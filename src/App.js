@@ -5,7 +5,7 @@ import "./styles/main.scss";
 function App() {
   return (
     <div>
-     <h1>Skeleton</h1>
+     <h1>Namerrs</h1>
     </div>
   );
 }
