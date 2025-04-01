@@ -1,0 +1,25 @@
+@use "../../variables/colors.scss" as colors;
+@use "../../variables/fonts.scss" as fonts;
+@use "../../variables/styleUtil.scss" as utils;
+
+.hero-card {
+    background-image: url("../../../../public/assets/images/namerrsHero.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:100% 100%;
+    width: 100vw;
+    height: 100vh;
+    .hero-body {
+    }
+
+    .hero-btn {
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        background-color: #8A2BE2;
+        color: #00CED1;
+    }
+}
+
+.heroIcon {
+    align-self: start;
+}

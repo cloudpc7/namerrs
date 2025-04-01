@@ -2,13 +2,14 @@ import {  Navbar, Nav, Offcanvas, Container, Button } from "react-bootstrap";
 
 const Header = () => {
     return (
-        <Navbar expand="lg">
-            <Container>
+        <Navbar expand="lg" className="p-0 m-0">
+            <Container className="p-0 m-0">
                 <Navbar.Toggle 
                      aria-controls="offcanvasNavbar-expand-lg"
+                     className="me-auto p-3"
                 />
                 <Navbar.Offcanvas
-                    placement=""
+                    placement="end"
                     show=""
                     onHide=""
                     aria-labelledby="offcanvasnavbar-expand-lg"

@@ -1,12 +1,13 @@
+// App.jsx
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import "./styles/main.scss";
-
+import { Routes, Route} from 'react-router-dom';
+import './styles/main.scss'
+import HomePage from './pages//home/HomePage';
 function App() {
   return (
-    <div>
-     <h1>Namerrs</h1>
-    </div>
+    <Routes>
+      <Route path="/" element={<HomePage />}/>
+    </Routes>
   );
 }
 
