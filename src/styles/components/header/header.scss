@@ -1,0 +1,44 @@
+@use "../../variables/colors.scss" as colors;
+@use "../../variables/fonts.scss" as fonts;
+@use "../../variables/styleUtil.scss" as utils;
+
+
+.navbar {
+    .container {
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255,1)' stroke-width='3' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24'/%3E%3Cpath stroke='rgba(255,255,255,1)' stroke-width='3' stroke-linecap='round' stroke-miterlimit='10' d='M4 16h24'/%3E%3Cpath stroke='rgba(255,255,255,1)' stroke-width='3' stroke-linecap='round' stroke-miterlimit='10' d='M4 24h24'/%3E%3C/svg%3E");
+        }
+    }
+
+}
+
+.offcanvas {
+    .offcanvas-header {
+        .navbar-brand {
+            .namerrsLogo {
+               width: 60px;
+               height: 60px; 
+            }
+        }
+        .offcanvas-title {
+            @include fonts.font-theme(heading);
+            letter-spacing: 0.1em;
+            font-size: 1.5rem;
+        }
+    }
+
+    .offcanvas-body {
+        .nav-link {
+            @include fonts.font-theme(heading);
+            letter-spacing: 0.2em;
+            text-align: left;
+            font-size: 1.125rem;
+            &:hover {
+                color: #8A2BE2;
+                text-decoration: underline;
+                text-underline-offset: 6px;
+            }
+            
+        }
+    }
+}

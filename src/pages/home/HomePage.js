@@ -2,7 +2,7 @@ import {useState, usEffect} from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Hero from '../../components/hero/Hero';
 import Header from '../../components/Header';
-import Products from '../../components/products/Products';
+import ProductList from '../../components/products/ProductsList';
 import Graphics from '../../components/graphic/Graphic';
 import BusinessCards from '../../features/products/BusinessCards';
 import Signs from '../../features/signs/Signs';
@@ -12,6 +12,7 @@ import About from '../../components/about/About';
 import Contact from '../../components/contact/Contact';
 import Footer from '../../components/Footer';
 const HomePage = () => {
+    
     return (
         <Container fluid className="p-0 m-0">
             <Row className="flex-column p-0 m-0">
@@ -19,7 +20,7 @@ const HomePage = () => {
                     <Hero />
                 </Col>
                 <Col className="p-0 m-0">
-                    <Products />
+                    <ProductList />
                 </Col>
                 <Col className="p-0 m-0">
                     <Graphics />

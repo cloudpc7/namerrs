@@ -18,16 +18,16 @@ const NamerrsLogo = () => {
     from: { offset: 0 },
     to: { offset: pathLength },
     loop: true,
-    config: { duration: 12000 },
+    config: { duration: 3000 },
   });
 
   return (
     <svg
-      width="100"
-      height="100"
+      width="150"
+      height="150"
       viewBox="0 0 1280 900"
       xmlns="http://www.w3.org/2000/svg"
-      className="heroIcon ps-3 pt-3 m-0"
+      className="heroIcon"
     >
       <defs>
         <linearGradient id="gradient" gradientUnits="userSpaceOnUse">
@@ -43,7 +43,7 @@ const NamerrsLogo = () => {
         d={namerrsPathData}
         fill="none"
         stroke="url(#gradient)"
-        strokeWidth="3"
+        strokeWidth="10"
         strokeDasharray={pathLength / 2}
         strokeDashoffset={offset}
       />

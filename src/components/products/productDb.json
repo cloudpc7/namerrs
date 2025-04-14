@@ -1,0 +1,37 @@
+[
+    {
+      "id": 0,
+      "name":"Banners",
+      "image":"assets/images/banners.png"
+    },
+    {
+      "id": 1,
+      "name":"Business Cards",
+      "image":"assets/images/businesscards.png"
+    },
+    {
+      "id": 2,
+      "name":"Flyers",
+      "image":"assets/images/flyers.png"
+    },
+    {
+      "id": 3,
+      "name":"T-shirts & Hats",
+      "image":"assets/images/tshirts.png"
+    },
+    {
+      "id": 4,
+      "name":"Signs",
+      "image":"assets/images/billboard.png"
+    },
+    {
+      "id": 0,
+      "name":"Stickers",
+      "image":"assets/images/stickers.png"
+    },
+    {
+      "id": 0,
+      "name":"Memorials",
+      "image":"assets/images/memorials.png"
+    }
+  ]
