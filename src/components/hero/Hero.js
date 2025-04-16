@@ -23,7 +23,7 @@ const Hero = () => {
                 <Header handleShow={handleShow} toggleNav={toggleNav} handleClose={handleClose} />
             </Col>
             <Col className="d-flex justify-content-center align-items-center p-0 m-0">
-                <Button as={Link} to="/products" className="hero-btn py-2 px-4 border-0 rounded-2 text-center">shop</Button>
+                <Button as={Link} to="/products" className="hero-btn py-3 px-5 border-0 rounded-2 text-center">shop</Button>
             </Col>
         </Row>
     );

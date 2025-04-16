@@ -1,0 +1,112 @@
+@use "../../variables/colors.scss" as colors;
+@use "../../variables/fonts.scss" as fonts;
+@use "../../variables/styleUtil.scss" as utils;
+
+.testimonials-container {
+  background-color: #fff;
+  padding: 60px 20px;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    color: #1E90FF;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .testimonials-row {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+
+    .testimonial-card {
+        border: 2px solid #475569;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        background: #f8f9fa;
+        position: relative;
+        &:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-body {
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .card-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            color: #1E90FF;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .card-text {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 1rem;
+            color: #333;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .card-date {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+
+            .social-icon {
+                font-size: 1.5rem;
+                color: #8A2BE2;
+                transition: color 0.3s ease;
+
+                &:hover {
+                color: #DA70D6;
+                }
+            }
+        }
+    }
+  }
+
+  @media (max-width: 768px) {
+    &::before {
+      background-size: 100% auto; 
+      opacity: 0.3; 
+    }
+
+    .section-title {
+      font-size: 2rem;
+    }
+
+    .testimonial-card {
+      min-height: 300px;
+    }
+  }
+}

@@ -1,0 +1,91 @@
+@use "../../variables/colors.scss" as colors;
+@use "../../variables/fonts.scss" as fonts;
+@use "../../variables/styleUtil.scss" as utils;
+
+.signs-container {
+  background: linear-gradient(135deg, #DA70D6 0%, #00CED1 100%); 
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+
+  .signs-row {
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: center;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .signs-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+
+      .signs-title {
+        font-family: 'Bebas Neue', sans-serif;
+        letter-spacing: 0.2em;
+        font-size: 2rem;
+        color: #fff;
+        max-width: 25rem;
+        text-transform: uppercase;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        margin-bottom: 10px;
+      }
+
+      .signs-subtitle {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 1rem;
+        color: #fff;
+        opacity: 0.9;
+        max-width: 25rem;
+        margin-bottom: 20px;
+      }
+
+      .signs-features {
+        list-style: none;
+        padding: 0;
+        margin-bottom: 20px;
+
+        li {
+          font-family: 'Open Sans', sans-serif;
+          font-size: 1rem;
+          color: #fff;
+          margin: 5px 0;
+        }
+      }
+
+      .signs-image {
+        max-width: 20rem;
+        height: 12rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        border: 2px solid #1E90FF;
+      }
+
+      .signs-btn {
+        background: #fff;
+        color: #8A2BE2;
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 1.2rem;
+        padding: 0.5rem 1.5rem;
+        border: none;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, color 0.3s ease;
+
+        &:hover {
+          transform: scale(1.05);
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+          background: #00CED1;
+          color: #fff;
+        }
+      }
+    }
+  }
+}

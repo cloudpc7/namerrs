@@ -1,0 +1,99 @@
+@use "../../variables/colors.scss" as colors;
+@use "../../variables/fonts.scss" as fonts;
+@use "../../variables/styleUtil.scss" as utils;
+
+.cards-container {
+    background-color: #1C2526;
+    position: relative;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    overflow: hidden;
+  
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        45deg,
+        rgba(218, 112, 214, 0.1),
+        rgba(218, 112, 214, 0.1) 10px,
+        transparent 10px,
+        transparent 20px
+      );
+      z-index: 1;
+    }
+  
+    .cards-row {
+      max-width: 1200px;
+      margin: 0 auto;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+  
+      @media (max-width: 768px) {
+        flex-direction: column;
+        text-align: center;
+      }
+  
+      .cards-col {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+  
+        .cards-title {
+          font-family: 'Bebas Neue', sans-serif;
+          letter-spacing: 0.2em;
+          font-size: 2rem;
+          color: #fff;
+          max-width: 25rem;
+          text-transform: uppercase;
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+          margin-bottom: 10px;
+        }
+  
+        .cards-subtitle {
+          font-family: 'Open Sans', sans-serif;
+          font-size: 1rem;
+          color: #DA70D6;
+          opacity: 0.9;
+          max-width: 25rem;
+          margin-bottom: 20px;
+        }
+  
+        .business-cards-image {
+          max-width: 20rem;
+          height: 12rem;
+          border-radius: 10px;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+          border: 2px solid #00CED1;
+        }
+  
+        .business-card-btn {
+          background: #fff;
+          color: #8A2BE2;
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: 1.2rem;
+          padding: 0.5rem 1.5rem; /* Match padding with graphic-btn */
+          border: none;
+          border-radius: 0.5rem; /* Already pill shape, kept for clarity */
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+          transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, color 0.3s ease;
+  
+          &:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            background: #00CED1;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
