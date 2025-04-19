@@ -1,0 +1,125 @@
+@use "../variables/colors.scss" as colors;
+@use "../variables/fonts.scss" as fonts;
+@use "../variables/styleUtil.scss" as utils;
+
+.products-page {
+
+}
+
+.mini-navbar {
+  position: relative;
+  height: 100%;
+  padding: 20px 0;
+  background-color: #000000;
+  background-image: url('../../../public/assets/images/namerrsOriginal.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 50% auto;
+  z-index: 0;
+
+  .products-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    color: #1E90FF; 
+    text-transform: uppercase;
+    text-align: center;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.products-container {
+  padding: 20px;
+
+  .product-section {
+    margin-bottom: 20px;
+  }
+
+  .product-card {
+    background: #1C2526; // Dark Slate Gray
+    border: 2px solid #475569; // Slate grey
+    border-radius: 10px;
+    overflow: hidden;
+
+    .product-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      color: #00CED1; // Dark Turquoise
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .product-desc {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 1rem;
+      color: #A9A9A9; // Dark Gray
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .customize-btn {
+      background: #1E90FF; // Dodger Blue
+      border: none;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 1rem;
+      padding: 10px 20px;
+      width: 100%;
+      border-radius: 5px;
+      transition: background 0.3s ease;
+
+      &:hover {
+        background: #00CED1; // Dark Turquoise
+      }
+    }
+  }
+}
+
+.custom-offcanvas {
+  background: #1C2526; // Dark Slate Gray
+  color: #fff;
+  width: 80% !important;
+
+  .offcanvas-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    color: #1E90FF; // Dodger Blue
+    text-transform: uppercase;
+  }
+
+  .offcanvas-body {
+    .form-group {
+      label {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 1rem;
+        color: #A9A9A9; // Dark Gray
+      }
+
+      .form-control,
+      .form-select {
+        background: #000000;
+        border: 1px solid #475569; // Slate grey
+        color: #fff;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 1rem;
+      }
+    }
+
+    .save-btn {
+      background: #00CED1; // Dark Turquoise
+      border: none;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 1rem;
+      padding: 10px 20px;
+      width: 100%;
+      border-radius: 5px;
+      margin-top: 15px;
+
+      &:hover {
+        background: #1E90FF; // Dodger Blue
+      }
+    }
+  }
+}
