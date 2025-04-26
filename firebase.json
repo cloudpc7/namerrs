@@ -62,6 +62,9 @@
     },
     "singleProjectMode": true
   },
+  "remoteconfig": {
+    "template": "remoteconfig.template.json"
+  },
   "database": {
     "rules": "database.rules.json"
   }

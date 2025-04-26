@@ -3,123 +3,80 @@
 @use "../variables/styleUtil.scss" as utils;
 
 .products-page {
-
-}
-
-.mini-navbar {
-  position: relative;
-  height: 100%;
-  padding: 20px 0;
-  background-color: #000000;
-  background-image: url('../../../public/assets/images/namerrsOriginal.png');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 50% auto;
-  z-index: 0;
-
-  .products-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2rem;
-    color: #1E90FF; 
-    text-transform: uppercase;
-    text-align: center;
-    margin: 0;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    position: relative;
-    z-index: 1;
-  }
-}
-
-.products-container {
-  padding: 20px;
-
-  .product-section {
-    margin-bottom: 20px;
-  }
-
-  .product-card {
-    background: #1C2526; // Dark Slate Gray
-    border: 2px solid #475569; // Slate grey
-    border-radius: 10px;
-    overflow: hidden;
-
-    .product-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.8rem;
-      color: #00CED1; // Dark Turquoise
-      text-transform: uppercase;
-      text-align: center;
-      margin-bottom: 10px;
-    }
-
-    .product-desc {
-      font-family: 'Open Sans', sans-serif;
-      font-size: 1rem;
-      color: #A9A9A9; // Dark Gray
-      text-align: center;
-      margin-bottom: 15px;
-    }
-
-    .customize-btn {
-      background: #1E90FF; // Dodger Blue
-      border: none;
-      font-family: 'Open Sans', sans-serif;
-      font-size: 1rem;
-      padding: 10px 20px;
-      width: 100%;
-      border-radius: 5px;
-      transition: background 0.3s ease;
-
-      &:hover {
-        background: #00CED1; // Dark Turquoise
-      }
-    }
-  }
-}
-
-.custom-offcanvas {
-  background: #1C2526; // Dark Slate Gray
-  color: #fff;
-  width: 80% !important;
-
-  .offcanvas-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.8rem;
-    color: #1E90FF; // Dodger Blue
-    text-transform: uppercase;
-  }
-
-  .offcanvas-body {
-    .form-group {
-      label {
-        font-family: 'Open Sans', sans-serif;
-        font-size: 1rem;
-        color: #A9A9A9; // Dark Gray
+  display: flex;
+  flex-direction: column;
+  .products-row {
+    flex-direction: column;
+    .products-nav {
+      background-color: #000000;
+      background-image: url('../../../public/assets/images/namerrsOriginal.png');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 50% auto;
+      min-height: 30vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1.5rem;
+      .header-col {
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-start;
       }
 
-      .form-control,
-      .form-select {
-        background: #000000;
-        border: 1px solid #475569; // Slate grey
-        color: #fff;
-        font-family: 'Open Sans', sans-serif;
-        font-size: 1rem;
+      .title-col {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        .title {
+          @include fonts.font-theme(heading);
+          font-size: 2rem;
+          color: #1E90FF;
+        }
       }
     }
 
-    .save-btn {
-      background: #00CED1; // Dark Turquoise
-      border: none;
-      font-family: 'Open Sans', sans-serif;
-      font-size: 1rem;
-      padding: 10px 20px;
-      width: 100%;
-      border-radius: 5px;
-      margin-top: 15px;
-
-      &:hover {
-        background: #1E90FF; // Dodger Blue
+    .card-products-col {
+      .card-products-title {
+        font-size: 1.25rem;
+        @include fonts.font-theme(heading);
+        padding: 1.25rem;
+      }
+      .business-card {
+        .card-img {}
+        .card-selector {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .custom-card-btn {
+            @include fonts.font-theme(heading); /* Assumes Bebas Neue for heading */
+            font-size: 1.125rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em; /* Slightly reduced for better readability */
+            padding: 0.75rem 1.5rem; /* Balanced padding for professional look */
+            background-color: transparent; /* Transparent to blend with card overlay */
+            color: #00CED1; /* Matches existing turquoise accent */
+            border: 2px solid #1E90FF; /* Blue border for contrast */
+            border-radius: 5px; /* Subtle rounding */
+            text-decoration: none;
+            transition: all 0.3s ease; /* Smooth transitions for hover */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+            &:hover {
+              background-color: #1E90FF; /* Blue fill on hover */
+              color: #ffffff; /* White text for contrast */
+              border-color: #1E90FF; /* Maintain border consistency */
+              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+            }
+            &:focus {
+              outline: none;
+              box-shadow: 0 0 0 3px rgba(30, 144, 255, 0.3); /* Focus ring for accessibility */
+            }
+          }
+        }
+        
       }
     }
   }
+ 
+
 }

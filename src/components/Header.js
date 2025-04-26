@@ -10,7 +10,7 @@ const Header = ({toggleNav, handleShow, handleClose}) => {
             <Container className="p-0 m-0">
                 <Navbar.Toggle 
                         aria-controls="offcanvasNavbar-expand-lg"
-                        className="mt-3 me-3"
+                        className="toggle-button"
                         onClick={handleShow}
                 />
                 <Navbar.Offcanvas

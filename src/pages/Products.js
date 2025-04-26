@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { Container, Row, Col, Card, Button, Offcanvas, Form } from 'react-bootstrap';
 import Header from '../components/Header';
+import cardstock from '../app/assets/images/businesscards.png'
 import '../styles/pages/products.scss';
-
+import CardProductForm from '../components/productforms/CardProductForm';
 const Products = () => {
   const [showOffcanvas, setShowOffcanvas] = useState(false);
   const [activeProduct, setActiveProduct] = useState(null);
-
+  const [showSideBar, setShowSideBar] = useState(false);
   const handleShow = (product) => {
     setActiveProduct(product);
     setShowOffcanvas(true);
@@ -14,108 +15,46 @@ const Products = () => {
 
   const handleClose = () => {
     setShowOffcanvas(false);
-    setActiveProduct(null);
   };
 
-  return (
-    <div className="products-page">
-      <div className="mini-navbar">
-        <Header /> 
-        <h1 className="products-title">Shop Namerrs</h1>
-      </div>
-      <Container fluid className="products-container">
-          <Row key="" className="product-section">
-          </Row>
-      </Container>
+  const handleSideBar = () => {
+    setShowSideBar(prev => !prev);
+  }
 
-      <Offcanvas
-        show={showOffcanvas}
-        onHide={handleClose}
-        placement="end"
-        className="custom-offcanvas"
-      >
+  return (
+   <Container fluid className="products-page">
+   {
+    showSideBar && (
+      <Offcanvas show={showSideBar} onHide={handleSideBar} placement="end" className="offcanvas">
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Customize {activeProduct?.name}</Offcanvas.Title>
+          <Offcanvas.Title>Create your personal business cards</Offcanvas.Title>
         </Offcanvas.Header>
-        <Offcanvas.Body>
-          {activeProduct?.id === 'business-cards' && (
-            <>
-              <Form.Group className="mb-3">
-                <Form.Label>Name</Form.Label>
-                <Form.Control type="text" placeholder="Enter name" />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Title</Form.Label>
-                <Form.Control type="text" placeholder="Enter title" />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Font</Form.Label>
-                <Form.Select>
-                  <option>Bebas Neue</option>
-                  <option>Open Sans</option>
-                </Form.Select>
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Color</Form.Label>
-                <Form.Select>
-                  <option value="#1E90FF">Dodger Blue</option>
-                  <option value="#00CED1">Dark Turquoise</option>
-                </Form.Select>
-              </Form.Group>
-              <Button className="save-btn">Save Design</Button>
-            </>
-          )}
-          {activeProduct?.id === 'tshirts-hats' && (
-            <>
-              <Form.Group className="mb-3">
-                <Form.Label>Shirt Color</Form.Label>
-                <Form.Select>
-                  <option>Black</option>
-                  <option>White</option>
-                </Form.Select>
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Size</Form.Label>
-                <Form.Select>
-                  <option>XS</option>
-                  <option>S</option>
-                  <option>M</option>
-                  <option>L</option>
-                  <option>XL</option>
-                  <option>XXL</option>
-                </Form.Select>
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Text</Form.Label>
-                <Form.Control type="text" placeholder="Add text" />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Upload Graphic</Form.Label>
-                <Form.Control type="file" accept="image/*" />
-              </Form.Group>
-              <Button className="save-btn">Save Design</Button>
-            </>
-          )}
-          {['banners', 'flyers', 'signs', 'stickers', 'memorials'].includes(activeProduct?.id) && (
-            <>
-              <Form.Group className="mb-3">
-                <Form.Label>Text</Form.Label>
-                <Form.Control type="text" placeholder="Enter text" />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Size</Form.Label>
-                <Form.Control type="text" placeholder="e.g., 4x6 ft" />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Upload Image</Form.Label>
-                <Form.Control type="file" accept="image/*" />
-              </Form.Group>
-              <Button className="save-btn">Save Design</Button>
-            </>
-          )}
+        <Offcanvas.Body className="offcanvas-body">
+          <CardProductForm />
         </Offcanvas.Body>
       </Offcanvas>
-    </div>
+    )
+   }
+    <Row className="products-row">
+      <Col className="products-nav">
+        <Col className="header-col">
+          <Header toggleNav={showOffcanvas} handleShow={handleShow} handleClose={handleClose} />
+        </Col>
+        <Col className="title-col">
+          <h1 className="h1 m-0 title">Shop Namerrs</h1>
+        </Col>
+      </Col>
+      <Col className="card-products-col">
+        <h2 className="card-products-title">Business Cards</h2>
+        <Card className="business-card">
+          <Card.Img className="card-img" src={cardstock} alt="business cards with namerrs logo"/>
+          <Card.ImgOverlay className="card-selector">
+            <Button onClick={() => setShowSideBar(prev => true)} className="custom-card-btn">Personalize Now</Button>
+          </Card.ImgOverlay>
+        </Card>
+      </Col>   
+    </Row>
+   </Container>
   );
 };
 
