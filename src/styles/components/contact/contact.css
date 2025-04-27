@@ -1,0 +1,111 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+.contact-container {
+  background-color: #000000;
+  padding: 40px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background-image: url("../../../../public/assets/images/namerrsOriginal.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 75% auto;
+}
+.contact-container .section-title {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 2.5rem;
+  color: #1E90FF;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 1;
+}
+.contact-container .contact-icons {
+  max-width: 200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+.contact-container .contact-icons .col {
+  display: flex;
+  align-items: center;
+}
+.contact-container .contact-icons .text-end {
+  justify-content: flex-end;
+}
+.contact-container .contact-icons .text-start {
+  justify-content: flex-start;
+}
+.contact-container .contact-icons .contact-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background: #1E90FF;
+  color: #fff;
+  font-size: 1.8rem;
+  border-radius: 50%;
+  text-decoration: none;
+  transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  transform: perspective(500px) translateZ(0);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+.contact-container .contact-icons .contact-icon:hover {
+  background: #A9A9A9;
+  transform: perspective(500px) translateZ(10px) scale(1.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+.contact-container .contact-icons .message-icon {
+  background: #1E90FF;
+  border: none;
+}
+.contact-container .contact-icons .message-icon:hover {
+  background: #A9A9A9;
+  transform: perspective(500px) translateZ(10px) scale(1.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+.contact-container .message-box {
+  max-width: 500px;
+  margin: 20px auto;
+  position: relative;
+  z-index: 1;
+}
+.contact-container .message-box .message-input {
+  font-family: "Open Sans", sans-serif;
+  font-size: 1rem;
+  border: 2px solid #475569;
+  border-radius: 5px;
+  padding: 10px;
+}
+.contact-container .message-box .send-button {
+  background: #1E90FF;
+  border: none;
+  padding: 10px 20px;
+  font-family: "Open Sans", sans-serif;
+  font-size: 1rem;
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.contact-container .message-box .send-button:hover {
+  background: #A9A9A9;
+}
+@media (max-width: 768px) {
+  .contact-container::before {
+    background-size: 100% auto;
+    opacity: 0.3;
+  }
+  .contact-container .section-title {
+    font-size: 2rem;
+  }
+  .contact-container .contact-icons {
+    max-width: 150px;
+  }
+  .contact-container .contact-icons .contact-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+  }
+}/*# sourceMappingURL=contact.css.map */

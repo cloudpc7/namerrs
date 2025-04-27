@@ -1,7 +1,8 @@
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 .product-list-container {
   width: 100%;
   overflow: hidden;
+  padding-bottom: 2rem;
 }
 .product-list-container .product-list-row .product-list-col {
   display: flex;

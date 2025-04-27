@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 *, *:before, *:after {
   box-sizing: border-box;
 }
@@ -61,7 +63,7 @@ body {
   box-sizing: border-box;
 }
 body p, body .card-text {
-  font-family: "Arial", serif;
+  font-family: "Open Sans", sans-serif;
   color: #000000;
   letter-spacing: 0;
   line-height: 1.5;
@@ -71,7 +73,7 @@ body p, body .card-text {
   font-size: 0.9vw;
 }
 body h1 {
-  font-family: "Arial", serif;
+  font-family: "Bebas Neue", sans-serif;
   color: #000000;
   letter-spacing: -0.015em;
   line-height: 1.2;
@@ -81,7 +83,7 @@ body h1 {
   font-size: 2.5vw;
 }
 body h2 {
-  font-family: "Arial", serif;
+  font-family: "Bebas Neue", sans-serif;
   color: #000000;
   letter-spacing: -0.015em;
   line-height: 1.2;
@@ -93,7 +95,7 @@ body h2 {
   font-size: 1.8vw;
 }
 body h3 {
-  font-family: "Arial", serif;
+  font-family: "Bebas Neue", sans-serif;
   color: #000000;
   letter-spacing: -0.015em;
   line-height: 1.2;
@@ -105,7 +107,7 @@ body h3 {
   font-size: 1.7vw;
 }
 body h4 {
-  font-family: "Arial", serif;
+  font-family: "Bebas Neue", sans-serif;
   color: #000000;
   letter-spacing: -0.015em;
   line-height: 1.2;
@@ -117,7 +119,7 @@ body h4 {
   font-size: 1.6vw;
 }
 body h5 {
-  font-family: "Arial", serif;
+  font-family: "Bebas Neue", sans-serif;
   color: #000000;
   letter-spacing: -0.015em;
   line-height: 1.2;
@@ -129,7 +131,7 @@ body h5 {
   font-size: 1.5vw;
 }
 body h6 {
-  font-family: "Arial", serif;
+  font-family: "Bebas Neue", sans-serif;
   color: #000000;
   letter-spacing: -0.015em;
   line-height: 1.2;
