@@ -1,0 +1,50 @@
+{
+    "marketingTips": [
+      {
+        "title": "Banners",
+        "tip": "Keep banner designs simple and memorable. Use unique images, large bold headlines, contrasting colors, and creative artwork to grab attention."
+      },
+      {
+        "title": "Flyers",
+        "tip": "Don’t overwhelm with info. Use attractive images and just enough info (like contact details or discounts) to spark curiosity. Distribute within a 1–3-mile radius for best response."
+      },
+      {
+        "title": "Stickers",
+        "tip": "Stickers are great for grassroots marketing. Hand them out at events or add to packaging—they’re cheaper than printing logos on boxes and stick around longer."
+      },
+      {
+        "title": "T-Shirts & Hats",
+        "tip": "Bold designs on dark fabrics grab attention!"
+      },
+      {
+        "title": "General Design",
+        "tip": "Keep designs simple and bold for maximum impact!"
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What paper stocks are available for business cards?",
+        "answer": "Gloss (16 pt.) for a shiny finish, Matte (14 pt.) for a vintage look, and Premium (18 pt.) for a thicker, high-quality feel."
+      },
+      {
+        "question": "What T-shirt styles and sizes are available?",
+        "answer": "Crew Neck, V-Neck, and Long Sleeve T-shirts in sizes XS-XXL."
+      },
+      {
+        "question": "Are banners suitable for outdoor use?",
+        "answer": "Yes, our banners are made of 13 oz. vinyl, waterproof, and UV-safe, perfect for indoor and outdoor use."
+      },
+      {
+        "question": "What sizes can I choose for flyers?",
+        "answer": "Flyers are available in 4\" x 6\", 8.5\" x 5.5\", and 8.5\" x 11\"."
+      },
+      {
+        "question": "What sizes are available for stickers?",
+        "answer": "Stickers range from 1\" x 1\" to 6\" x 6\", with various sizes in between."
+      },
+      {
+        "question": "What shipping options are available?",
+        "answer": "Standard (5-7 days), Express (2-3 days), and Local Pickup for all products."
+      }
+    ]
+}

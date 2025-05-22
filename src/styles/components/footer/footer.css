@@ -1,0 +1,109 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+.footer-container {
+  background: #1C2526;
+  color: #fff;
+  padding: 60px 0 20px;
+  position: relative;
+  overflow: hidden;
+}
+.footer-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, #1E90FF, #00CED1);
+  opacity: 0.2;
+  z-index: 0;
+}
+.footer-container .footer-content {
+  position: relative;
+  z-index: 1;
+}
+.footer-container .footer-section .footer-title {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 2.5rem;
+  color: #1E90FF;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+.footer-container .footer-section .footer-subtitle {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1.8rem;
+  color: #00CED1;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+.footer-container .footer-section .footer-text {
+  font-family: "Open Sans", sans-serif;
+  font-size: 1rem;
+  color: #A9A9A9;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+.footer-container .footer-section .social-links {
+  display: flex;
+  gap: 15px;
+}
+.footer-container .footer-section .social-links .social-icon {
+  font-size: 1.8rem;
+  color: #1E90FF;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+.footer-container .footer-section .social-links .social-icon:hover {
+  color: #00CED1;
+  transform: translateY(-5px) scale(1.2);
+}
+.footer-container .footer-section .footer-list {
+  list-style: none;
+  padding: 0;
+}
+.footer-container .footer-section .footer-list li {
+  margin-bottom: 10px;
+}
+.footer-container .footer-section .footer-list .footer-link {
+  font-family: "Open Sans", sans-serif;
+  font-size: 1rem;
+  color: #A9A9A9;
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+.footer-container .footer-section .footer-list .footer-link:hover {
+  color: #1E90FF;
+  transform: translateX(5px);
+}
+.footer-container .footer-bottom {
+  border-top: 1px solid #475569;
+  padding-top: 20px;
+  margin-top: 20px;
+  position: relative;
+  z-index: 1;
+}
+.footer-container .footer-bottom .footer-copyright {
+  font-family: "Open Sans", sans-serif;
+  font-size: 0.9rem;
+  color: #A9A9A9;
+  margin: 0;
+}
+@media (max-width: 768px) {
+  .footer-container {
+    padding: 40px 0 20px;
+  }
+  .footer-container .footer-title {
+    font-size: 2rem;
+  }
+  .footer-container .footer-subtitle {
+    font-size: 1.5rem;
+  }
+  .footer-container .footer-text,
+  .footer-container .footer-link,
+  .footer-container .footer-copyright {
+    font-size: 0.9rem;
+  }
+  .footer-container .social-links .social-icon {
+    font-size: 1.5rem;
+  }
+}/*# sourceMappingURL=footer.css.map */

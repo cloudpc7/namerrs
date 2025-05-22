@@ -1,0 +1,32 @@
+@use "../../variables/colors.scss" as colors;
+@use "../../variables/fonts.scss" as fonts;
+@use "../../variables/styleUtil.scss" as utils;
+
+.hero-container {
+  background-color: #000000;
+  background-image: url("../../../../public/assets/images/namerrsmodel.png");
+  background-repeat: no-repeat;
+  background-position: 50% 15%;
+  background-size: 50% 65%;
+  min-height: 40vh;
+  .hero-col {
+    .heroIcon {
+      align-self: start;
+      max-width: 8rem;
+      max-height: 8rem;
+    }
+  }
+    .hero-btn {
+      @include fonts.font-theme(heading);
+      font-size: 1.125rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      background-color: #8A2BE2;
+      color: #00CED1;
+      text-decoration: none;
+      &:hover {
+        background-color: #ffffff !important;
+        color: #DA70D6;
+      }
+    }
+}

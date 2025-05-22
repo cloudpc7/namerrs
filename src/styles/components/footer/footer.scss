@@ -1,0 +1,131 @@
+@use "../../variables/colors.scss" as colors;
+@use "../../variables/fonts.scss" as fonts;
+@use "../../variables/styleUtil.scss" as utils;
+
+.footer-container {
+  background: #1C2526; // Dark Slate Gray
+  color: #fff;
+  padding: 60px 0 20px;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #1E90FF, #00CED1); // Gradient overlay
+    opacity: 0.2;
+    z-index: 0;
+  }
+
+  .footer-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .footer-section {
+    .footer-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.5rem;
+      color: #1E90FF; // Dodger Blue
+      text-transform: uppercase;
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .footer-subtitle {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      color: #00CED1; // Dark Turquoise
+      text-transform: uppercase;
+      margin-bottom: 15px;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    }
+
+    .footer-text {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 1rem;
+      color: #A9A9A9; // Dark Gray
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+
+      .social-icon {
+        font-size: 1.8rem;
+        color: #1E90FF; // Dodger Blue
+        transition: transform 0.3s ease, color 0.3s ease;
+
+        &:hover {
+          color: #00CED1; // Dark Turquoise
+          transform: translateY(-5px) scale(1.2); // Pop-out effect
+        }
+      }
+    }
+
+    .footer-list {
+      list-style: none;
+      padding: 0;
+
+      li {
+        margin-bottom: 10px;
+      }
+
+      .footer-link {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 1rem;
+        color: #A9A9A9; // Dark Gray
+        text-decoration: none;
+        transition: color 0.3s ease, transform 0.3s ease;
+
+        &:hover {
+          color: #1E90FF; // Dodger Blue
+          transform: translateX(5px);
+        }
+      }
+    }
+  }
+
+  .footer-bottom {
+    border-top: 1px solid #475569; // Slate grey
+    padding-top: 20px;
+    margin-top: 20px;
+    position: relative;
+    z-index: 1;
+
+    .footer-copyright {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.9rem;
+      color: #A9A9A9; // Dark Gray
+      margin: 0;
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 40px 0 20px;
+
+    .footer-title {
+      font-size: 2rem;
+    }
+
+    .footer-subtitle {
+      font-size: 1.5rem;
+    }
+
+    .footer-text,
+    .footer-link,
+    .footer-copyright {
+      font-size: 0.9rem;
+    }
+
+    .social-links .social-icon {
+      font-size: 1.5rem;
+    }
+  }
+}

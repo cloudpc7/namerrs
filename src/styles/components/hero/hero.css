@@ -1,0 +1,33 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+.hero-container {
+  background-color: #000000;
+  background-image: url("../../../../public/assets/images/namerrsmodel.png");
+  background-repeat: no-repeat;
+  background-position: 50% 15%;
+  background-size: 50% 65%;
+  min-height: 40vh;
+}
+.hero-container .hero-col .heroIcon {
+  align-self: start;
+  max-width: 8rem;
+  max-height: 8rem;
+}
+.hero-container .hero-btn {
+  font-family: "Bebas Neue", sans-serif;
+  color: #000000;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-size: 1.125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  background-color: #8A2BE2;
+  color: #00CED1;
+  text-decoration: none;
+}
+.hero-container .hero-btn:hover {
+  background-color: #ffffff !important;
+  color: #DA70D6;
+}/*# sourceMappingURL=hero.css.map */

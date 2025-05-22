@@ -1,0 +1,226 @@
+@use "../../variables/colors.scss" as colors;
+@use "../../variables/fonts.scss" as fonts;
+@use "../../variables/styleUtil.scss" as utils;
+
+// Product List Styles (Unchanged)
+.product-list-container {
+  width: 100%;
+  overflow: hidden;
+  padding-bottom: 2rem;
+  .product-list-row {
+    .product-list-col {
+      display: flex;
+      justify-content: center;
+      .product-list-title {
+        max-width: 16rem;
+      }
+
+      .container {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        height: 500px;
+        width: 100%;
+        overflow: hidden;
+        margin: 0 auto; 
+      }
+
+      .product-card-wrapper {
+        border-radius: 0.5rem;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        flex-shrink: 0;
+        max-width: 100%; 
+      }
+
+      .product-card {
+        height: 300px;
+        border: none;
+        background: transparent;
+      }
+
+      .product-content {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 15px;
+      }
+
+      .title-overlay {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+      }
+
+      .product-title {
+        color: white;
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-align: center;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 10px;
+        border-radius: 5px;
+      }
+    }
+  }
+}
+
+// Card Design Form Styles
+.card-design-form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-label {
+    font-weight: 500;
+    color: black; // Matches dark text implied by your styles
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+
+    .required-indicator {
+      color: #dc3545; // Bootstrap's danger red for errors
+      font-size: 1rem;
+    }
+  }
+
+  .form-control {
+    border-radius: 0.5rem; // Matches your 0.5rem border-radius
+    font-size: 1rem;
+    padding: 0.75rem;
+    transition: border-color 0.2s ease-in-out;
+
+    &:focus {
+      border-color: #007bff; // Bootstrap's primary blue
+      outline: 2px solid rgba(0, 123, 255, 0.25);
+    }
+
+    &.is-invalid {
+      border-color: #dc3545;
+    }
+  }
+
+  .form-select {
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    padding: 0.75rem;
+
+    &:focus {
+      border-color: #007bff;
+      outline: 2px solid rgba(0, 123, 255, 0.25);
+    }
+  }
+
+  .form-control-feedback {
+    font-size: 0.875rem;
+    color: #dc3545;
+    margin-top: 0.25rem;
+    animation: fadeIn 0.3s ease-in;
+  }
+
+  .error-message {
+    background-color: rgba(220, 53, 69, 0.1); // Subtle red background
+    color: #dc3545;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    animation: fadeIn 0.3s ease-in;
+
+    .error-icon {
+      font-size: 1rem;
+    }
+  }
+
+  .autocomplete-container {
+    position: relative;
+  }
+
+  .color-picker-container {
+    margin-top: 0.75rem;
+    max-width: 100%;
+    overflow-x: auto;
+
+    .chrome-picker {
+      width: 100% !important;
+      max-width: 225px;
+      border-radius: 0.5rem !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+    }
+  }
+
+  .btn-primary {
+    background-color: #007bff; // Bootstrap primary
+    border-color: #007bff;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    color: white; // Matches your white text
+    transition: background-color 0.2s ease-in-out;
+
+    &:hover {
+      background-color: #0056b3;
+      border-color: #0056b3;
+    }
+
+    &:disabled {
+      background-color: #6c757d; // Bootstrap secondary gray
+      border-color: #6c757d;
+      opacity: 0.65;
+    }
+
+    .spinner {
+      margin-right: 0.5rem;
+    }
+  }
+
+  .btn-outline-secondary {
+    border-color: #6c757d; // Bootstrap secondary
+    color: #6c757d;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    border-radius: 0.5rem;
+
+    &:hover {
+      background-color: rgba(108, 117, 125, 0.1);
+      border-color: #5a6268;
+      color: #5a6268;
+    }
+  }
+}
+
+// Responsive Design
+@media (max-width: 576px) {
+  .card-design-form {
+    padding: 15px;
+  }
+
+  .form-group {
+    flex-direction: column;
+  }
+
+  .color-picker-container {
+    max-width: 100%;
+  }
+
+  .btn-primary {
+    width: 100%;
+    padding: 0.75rem;
+  }
+}
+
+// Animations
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}

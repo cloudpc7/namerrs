@@ -1,0 +1,26 @@
+[
+    {
+      "id": "1",
+      "name": "Edgar Godinez",
+      "quote": "Knowledgeable, fast, and legit",
+      "date": "02/28/2025",
+      "facebookLink": "https://facebook.com/edgar.godinez.9",
+      "instagramLink": "https://instagram.com"
+    },
+    {
+      "id": "2",
+      "name": "Clarence B Bowser Jr",
+      "quote": "Best place in town thank U",
+      "date": "1/5/2022",
+      "facebookLink": "https://facebook.com/clarence.bowser",
+      "instagramLink": "https://instagram.com"
+    },
+    {
+      "id": "3",
+      "name": "Debbie Mc Colery Farmer",
+      "quote": "Excellent customer service, great prices and good quality",
+      "date": "08/15/2020",
+      "facebookLink": "https://facebook.com",
+      "instagramLink": "https://instagram.com"
+    }
+  ]

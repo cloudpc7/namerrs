@@ -1,0 +1,82 @@
+@use "../variables/colors.scss" as colors;
+@use "../variables/fonts.scss" as fonts;
+@use "../variables/styleUtil.scss" as utils;
+
+.products-page {
+  display: flex;
+  flex-direction: column;
+  .products-row {
+    flex-direction: column;
+    .products-nav {
+      background-color: #000000;
+      background-image: url('../../../public/assets/images/namerrsOriginal.png');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 50% auto;
+      min-height: 30vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1.5rem;
+      .header-col {
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-start;
+      }
+
+      .title-col {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        .title {
+          @include fonts.font-theme(heading);
+          font-size: 2rem;
+          color: #1E90FF;
+        }
+      }
+    }
+
+    .card-products-col {
+      .card-products-title {
+        font-size: 1.25rem;
+        @include fonts.font-theme(heading);
+        padding: 1.25rem;
+      }
+      .business-card {
+        .card-img {}
+        .card-selector {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .custom-card-btn {
+            @include fonts.font-theme(heading); /* Assumes Bebas Neue for heading */
+            font-size: 1.125rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em; /* Slightly reduced for better readability */
+            padding: 0.75rem 1.5rem; /* Balanced padding for professional look */
+            background-color: transparent; /* Transparent to blend with card overlay */
+            color: #00CED1; /* Matches existing turquoise accent */
+            border: 2px solid #1E90FF; /* Blue border for contrast */
+            border-radius: 5px; /* Subtle rounding */
+            text-decoration: none;
+            transition: all 0.3s ease; /* Smooth transitions for hover */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+            &:hover {
+              background-color: #1E90FF; /* Blue fill on hover */
+              color: #ffffff; /* White text for contrast */
+              border-color: #1E90FF; /* Maintain border consistency */
+              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+            }
+            &:focus {
+              outline: none;
+              box-shadow: 0 0 0 3px rgba(30, 144, 255, 0.3); /* Focus ring for accessibility */
+            }
+          }
+        }
+        
+      }
+    }
+  }
+ 
+
+}

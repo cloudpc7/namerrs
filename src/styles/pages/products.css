@@ -1,0 +1,88 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+.products-page {
+  display: flex;
+  flex-direction: column;
+}
+.products-page .products-row {
+  flex-direction: column;
+}
+.products-page .products-row .products-nav {
+  background-color: #000000;
+  background-image: url("../../../public/assets/images/namerrsOriginal.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 50% auto;
+  min-height: 30vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.5rem;
+}
+.products-page .products-row .products-nav .header-col {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+.products-page .products-row .products-nav .title-col {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+.products-page .products-row .products-nav .title-col .title {
+  font-family: "Bebas Neue", sans-serif;
+  color: #000000;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-size: 2rem;
+  color: #1E90FF;
+}
+.products-page .products-row .card-products-col .card-products-title {
+  font-size: 1.25rem;
+  font-family: "Bebas Neue", sans-serif;
+  color: #000000;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  padding: 1.25rem;
+}
+.products-page .products-row .card-products-col .business-card .card-selector {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.products-page .products-row .card-products-col .business-card .card-selector .custom-card-btn {
+  font-family: "Bebas Neue", sans-serif;
+  color: #000000;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  /* Assumes Bebas Neue for heading */
+  font-size: 1.125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em; /* Slightly reduced for better readability */
+  padding: 0.75rem 1.5rem; /* Balanced padding for professional look */
+  background-color: transparent; /* Transparent to blend with card overlay */
+  color: #00CED1; /* Matches existing turquoise accent */
+  border: 2px solid #1E90FF; /* Blue border for contrast */
+  border-radius: 5px; /* Subtle rounding */
+  text-decoration: none;
+  transition: all 0.3s ease; /* Smooth transitions for hover */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+.products-page .products-row .card-products-col .business-card .card-selector .custom-card-btn:hover {
+  background-color: #1E90FF; /* Blue fill on hover */
+  color: #ffffff; /* White text for contrast */
+  border-color: #1E90FF; /* Maintain border consistency */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+}
+.products-page .products-row .card-products-col .business-card .card-selector .custom-card-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(30, 144, 255, 0.3); /* Focus ring for accessibility */
+}/*# sourceMappingURL=products.css.map */
