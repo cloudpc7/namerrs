@@ -1,52 +1,55 @@
 /**
- * ReviewsSection.jsx — Landing page reviews with modal submission.
+ * ReviewsSection.jsx — Landing page reviews with modal submission via Redux.
  */
 
-import { useEffect, useMemo, useState } from 'react';
-import { apiGet } from '../../utils/apiClient';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  fetchReviews,
+  selectReviews,
+  selectReviewsAverageRating,
+  selectReviewsError,
+  selectReviewsFetchStatus,
+} from '../../redux/slices/reviews.slice';
+import {
+  closeReviewModal,
+  openReviewModal,
+  selectIsReviewModalOpen,
+} from '../../redux/slices/ui.slice';
+import { ASYNC_STATUS } from '../../redux/constants/async.constants';
+import {
+  Section,
+  SectionHeading,
+  Button,
+  Card,
+  EmptyState,
+  Skeleton,
+  Stack,
+} from './primitives';
 import ReviewModal from './ReviewModal';
-import Section from './primitives/Section';
-import SectionHeading from './primitives/SectionHeading';
-import Button from './primitives/Button';
 
 const StarRating = ({ rating }) => (
-  <span aria-label={`${rating} out of 5 stars`} className="text-[#f59e0b]">
+  <span aria-label={`${rating} out of 5 stars`} className="review-stars">
     {'★'.repeat(rating)}
     {'☆'.repeat(5 - rating)}
   </span>
 );
 
 const ReviewsSection = () => {
-  const [reviews, setReviews] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [status, setStatus] = useState('loading');
-
-  const loadReviews = async () => {
-    setStatus('loading');
-    try {
-      const data = await apiGet('/reviews');
-      setReviews(data.reviews || []);
-      setStatus('succeeded');
-    } catch {
-      setStatus('failed');
-    }
-  };
+  const dispatch = useDispatch();
+  const reviews = useSelector(selectReviews);
+  const fetchStatus = useSelector(selectReviewsFetchStatus);
+  const error = useSelector(selectReviewsError);
+  const averageRating = useSelector(selectReviewsAverageRating);
+  const isModalOpen = useSelector(selectIsReviewModalOpen);
 
   useEffect(() => {
-    loadReviews();
-  }, []);
-
-  const averageRating = useMemo(() => {
-    if (!reviews.length) {
-      return null;
-    }
-    const total = reviews.reduce((sum, review) => sum + review.rating, 0);
-    return (total / reviews.length).toFixed(1);
-  }, [reviews]);
+    dispatch(fetchReviews());
+  }, [dispatch]);
 
   return (
     <Section id="reviews" ariaLabel="Reviews" variant="surface">
-      <div className="flex flex-wrap items-end justify-between gap-6">
+      <div className="reviews-section__header">
         <div>
           <SectionHeading
             eyebrow="Customer reviews"
@@ -54,75 +57,65 @@ const ReviewsSection = () => {
             subtitle="Real feedback from local businesses and families in San Jacinto."
           />
           {averageRating && (
-            <p className="mt-3 text-sm font-medium text-[var(--color-text-secondary)]">
-              <span className="text-[#f59e0b]">★</span> {averageRating} average from {reviews.length}{' '}
+            <p className="reviews-section__average">
+              <span className="review-stars">★</span> {averageRating} average from {reviews.length}{' '}
               review{reviews.length === 1 ? '' : 's'}
             </p>
           )}
         </div>
-        <Button onClick={() => setIsModalOpen(true)}>Leave a review</Button>
+        <Button onClick={() => dispatch(openReviewModal())}>Leave a review</Button>
       </div>
 
-      <div className="mt-10 grid gap-4 md:grid-cols-2">
-        {status === 'loading' &&
+      <div className="reviews-grid">
+        {fetchStatus === ASYNC_STATUS.LOADING &&
           Array.from({ length: 2 }, (_, index) => (
-            <div
-              key={`review-skeleton-${index}`}
-              className="animate-pulse rounded-2xl bg-white p-6 ring-1 ring-[var(--color-border)]"
-            >
-              <div className="h-4 w-24 rounded bg-[var(--color-border)]" />
-              <div className="mt-4 h-4 w-full rounded bg-[var(--color-border)]" />
-              <div className="mt-2 h-4 w-5/6 rounded bg-[var(--color-border)]" />
-            </div>
+            <Card key={`review-skeleton-${index}`} padding="md">
+              <Stack gap="sm">
+                <Skeleton variant="text" style={{ width: '6rem' }} />
+                <Skeleton variant="text" />
+                <Skeleton variant="text" style={{ width: '80%' }} />
+              </Stack>
+            </Card>
           ))}
 
-        {status === 'failed' && (
-          <div className="rounded-2xl bg-white p-6 ring-1 ring-[var(--color-border)] md:col-span-2">
-            <p className="text-sm text-[var(--color-text-secondary)]">
-              Reviews are temporarily unavailable. You can still leave one — we&apos;ll publish it shortly.
-            </p>
-            <Button className="mt-4" onClick={() => setIsModalOpen(true)}>
-              Leave a review
-            </Button>
-          </div>
+        {fetchStatus === ASYNC_STATUS.FAILED && (
+          <Card padding="md" className="reviews-grid__full">
+            <EmptyState
+              title="Reviews temporarily unavailable"
+              description={error || "You can still leave one — we'll publish it shortly."}
+            >
+              <Button className="mt-4" onClick={() => dispatch(openReviewModal())}>
+                Leave a review
+              </Button>
+            </EmptyState>
+          </Card>
         )}
 
-        {status === 'succeeded' && reviews.length === 0 && (
-          <div className="rounded-2xl bg-white p-8 text-center ring-1 ring-[var(--color-border)] md:col-span-2">
-            <p className="text-lg font-semibold text-[var(--color-text-primary)]">
-              Be the first to review Namerrs
-            </p>
-            <p className="mt-2 text-sm text-[var(--color-text-secondary)]">
-              Share your experience with our signs, printing, or custom apparel.
-            </p>
-            <Button className="mt-5" onClick={() => setIsModalOpen(true)}>
-              Leave a review
-            </Button>
-          </div>
+        {fetchStatus === ASYNC_STATUS.SUCCEEDED && reviews.length === 0 && (
+          <Card padding="lg" className="reviews-grid__full">
+            <EmptyState
+              title="Be the first to review Namerrs"
+              description="Share your experience with our signs, printing, or custom apparel."
+            >
+              <Button className="mt-5" onClick={() => dispatch(openReviewModal())}>
+                Leave a review
+              </Button>
+            </EmptyState>
+          </Card>
         )}
 
         {reviews.map((review) => (
-          <article
-            key={review.id}
-            className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-[var(--color-border)]"
-          >
+          <Card key={review.id} as="article" padding="md" variant="elevated">
             <StarRating rating={review.rating} />
-            <p className="mt-3 leading-relaxed text-[var(--color-text-primary)]">{review.text}</p>
-            <p className="mt-4 text-sm font-medium text-[var(--color-text-secondary)]">
+            <p className="review-card__text">{review.text}</p>
+            <p className="review-card__author">
               — {review.name || 'Namerrs customer'}
             </p>
-          </article>
+          </Card>
         ))}
       </div>
 
-      <ReviewModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onSubmitted={() => {
-          setIsModalOpen(false);
-          loadReviews();
-        }}
-      />
+      <ReviewModal isOpen={isModalOpen} onClose={() => dispatch(closeReviewModal())} />
     </Section>
   );
 };

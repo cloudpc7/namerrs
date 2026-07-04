@@ -8,6 +8,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import HttpErrorBanner from '../components/HttpErrorBanner';
 import OffcanvasHost from '../components/OffcanvasHost';
+import ToastHost from '../components/ToastHost';
 import { fetchContent, selectContentError, selectContentStatus } from '../../redux/slices/content.slice';
 import { openCart } from '../../redux/slices/design.slice';
 import { setHttpError, setProductSearch } from '../../redux/slices/ui.slice';
@@ -54,6 +55,7 @@ const MainLayout = ({ children }) => {
       </div>
       <Footer />
       <OffcanvasHost />
+      <ToastHost />
     </div>
   );
 };

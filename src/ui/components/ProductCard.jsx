@@ -3,7 +3,7 @@
  */
 
 import { getProductImageUrl } from '../../constants/assets.constants';
-import { formatPrice } from '../../utils/formatPrice';
+import { Card, PriceDisplay } from './primitives';
 
 const ProductCard = ({
   productId,
@@ -16,14 +16,14 @@ const ProductCard = ({
   const panelId = `product-panel-${productId}`;
 
   return (
-    <button
+    <Card
+      as="button"
       type="button"
+      variant={isSelected ? 'selected' : 'interactive'}
+      className="product-card"
       aria-expanded={isSelected}
       aria-controls={panelId}
       onClick={onSelect}
-      className={`product-card group text-left focus:outline-none focus:ring-2 focus:ring-[var(--color-focus-ring)] ${
-        isSelected ? 'product-card--selected' : ''
-      }`}
     >
       <div className="product-card__media">
         {imageUrl ? (
@@ -37,9 +37,9 @@ const ProductCard = ({
         {product?.description && (
           <p className="product-card__desc">{product.description}</p>
         )}
-        <p className="product-card__price">{formatPrice(price)}</p>
+        <PriceDisplay amount={price} />
       </div>
-    </button>
+    </Card>
   );
 };
 

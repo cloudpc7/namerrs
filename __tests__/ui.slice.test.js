@@ -15,6 +15,8 @@ describe('ui slice', () => {
     code: null,
     retryable: false,
     productSearch: '',
+    toast: { message: null, type: 'info', id: null },
+    isReviewModalOpen: false,
   };
 
   it('setHttpError stores status, message, code, and retryable', () => {
@@ -34,6 +36,8 @@ describe('ui slice', () => {
       code: 'SERVICE_UNAVAILABLE',
       retryable: true,
       productSearch: '',
+      toast: { message: null, type: 'info', id: null },
+      isReviewModalOpen: false,
     });
   });
 
@@ -44,6 +48,8 @@ describe('ui slice', () => {
       code: 'NOT_FOUND',
       retryable: false,
       productSearch: 'shirts',
+      toast: { message: null, type: 'info', id: null },
+      isReviewModalOpen: false,
     };
 
     const nextState = uiReducer(populatedState, clearHttpError());

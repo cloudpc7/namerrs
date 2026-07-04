@@ -13,3 +13,11 @@ export const DESIGNER_MODE = {
   ADD: 'add',
   EDIT: 'edit',
 };
+
+export const WIZARD_STEP = {
+  DESIGN: 'design',
+  QUANTITY: 'quantity',
+  SCHEDULE: 'schedule',
+};
+
+export const WIZARD_STEPS = [WIZARD_STEP.DESIGN, WIZARD_STEP.QUANTITY, WIZARD_STEP.SCHEDULE];

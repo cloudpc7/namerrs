@@ -1,42 +1,60 @@
 /**
- * ReviewModal.jsx — Modal form for submitting customer reviews.
+ * ReviewModal.jsx — Modal form for submitting customer reviews via Redux.
  */
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  resetReviewSubmit,
+  selectReviewSubmitError,
+  selectReviewsSubmitStatus,
+  submitReview,
+} from '../../redux/slices/reviews.slice';
+import { closeReviewModal, showToast } from '../../redux/slices/ui.slice';
+import { ASYNC_STATUS } from '../../redux/constants/async.constants';
+import { TOAST_TYPE } from '../../redux/constants/ui.constants';
 import Modal from './Modal';
 import StarRatingInput from './StarRatingInput';
-import TextField from './primitives/TextField';
-import Button from './primitives/Button';
-import { apiPost } from '../../utils/apiClient';
+import { Alert, Button, Stack, TextField } from './primitives';
 
-const ReviewModal = ({ isOpen, onClose, onSubmitted }) => {
+const ReviewModal = ({ isOpen, onClose }) => {
+  const dispatch = useDispatch();
+  const submitStatus = useSelector(selectReviewsSubmitStatus);
+  const submitError = useSelector(selectReviewSubmitError);
+
   const [rating, setRating] = useState(5);
   const [text, setText] = useState('');
   const [name, setName] = useState('');
-  const [error, setError] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setError('');
-    setIsSubmitting(true);
-
-    try {
-      await apiPost('/reviews', { rating, text, name });
+  useEffect(() => {
+    if (submitStatus === ASYNC_STATUS.SUCCEEDED) {
+      dispatch(
+        showToast({
+          message: 'Thank you — your review has been submitted.',
+          type: TOAST_TYPE.SUCCESS,
+        })
+      );
       setText('');
       setName('');
       setRating(5);
-      onSubmitted();
-    } catch (submitError) {
-      setError(submitError.message || 'Could not submit review.');
-    } finally {
-      setIsSubmitting(false);
+      dispatch(resetReviewSubmit());
+      dispatch(closeReviewModal());
     }
+  }, [submitStatus, dispatch]);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    dispatch(submitReview({ rating, text, name }));
+  };
+
+  const handleClose = () => {
+    dispatch(resetReviewSubmit());
+    onClose();
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title="Leave a review" ariaLabel="Review form">
-      <form onSubmit={handleSubmit} className="space-y-4">
+    <Modal isOpen={isOpen} onClose={handleClose} title="Leave a review" ariaLabel="Review form">
+      <form onSubmit={handleSubmit} className="stack">
         <StarRatingInput id="review-rating" value={rating} onChange={setRating} />
         <TextField
           id="review-text"
@@ -56,13 +74,13 @@ const ReviewModal = ({ isOpen, onClose, onSubmitted }) => {
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
-        {error && (
-          <p className="text-sm text-[var(--color-error)]" role="alert">
-            {error}
-          </p>
-        )}
-        <Button type="submit" disabled={isSubmitting} className="w-full">
-          {isSubmitting ? 'Submitting…' : 'Submit review'}
+        {submitError && <Alert variant="error">{submitError}</Alert>}
+        <Button
+          type="submit"
+          disabled={submitStatus === ASYNC_STATUS.SUBMITTING}
+          className="w-full"
+        >
+          {submitStatus === ASYNC_STATUS.SUBMITTING ? 'Submitting…' : 'Submit review'}
         </Button>
       </form>
     </Modal>

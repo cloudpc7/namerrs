@@ -110,7 +110,7 @@ describe('ProductsSection', () => {
     const panel = document.getElementById(businessCardsButton.getAttribute('aria-controls'));
     expect(panel).toBeInTheDocument();
     expect(within(panel).getByText(/custom business cards/i)).toBeInTheDocument();
-    expect(within(panel).getByText('$0.00')).toHaveClass('text-[var(--color-text-disabled)]');
+    expect(within(panel).getByText('$0.00')).toHaveClass('price', 'price--lg');
     expect(within(panel).getByRole('button', { name: /add to order/i })).toBeInTheDocument();
     expect(within(panel).getByRole('button', { name: /edit design/i })).toBeInTheDocument();
   });
@@ -141,10 +141,10 @@ describe('ProductsSection', () => {
 
     const panel = document.getElementById(businessCardsButton.getAttribute('aria-controls'));
     await user.click(within(panel).getByRole('button', { name: /add to order/i }));
-    expect(onDesignerOpen).toHaveBeenCalledWith('businessCards', 'add');
+    expect(onDesignerOpen).toHaveBeenCalledWith('businessCards', 'add', 500);
 
     await user.click(within(panel).getByRole('button', { name: /edit design/i }));
-    expect(onDesignerOpen).toHaveBeenCalledWith('businessCards', 'edit');
+    expect(onDesignerOpen).toHaveBeenCalledWith('businessCards', 'edit', 500);
   });
 
   it('shows loading skeleton while content is loading', () => {

@@ -2,12 +2,11 @@
  * FeaturesSection.jsx — Home page feature highlights with icons and fallbacks.
  */
 
-import { useSelector } from 'react-redux';
 import { Award, Palette, Zap } from 'lucide-react';
+import { useSelector } from 'react-redux';
 import { selectPageContent } from '../../redux/slices/content.slice';
 import { DEFAULT_FEATURES } from '../../constants/business.constants';
-import Section from './primitives/Section';
-import SectionHeading from './primitives/SectionHeading';
+import { Section, SectionHeading, Card } from './primitives';
 
 const FEATURE_ICONS = [Award, Zap, Palette];
 
@@ -29,13 +28,13 @@ const FeaturesSection = () => {
           const Icon = FEATURE_ICONS[index % FEATURE_ICONS.length];
 
           return (
-            <article key={feature.title} className="feature-card">
+            <Card key={feature.title} as="article" padding="md" className="feature-card">
               <div className="feature-card__icon">
                 <Icon size={22} aria-hidden="true" />
               </div>
               <h3 className="feature-card__title">{feature.title}</h3>
               <p className="feature-card__desc">{feature.description}</p>
-            </article>
+            </Card>
           );
         })}
       </div>

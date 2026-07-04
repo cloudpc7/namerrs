@@ -1,16 +1,17 @@
 /** @type {import('jest').Config} */
+const path = require('path');
+
 module.exports = {
+  rootDir: path.resolve(__dirname),
   testEnvironment: 'jsdom',
-  setupFilesAfterEnv: ['<rootDir>/__tests__/setup.js'],
+  setupFilesAfterEnv: [path.join(__dirname, '__tests__', 'setup.js')],
   transform: {
     '^.+\\.(js|jsx)$': ['babel-jest', { configFile: './babel.config.cjs' }],
   },
   moduleFileExtensions: ['js', 'jsx', 'json'],
-  testMatch: [
-    '<rootDir>/__tests__/**/*.test.js',
-    '<rootDir>/__tests__/**/*.test.jsx',
-    '<rootDir>/src/**/*.test.jsx',
-  ],
+  testRegex: String.raw`__tests__[\\/].*\.(test|spec)\.(jsx?|tsx?)$`,
+  modulePathIgnorePatterns: [path.join(__dirname, 'namerrsconcept')],
+  testPathIgnorePatterns: [path.join(__dirname, 'namerrsconcept')],
   moduleNameMapper: {
     '\\.(css|scss|sass)$': 'identity-obj-proxy',
   },
@@ -20,4 +21,7 @@ module.exports = {
     '!src/**/*.test.{js,jsx}',
     '!src/firebase/**',
   ],
+  haste: {
+    forceNodeFilesystemAPI: true,
+  },
 };

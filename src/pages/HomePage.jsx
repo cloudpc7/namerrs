@@ -18,8 +18,8 @@ const HomePage = () => {
   const dispatch = useDispatch();
   useSeo('root');
 
-  const handleDesignerOpen = (productId, mode) => {
-    dispatch(openDesigner({ productId, mode }));
+  const handleDesignerOpen = (productId, mode, minQuantity) => {
+    dispatch(openDesigner({ productId, mode, minQuantity }));
   };
 
   return (

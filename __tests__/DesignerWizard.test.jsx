@@ -9,6 +9,9 @@ import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import DesignerWizard from '../src/features/designers/DesignerWizard';
 import contentReducer from '../src/redux/slices/content.slice';
+import designReducer from '../src/redux/slices/design.slice';
+import cartReducer from '../src/redux/slices/cart.slice';
+import { PANEL_TYPE, DESIGNER_MODE, WIZARD_STEP } from '../src/redux/constants/design.constants';
 
 jest.mock('react-easy-crop', () => ({
   __esModule: true,
@@ -17,7 +20,11 @@ jest.mock('react-easy-crop', () => ({
 
 const renderWizard = (productId) => {
   const store = configureStore({
-    reducer: { content: contentReducer },
+    reducer: {
+      content: contentReducer,
+      design: designReducer,
+      cart: cartReducer,
+    },
     preloadedState: {
       content: {
         products: {
@@ -30,13 +37,31 @@ const renderWizard = (productId) => {
         social: {},
         status: 'idle',
         error: null,
+        httpStatus: null,
+        retryable: false,
+      },
+      design: {
+        isOpen: true,
+        panel: PANEL_TYPE.DESIGNER,
+        productId,
+        mode: DESIGNER_MODE.ADD,
+        wizard: {
+          step: WIZARD_STEP.DESIGN,
+          design: {},
+          quantity: 1,
+          sizeQuantities: {},
+          completionDate: '',
+          designErrors: [],
+          quantityError: '',
+          scheduleError: '',
+        },
       },
     },
   });
 
   return render(
     <Provider store={store}>
-      <DesignerWizard productId={productId} />
+      <DesignerWizard />
     </Provider>
   );
 };

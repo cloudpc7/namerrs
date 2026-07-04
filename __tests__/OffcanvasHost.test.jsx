@@ -12,7 +12,7 @@ import cartReducer from '../src/redux/slices/cart.slice';
 import designReducer, { openDesigner, openCart } from '../src/redux/slices/design.slice';
 import uiReducer from '../src/redux/slices/ui.slice';
 import { CONTENT_STATUS } from '../src/redux/constants/content.constants';
-import { DESIGNER_MODE } from '../src/redux/constants/design.constants';
+import { DESIGNER_MODE, WIZARD_STEP } from '../src/redux/constants/design.constants';
 import OffcanvasHost from '../src/ui/components/OffcanvasHost';
 
 jest.mock('@react-spring/web', () => ({
@@ -66,6 +66,16 @@ const createStore = (preloadedDesign = {}) =>
         panel: null,
         productId: null,
         mode: null,
+        wizard: {
+          step: WIZARD_STEP.DESIGN,
+          design: {},
+          quantity: 1,
+          sizeQuantities: {},
+          completionDate: '',
+          designErrors: [],
+          quantityError: '',
+          scheduleError: '',
+        },
         ...preloadedDesign,
       },
       ui: {
@@ -73,6 +83,9 @@ const createStore = (preloadedDesign = {}) =>
         errorMessage: null,
         code: null,
         retryable: false,
+        productSearch: '',
+        toast: { message: null, type: 'info', id: null },
+        isReviewModalOpen: false,
       },
     },
   });

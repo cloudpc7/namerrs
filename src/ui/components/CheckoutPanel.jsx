@@ -1,33 +1,52 @@
 /**
- * CheckoutPanel.jsx — Checkout form with Stripe Payment Element.
+ * CheckoutPanel.jsx — Checkout form with Stripe Payment Element via Redux checkout slice.
  */
 
-import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { ShieldCheck } from 'lucide-react';
-import { apiPost } from '../../utils/apiClient';
-import { STRIPE_PUBLISHABLE_KEY } from '../../config/stripe';
 import { mapStripeError } from '../../utils/stripeErrors';
-import { getSessionId } from '../../utils/sessionId';
+import { STRIPE_PUBLISHABLE_KEY } from '../../config/stripe';
 import { formatPrice } from '../../utils/formatPrice';
 import {
   selectCartItems,
   selectCartTotal,
   setLastOrder,
 } from '../../redux/slices/cart.slice';
+import {
+  clearCheckoutError,
+  createPaymentIntent,
+  placeOrder,
+  resetCheckoutFlow,
+  selectCheckoutClientSecret,
+  selectCheckoutCustomer,
+  selectCheckoutError,
+  selectCheckoutPaymentStatus,
+  setCheckoutCustomer,
+  setCheckoutError,
+} from '../../redux/slices/checkout.slice';
 import { setHttpError } from '../../redux/slices/ui.slice';
-import { PRICING_HELPER_TEXT } from '../../constants/business.constants';
-import TextField from './primitives/TextField';
-import Button from './primitives/Button';
+import { PAYMENT_STATUS } from '../../redux/constants/checkout.constants';
+import {
+  Alert,
+  Badge,
+  Button,
+  Card,
+  PriceDisplay,
+  Stack,
+  Surface,
+  TextField,
+} from './primitives';
 
 const stripePromise = STRIPE_PUBLISHABLE_KEY ? loadStripe(STRIPE_PUBLISHABLE_KEY) : null;
 
-const PaymentForm = ({ clientSecret, customer, items, total, onSuccess, onError }) => {
+const PaymentForm = ({ customer, items, total, onSuccess }) => {
+  const dispatch = useDispatch();
   const stripe = useStripe();
   const elements = useElements();
-  const [isProcessing, setIsProcessing] = useState(false);
+  const paymentStatus = useSelector(selectCheckoutPaymentStatus);
+  const isProcessing = paymentStatus === PAYMENT_STATUS.PROCESSING;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -35,8 +54,7 @@ const PaymentForm = ({ clientSecret, customer, items, total, onSuccess, onError 
       return;
     }
 
-    setIsProcessing(true);
-    onError('');
+    dispatch(clearCheckoutError());
 
     const { error, paymentIntent } = await stripe.confirmPayment({
       elements,
@@ -44,29 +62,26 @@ const PaymentForm = ({ clientSecret, customer, items, total, onSuccess, onError 
     });
 
     if (error) {
-      onError(mapStripeError(error));
-      setIsProcessing(false);
+      dispatch(setCheckoutError(mapStripeError(error)));
       return;
     }
 
-    try {
-      const orderResponse = await apiPost('/orders', {
+    const result = await dispatch(
+      placeOrder({
         customer,
         items,
         total,
         paymentIntentId: paymentIntent?.id,
-        sessionId: getSessionId(),
-      });
-      onSuccess(orderResponse.order);
-    } catch (orderError) {
-      onError(orderError.message || 'Order could not be created.');
-    } finally {
-      setIsProcessing(false);
+      })
+    );
+
+    if (placeOrder.fulfilled.match(result)) {
+      onSuccess(result.payload);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="stack">
       <PaymentElement />
       <Button type="submit" disabled={!stripe || isProcessing} className="w-full">
         {isProcessing ? 'Processing…' : `Pay ${formatPrice(total)}`}
@@ -79,98 +94,88 @@ const CheckoutPanel = ({ onBack }) => {
   const dispatch = useDispatch();
   const items = useSelector(selectCartItems);
   const total = useSelector(selectCartTotal);
+  const customer = useSelector(selectCheckoutCustomer);
+  const clientSecret = useSelector(selectCheckoutClientSecret);
+  const error = useSelector(selectCheckoutError);
+  const paymentStatus = useSelector(selectCheckoutPaymentStatus);
 
-  const [customer, setCustomer] = useState({ name: '', email: '', phone: '', notes: '' });
-  const [clientSecret, setClientSecret] = useState('');
-  const [error, setError] = useState('');
-  const [loadingIntent, setLoadingIntent] = useState(false);
+  const isIntentLoading = paymentStatus === PAYMENT_STATUS.INTENT_LOADING;
 
   const handleOrderSuccess = (order) => {
     dispatch(setLastOrder(order));
+    dispatch(resetCheckoutFlow());
   };
 
   const handleCustomerSubmit = async (event) => {
     event.preventDefault();
-    setError('');
-    setLoadingIntent(true);
 
-    try {
-      if (total <= 0) {
-        const orderResponse = await apiPost('/orders', {
+    if (total <= 0) {
+      const result = await dispatch(
+        placeOrder({
           customer,
           items,
           total,
-          sessionId: getSessionId(),
-        });
-        handleOrderSuccess(orderResponse.order);
-        return;
-      }
-
-      const response = await apiPost('/create-payment-intent', {
-        amount: total,
-        currency: 'usd',
-        sessionId: getSessionId(),
-      });
-      setClientSecret(response.clientSecret);
-    } catch (intentError) {
-      const message = mapStripeError(intentError);
-      setError(message);
-      dispatch(
-        setHttpError({
-          httpStatus: intentError.status || null,
-          errorMessage: message,
-          code: intentError.code || 'PAYMENT_ERROR',
-          retryable: Boolean(intentError.retryable),
         })
       );
-    } finally {
-      setLoadingIntent(false);
+
+      if (placeOrder.fulfilled.match(result)) {
+        handleOrderSuccess(result.payload);
+      }
+      return;
+    }
+
+    const result = await dispatch(createPaymentIntent({ amount: total }));
+
+    if (createPaymentIntent.rejected.match(result)) {
+      dispatch(
+        setHttpError({
+          httpStatus: result.payload?.status || null,
+          errorMessage: result.payload?.friendlyMessage || result.payload?.message,
+          code: result.payload?.code || 'PAYMENT_ERROR',
+          retryable: Boolean(result.payload?.retryable),
+        })
+      );
     }
   };
 
+  const handleCustomerChange = (field) => (event) => {
+    dispatch(setCheckoutCustomer({ [field]: event.target.value }));
+  };
+
   if (!stripePromise && total > 0) {
-    return (
-      <div className="rounded-xl bg-[var(--color-surface)] p-4 text-sm text-[var(--color-text-secondary)] ring-1 ring-[var(--color-border)]">
-        Stripe is not configured. Add VITE_STRIPE_PUBLISHABLE_KEY to your environment.
-      </div>
-    );
+    return <Alert variant="info">Stripe is not configured. Add VITE_STRIPE_PUBLISHABLE_KEY to your environment.</Alert>;
   }
 
   return (
-    <div className="space-y-5">
-      <button
-        type="button"
-        onClick={onBack}
-        className="text-sm font-medium text-[var(--color-accent)] hover:underline focus:outline-none focus:ring-2 focus:ring-[var(--color-focus-ring)] rounded"
-      >
+    <Stack gap="md">
+      <button type="button" onClick={() => { dispatch(resetCheckoutFlow()); onBack(); }} className="link-back">
         ← Back to cart
       </button>
 
-      <div className="rounded-xl bg-[var(--color-surface)] p-4 ring-1 ring-[var(--color-border)]">
-        <p className="text-sm font-semibold text-[var(--color-text-primary)]">Order summary</p>
-        <ul className="mt-3 space-y-2 text-sm text-[var(--color-text-secondary)]">
+      <Surface padding="md">
+        <p className="form-label">Order summary</p>
+        <ul className="checkout-summary">
           {items.map((item) => (
-            <li key={item.id} className="flex justify-between gap-3">
+            <li key={item.id} className="checkout-summary__row">
               <span>{item.productName}</span>
               <span>{formatPrice(item.lineTotal)}</span>
             </li>
           ))}
         </ul>
-        <p className="mt-4 border-t border-[var(--color-border)] pt-3 text-base font-semibold text-[var(--color-text-primary)]">
-          Total: <span className="text-[var(--color-text-disabled)]">{formatPrice(total)}</span>
-        </p>
-        <p className="mt-1 text-xs text-[var(--color-text-disabled)]">{PRICING_HELPER_TEXT}</p>
-      </div>
+        <div className="checkout-summary__total">
+          <PriceDisplay amount={total} size="lg" showHelper />
+        </div>
+      </Surface>
 
       {!clientSecret ? (
-        <form onSubmit={handleCustomerSubmit} className="space-y-4">
-          <h3 className="text-base font-semibold text-[var(--color-text-primary)]">Contact information</h3>
+        <form onSubmit={handleCustomerSubmit} className="stack">
+          <h3 className="form-label" style={{ fontSize: '1rem' }}>Contact information</h3>
           <TextField
             id="checkout-name"
             label="Name"
             required
             value={customer.name}
-            onChange={(e) => setCustomer((c) => ({ ...c, name: e.target.value }))}
+            onChange={handleCustomerChange('name')}
           />
           <TextField
             id="checkout-email"
@@ -178,7 +183,7 @@ const CheckoutPanel = ({ onBack }) => {
             type="email"
             required
             value={customer.email}
-            onChange={(e) => setCustomer((c) => ({ ...c, email: e.target.value }))}
+            onChange={handleCustomerChange('email')}
           />
           <TextField
             id="checkout-phone"
@@ -186,7 +191,7 @@ const CheckoutPanel = ({ onBack }) => {
             type="tel"
             required
             value={customer.phone}
-            onChange={(e) => setCustomer((c) => ({ ...c, phone: e.target.value }))}
+            onChange={handleCustomerChange('phone')}
           />
           <TextField
             id="checkout-notes"
@@ -194,15 +199,11 @@ const CheckoutPanel = ({ onBack }) => {
             as="textarea"
             rows={2}
             value={customer.notes}
-            onChange={(e) => setCustomer((c) => ({ ...c, notes: e.target.value }))}
+            onChange={handleCustomerChange('notes')}
           />
-          {error && (
-            <p className="text-sm text-[var(--color-error)]" role="alert">
-              {error}
-            </p>
-          )}
-          <Button type="submit" disabled={loadingIntent} className="w-full">
-            {loadingIntent
+          {error && <Alert variant="error">{error}</Alert>}
+          <Button type="submit" disabled={isIntentLoading} className="w-full">
+            {isIntentLoading
               ? 'Processing…'
               : total <= 0
                 ? 'Place order'
@@ -210,29 +211,23 @@ const CheckoutPanel = ({ onBack }) => {
           </Button>
         </form>
       ) : (
-        <div className="space-y-4">
-          <div className="inline-flex items-center gap-2 rounded-full bg-[var(--color-surface)] px-3 py-1.5 text-xs font-medium text-[var(--color-text-secondary)] ring-1 ring-[var(--color-border)]">
-            <ShieldCheck size={14} className="text-[var(--color-accent)]" aria-hidden="true" />
+        <Stack gap="md">
+          <Badge>
+            <ShieldCheck size={14} aria-hidden="true" />
             Secure checkout powered by Stripe
-          </div>
-          {error && (
-            <p className="text-sm text-[var(--color-error)]" role="alert">
-              {error}
-            </p>
-          )}
+          </Badge>
+          {error && <Alert variant="error">{error}</Alert>}
           <Elements stripe={stripePromise} options={{ clientSecret }}>
             <PaymentForm
-              clientSecret={clientSecret}
               customer={customer}
               items={items}
               total={total}
               onSuccess={handleOrderSuccess}
-              onError={setError}
             />
           </Elements>
-        </div>
+        </Stack>
       )}
-    </div>
+    </Stack>
   );
 };
 

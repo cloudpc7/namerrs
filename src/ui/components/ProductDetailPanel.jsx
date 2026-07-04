@@ -4,9 +4,16 @@
 
 import { X } from 'lucide-react';
 import { getProductImageUrl } from '../../constants/assets.constants';
-import { PRICING_HELPER_TEXT } from '../../constants/business.constants';
-import { formatPrice } from '../../utils/formatPrice';
-import Button from './primitives/Button';
+import {
+  Button,
+  Card,
+  IconButton,
+  MediaFrame,
+  PriceDisplay,
+  SpecTable,
+  Surface,
+  Stack,
+} from './primitives';
 
 const ProductDetailPanel = ({
   productId,
@@ -18,57 +25,36 @@ const ProductDetailPanel = ({
   const imageUrl = getProductImageUrl(productId, product);
   const panelId = `product-panel-${productId}`;
   const headerId = `product-header-${productId}`;
-  const specs = product?.specs || [];
 
   return (
-    <article
+    <Card
+      as="article"
       id={panelId}
       role="region"
       aria-labelledby={headerId}
+      variant="elevated"
       className="product-detail-panel"
     >
       <div className="product-detail-panel__header">
         <h3 id={headerId} className="product-detail-panel__heading">
           {product?.name}
         </h3>
-        <button
-          type="button"
-          onClick={onClose}
-          aria-label={`Close ${product?.name} details`}
-          className="product-detail-panel__close"
-        >
+        <IconButton label={`Close ${product?.name} details`} onClick={onClose}>
           <X size={20} aria-hidden="true" />
-        </button>
+        </IconButton>
       </div>
 
       <div className="product-detail-panel__content">
         {imageUrl && (
-          <div className="product-detail-panel__media">
-            <img
-              src={imageUrl}
-              alt={product?.name}
-              className="product-detail-panel__image"
-            />
-          </div>
+          <MediaFrame src={imageUrl} alt={product?.name} className="product-detail-panel__media" />
         )}
 
-        <div className="product-detail-panel__info">
+        <Stack gap="md" className="product-detail-panel__info">
           {product?.description && (
             <p className="product-detail-panel__description">{product.description}</p>
           )}
 
-          {specs.length > 0 && (
-            <table className="product-detail-panel__specs">
-              <tbody>
-                {specs.map((spec) => (
-                  <tr key={`${spec.label}-${spec.value}`}>
-                    <th scope="row">{spec.label}</th>
-                    <td>{spec.value}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
+          <SpecTable specs={product?.specs || []} />
 
           {product?.minQuantity && (
             <p className="product-detail-panel__minimum">
@@ -76,24 +62,23 @@ const ProductDetailPanel = ({
             </p>
           )}
 
-          <div className="product-detail-panel__actions">
-            <div>
-              <p className="product-detail-panel__price text-[var(--color-text-disabled)]">
-                {formatPrice(price)}
-              </p>
-              <p className="product-detail-panel__price-note">{PRICING_HELPER_TEXT}</p>
-            </div>
-
-            <div className="product-detail-panel__buttons">
-              <Button onClick={() => onDesignerOpen(productId, 'add')}>Add to order</Button>
-              <Button variant="secondary" onClick={() => onDesignerOpen(productId, 'edit')}>
+          <Surface padding="md" className="product-detail-panel__actions">
+            <PriceDisplay amount={price} size="lg" showHelper />
+            <div className="cluster product-detail-panel__buttons">
+              <Button onClick={() => onDesignerOpen(productId, 'add', product?.minQuantity)}>
+                Add to order
+              </Button>
+              <Button
+                variant="secondary"
+                onClick={() => onDesignerOpen(productId, 'edit', product?.minQuantity)}
+              >
                 Edit design
               </Button>
             </div>
-          </div>
-        </div>
+          </Surface>
+        </Stack>
       </div>
-    </article>
+    </Card>
   );
 };
 

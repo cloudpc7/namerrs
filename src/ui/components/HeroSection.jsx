@@ -2,8 +2,8 @@
  * HeroSection.jsx — Hero banner with backend-driven copy, CTAs, and trust strip.
  */
 
-import { useSelector } from 'react-redux';
 import { MapPin, Clock, ShieldCheck } from 'lucide-react';
+import { useSelector } from 'react-redux';
 import {
   selectContentStatus,
   selectPageContent,
@@ -15,8 +15,7 @@ import {
   BUSINESS_LOCATION_LABEL,
   BUSINESS_SINCE,
 } from '../../constants/business.constants';
-import Section from './primitives/Section';
-import Button from './primitives/Button';
+import { Section, Button, Badge, MediaFrame, Skeleton, Stack } from './primitives';
 
 const HeroSection = () => {
   const status = useSelector(selectContentStatus);
@@ -30,12 +29,12 @@ const HeroSection = () => {
   if (status === CONTENT_STATUS.LOADING) {
     return (
       <Section ariaLabel="Loading hero content" variant="surface">
-        <div className="animate-pulse space-y-6">
-          <div className="h-4 w-32 rounded bg-[var(--color-border)]" />
-          <div className="h-12 w-2/3 max-w-xl rounded bg-[var(--color-border)]" />
-          <div className="h-6 w-1/2 max-w-md rounded bg-[var(--color-border)]" />
-          <div className="h-64 rounded-2xl bg-[var(--color-border)]" />
-        </div>
+        <Stack gap="lg">
+          <Skeleton variant="text" style={{ width: '8rem' }} />
+          <Skeleton variant="title" style={{ width: '66%', maxWidth: '32rem' }} />
+          <Skeleton variant="text" style={{ width: '50%', maxWidth: '24rem' }} />
+          <Skeleton variant="block" />
+        </Stack>
       </Section>
     );
   }
@@ -44,10 +43,10 @@ const HeroSection = () => {
     <Section ariaLabel="Hero" variant="surface" className="hero-panel">
       <div className="hero__grid">
         <div className="hero__content">
-          <p className="hero__badge">
+          <Badge>
             <MapPin size={16} aria-hidden="true" />
             {BUSINESS_LOCATION_LABEL}
-          </p>
+          </Badge>
 
           <h1 className="hero__title">{title}</h1>
           <p className="hero__slogan">{slogan}</p>
@@ -87,14 +86,11 @@ const HeroSection = () => {
         </div>
 
         <div className="hero__media">
-          <div className="hero-image-frame">
-            <img
-              src={heroImage}
-              alt={`${title} storefront and signage showcase`}
-              className="hero__image"
-              loading="eager"
-            />
-          </div>
+          <MediaFrame
+            src={heroImage}
+            alt={`${title} storefront and signage showcase`}
+            loading="eager"
+          />
           <div className="hero__caption">
             <p className="hero__caption-title">Quality products. Best prices around.</p>
             <p className="hero__caption-desc">Design online, pick up in San Jacinto.</p>

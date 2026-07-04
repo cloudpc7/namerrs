@@ -2,22 +2,35 @@
  * ContactSection.jsx — Contact form with business details and social links.
  */
 
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { MapPin, Clock, Send } from 'lucide-react';
 import SocialIcons from './SocialIcons';
-import { apiPost } from '../../utils/apiClient';
+import {
+  resetContactForm,
+  selectContactError,
+  selectContactSubmitStatus,
+  submitContactMessage,
+} from '../../redux/slices/contact.slice';
 import { selectSocialLinks } from '../../redux/slices/content.slice';
+import { showToast } from '../../redux/slices/ui.slice';
+import { ASYNC_STATUS } from '../../redux/constants/async.constants';
+import { TOAST_TYPE } from '../../redux/constants/ui.constants';
 import { DEFAULT_SOCIAL_LINKS } from '../../constants/social.constants';
 import {
   BUSINESS_ADDRESS,
   BUSINESS_HOURS,
   BUSINESS_LOCATION_LABEL,
 } from '../../constants/business.constants';
-import Section from './primitives/Section';
-import SectionHeading from './primitives/SectionHeading';
-import TextField from './primitives/TextField';
-import Button from './primitives/Button';
+import {
+  Section,
+  SectionHeading,
+  TextField,
+  Button,
+  Card,
+  Stack,
+  Alert,
+} from './primitives';
 
 const formatPhoneHref = (phone) => {
   const digits = String(phone).replace(/\D/g, '');
@@ -25,7 +38,10 @@ const formatPhoneHref = (phone) => {
 };
 
 const ContactSection = () => {
+  const dispatch = useDispatch();
   const socialFromStore = useSelector(selectSocialLinks);
+  const submitStatus = useSelector(selectContactSubmitStatus);
+  const error = useSelector(selectContactError);
   const socialLinks = Object.keys(socialFromStore || {}).length
     ? socialFromStore
     : DEFAULT_SOCIAL_LINKS;
@@ -34,48 +50,44 @@ const ContactSection = () => {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [message, setMessage] = useState('');
-  const [status, setStatus] = useState('idle');
-  const [error, setError] = useState('');
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setError('');
-    setStatus('submitting');
-
-    try {
-      await apiPost('/contact', {
-        name,
-        email,
-        phone,
-        message,
-      });
+  useEffect(() => {
+    if (submitStatus === ASYNC_STATUS.SUCCEEDED) {
+      dispatch(
+        showToast({
+          message: "Message sent — we'll get back to you soon.",
+          type: TOAST_TYPE.SUCCESS,
+        })
+      );
       setName('');
       setEmail('');
       setPhone('');
       setMessage('');
-      setStatus('success');
-    } catch (submitError) {
-      setStatus('error');
-      setError(submitError.message || 'Could not send message.');
+      dispatch(resetContactForm());
     }
+  }, [submitStatus, dispatch]);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    dispatch(submitContactMessage({ name, email, phone, message }));
   };
 
   return (
     <Section id="contact" ariaLabel="Contact">
-      <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:gap-14">
-        <div className="rounded-2xl bg-[var(--color-surface)] p-6 ring-1 ring-[var(--color-border)] md:p-8">
+      <div className="contact-grid">
+        <Card padding="lg" className="contact-grid__info">
           <SectionHeading
             eyebrow="Visit or call"
             title="Namerrs Signs & Printing"
             subtitle="Questions about an order or a custom project? Reach out — we typically respond within one business day."
           />
 
-          <div className="mt-8 space-y-5 text-sm text-[var(--color-text-secondary)]">
-            <div className="flex items-start gap-3">
-              <MapPin size={18} className="mt-0.5 shrink-0 text-[var(--color-accent)]" aria-hidden="true" />
+          <Stack gap="md" className="contact-grid__details">
+            <div className="contact-detail">
+              <MapPin size={18} className="contact-detail__icon" aria-hidden="true" />
               <div>
-                <p className="font-medium text-[var(--color-text-primary)]">{BUSINESS_LOCATION_LABEL}</p>
-                <p className="mt-1">
+                <p className="contact-detail__label">{BUSINESS_LOCATION_LABEL}</p>
+                <p className="contact-detail__value">
                   {BUSINESS_ADDRESS.street}
                   <br />
                   {BUSINESS_ADDRESS.city}, {BUSINESS_ADDRESS.state} {BUSINESS_ADDRESS.zip}
@@ -83,47 +95,41 @@ const ContactSection = () => {
               </div>
             </div>
 
-            <div className="flex items-start gap-3">
-              <Clock size={18} className="mt-0.5 shrink-0 text-[var(--color-accent)]" aria-hidden="true" />
-              <p>{BUSINESS_HOURS}</p>
+            <div className="contact-detail">
+              <Clock size={18} className="contact-detail__icon" aria-hidden="true" />
+              <p className="contact-detail__value">{BUSINESS_HOURS}</p>
             </div>
 
             {socialLinks.phone && (
-              <p>
-                <a
-                  href={formatPhoneHref(socialLinks.phone)}
-                  className="font-semibold text-[var(--color-accent)] hover:underline"
-                >
+              <p className="contact-detail__value">
+                <a href={formatPhoneHref(socialLinks.phone)} className="contact-detail__link">
                   {socialLinks.phone}
                 </a>
               </p>
             )}
 
             {socialLinks.email && (
-              <p>
-                <a
-                  href={`mailto:${socialLinks.email}`}
-                  className="font-semibold text-[var(--color-accent)] hover:underline"
-                >
+              <p className="contact-detail__value">
+                <a href={`mailto:${socialLinks.email}`} className="contact-detail__link">
                   {socialLinks.email}
                 </a>
               </p>
             )}
-          </div>
+          </Stack>
 
-          <div className="mt-8">
-            <p className="mb-3 text-sm font-medium text-[var(--color-text-primary)]">Connect with us</p>
+          <div className="contact-grid__social">
+            <p className="form-label">Connect with us</p>
             <SocialIcons links={socialLinks} />
           </div>
-        </div>
+        </Card>
 
-        <div className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-[var(--color-border)] md:p-8">
-          <h3 className="text-xl font-semibold text-[var(--color-text-primary)]">Send a message</h3>
-          <p className="mt-2 text-sm text-[var(--color-text-secondary)]">
+        <Card padding="lg" variant="elevated">
+          <h3 className="panel-header__title">Send a message</h3>
+          <p className="form-hint" style={{ marginTop: '0.5rem', fontSize: '0.875rem' }}>
             Tell us what you need — quotes, design help, or order questions.
           </p>
 
-          <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+          <form onSubmit={handleSubmit} className="stack stack--lg" style={{ marginTop: '1.5rem' }}>
             <TextField
               id="contact-name"
               label="Name"
@@ -160,23 +166,18 @@ const ContactSection = () => {
               onChange={(e) => setMessage(e.target.value)}
             />
 
-            {error && (
-              <p className="text-sm text-[var(--color-error)]" role="alert">
-                {error}
-              </p>
-            )}
-            {status === 'success' && (
-              <p className="text-sm text-[var(--color-success)]" role="status">
-                Message sent — we&apos;ll get back to you soon.
-              </p>
-            )}
+            {error && <Alert variant="error">{error}</Alert>}
 
-            <Button type="submit" disabled={status === 'submitting'} className="min-h-11">
+            <Button
+              type="submit"
+              disabled={submitStatus === ASYNC_STATUS.SUBMITTING}
+              className="min-h-11"
+            >
               <Send size={16} aria-hidden="true" />
-              {status === 'submitting' ? 'Sending…' : 'Send message'}
+              {submitStatus === ASYNC_STATUS.SUBMITTING ? 'Sending…' : 'Send message'}
             </Button>
           </form>
-        </div>
+        </Card>
       </div>
     </Section>
   );

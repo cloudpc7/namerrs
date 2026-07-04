@@ -13,8 +13,7 @@ import { selectProductSearch } from '../../redux/slices/ui.slice';
 import { CONTENT_STATUS } from '../../redux/constants/content.constants';
 import { PRODUCT_ORDER } from '../../constants/products.constants';
 import { PRICING_HELPER_TEXT } from '../../constants/business.constants';
-import Section from './primitives/Section';
-import SectionHeading from './primitives/SectionHeading';
+import { Section, SectionHeading, Skeleton, Alert, Stack } from './primitives';
 import ProductCard from './ProductCard';
 import ProductDetailPanel from './ProductDetailPanel';
 
@@ -61,14 +60,14 @@ const ProductsSection = ({ onDesignerOpen = () => {} }) => {
   if (status === CONTENT_STATUS.LOADING) {
     return (
       <Section id="products" ariaLabel="Loading products" variant="surface">
-        <div className="animate-pulse space-y-4">
-          <div className="h-8 w-48 rounded bg-[var(--color-border)]" />
+        <Stack gap="lg" className="animate-pulse">
+          <Skeleton variant="title" style={{ width: '12rem' }} />
           <div className="product-grid">
             {Array.from({ length: 6 }, (_, index) => (
-              <div key={`product-skeleton-${index}`} className="h-64 rounded-2xl bg-[var(--color-border)]" />
+              <Skeleton key={`product-skeleton-${index}`} variant="block" style={{ height: '16rem' }} />
             ))}
           </div>
-        </div>
+        </Stack>
       </Section>
     );
   }
@@ -81,10 +80,12 @@ const ProductsSection = ({ onDesignerOpen = () => {} }) => {
         subtitle="Choose a product below to view specs, then add or edit your design in the offcanvas designer."
       />
 
-      <p className="mt-4 text-sm text-[var(--color-text-disabled)]">{PRICING_HELPER_TEXT}</p>
+      <Alert variant="info" className="mt-4">
+        {PRICING_HELPER_TEXT}
+      </Alert>
 
       {searchQuery.trim() && (
-        <p className="mt-4 text-sm text-[var(--color-text-secondary)]" role="status">
+        <p className="form-hint mt-4" role="status" style={{ fontSize: '0.875rem' }}>
           {visibleProducts.length
             ? `Showing ${visibleProducts.length} product${visibleProducts.length === 1 ? '' : 's'} matching “${searchQuery.trim()}”.`
             : `No products match “${searchQuery.trim()}”. Try business cards, shirts, or banners.`}

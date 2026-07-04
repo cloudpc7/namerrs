@@ -2,11 +2,26 @@
  * DesignerWizard.jsx — Multi-step designer flow: design → quantity → schedule → cart.
  */
 
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addCartItem } from '../../redux/slices/cart.slice';
-import { closePanel, openCart } from '../../redux/slices/design.slice';
+import {
+  closePanel,
+  openCart,
+  selectDesignerProductId,
+  selectWizardState,
+  setWizardCompletionDate,
+  setWizardDesignErrors,
+  setWizardQuantity,
+  setWizardQuantityError,
+  setWizardScheduleError,
+  setWizardSizeQuantities,
+  setWizardStep,
+  updateWizardDesign,
+} from '../../redux/slices/design.slice';
 import { selectPricing, selectProductContent } from '../../redux/slices/content.slice';
+import { WIZARD_STEP, WIZARD_STEPS } from '../../redux/constants/design.constants';
+import { Alert, StepIndicator, Stack } from '../../ui/components/primitives';
 import {
   formatDateLabel,
   getMinimumCompletionDate,
@@ -17,28 +32,30 @@ import { getDesignerComponent } from './registry';
 import { getQuantityStepComponent } from './quantity/registry';
 import { validateDesignStep } from './validationRegistry';
 
-const STEPS = ['design', 'quantity', 'schedule'];
-
 const buildInitialSizeQuantities = (design) => {
   const sizes = design?.selectedSizes || ['M'];
   return sizes.reduce((acc, size) => ({ ...acc, [size]: 1 }), {});
 };
 
-const DesignerWizard = ({ productId }) => {
+const DesignerWizard = () => {
   const dispatch = useDispatch();
+  const productId = useSelector(selectDesignerProductId);
+  const wizard = useSelector(selectWizardState);
   const product = useSelector((state) => selectProductContent(state, productId));
   const pricing = useSelector(selectPricing);
   const DesignerComponent = getDesignerComponent(productId);
   const QuantityStepComponent = getQuantityStepComponent(productId);
 
-  const [step, setStep] = useState('design');
-  const [design, setDesign] = useState({});
-  const [quantity, setQuantity] = useState(product?.minQuantity || 1);
-  const [sizeQuantities, setSizeQuantities] = useState({});
-  const [completionDate, setCompletionDate] = useState('');
-  const [designErrors, setDesignErrors] = useState([]);
-  const [quantityError, setQuantityError] = useState('');
-  const [scheduleError, setScheduleError] = useState('');
+  const {
+    step,
+    design,
+    quantity,
+    sizeQuantities,
+    completionDate,
+    designErrors,
+    quantityError,
+    scheduleError,
+  } = wizard;
 
   const configuredPrice = Number(pricing[productId]) || 0;
   const minDate = getMinimumCompletionDate().toISOString().slice(0, 10);
@@ -60,20 +77,15 @@ const DesignerWizard = ({ productId }) => {
   }, [productId, sizeQuantities, quantity, configuredPrice]);
 
   const handleDesignChange = (updates) => {
-    setDesign((current) => {
-      const next = { ...current, ...updates };
-      if (productId === 'tshirts' && updates.selectedSizes) {
-        setSizeQuantities((prev) => {
-          const nextQty = {};
-          updates.selectedSizes.forEach((size) => {
-            nextQty[size] = prev[size] ?? 1;
-          });
-          return nextQty;
-        });
-      }
-      return next;
-    });
-    setDesignErrors([]);
+    dispatch(updateWizardDesign(updates));
+
+    if (productId === 'tshirts' && updates.selectedSizes) {
+      const nextQty = {};
+      updates.selectedSizes.forEach((size) => {
+        nextQty[size] = sizeQuantities[size] ?? 1;
+      });
+      dispatch(setWizardSizeQuantities(nextQty));
+    }
   };
 
   const validateQuantityStep = () => {
@@ -98,44 +110,44 @@ const DesignerWizard = ({ productId }) => {
   };
 
   const goNext = () => {
-    const index = STEPS.indexOf(step);
+    const index = WIZARD_STEPS.indexOf(step);
 
-    if (step === 'design') {
+    if (step === WIZARD_STEP.DESIGN) {
       const errors = validateDesignStep(productId, design);
       if (errors.length) {
-        setDesignErrors(errors);
+        dispatch(setWizardDesignErrors(errors));
         return;
       }
-      setDesignErrors([]);
+      dispatch(setWizardDesignErrors([]));
       if (productId === 'tshirts' && !Object.keys(sizeQuantities).length) {
-        setSizeQuantities(buildInitialSizeQuantities(design));
+        dispatch(setWizardSizeQuantities(buildInitialSizeQuantities(design)));
       }
     }
 
-    if (step === 'quantity') {
+    if (step === WIZARD_STEP.QUANTITY) {
       const error = validateQuantityStep();
       if (error) {
-        setQuantityError(error);
+        dispatch(setWizardQuantityError(error));
         return;
       }
-      setQuantityError('');
+      dispatch(setWizardQuantityError(''));
     }
 
-    if (index < STEPS.length - 1) {
-      setStep(STEPS[index + 1]);
+    if (index < WIZARD_STEPS.length - 1) {
+      dispatch(setWizardStep(WIZARD_STEPS[index + 1]));
     }
   };
 
   const goBack = () => {
-    const index = STEPS.indexOf(step);
+    const index = WIZARD_STEPS.indexOf(step);
     if (index > 0) {
-      setStep(STEPS[index - 1]);
+      dispatch(setWizardStep(WIZARD_STEPS[index - 1]));
     }
   };
 
   const handleAddToCart = () => {
     if (!isValidCompletionDate(completionDate)) {
-      setScheduleError('Please allow at least 5 business days for production.');
+      dispatch(setWizardScheduleError('Please allow at least 5 business days for production.'));
       return;
     }
 
@@ -156,43 +168,37 @@ const DesignerWizard = ({ productId }) => {
   };
 
   if (!DesignerComponent) {
-    return <p className="text-[#6b7280]">Designer not available for this product.</p>;
+    return <Alert variant="info">Designer not available for this product.</Alert>;
   }
 
   return (
-    <div className="space-y-5">
-      <div className="flex gap-2 text-xs font-medium uppercase tracking-wide text-[#6b7280]">
-        {STEPS.map((stepName) => (
-          <span key={stepName} className={step === stepName ? 'text-[#1d4ed8]' : ''}>
-            {stepName}
-          </span>
-        ))}
-      </div>
+    <Stack gap="md">
+      <StepIndicator steps={WIZARD_STEPS} currentStep={step} />
 
-      {step === 'design' && (
+      {step === WIZARD_STEP.DESIGN && (
         <>
           <DesignerComponent design={design} onChange={handleDesignChange} product={product} />
           {designErrors.length > 0 && (
-            <div className="rounded-lg border border-red-200 bg-red-50 p-3" role="alert">
-              <p className="text-sm font-medium text-red-900">Fix these before continuing:</p>
-              <ul className="mt-1 list-inside list-disc text-sm text-red-800">
+            <Alert variant="error">
+              <strong>Fix these before continuing:</strong>
+              <ul className="design-errors-list">
                 {designErrors.map((error) => (
                   <li key={error}>{error}</li>
                 ))}
               </ul>
-            </div>
+            </Alert>
           )}
         </>
       )}
 
-      {step === 'quantity' && (
+      {step === WIZARD_STEP.QUANTITY && (
         <QuantityStepComponent
           product={product}
           design={design}
           quantity={quantity}
-          onQuantityChange={setQuantity}
+          onQuantityChange={(value) => dispatch(setWizardQuantity(value))}
           sizeQuantities={sizeQuantities}
-          onSizeQuantitiesChange={setSizeQuantities}
+          onSizeQuantitiesChange={(value) => dispatch(setWizardSizeQuantities(value))}
           configuredUnitPrice={configuredPrice}
           unitPrice={unitPrice}
           lineTotal={lineTotal}
@@ -200,9 +206,9 @@ const DesignerWizard = ({ productId }) => {
         />
       )}
 
-      {step === 'schedule' && (
-        <div className="space-y-3">
-          <label htmlFor="completion-date" className="block text-sm font-medium text-[#374151]">
+      {step === WIZARD_STEP.SCHEDULE && (
+        <div className="form-field">
+          <label htmlFor="completion-date" className="form-label">
             Requested completion date
           </label>
           <input
@@ -210,57 +216,34 @@ const DesignerWizard = ({ productId }) => {
             type="date"
             min={minDate}
             value={completionDate}
-            onChange={(event) => {
-              setCompletionDate(event.target.value);
-              setScheduleError('');
-            }}
-            className="w-full rounded-lg border border-[#e5e7eb] px-3 py-2 text-sm focus:border-[#1d4ed8] focus:outline-none focus:ring-2 focus:ring-[#93c5fd]"
+            onChange={(event) => dispatch(setWizardCompletionDate(event.target.value))}
+            className="form-input"
           />
-          {scheduleError && (
-            <p className="text-sm text-red-600" role="alert">
-              {scheduleError}
-            </p>
-          )}
+          {scheduleError && <p className="form-error" role="alert">{scheduleError}</p>}
           {completionDate && isValidCompletionDate(completionDate) && (
-            <p className="text-sm text-[#6b7280]">
-              Scheduled for {formatDateLabel(completionDate)}
-            </p>
+            <p className="form-hint">Scheduled for {formatDateLabel(completionDate)}</p>
           )}
-          <p className="text-xs text-[#9ca3af]">
-            Please allow at least 5 business days for production.
-          </p>
+          <p className="form-hint">Please allow at least 5 business days for production.</p>
         </div>
       )}
 
-      <div className="flex flex-wrap gap-3 border-t border-[#e5e7eb] pt-4">
-        {step !== 'design' && (
-          <button
-            type="button"
-            onClick={goBack}
-            className="rounded-lg border border-[#e5e7eb] px-4 py-2 text-sm font-medium text-[#374151] hover:border-[#1d4ed8] focus:outline-none focus:ring-2 focus:ring-[#93c5fd]"
-          >
+      <div className="wizard-actions">
+        {step !== WIZARD_STEP.DESIGN && (
+          <button type="button" onClick={goBack} className="btn btn--secondary btn--md">
             Back
           </button>
         )}
-        {step !== 'schedule' ? (
-          <button
-            type="button"
-            onClick={goNext}
-            className="rounded-lg bg-[#1d4ed8] px-4 py-2 text-sm font-medium text-white hover:bg-[#1e40af] focus:outline-none focus:ring-2 focus:ring-[#93c5fd]"
-          >
+        {step !== WIZARD_STEP.SCHEDULE ? (
+          <button type="button" onClick={goNext} className="btn btn--primary btn--md">
             Continue
           </button>
         ) : (
-          <button
-            type="button"
-            onClick={handleAddToCart}
-            className="rounded-lg bg-[#1d4ed8] px-4 py-2 text-sm font-medium text-white hover:bg-[#1e40af] focus:outline-none focus:ring-2 focus:ring-[#93c5fd]"
-          >
+          <button type="button" onClick={handleAddToCart} className="btn btn--primary btn--md">
             Add to cart
           </button>
         )}
       </div>
-    </div>
+    </Stack>
   );
 };
 

@@ -4,6 +4,10 @@
 
 import '@testing-library/jest-dom';
 
+jest.mock('../src/config/api', () => ({
+  API_BASE_URL: '/api',
+}));
+
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
   value: jest.fn().mockImplementation((query) => ({

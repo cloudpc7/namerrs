@@ -1,9 +1,9 @@
 /**
- * Header.jsx — Site header with navigation, social links, and cart.
+ * Header.jsx — Site header wiring Redux state into the navigation bar.
  */
 
 import { useSelector } from 'react-redux';
-import Navbar from './Navbar';
+import { Navbar } from './nav';
 import { NAV_LINKS } from '../../constants/navigation.constants';
 import { DEFAULT_SOCIAL_LINKS, LOGO_PATH } from '../../constants/social.constants';
 import { selectSocialLinks } from '../../redux/slices/content.slice';
@@ -19,19 +19,17 @@ const Header = ({ onCartClick = () => {}, onSearch = () => {} }) => {
     : DEFAULT_SOCIAL_LINKS;
 
   return (
-    <header>
-      <Navbar
-        logoSrc={LOGO_PATH}
-        logoAlt="Namerrs Signs and Printing"
-        links={NAV_LINKS}
-        socialLinks={socialLinks}
-        showSearch
-        searchValue={searchValue}
-        onSearch={onSearch}
-        onCartClick={onCartClick}
-        cartCount={cartCount}
-      />
-    </header>
+    <Navbar
+      logoSrc={LOGO_PATH}
+      logoAlt="Namerrs Signs and Printing"
+      links={NAV_LINKS}
+      socialLinks={socialLinks}
+      showSearch
+      searchValue={searchValue}
+      onSearch={onSearch}
+      onCartClick={onCartClick}
+      cartCount={cartCount}
+    />
   );
 };
 

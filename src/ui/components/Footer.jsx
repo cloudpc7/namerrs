@@ -2,10 +2,10 @@
  * Footer.jsx — Site footer with logo, NAP, navigation, and social links.
  */
 
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import SocialIcons from './SocialIcons';
+import { NavBrand } from './nav';
 import { FOOTER_LINKS, POWERED_BY } from '../../constants/navigation.constants';
 import { DEFAULT_SOCIAL_LINKS, LOGO_PATH } from '../../constants/social.constants';
 import { selectSocialLinks } from '../../redux/slices/content.slice';
@@ -26,28 +26,17 @@ const Footer = () => {
     ? socialFromStore
     : DEFAULT_SOCIAL_LINKS;
   const year = new Date().getFullYear();
-  const [logoFailed, setLogoFailed] = useState(false);
 
   return (
     <footer className="site-footer">
       <div className="site-footer__inner">
         <div className="site-footer__grid">
           <div>
-            <Link to="/" className="site-nav__brand">
-              {LOGO_PATH && !logoFailed ? (
-                <img
-                  src={LOGO_PATH}
-                  alt="Namerrs Signs and Printing"
-                  className="site-nav__logo"
-                  style={{ filter: 'brightness(0) invert(1)' }}
-                  onError={() => setLogoFailed(true)}
-                />
-              ) : (
-                <span className="site-nav__brand-text" style={{ color: '#fff' }}>
-                  Namerrs Signs & Printing
-                </span>
-              )}
-            </Link>
+            <NavBrand
+              logoSrc={LOGO_PATH}
+              logoAlt="Namerrs Signs and Printing"
+              className="nav-brand--footer"
+            />
             <p className="site-footer__brand-desc">
               Custom signs, printing, and apparel in {BUSINESS_LOCATION_LABEL}. Design online and
               schedule your order completion in one place.
