@@ -1,0 +1,10 @@
+---
+pid: 32848
+cwd: "C:\Users\cloud\projects\namerrs"
+command: "Set-Location C:\\Users\\cloud\\projects\\namerrs; firebase emulators:start --only database,storage,functions,auth --import=./emulator-data"
+started_at: 2026-07-02T23:48:44.310Z
+running_for_ms: 85010    
+---
+i  emulators: Shutting down emulators.
+
+Error: No emulators to start, run firebase init emulators to get started.

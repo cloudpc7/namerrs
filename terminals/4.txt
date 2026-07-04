@@ -1,0 +1,345 @@
+---
+pid: 24828
+cwd: "C:\Users\cloud\projects\namerrs"
+command: "cd C:\\Users\\cloud\\projects\\namerrs; npm test 2>&1"
+started_at: 2026-07-01T20:53:49.561Z
+running_for_ms: 86400007 
+---
+
+> namerrs@1.0.0 test
+> jest
+
+PASS __tests__/apiClient.test.js (5.218 s)
+PASS __tests__/ui.slice.test.js (6.254 s)
+PASS __tests__/content.slice.test.js (6.417 s)
+PASS __tests__/HeroSection.test.jsx (10.718 s)
+PASS src/ui/components/LinkComponent.test.jsx (11.868 s)
+  ● Console
+
+    console.warn
+      ⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+
+       6 |
+       7 | const renderWithRouter = (ui) => {
+    >  8 |   return render(ui, { wrapper: BrowserRouter });
+         |                ^
+       9 | };
+      10 |
+      11 | describe('LinkComponent', () => {
+
+      at warn (node_modules/react-router/lib/deprecations.ts:9:13)
+      at warnOnce (node_modules/react-router/lib/deprecations.ts:14:3)
+      at Object.logDeprecation [as UNSAFE_logV6DeprecationWarnings] (node_modules/react-router/lib/deprecations.ts:26:5)
+      at UNSAFE_logV6DeprecationWarnings (node_modules/react-router-dom/index.tsx:816:25)
+      at Object.create [as react_stack_bottom_frame] (node_modules/react-dom/cjs/react-dom-client.development.js:25989:20)
+      at callback (node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+      at runWithFiberInDEV (node_modules/react-dom/cjs/react-dom-client.development.js:13249:29)
+      at commitHookEffectListMount (node_modules/react-dom/cjs/react-dom-client.development.js:13336:11)
+      at commitHookPassiveMountEffects (node_modules/react-dom/cjs/react-dom-client.development.js:15484:13)
+      at commitPassiveMountOnFiber (node_modules/react-dom/cjs/react-dom-client.development.js:15439:11)
+      at recursivelyTraversePassiveMountEffects (node_modules/react-dom/cjs/react-dom-client.development.js:15519:11)
+      at commitPassiveMountOnFiber (node_modules/react-dom/cjs/react-dom-client.development.js:18432:9)
+      at flushPassiveEffects (node_modules/react-dom/cjs/react-dom-client.development.js:17923:15)
+      at callback (node_modules/react/cjs/react.development.js:590:34)
+      at flushActQueue (node_modules/react/cjs/react.development.js:884:10)
+      at actImplementation (node_modules/@testing-library/react/dist/act-compat.js:46:25)
+      at renderRoot (node_modules/@testing-library/react/dist/pure.js:189:25)
+      at renderRoot (node_modules/@testing-library/react/dist/pure.js:291:10)
+      at renderWithRouter (src/ui/components/LinkComponent.test.jsx:8:16)
+      at Object.renderWithRouter (src/ui/components/LinkComponent.test.jsx:13:5)
+
+    console.warn
+      ⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+       6 |
+       7 | const renderWithRouter = (ui) => {
+    >  8 |   return render(ui, { wrapper: BrowserRouter });
+         |                ^
+       9 | };
+      10 |
+      11 | describe('LinkComponent', () => {
+
+      at warn (node_modules/react-router/lib/deprecations.ts:9:13)
+      at warnOnce (node_modules/react-router/lib/deprecations.ts:14:3)
+      at Object.logDeprecation [as UNSAFE_logV6DeprecationWarnings] (node_modules/react-router/lib/deprecations.ts:37:5)
+      at UNSAFE_logV6DeprecationWarnings (node_modules/react-router-dom/index.tsx:816:25)
+      at Object.create [as react_stack_bottom_frame] (node_modules/react-dom/cjs/react-dom-client.development.js:25989:20)
+      at callback (node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+      at runWithFiberInDEV (node_modules/react-dom/cjs/react-dom-client.development.js:13249:29)
+      at commitHookEffectListMount (node_modules/react-dom/cjs/react-dom-client.development.js:13336:11)
+      at commitHookPassiveMountEffects (node_modules/react-dom/cjs/react-dom-client.development.js:15484:13)
+      at commitPassiveMountOnFiber (node_modules/react-dom/cjs/react-dom-client.development.js:15439:11)
+      at recursivelyTraversePassiveMountEffects (node_modules/react-dom/cjs/react-dom-client.development.js:15519:11)
+      at commitPassiveMountOnFiber (node_modules/react-dom/cjs/react-dom-client.development.js:18432:9)
+      at flushPassiveEffects (node_modules/react-dom/cjs/react-dom-client.development.js:17923:15)
+      at callback (node_modules/react/cjs/react.development.js:590:34)
+      at flushActQueue (node_modules/react/cjs/react.development.js:884:10)
+      at actImplementation (node_modules/@testing-library/react/dist/act-compat.js:46:25)
+      at renderRoot (node_modules/@testing-library/react/dist/pure.js:189:25)
+      at renderRoot (node_modules/@testing-library/react/dist/pure.js:291:10)
+      at renderWithRouter (src/ui/components/LinkComponent.test.jsx:8:16)
+      at Object.renderWithRouter (src/ui/components/LinkComponent.test.jsx:13:5)
+
+FAIL __tests__/SocialIcons.test.jsx (62.328 s)
+  ● SocialIcons › renders social platform links with aria labels
+
+    TestingLibraryElementError: Unable to find an accessible element with the role "link" and name `/phone/i`
+
+    Here are the accessible roles:
+
+      link:
+
+      Name "Visit us on Instagram":
+      <a
+        aria-label="Visit us on Instagram"
+        class="inline-flex h-11 w-11 items-center justify-center rounded-full text-[#374151] transition-colors hover:bg-[#f9fafb] hover:text-[#1d4ed8] focus:outline-none focus:ring-2 focus:ring-[#93c5fd]"
+        href="https://www.instagram.com/namerrs"
+        rel="noopener noreferrer"
+        target="_blank"
+      />
+
+      Name "Visit us on Facebook":
+      <a
+        aria-label="Visit us on Facebook"
+        class="inline-flex h-11 w-11 items-center justify-center rounded-full text-[#374151] transition-colors hover:bg-[#f9fafb] hover:text-[#1d4ed8] focus:outline-none focus:ring-2 focus:ring-[#93c5fd]"
+        href="https://www.facebook.com/Namerrs"
+        rel="noopener noreferrer"
+        target="_blank"
+      />
+
+      Name "Visit us on X":
+      <a
+        aria-label="Visit us on X"
+        class="inline-flex h-11 w-11 items-center justify-center rounded-full text-[#374151] transition-colors hover:bg-[#f9fafb] hover:text-[#1d4ed8] focus:outline-none focus:ring-2 focus:ring-[#93c5fd]"
+        href="https://www.x.com/namerrs"
+        rel="noopener noreferrer"
+        target="_blank"
+      />
+
+      Name "Visit us on YouTube":
+      <a
+        aria-label="Visit us on YouTube"
+        class="inline-flex h-11 w-11 items-center justify-center rounded-full text-[#374151] transition-colors hover:bg-[#f9fafb] hover:text-[#1d4ed8] focus:outline-none focus:ring-2 focus:ring-[#93c5fd]"
+        href="https://www.youtube.com/channel/UC0hn7EgFs-4ZZT_AIjeA7VQ"
+        rel="noopener noreferrer"
+        target="_blank"
+      />
+
+      Name "Call us at (951) 350-0270":
+      <a
+        aria-label="Call us at (951) 350-0270"
+        class="inline-flex h-11 w-11 items-center justify-center rounded-full text-[#374151] transition-colors hover:bg-[#f9fafb] hover:text-[#1d4ed8] focus:outline-none focus:ring-2 focus:ring-[#93c5fd]"
+        href="tel:9513500270"
+      />
+
+      --------------------------------------------------
+
+    Ignored nodes: comments, script, style
+    <body>
+      <div>
+        <div
+          class="flex items-center gap-3"
+        >
+          <a
+            aria-label="Visit us on Instagram"
+            class="inline-flex h-11 w-11 items-center justify-center rounded-full text-[#374151] transition-colors hover:bg-[#f9fafb] hover:text-[#1d4ed8] focus:outline-none focus:ring-2 focus:ring-[#93c5fd]"
+            href="https://www.instagram.com/namerrs"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <svg
+              aria-hidden="true"
+              fill="currentColor"
+              height="20"
+              viewBox="0 0 24 24"
+              width="20"
+            >
+              <path
+                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 11-2.881.001 1.44 1.44 0 012.881-.001z"
+              />
+            </svg>
+          </a>
+          <a
+            aria-label="Visit us on Facebook"
+            class="inline-flex h-11 w-11 items-center justify-center rounded-full text-[#374151] transition-colors hover:bg-[#f9fafb] hover:text-[#1d4ed8] focus:outline-none focus:ring-2 focus:ring-[#93c5fd]"
+            href="https://www.facebook.com/Namerrs"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <svg
+              aria-hidden="true"
+              fill="currentColor"
+              height="20"
+              viewBox="0 0 24 24"
+              width="20"
+            >
+              <path
+                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
+              />
+            </svg>
+          </a>
+          <a
+            aria-label="Visit us on X"
+            class="inline-flex h-11 w-11 items-center justify-center rounded-full text-[#374151] transition-colors hover:bg-[#f9fafb] hover:text-[#1d4ed8] focus:outline-none focus:ring-2 focus:ring-[#93c5fd]"
+            href="https://www.x.com/namerrs"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <svg
+              aria-hidden="true"
+              fill="currentColor"
+              height="20"
+              viewBox="0 0 24 24"
+              width="20"
+            >
+              <path
+                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+              />
+            </svg>
+          </a>
+          <a
+            aria-label="Visit us on YouTube"
+            class="inline-flex h-11 w-11 items-center justify-center rounded-full text-[#374151] transition-colors hover:bg-[#f9fafb] hover:text-[#1d4ed8] focus:outline-none focus:ring-2 focus:ring-[#93c5fd]"
+            href="https://www.youtube.com/channel/UC0hn7EgFs-4ZZT_AIjeA7VQ"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <svg
+              aria-hidden="true"
+              fill="currentColor"
+              height="20"
+              viewBox="0 0 24 24"
+              width="20"
+            >
+              <path
+                d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+              />
+            </svg>
+          </a>
+          <a
+            aria-label="Call us at (951) 350-0270"
+            class="inline-flex h-11 w-11 items-center justify-center rounded-full text-[#374151] transition-colors hover:bg-[#f9fafb] hover:text-[#1d4ed8] focus:outline-none focus:ring-2 focus:ring-[#93c5fd]"
+            href="tel:9513500270"
+          >
+            <svg
+              aria-hidden="true"
+              class="lucide lucide-phone"
+              fill="none"
+              height="20"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </body>
+
+      17 |     );
+      18 |     expect(screen.getByRole('link', { name: /facebook/i })).toBeInTheDocument();
+    > 19 |     expect(screen.getByRole('link', { name: /phone/i })).toHaveAttribute('href', 'tel:9513500270');
+         |                   ^
+      20 |   });
+      21 | });
+
+      at Object.getElementError (node_modules/@testing-library/dom/dist/config.js:37:19)
+      at getElementError (node_modules/@testing-library/dom/dist/query-helpers.js:76:38)
+      at apply (node_modules/@testing-library/dom/dist/query-helpers.js:52:25)
+      at apply (node_modules/@testing-library/dom/dist/query-helpers.js:95:24)
+      at Object.getByRole (__tests__/SocialIcons.test.jsx:19:19)
+
+PASS __tests__/Header.test.jsx (64.284 s)
+  ● Console
+
+    console.warn
+      ⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+
+      17 |   });
+      18 |
+    > 19 |   return render(
+         |                ^
+      20 |     <Provider store={store}>
+      21 |       <BrowserRouter>
+      22 |         <Header />
+
+      at warn (node_modules/react-router/lib/deprecations.ts:9:13)
+      at warnOnce (node_modules/react-router/lib/deprecations.ts:14:3)
+      at Object.logDeprecation [as UNSAFE_logV6DeprecationWarnings] (node_modules/react-router/lib/deprecations.ts:26:5)
+      at UNSAFE_logV6DeprecationWarnings (node_modules/react-router-dom/index.tsx:816:25)
+      at Object.create [as react_stack_bottom_frame] (node_modules/react-dom/cjs/react-dom-client.development.js:25989:20)
+      at callback (node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+      at runWithFiberInDEV (node_modules/react-dom/cjs/react-dom-client.development.js:13249:29)
+      at commitHookEffectListMount (node_modules/react-dom/cjs/react-dom-client.development.js:13336:11)
+      at commitHookPassiveMountEffects (node_modules/react-dom/cjs/react-dom-client.development.js:15484:13)
+      at commitPassiveMountOnFiber (node_modules/react-dom/cjs/react-dom-client.development.js:15439:11)
+      at recursivelyTraversePassiveMountEffects (node_modules/react-dom/cjs/react-dom-client.development.js:15718:11)
+      at commitPassiveMountOnFiber (node_modules/react-dom/cjs/react-dom-client.development.js:15439:11)
+      at recursivelyTraversePassiveMountEffects (node_modules/react-dom/cjs/react-dom-client.development.js:15476:11)
+      at commitPassiveMountOnFiber (node_modules/react-dom/cjs/react-dom-client.development.js:15439:11)
+      at recursivelyTraversePassiveMountEffects (node_modules/react-dom/cjs/react-dom-client.development.js:15519:11)
+      at commitPassiveMountOnFiber (node_modules/react-dom/cjs/react-dom-client.development.js:18432:9)
+      at flushPassiveEffects (node_modules/react-dom/cjs/react-dom-client.development.js:17923:15)
+      at callback (node_modules/react/cjs/react.development.js:590:34)
+      at flushActQueue (node_modules/react/cjs/react.development.js:884:10)
+      at actImplementation (node_modules/@testing-library/react/dist/act-compat.js:46:25)
+      at renderRoot (node_modules/@testing-library/react/dist/pure.js:189:25)
+      at renderRoot (node_modules/@testing-library/react/dist/pure.js:291:10)
+      at renderHeader (__tests__/Header.test.jsx:19:16)
+      at Object.renderHeader (__tests__/Header.test.jsx:30:5)
+
+    console.warn
+      ⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+      17 |   });
+      18 |
+    > 19 |   return render(
+         |                ^
+      20 |     <Provider store={store}>
+      21 |       <BrowserRouter>
+      22 |         <Header />
+
+      at warn (node_modules/react-router/lib/deprecations.ts:9:13)
+      at warnOnce (node_modules/react-router/lib/deprecations.ts:14:3)
+      at Object.logDeprecation [as UNSAFE_logV6DeprecationWarnings] (node_modules/react-router/lib/deprecations.ts:37:5)
+      at UNSAFE_logV6DeprecationWarnings (node_modules/react-router-dom/index.tsx:816:25)
+      at Object.create [as react_stack_bottom_frame] (node_modules/react-dom/cjs/react-dom-client.development.js:25989:20)
+      at callback (node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+      at runWithFiberInDEV (node_modules/react-dom/cjs/react-dom-client.development.js:13249:29)
+      at commitHookEffectListMount (node_modules/react-dom/cjs/react-dom-client.development.js:13336:11)
+      at commitHookPassiveMountEffects (node_modules/react-dom/cjs/react-dom-client.development.js:15484:13)
+      at commitPassiveMountOnFiber (node_modules/react-dom/cjs/react-dom-client.development.js:15439:11)
+      at recursivelyTraversePassiveMountEffects (node_modules/react-dom/cjs/react-dom-client.development.js:15718:11)
+      at commitPassiveMountOnFiber (node_modules/react-dom/cjs/react-dom-client.development.js:15439:11)
+      at recursivelyTraversePassiveMountEffects (node_modules/react-dom/cjs/react-dom-client.development.js:15476:11)
+      at commitPassiveMountOnFiber (node_modules/react-dom/cjs/react-dom-client.development.js:15439:11)
+      at recursivelyTraversePassiveMountEffects (node_modules/react-dom/cjs/react-dom-client.development.js:15519:11)
+      at commitPassiveMountOnFiber (node_modules/react-dom/cjs/react-dom-client.development.js:18432:9)
+      at flushPassiveEffects (node_modules/react-dom/cjs/react-dom-client.development.js:17923:15)
+      at callback (node_modules/react/cjs/react.development.js:590:34)
+      at flushActQueue (node_modules/react/cjs/react.development.js:884:10)
+      at actImplementation (node_modules/@testing-library/react/dist/act-compat.js:46:25)
+      at renderRoot (node_modules/@testing-library/react/dist/pure.js:189:25)
+      at renderRoot (node_modules/@testing-library/react/dist/pure.js:291:10)
+      at renderHeader (__tests__/Header.test.jsx:19:16)
+      at Object.renderHeader (__tests__/Header.test.jsx:30:5)
+
+
+Test Suites: 1 failed, 6 passed, 7 total
+Tests:       1 failed, 16 passed, 17 total
+Snapshots:   0 total
+Time:        67.952 s
+Ran all test suites.
+
+---
+exit_code: -1
+elapsed_ms: 86400007
+ended_at: 2026-07-02T20:54:02.691Z
+---

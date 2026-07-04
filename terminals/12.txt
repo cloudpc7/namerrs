@@ -1,0 +1,44 @@
+---
+pid: 16172
+cwd: "C:\Users\cloud\projects\namerrs"
+command: "cmd /c \"cd /d C:\\Users\\cloud\\projects\\namerrs && firebase deploy --only functions --project namerrs --force\""
+started_at: 2026-07-01T22:37:52.235Z
+running_for_ms: 86400010 
+---
+
+=== Deploying to 'namerrs'...
+
+i  deploying functions
+i  functions: preparing codebase default for deployment
+i  functions: ensuring required API cloudfunctions.googleapis.com is enabled...
+i  functions: ensuring required API cloudbuild.googleapis.com is enabled...
+i  artifactregistry: ensuring required API artifactregistry.googleapis.com is enabled...
+!  functions: Runtime Node.js 20 was deprecated on 2026-04-30 and will be decommissioned on 2026-10-30, after which you will not be able to deploy without upgrading. Consider upgrading now to avoid disruption. See https://cloud.google.com/functions/docs/runtime-support for full details on the lifecycle policy
+!  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory.
+!  functions: Please note that there will be breaking changes when you upgrade.
+i  functions: Loading and analyzing source code for codebase default to determine what to deploy
+Serving at port 8066
+
+i  extensions: ensuring required API firebaseextensions.googleapis.com is enabled...
+i  functions: preparing functions directory for uploading...
+i  functions: packaged C:\Users\cloud\projects\namerrs\functions (39.65 KB) for uploading
+i  functions: ensuring required API run.googleapis.com is enabled...
+i  functions: ensuring required API eventarc.googleapis.com is enabled...
+i  functions: ensuring required API pubsub.googleapis.com is enabled...
+i  functions: ensuring required API storage.googleapis.com is enabled...
+i  functions: generating the service identity for pubsub.googleapis.com...
+i  functions: generating the service identity for eventarc.googleapis.com...
++  functions: functions source uploaded successfully
+i  functions: updating Node.js 20 (2nd Gen) function api(us-central1)...
++  functions[api(us-central1)] Successful update operation.
+Function URL (api(us-central1)): https://api-ipd6i6g5jq-uc.a.run.app
+
++  Deploy complete!
+
+Project Console: https://console.firebase.google.com/project/namerrs/overview
+
+---
+exit_code: -1
+elapsed_ms: 86400010
+ended_at: 2026-07-02T22:38:05.256Z
+---

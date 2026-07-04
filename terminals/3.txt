@@ -1,0 +1,327 @@
+---
+pid: 28532
+cwd: "C:\Users\cloud\projects\namerrs"
+command: "cmd /c \"cd /d C:\\Users\\cloud\\projects\\namerrs && firebase emulators:start --only database,storage,functions,auth\""
+started_at: 2026-07-01T20:38:39.751Z
+running_for_ms: 86400012 
+---
+i  emulators: Starting emulators: auth, functions, database, storage
+!  functions: The following emulators are not running, calls to these services from the Functions emulator will affect production: apphosting, firestore, hosting, pubsub, dataconnect
+!  functions: Application Default Credentials detected. Non-emulated services will access production using these credentials. Be careful!
+i  database: Database Emulator logging to database-debug.log
+i  functions: Watching "C:\Users\cloud\projects\namerrs\functions" for Cloud Functions...
+!  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory.
+!  functions: Please note that there will be breaking changes when you upgrade.
+!  functions: Your requested "node" version "20" doesn't match your global version "22". Using node@22 from host.
+Serving at port 8205
+
++  functions: Loaded functions definitions from source: api.
++  functions[us-central1-api]: http function initialized (http://127.0.0.1:5001/namerrs/us-central1/api).
+
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://127.0.0.1:4000/               │
+└─────────────────────────────────────────────────────────────┘
+
+┌────────────────┬────────────────┬─────────────────────────────────┐
+│ Emulator       │ Host:Port      │ View in Emulator UI             │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Authentication │ 127.0.0.1:9099 │ http://127.0.0.1:4000/auth      │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Functions      │ 127.0.0.1:5001 │ http://127.0.0.1:4000/functions │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Database       │ 127.0.0.1:9000 │ http://127.0.0.1:4000/database  │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Storage        │ 127.0.0.1:9199 │ http://127.0.0.1:4000/storage   │
+└────────────────┴────────────────┴─────────────────────────────────┘
+  Emulator Hub host: 127.0.0.1 port: 4400
+  Other reserved ports: 4500
+
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 
+i  functions: Beginning execution of "us-central1-api"
+i  functions: Finished "us-central1-api" in 6.3271ms
+i  functions: Beginning execution of "us-central1-api"
+i  functions: Finished "us-central1-api" in 343.6216ms
+!  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory.
+!  functions: Please note that there will be breaking changes when you upgrade.
+!  functions: Your requested "node" version "20" doesn't match your global version "22". Using node@22 from host.
+Serving at port 8891
+
+i  functions: Beginning execution of "us-central1-api"
+i  functions: Finished "us-central1-api" in 28.8489ms
+!  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory.
+!  functions: Please note that there will be breaking changes when you upgrade.
+!  functions: Your requested "node" version "20" doesn't match your global version "22". Using node@22 from host.
++  functions: Loaded functions definitions from source: api.
+Serving at port 8139
+
++  functions: Loaded functions definitions from source: api.
+!  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory.
+!  functions: Please note that there will be breaking changes when you upgrade.
+!  functions: Your requested "node" version "20" doesn't match your global version "22". Using node@22 from host.
+i  functions: Loaded environment variables from .env.local.
+Serving at port 8158
+
++  functions: Loaded functions definitions from source: api.
+i  database: Change detected, updating rules for namerrs-default-rtdb...
+!  database: database.rules.json:42:5: 'messages' occurs multiple times.
+!  database: Failed to update rules
+i  database: Change detected, updating rules for namerrs-default-rtdb...
++  database: Rules updated.
+!  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory.
+!  functions: Please note that there will be breaking changes when you upgrade.
+!  functions: Your requested "node" version "20" doesn't match your global version "22". Using node@22 from host.
+i  functions: Loaded environment variables from .env.local.
+Serving at port 8953
+
++  functions: Loaded functions definitions from source: api.
+!  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory.
+!  functions: Please note that there will be breaking changes when you upgrade.
+!  functions: Your requested "node" version "20" doesn't match your global version "22". Using node@22 from host.
+i  functions: Loaded environment variables from .env.local.
+Serving at port 8946
+
++  functions: Loaded functions definitions from source: api.
+!  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory.
+!  functions: Please note that there will be breaking changes when you upgrade.
+!  functions: Your requested "node" version "20" doesn't match your global version "22". Using node@22 from host.
+i  functions: Loaded environment variables from .env.local.
+Serving at port 8539
+
++  functions: Loaded functions definitions from source: api.
+!  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory.
+!  functions: Please note that there will be breaking changes when you upgrade.
+!  functions: Your requested "node" version "20" doesn't match your global version "22". Using node@22 from host.
+i  functions: Loaded environment variables from .env.local.
+Serving at port 8361
+
++  functions: Loaded functions definitions from source: api.
+!  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory.
+!  functions: Please note that there will be breaking changes when you upgrade.
+!  functions: Your requested "node" version "20" doesn't match your global version "22". Using node@22 from host.
+i  functions: Loaded environment variables from .env.local.
+Serving at port 8962
+
++  functions: Loaded functions definitions from source: api.
+!  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory.
+!  functions: Please note that there will be breaking changes when you upgrade.
+!  functions: Your requested "node" version "20" doesn't match your global version "22". Using node@22 from host.
+i  functions: Loaded environment variables from .env.local.
+Serving at port 8419
+
++  functions: Loaded functions definitions from source: api.
+!  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory.
+!  functions: Please note that there will be breaking changes when you upgrade.
+!  functions: Your requested "node" version "20" doesn't match your global version "22". Using node@22 from host.
+i  functions: Loaded environment variables from .env.local.
+Serving at port 8708
+
++  functions: Loaded functions definitions from source: api.
+i  functions: Loaded environment variables from .env.local.
+i  functions: Loaded environment variables from .env.local.
+i  functions: Beginning execution of "us-central1-api"
+i  functions: Beginning execution of "us-central1-api"
+i  functions: Finished "us-central1-api" in 514.759ms
+i  functions: Beginning execution of "us-central1-api"
+i  functions: Finished "us-central1-api" in 45.0184ms
+>  [2026-07-01T22:40:50.625Z]  @firebase/database: FIREBASE WARNING: Using an unspecified index. Your data will be downloaded and filtered on the client. Consider adding ".indexOn": "createdAt" at /reviews to your security rules for better performance. 
+i  functions: Finished "us-central1-api" in 623.8147ms
+i  functions: Beginning execution of "us-central1-api"
+>  [2026-07-01T22:40:50.646Z]  @firebase/database: FIREBASE WARNING: Using an unspecified index. Your data will be downloaded and filtered on the client. Consider adding ".indexOn": "createdAt" at /reviews to your security rules for better performance. 
+i  functions: Finished "us-central1-api" in 11.5998ms
+i  functions: Beginning execution of "us-central1-api"
+i  functions: Beginning execution of "us-central1-api"
+>  [2026-07-01T22:45:46.159Z]  @firebase/database: FIREBASE WARNING: Using an unspecified index. Your data will be downloaded and filtered on the client. Consider adding ".indexOn": "createdAt" at /reviews to your security rules for better performance. 
+i  functions: Finished "us-central1-api" in 77.8346ms
+i  functions: Beginning execution of "us-central1-api"
+i  functions: Finished "us-central1-api" in 78.2756ms
+i  functions: Beginning execution of "us-central1-api"
+>  [2026-07-01T22:45:46.187Z]  @firebase/database: FIREBASE WARNING: Using an unspecified index. Your data will be downloaded and filtered on the client. Consider adding ".indexOn": "createdAt" at /reviews to your security rules for better performance. 
+i  functions: Finished "us-central1-api" in 17.3164ms
+i  functions: Finished "us-central1-api" in 14.705ms
+i  functions: Beginning execution of "us-central1-api"
+i  functions: Beginning execution of "us-central1-api"
+>  [2026-07-01T22:45:49.275Z]  @firebase/database: FIREBASE WARNING: Using an unspecified index. Your data will be downloaded and filtered on the client. Consider adding ".indexOn": "createdAt" at /reviews to your security rules for better performance. 
+i  functions: Finished "us-central1-api" in 14.3758ms
+i  functions: Beginning execution of "us-central1-api"
+i  functions: Finished "us-central1-api" in 16.9348ms
+i  functions: Beginning execution of "us-central1-api"
+>  [2026-07-01T22:45:49.293Z]  @firebase/database: FIREBASE WARNING: Using an unspecified index. Your data will be downloaded and filtered on the client. Consider adding ".indexOn": "createdAt" at /reviews to your security rules for better performance. 
+i  functions: Finished "us-central1-api" in 10.1465ms
+i  functions: Finished "us-central1-api" in 16.1333ms
+!  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory.
+!  functions: Please note that there will be breaking changes when you upgrade.
+!  functions: Your requested "node" version "20" doesn't match your global version "22". Using node@22 from host.
+i  functions: Loaded environment variables from .env.local.
+Serving at port 8789
+
++  functions: Loaded functions definitions from source: api.
+i  functions: Loaded environment variables from .env.local.
+i  functions: Loaded environment variables from .env.local.
+i  functions: Beginning execution of "us-central1-api"
+i  functions: Beginning execution of "us-central1-api"
+>  [2026-07-01T23:01:46.044Z]  @firebase/database: FIREBASE WARNING: Using an unspecified index. Your data will be downloaded and filtered on the client. Consider adding ".indexOn": "createdAt" at /reviews to your security rules for better performance. 
+i  functions: Finished "us-central1-api" in 336.5492ms
+i  functions: Beginning execution of "us-central1-api"
+i  functions: Finished "us-central1-api" in 334.4724ms
+i  functions: Beginning execution of "us-central1-api"
+>  [2026-07-01T23:01:46.071Z]  @firebase/database: FIREBASE WARNING: Using an unspecified index. Your data will be downloaded and filtered on the client. Consider adding ".indexOn": "createdAt" at /reviews to your security rules for better performance. 
+i  functions: Finished "us-central1-api" in 11.5661ms
+i  functions: Finished "us-central1-api" in 11.8949ms
+i  functions: Beginning execution of "us-central1-api"
+i  functions: Beginning execution of "us-central1-api"
+>  [2026-07-01T23:12:08.145Z]  @firebase/database: FIREBASE WARNING: Using an unspecified index. Your data will be downloaded and filtered on the client. Consider adding ".indexOn": "createdAt" at /reviews to your security rules for better performance. 
+i  functions: Finished "us-central1-api" in 345.8256ms
+i  functions: Beginning execution of "us-central1-api"
+i  functions: Finished "us-central1-api" in 338.2702ms
+i  functions: Beginning execution of "us-central1-api"
+>  [2026-07-01T23:12:08.199Z]  @firebase/database: FIREBASE WARNING: Using an unspecified index. Your data will be downloaded and filtered on the client. Consider adding ".indexOn": "createdAt" at /reviews to your security rules for better performance. 
+i  functions: Finished "us-central1-api" in 17.8564ms
+i  functions: Finished "us-central1-api" in 16.6006ms
+i  functions: Beginning execution of "us-central1-api"
+i  functions: Beginning execution of "us-central1-api"
+>  [2026-07-01T23:14:43.167Z]  @firebase/database: FIREBASE WARNING: Using an unspecified index. Your data will be downloaded and filtered on the client. Consider adding ".indexOn": "createdAt" at /reviews to your security rules for better performance. 
+i  functions: Finished "us-central1-api" in 14.4258ms
+i  functions: Beginning execution of "us-central1-api"
+i  functions: Finished "us-central1-api" in 24.7781ms
+i  functions: Beginning execution of "us-central1-api"
+>  [2026-07-01T23:14:43.187Z]  @firebase/database: FIREBASE WARNING: Using an unspecified index. Your data will be downloaded and filtered on the client. Consider adding ".indexOn": "createdAt" at /reviews to your security rules for better performance. 
+i  functions: Finished "us-central1-api" in 16.4436ms
+i  functions: Finished "us-central1-api" in 17.2644ms
+i  functions: Beginning execution of "us-central1-api"
+i  functions: Beginning execution of "us-central1-api"
+>  [2026-07-01T23:15:12.586Z]  @firebase/database: FIREBASE WARNING: Using an unspecified index. Your data will be downloaded and filtered on the client. Consider adding ".indexOn": "createdAt" at /reviews to your security rules for better performance. 
+i  functions: Finished "us-central1-api" in 10.498ms
+i  functions: Beginning execution of "us-central1-api"
+i  functions: Finished "us-central1-api" in 18.4356ms
+i  functions: Beginning execution of "us-central1-api"
+>  [2026-07-01T23:15:12.623Z]  @firebase/database: FIREBASE WARNING: Using an unspecified index. Your data will be downloaded and filtered on the client. Consider adding ".indexOn": "createdAt" at /reviews to your security rules for better performance. 
+i  functions: Finished "us-central1-api" in 31.083ms
+i  functions: Finished "us-central1-api" in 45.0624ms
+i  functions: Beginning execution of "us-central1-api"
+i  functions: Beginning execution of "us-central1-api"
+>  [2026-07-01T23:15:19.692Z]  @firebase/database: FIREBASE WARNING: Using an unspecified index. Your data will be downloaded and filtered on the client. Consider adding ".indexOn": "createdAt" at /reviews to your security rules for better performance. 
+i  functions: Finished "us-central1-api" in 46.758ms
+i  functions: Finished "us-central1-api" in 40.7537ms
+i  functions: Beginning execution of "us-central1-api"
+i  functions: Beginning execution of "us-central1-api"
+>  [2026-07-01T23:15:19.742Z]  @firebase/database: FIREBASE WARNING: Using an unspecified index. Your data will be downloaded and filtered on the client. Consider adding ".indexOn": "createdAt" at /reviews to your security rules for better performance. 
+i  functions: Finished "us-central1-api" in 12.8755ms
+i  functions: Finished "us-central1-api" in 13.2393ms
+i  functions: Beginning execution of "us-central1-api"
+i  functions: Beginning execution of "us-central1-api"
+>  [2026-07-01T23:15:24.530Z]  @firebase/database: FIREBASE WARNING: Using an unspecified index. Your data will be downloaded and filtered on the client. Consider adding ".indexOn": "createdAt" at /reviews to your security rules for better performance. 
+i  functions: Finished "us-central1-api" in 8.9267ms
+i  functions: Beginning execution of "us-central1-api"
+i  functions: Finished "us-central1-api" in 13.7964ms
+i  functions: Beginning execution of "us-central1-api"
+>  [2026-07-01T23:15:24.550Z]  @firebase/database: FIREBASE WARNING: Using an unspecified index. Your data will be downloaded and filtered on the client. Consider adding ".indexOn": "createdAt" at /reviews to your security rules for better performance. 
+i  functions: Finished "us-central1-api" in 16.7352ms
+i  functions: Finished "us-central1-api" in 28.4895ms
+i  functions: Beginning execution of "us-central1-api"
+i  functions: Beginning execution of "us-central1-api"
+>  [2026-07-01T23:15:46.046Z]  @firebase/database: FIREBASE WARNING: Using an unspecified index. Your data will be downloaded and filtered on the client. Consider adding ".indexOn": "createdAt" at /reviews to your security rules for better performance. 
+i  functions: Finished "us-central1-api" in 94.4536ms
+i  functions: Beginning execution of "us-central1-api"
+i  functions: Finished "us-central1-api" in 91.8633ms
+i  functions: Beginning execution of "us-central1-api"
+>  [2026-07-01T23:15:46.070Z]  @firebase/database: FIREBASE WARNING: Using an unspecified index. Your data will be downloaded and filtered on the client. Consider adding ".indexOn": "createdAt" at /reviews to your security rules for better performance. 
+i  functions: Finished "us-central1-api" in 15.0327ms
+i  functions: Finished "us-central1-api" in 13.1733ms
+i  functions: Beginning execution of "us-central1-api"
+i  functions: Beginning execution of "us-central1-api"
+>  [2026-07-01T23:16:59.675Z]  @firebase/database: FIREBASE WARNING: Using an unspecified index. Your data will be downloaded and filtered on the client. Consider adding ".indexOn": "createdAt" at /reviews to your security rules for better performance. 
+i  functions: Finished "us-central1-api" in 8.2029ms
+i  functions: Beginning execution of "us-central1-api"
+i  functions: Finished "us-central1-api" in 9.9431ms
+i  functions: Beginning execution of "us-central1-api"
+>  [2026-07-01T23:16:59.686Z]  @firebase/database: FIREBASE WARNING: Using an unspecified index. Your data will be downloaded and filtered on the client. Consider adding ".indexOn": "createdAt" at /reviews to your security rules for better performance. 
+i  functions: Finished "us-central1-api" in 9.6052ms
+i  functions: Finished "us-central1-api" in 9.0552ms
+i  functions: Beginning execution of "us-central1-api"
+i  functions: Beginning execution of "us-central1-api"
+>  [2026-07-01T23:34:55.327Z]  @firebase/database: FIREBASE WARNING: Using an unspecified index. Your data will be downloaded and filtered on the client. Consider adding ".indexOn": "createdAt" at /reviews to your security rules for better performance. 
+i  functions: Finished "us-central1-api" in 282.3437ms
+i  functions: Beginning execution of "us-central1-api"
+i  functions: Finished "us-central1-api" in 291.2811ms
+>  [2026-07-01T23:34:55.366Z]  @firebase/database: FIREBASE WARNING: Using an unspecified index. Your data will be downloaded and filtered on the client. Consider adding ".indexOn": "createdAt" at /reviews to your security rules for better performance. 
+i  functions: Beginning execution of "us-central1-api"
+i  functions: Finished "us-central1-api" in 36.6457ms
+i  functions: Finished "us-central1-api" in 23.3467ms
+i  functions: Beginning execution of "us-central1-api"
+i  functions: Beginning execution of "us-central1-api"
+>  [2026-07-01T23:34:57.057Z]  @firebase/database: FIREBASE WARNING: Using an unspecified index. Your data will be downloaded and filtered on the client. Consider adding ".indexOn": "createdAt" at /reviews to your security rules for better performance. 
+i  functions: Finished "us-central1-api" in 14.0753ms
+i  functions: Finished "us-central1-api" in 19.5122ms
+i  functions: Beginning execution of "us-central1-api"
+i  functions: Beginning execution of "us-central1-api"
+>  [2026-07-01T23:34:57.109Z]  @firebase/database: FIREBASE WARNING: Using an unspecified index. Your data will be downloaded and filtered on the client. Consider adding ".indexOn": "createdAt" at /reviews to your security rules for better performance. 
+i  functions: Finished "us-central1-api" in 20.5679ms
+i  functions: Finished "us-central1-api" in 32.1179ms
+i  functions: Beginning execution of "us-central1-api"
+i  functions: Beginning execution of "us-central1-api"
+>  [2026-07-01T23:34:58.825Z]  @firebase/database: FIREBASE WARNING: Using an unspecified index. Your data will be downloaded and filtered on the client. Consider adding ".indexOn": "createdAt" at /reviews to your security rules for better performance. 
+i  functions: Finished "us-central1-api" in 14.8099ms
+i  functions: Beginning execution of "us-central1-api"
+i  functions: Finished "us-central1-api" in 18.5487ms
+i  functions: Beginning execution of "us-central1-api"
+>  [2026-07-01T23:34:58.844Z]  @firebase/database: FIREBASE WARNING: Using an unspecified index. Your data will be downloaded and filtered on the client. Consider adding ".indexOn": "createdAt" at /reviews to your security rules for better performance. 
+i  functions: Finished "us-central1-api" in 13.8081ms
+i  functions: Finished "us-central1-api" in 13.9701ms
+i  functions: Beginning execution of "us-central1-api"
+i  functions: Beginning execution of "us-central1-api"
+>  [2026-07-01T23:35:00.029Z]  @firebase/database: FIREBASE WARNING: Using an unspecified index. Your data will be downloaded and filtered on the client. Consider adding ".indexOn": "createdAt" at /reviews to your security rules for better performance. 
+i  functions: Finished "us-central1-api" in 8.9827ms
+i  functions: Beginning execution of "us-central1-api"
+>  [2026-07-01T23:35:00.040Z]  @firebase/database: FIREBASE WARNING: Using an unspecified index. Your data will be downloaded and filtered on the client. Consider adding ".indexOn": "createdAt" at /reviews to your security rules for better performance. 
+i  functions: Finished "us-central1-api" in 8.7068ms
+i  functions: Finished "us-central1-api" in 17.8208ms
+i  functions: Beginning execution of "us-central1-api"
+i  functions: Finished "us-central1-api" in 83.3918ms
+i  functions: Beginning execution of "us-central1-api"
+i  functions: Beginning execution of "us-central1-api"
+>  [2026-07-01T23:35:02.245Z]  @firebase/database: FIREBASE WARNING: Using an unspecified index. Your data will be downloaded and filtered on the client. Consider adding ".indexOn": "createdAt" at /reviews to your security rules for better performance. 
+i  functions: Finished "us-central1-api" in 14.6226ms
+i  functions: Beginning execution of "us-central1-api"
+i  functions: Finished "us-central1-api" in 17.9456ms
+i  functions: Beginning execution of "us-central1-api"
+>  [2026-07-01T23:35:02.262Z]  @firebase/database: FIREBASE WARNING: Using an unspecified index. Your data will be downloaded and filtered on the client. Consider adding ".indexOn": "createdAt" at /reviews to your security rules for better performance. 
+i  functions: Finished "us-central1-api" in 10.2746ms
+i  functions: Finished "us-central1-api" in 14.2995ms
+i  functions: Beginning execution of "us-central1-api"
+i  functions: Beginning execution of "us-central1-api"
+>  [2026-07-01T23:35:08.945Z]  @firebase/database: FIREBASE WARNING: Using an unspecified index. Your data will be downloaded and filtered on the client. Consider adding ".indexOn": "createdAt" at /reviews to your security rules for better performance. 
+i  functions: Finished "us-central1-api" in 12.1156ms
+i  functions: Beginning execution of "us-central1-api"
+i  functions: Finished "us-central1-api" in 14.1908ms
+i  functions: Beginning execution of "us-central1-api"
+>  [2026-07-01T23:35:08.960Z]  @firebase/database: FIREBASE WARNING: Using an unspecified index. Your data will be downloaded and filtered on the client. Consider adding ".indexOn": "createdAt" at /reviews to your security rules for better performance. 
+i  functions: Finished "us-central1-api" in 12.7446ms
+i  functions: Finished "us-central1-api" in 7.8085ms
+i  functions: Beginning execution of "us-central1-api"
+i  functions: Beginning execution of "us-central1-api"
+>  [2026-07-01T23:35:12.915Z]  @firebase/database: FIREBASE WARNING: Using an unspecified index. Your data will be downloaded and filtered on the client. Consider adding ".indexOn": "createdAt" at /reviews to your security rules for better performance. 
+i  functions: Finished "us-central1-api" in 10.1461ms
+i  functions: Beginning execution of "us-central1-api"
+i  functions: Finished "us-central1-api" in 17.7443ms
+i  functions: Beginning execution of "us-central1-api"
+>  [2026-07-01T23:35:12.935Z]  @firebase/database: FIREBASE WARNING: Using an unspecified index. Your data will be downloaded and filtered on the client. Consider adding ".indexOn": "createdAt" at /reviews to your security rules for better performance. 
+i  functions: Finished "us-central1-api" in 9.333ms
+i  functions: Finished "us-central1-api" in 11.954ms
+i  functions: Beginning execution of "us-central1-api"
+i  functions: Beginning execution of "us-central1-api"
+>  [2026-07-01T23:35:30.691Z]  @firebase/database: FIREBASE WARNING: Using an unspecified index. Your data will be downloaded and filtered on the client. Consider adding ".indexOn": "createdAt" at /reviews to your security rules for better performance. 
+i  functions: Finished "us-central1-api" in 8.7108ms
+i  functions: Beginning execution of "us-central1-api"
+i  functions: Finished "us-central1-api" in 13.5138ms
+>  [2026-07-01T23:35:30.705Z]  @firebase/database: FIREBASE WARNING: Using an unspecified index. Your data will be downloaded and filtered on the client. Consider adding ".indexOn": "createdAt" at /reviews to your security rules for better performance. 
+i  functions: Finished "us-central1-api" in 7.577ms
+i  functions: Beginning execution of "us-central1-api"
+i  functions: Finished "us-central1-api" in 10.2893ms
+
+---
+exit_code: -1
+elapsed_ms: 86400012
+ended_at: 2026-07-02T20:38:37.943Z
+---

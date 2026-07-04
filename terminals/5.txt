@@ -1,0 +1,47 @@
+---
+pid: 21132
+cwd: "C:\Users\cloud\projects\namerrs"
+command: "cd C:\\Users\\cloud\\projects\\namerrs; firebase deploy --only functions --project namerrs --non-interactive 2>&1"
+started_at: 2026-07-01T22:26:07.183Z
+running_for_ms: 86400014 
+---
+
+=== Deploying to 'namerrs'...
+
+i  deploying functions
+i  functions: preparing codebase default for deployment
+i  functions: ensuring required API cloudfunctions.googleapis.com is enabled...
+i  functions: ensuring required API cloudbuild.googleapis.com is enabled...
+i  artifactregistry: ensuring required API artifactregistry.googleapis.com is enabled...
+!  functions: Runtime Node.js 20 was deprecated on 2026-04-30 and will be decommissioned on 2026-10-30, after which you will not be able to deploy without upgrading. Consider upgrading now to avoid disruption. See https://cloud.google.com/functions/docs/runtime-support for full details on the lifecycle policy
+!  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory.
+!  functions: Please note that there will be breaking changes when you upgrade.
+i  functions: Loading and analyzing source code for codebase default to determine what to deploy
+Serving at port 8869
+
+i  extensions: ensuring required API firebaseextensions.googleapis.com is enabled...
+i  functions: preparing functions directory for uploading...
+i  functions: packaged C:\Users\cloud\projects\namerrs\functions (39.48 KB) for uploading
+i  functions: ensuring required API run.googleapis.com is enabled...
+i  functions: ensuring required API eventarc.googleapis.com is enabled...
+i  functions: ensuring required API pubsub.googleapis.com is enabled...
+i  functions: ensuring required API storage.googleapis.com is enabled...
+!  functions: missing required API run.googleapis.com. Enabling now...
+i  functions: generating the service identity for pubsub.googleapis.com...
+i  functions: generating the service identity for eventarc.googleapis.com...
++  functions: functions source uploaded successfully
+i  functions: creating Node.js 20 (2nd Gen) function api(us-central1)...
+!  functions: Request to https://cloudfunctions.googleapis.com/v2/projects/namerrs/locations/us-central1/functions?functionId=api had HTTP Error: 403, Could not create Cloud Run service api. Cloud Run Admin API has not been used in project 849760792239 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/run.googleapis.com/overview?project=849760792239 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.
+!  functions:  failed to create function projects/namerrs/locations/us-central1/functions/api
+Failed to create function projects/namerrs/locations/us-central1/functions/api
+
+Functions deploy had errors with the following functions:
+api(us-central1)
+
+Error: There was an error deploying functions
+
+---
+exit_code: -1
+elapsed_ms: 86400014
+ended_at: 2026-07-02T22:26:20.280Z
+---

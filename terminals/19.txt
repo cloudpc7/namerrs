@@ -1,0 +1,32 @@
+---
+pid: 960
+cwd: "C:\Users\cloud\projects\namerrs"
+command: "Set-Location C:\\Users\\cloud\\projects\\namerrs\\namerrsconcept; npm run build 2>&1 | Select-Object -Last 25"
+started_at: 2026-07-01T23:51:01.049Z
+running_for_ms: 86335009 
+---
+Compiled successfully.  npx update-browserslist-db@latest
+
+
+File sizes after gzip:
+
+  257.88 kB          build\static\js\main.b861e6df.js
+  47.07 kB (+956 B)  build\static\css\main.95ccbe02.css
+
+The project was built assuming it is hosted at /.
+You can control this with the homepage field in your package.json.
+
+The build folder is ready to be deployed.
+You may serve it with a static server:
+
+  npm install -g serve
+  serve -s build
+
+Find out more about deployment here:
+
+  https://cra.link/deployment
+
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+Browserslist: browsers data (caniuse-lite) is 15 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme

@@ -1,0 +1,32 @@
+name: Deploy Preview to Firebase
+
+on:
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  deploy-preview:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Project
+        run: npm run build
+
+      - name: Deploy to Firebase Preview Channel
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.FIREBASE_TOKEN }}
+          firebaseProjectId: ${{ secrets.FIREBASE_PROJECT_ID }}
+          entryPoint: ./
+          channelId: preview-${{ github.event.pull_request.number }}

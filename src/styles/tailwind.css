@@ -1,0 +1,13 @@
+@import 'tailwindcss';
+
+@source '../**/*.{js,jsx}';
+@source '../../index.html';
+
+@theme {
+  --color-brand: #111111;
+  --color-brand-accent: #1d4ed8;
+  --color-brand-accent-hover: #1e40af;
+  --color-brand-surface: #f9fafb;
+  --color-brand-muted: #6b7280;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+}

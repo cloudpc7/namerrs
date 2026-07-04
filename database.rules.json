@@ -1,0 +1,40 @@
+{
+  "rules": {
+    "content": {
+      ".read": true,
+      ".write": false
+    },
+    "config": {
+      ".read": true,
+      ".write": false
+    },
+    "reviews": {
+      ".read": true,
+      "$reviewId": {
+        ".write": "newData.hasChildren(['rating', 'text'])"
+      }
+    },
+    "messages": {
+      ".read": false,
+      "$messageId": {
+        ".write": "newData.hasChildren(['text'])"
+      }
+    },
+    "cart": {
+      "$sessionId": {
+        ".read": true,
+        ".write": true
+      }
+    },
+    "designs": {
+      "$designId": {
+        ".read": true,
+        ".write": true
+      }
+    },
+    "orders": {
+      ".read": false,
+      ".write": false
+    }
+  }
+}

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://namerrs.web.app/sitemap.xml

@@ -1,0 +1,30 @@
+---
+pid: 25276
+cwd: "C:\Users\cloud\projects\namerrs"
+command: "cmd /c \"cd /d C:\\Users\\cloud\\projects\\namerrs && copy /Y .env.example .env.local && firebase emulators:start --only database,storage,functions,auth --import=./emulator-data\""
+started_at: 2026-07-01T20:38:25.270Z
+running_for_ms: 86400002 
+---
+        1 file(s) copied.
+i  emulators: Starting emulators: auth, functions, database, storage
+!  functions: The following emulators are not running, calls to these services from the Functions emulator will affect production: apphosting, firestore, hosting, pubsub, dataconnect
+!  functions: Application Default Credentials detected. Non-emulated services will access production using these credentials. Be careful!
+i  database: downloading firebase-database-emulator-v4.11.2.jar...
+
+i  database: Database Emulator logging to database-debug.log
+i  database: Importing data from C:\Users\cloud\projects\namerrs\emulator-data\database_export\namerrs-default-rtdb.json
+i  emulators: Shutting down emulators.
+i  functions: Stopping Functions Emulator
+i  database: Stopping Database Emulator
+!  Database Emulator has exited upon receiving signal: SIGINT
+i  eventarc: Stopping Eventarc Emulator
+i  tasks: Stopping Cloud Tasks Emulator
+i  hub: Stopping emulator hub
+
+Error: Error during database import.
+
+---
+exit_code: -1
+elapsed_ms: 86400002
+ended_at: 2026-07-02T20:38:23.273Z
+---

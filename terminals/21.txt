@@ -1,0 +1,43 @@
+---
+pid: 16244
+cwd: "C:\Users\cloud\projects\namerrs"
+command: "Set-Location C:\\Users\\cloud\\projects\\namerrs\\namerrsconcept; npm run build 2>&1 | Select-Object -Last 30"
+started_at: 2026-07-02T00:01:44.598Z
+running_for_ms: 85695010 
+---
+> namerrs@0.1.0 build
+> react-scripts build
+
+Creating an optimized production build...
+Compiled successfully.node.exe : Browserslist: browsers data (caniuse-lite) is 15 months old. Please run:
+
+
+File sizes after gzip:
+
+  231.07 kB (-26.81 kB)  build\static\js\main.b78f51e5.js
+  48.45 kB (+1.22 kB)    build\static\css\main.17394801.css
+
+The project was built assuming it is hosted at /.
+You can control this with the homepage field in your package.json.
+
+The build folder is ready to be deployed.
+You may serve it with a static server:
+
+  npm install -g serve
+  serve -s build
+
+Find out more about deployment here:
+
+  https://cra.link/deployment
+
+At C:\Program Files\nodejs\npm.ps1:29 char:3
++   & $NODE_EXE $NPM_CLI_JS $args
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Browserslist: b...ld. Please run::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+Browserslist: browsers data (caniuse-lite) is 15 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme

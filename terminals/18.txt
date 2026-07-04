@@ -1,0 +1,1055 @@
+---
+pid: 1840
+cwd: "C:\Users\cloud\projects\namerrs"
+command: "Set-Location C:\\Users\\cloud\\projects\\namerrs\\namerrsconcept; npm start"
+started_at: 2026-07-01T23:43:18.989Z
+running_for_ms: 86400005 
+---
+
+> namerrs@0.1.0 start
+> react-scripts start
+
+Browserslist: browsers data (caniuse-lite) is 15 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+(node:22292) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:22292) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+Starting the development server...
+
+Compiled successfully!
+
+You can now view namerrs in the browser.
+
+  Local:            http://localhost:3000
+  On Your Network:  http://192.168.4.68:3000
+
+Note that the development build is not optimized.
+To create a production build, use npm run build.
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./node_modules/bootstrap/scss/bootstrap.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+<w> Deprecation Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+<w> 
+<w> More info and automated migrator: https://sass-lang.com/d/import
+<w> 
+<w> node_modules\bootstrap\scss\bootstrap.scss 1:9  root stylesheet
+<w> 
+<w> Deprecation Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+<w> 
+<w> More info and automated migrator: https://sass-lang.com/d/import
+<w> 
+<w> node_modules\bootstrap\scss\bootstrap.scss 7:9  root stylesheet
+<w> 
+<w> Deprecation Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+<w> 
+<w> More info and automated migrator: https://sass-lang.com/d/import
+<w> 
+<w> node_modules\bootstrap\scss\bootstrap.scss 8:9  root stylesheet
+<w> 
+<w> Deprecation Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+<w> 
+<w> More info and automated migrator: https://sass-lang.com/d/import
+<w> 
+<w> node_modules\bootstrap\scss\bootstrap.scss 9:9  root stylesheet
+<w> 
+<w> Deprecation Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+<w> 
+<w> More info and automated migrator: https://sass-lang.com/d/import
+<w> 
+<w> node_modules\bootstrap\scss\bootstrap.scss 10:9  root stylesheet
+<w> 
+<w> Deprecation Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+<w> Use color.mix instead.
+<w> 
+<w> More info and automated migrator: https://sass-lang.com/d/import
+<w> 
+<w> node_modules\bootstrap\scss\_functions.scss 207:11  tint-color()
+<w> node_modules\bootstrap\scss\_variables.scss 79:12   @import
+<w> node_modules\bootstrap\scss\bootstrap.scss 8:9      root stylesheet
+<w> 
+<w> Deprecation Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+<w> Use color.mix instead.
+<w> 
+<w> More info and automated migrator: https://sass-lang.com/d/import
+<w> 
+<w> node_modules\bootstrap\scss\_functions.scss 212:11  shade-color()
+<w> node_modules\bootstrap\scss\_variables.scss 84:12   @import
+<w> node_modules\bootstrap\scss\bootstrap.scss 8:9      root stylesheet
+<w> 
+<w> Deprecation Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+<w> Use color.mix instead.
+<w> 
+<w> More info and automated migrator: https://sass-lang.com/d/import
+<w> 
+<w> node_modules\bootstrap\scss\_variables.scss 342:27  @import
+<w> node_modules\bootstrap\scss\bootstrap.scss 8:9      root stylesheet
+<w> 
+<w> Deprecation Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+<w> Use math.unit instead.
+<w> 
+<w> More info and automated migrator: https://sass-lang.com/d/import
+<w> 
+<w> node_modules\bootstrap\scss\_functions.scss 11:30  -assert-ascending()
+<w> node_modules\bootstrap\scss\_variables.scss 494:1  @import
+<w> node_modules\bootstrap\scss\bootstrap.scss 8:9     root stylesheet
+<w> 
+<w> Deprecation Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+<w> Use math.unit instead.
+<w> 
+<w> More info and automated migrator: https://sass-lang.com/d/import
+<w> 
+<w> node_modules\bootstrap\scss\_functions.scss 11:51  -assert-ascending()
+<w> node_modules\bootstrap\scss\_variables.scss 494:1  @import
+<w> node_modules\bootstrap\scss\bootstrap.scss 8:9     root stylesheet
+<w> 
+<w> Deprecation red() is deprecated. Suggestion:
+<w> 
+<w> color.channel($color, "red", $space: rgb)
+<w> 
+<w> More info: https://sass-lang.com/d/color-functions
+<w> 
+<w> node_modules\bootstrap\scss\_functions.scss 185:10  luminance()
+<w> node_modules\bootstrap\scss\_functions.scss 174:8   contrast-ratio()
+<w> node_modules\bootstrap\scss\_functions.scss 159:22  color-contrast()
+<w> node_modules\bootstrap\scss\_variables.scss 846:42  @import
+<w> node_modules\bootstrap\scss\bootstrap.scss 8:9      root stylesheet
+<w> 
+<w> Deprecation green() is deprecated. Suggestion:
+<w> 
+<w> color.channel($color, "green", $space: rgb)
+<w> 
+<w> More info: https://sass-lang.com/d/color-functions
+<w> 
+<w> node_modules\bootstrap\scss\_functions.scss 186:10  luminance()
+<w> node_modules\bootstrap\scss\_functions.scss 174:8   contrast-ratio()
+<w> node_modules\bootstrap\scss\_functions.scss 159:22  color-contrast()
+<w> node_modules\bootstrap\scss\_variables.scss 846:42  @import
+<w> node_modules\bootstrap\scss\bootstrap.scss 8:9      root stylesheet
+<w> 
+<w> Deprecation blue() is deprecated. Suggestion:
+<w> 
+<w> color.channel($color, "blue", $space: rgb)
+<w> 
+<w> More info: https://sass-lang.com/d/color-functions
+<w> 
+<w> node_modules\bootstrap\scss\_functions.scss 187:10  luminance()
+<w> node_modules\bootstrap\scss\_functions.scss 174:8   contrast-ratio()
+<w> node_modules\bootstrap\scss\_functions.scss 159:22  color-contrast()
+<w> node_modules\bootstrap\scss\_variables.scss 846:42  @import
+<w> node_modules\bootstrap\scss\bootstrap.scss 8:9      root stylesheet
+<w> 
+<w> Deprecation red() is deprecated. Suggestion:
+<w> 
+<w> color.channel($color, "red", $space: rgb)
+<w> 
+<w> More info: https://sass-lang.com/d/color-functions
+<w> 
+<w> node_modules\bootstrap\scss\_functions.scss 37:11   to-rgb()
+<w> node_modules\bootstrap\scss\_variables.scss 846:31  @import
+<w> node_modules\bootstrap\scss\bootstrap.scss 8:9      root stylesheet
+<w> 
+<w> Deprecation green() is deprecated. Suggestion:
+<w> 
+<w> color.channel($color, "green", $space: rgb)
+<w> 
+<w> More info: https://sass-lang.com/d/color-functions
+<w> 
+<w> node_modules\bootstrap\scss\_functions.scss 37:24   to-rgb()
+<w> node_modules\bootstrap\scss\_variables.scss 846:31  @import
+<w> node_modules\bootstrap\scss\bootstrap.scss 8:9      root stylesheet
+<w> 
+<w> 232 repetitive deprecation warnings omitted.
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/main.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+<w> Deprecation Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+<w> Use map.get instead.
+<w> 
+<w> More info and automated migrator: https://sass-lang.com/d/import
+<w> 
+<w> src\styles\variables\colors.scss 10:13  colorTheme()
+<w> src\styles\variables\fonts.scss 25:12   @use
+<w> src\styles\main.scss 2:1                root stylesheet
+<w> 
+<w> Deprecation Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+<w> Use map.get instead.
+<w> 
+<w> More info and automated migrator: https://sass-lang.com/d/import
+<w> 
+<w> src\styles\variables\colors.scss 10:13   colorTheme()
+<w> src\styles\variables\fonts.scss 25:12    @use
+<w> src\styles\variables\styleUtil.scss 2:1  @use
+<w> src\styles\main.scss 3:1                 root stylesheet
+<w> 
+<w> Deprecation Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+<w> Use map.get instead.
+<w> 
+<w> More info and automated migrator: https://sass-lang.com/d/import
+<w> 
+<w> src\styles\variables\fonts.scss 44:11  font-theme()
+<w> src\styles\main.scss 9:5               root stylesheet
+<w> 
+<w> Deprecation Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+<w> Use map.get instead.
+<w> 
+<w> More info and automated migrator: https://sass-lang.com/d/import
+<w> 
+<w> src\styles\variables\fonts.scss 46:18  font-theme()
+<w> src\styles\main.scss 9:5               root stylesheet
+<w> 
+<w> Deprecation Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+<w> Use map.get instead.
+<w> 
+<w> More info and automated migrator: https://sass-lang.com/d/import
+<w> 
+<w> src\styles\variables\fonts.scss 47:12  font-theme()
+<w> src\styles\main.scss 9:5               root stylesheet
+<w> 
+<w> 5 repetitive deprecation warnings omitted.
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/pages/products.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+<w> Deprecation Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+<w> Use map.get instead.
+<w> 
+<w> More info and automated migrator: https://sass-lang.com/d/import
+<w> 
+<w> src\styles\variables\colors.scss 10:13  colorTheme()
+<w> src\styles\variables\fonts.scss 25:12   @use
+<w> src\styles\pages\products.scss 2:1      root stylesheet
+<w> 
+<w> Deprecation Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+<w> Use map.get instead.
+<w> 
+<w> More info and automated migrator: https://sass-lang.com/d/import
+<w> 
+<w> src\styles\variables\fonts.scss 44:11  font-theme()
+<w> src\styles\pages\products.scss 32:11   root stylesheet
+<w> 
+<w> Deprecation Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+<w> Use map.get instead.
+<w> 
+<w> More info and automated migrator: https://sass-lang.com/d/import
+<w> 
+<w> src\styles\variables\fonts.scss 46:18  font-theme()
+<w> src\styles\pages\products.scss 32:11   root stylesheet
+<w> 
+<w> Deprecation Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+<w> Use map.get instead.
+<w> 
+<w> More info and automated migrator: https://sass-lang.com/d/import
+<w> 
+<w> src\styles\variables\fonts.scss 47:12  font-theme()
+<w> src\styles\pages\products.scss 32:11   root stylesheet
+<w> 
+<w> Deprecation Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+<w> Use map.get instead.
+<w> 
+<w> More info and automated migrator: https://sass-lang.com/d/import
+<w> 
+<w> src\styles\variables\fonts.scss 48:21  font-theme()
+<w> src\styles\pages\products.scss 32:11   root stylesheet
+<w> 
+<w> 4 repetitive deprecation warnings omitted.
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/header/header.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+<w> Deprecation Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+<w> Use map.get instead.
+<w> 
+<w> More info and automated migrator: https://sass-lang.com/d/import
+<w> 
+<w> src\styles\variables\colors.scss 10:13        colorTheme()
+<w> src\styles\variables\fonts.scss 25:12         @use
+<w> src\styles\components\header\header.scss 2:1  root stylesheet
+<w> 
+<w> Deprecation Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+<w> Use map.get instead.
+<w> 
+<w> More info and automated migrator: https://sass-lang.com/d/import
+<w> 
+<w> src\styles\variables\fonts.scss 44:11           font-theme()
+<w> src\styles\components\header\header.scss 24:13  root stylesheet
+<w> 
+<w> Deprecation Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+<w> Use map.get instead.
+<w> 
+<w> More info and automated migrator: https://sass-lang.com/d/import
+<w> 
+<w> src\styles\variables\fonts.scss 46:18           font-theme()
+<w> src\styles\components\header\header.scss 24:13  root stylesheet
+<w> 
+<w> Deprecation Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+<w> Use map.get instead.
+<w> 
+<w> More info and automated migrator: https://sass-lang.com/d/import
+<w> 
+<w> src\styles\variables\fonts.scss 47:12           font-theme()
+<w> src\styles\components\header\header.scss 24:13  root stylesheet
+<w> 
+<w> Deprecation Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+<w> Use map.get instead.
+<w> 
+<w> More info and automated migrator: https://sass-lang.com/d/import
+<w> 
+<w> src\styles\variables\fonts.scss 48:21           font-theme()
+<w> src\styles\components\header\header.scss 24:13  root stylesheet
+<w> 
+<w> 4 repetitive deprecation warnings omitted.
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/products/products.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+<w> Deprecation Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+<w> Use map.get instead.
+<w> 
+<w> More info and automated migrator: https://sass-lang.com/d/import
+<w> 
+<w> src\styles\variables\colors.scss 10:13            colorTheme()
+<w> src\styles\variables\fonts.scss 25:12             @use
+<w> src\styles\components\products\products.scss 2:1  root stylesheet
+<w>
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/footer/footer.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+<w> Deprecation Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+<w> Use map.get instead.
+<w> 
+<w> More info and automated migrator: https://sass-lang.com/d/import
+<w> 
+<w> src\styles\variables\colors.scss 10:13        colorTheme()
+<w> src\styles\variables\fonts.scss 25:12         @use
+<w> src\styles\components\footer\footer.scss 2:1  root stylesheet
+<w>
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/hero/hero.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+<w> Deprecation Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+<w> Use map.get instead.
+<w> 
+<w> More info and automated migrator: https://sass-lang.com/d/import
+<w> 
+<w> src\styles\variables\colors.scss 10:13    colorTheme()
+<w> src\styles\variables\fonts.scss 25:12     @use
+<w> src\styles\components\hero\hero.scss 2:1  root stylesheet
+<w> 
+<w> Deprecation Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+<w> Use map.get instead.
+<w> 
+<w> More info and automated migrator: https://sass-lang.com/d/import
+<w> 
+<w> src\styles\variables\fonts.scss 44:11      font-theme()
+<w> src\styles\components\hero\hero.scss 20:7  root stylesheet
+<w> 
+<w> Deprecation Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+<w> Use map.get instead.
+<w> 
+<w> More info and automated migrator: https://sass-lang.com/d/import
+<w> 
+<w> src\styles\variables\fonts.scss 46:18      font-theme()
+<w> src\styles\components\hero\hero.scss 20:7  root stylesheet
+<w> 
+<w> Deprecation Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+<w> Use map.get instead.
+<w> 
+<w> More info and automated migrator: https://sass-lang.com/d/import
+<w> 
+<w> src\styles\variables\fonts.scss 47:12      font-theme()
+<w> src\styles\components\hero\hero.scss 20:7  root stylesheet
+<w> 
+<w> Deprecation Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+<w> Use map.get instead.
+<w> 
+<w> More info and automated migrator: https://sass-lang.com/d/import
+<w> 
+<w> src\styles\variables\fonts.scss 48:21      font-theme()
+<w> src\styles\components\hero\hero.scss 20:7  root stylesheet
+<w> 
+<w> 4 repetitive deprecation warnings omitted.
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/graphics/graphics.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+<w> Deprecation Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+<w> Use map.get instead.
+<w> 
+<w> More info and automated migrator: https://sass-lang.com/d/import
+<w> 
+<w> src\styles\variables\colors.scss 10:13            colorTheme()
+<w> src\styles\variables\fonts.scss 25:12             @use
+<w> src\styles\components\graphics\graphics.scss 2:1  root stylesheet
+<w>
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/faqs/faqs.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+<w> Deprecation Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+<w> Use map.get instead.
+<w> 
+<w> More info and automated migrator: https://sass-lang.com/d/import
+<w> 
+<w> src\styles\variables\colors.scss 10:13    colorTheme()
+<w> src\styles\variables\fonts.scss 25:12     @use
+<w> src\styles\components\faqs\faqs.scss 2:1  root stylesheet
+<w>
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/businesscards/cards.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+<w> Deprecation Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+<w> Use map.get instead.
+<w> 
+<w> More info and automated migrator: https://sass-lang.com/d/import
+<w> 
+<w> src\styles\variables\colors.scss 10:13              colorTheme()
+<w> src\styles\variables\fonts.scss 25:12               @use
+<w> src\styles\components\businesscards\cards.scss 2:1  root stylesheet
+<w>
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/about/about.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+<w> Deprecation Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+<w> Use map.get instead.
+<w> 
+<w> More info and automated migrator: https://sass-lang.com/d/import
+<w> 
+<w> src\styles\variables\colors.scss 10:13      colorTheme()
+<w> src\styles\variables\fonts.scss 25:12       @use
+<w> src\styles\components\about\about.scss 2:1  root stylesheet
+<w>
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/testimonies/testimony.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+<w> Deprecation Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+<w> Use map.get instead.
+<w> 
+<w> More info and automated migrator: https://sass-lang.com/d/import
+<w> 
+<w> src\styles\variables\colors.scss 10:13                colorTheme()
+<w> src\styles\variables\fonts.scss 25:12                 @use
+<w> src\styles\components\testimonies\testimony.scss 2:1  root stylesheet
+<w>
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/signs/signs.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+<w> Deprecation Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+<w> Use map.get instead.
+<w> 
+<w> More info and automated migrator: https://sass-lang.com/d/import
+<w> 
+<w> src\styles\variables\colors.scss 10:13      colorTheme()
+<w> src\styles\variables\fonts.scss 25:12       @use
+<w> src\styles\components\signs\signs.scss 2:1  root stylesheet
+<w>
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/contact/contact.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+<w> Deprecation Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+<w> Use map.get instead.
+<w> 
+<w> More info and automated migrator: https://sass-lang.com/d/import
+<w> 
+<w> src\styles\variables\colors.scss 10:13          colorTheme()
+<w> src\styles\variables\fonts.scss 25:12           @use
+<w> src\styles\components\contact\contact.scss 2:1  root stylesheet
+<w>
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/spinners/Spinner.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+webpack compiled successfully
+Compiling...
+Compiled successfully!
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/main.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/pages/products.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/footer/footer.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/header/header.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/products/products.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/hero/hero.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/graphics/graphics.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/businesscards/cards.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/faqs/faqs.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/signs/signs.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/about/about.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/testimonies/testimony.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/spinners/Spinner.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/contact/contact.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+webpack compiled successfully
+Compiling...
+Compiled successfully!
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/main.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+webpack compiled successfully
+Compiling...
+Compiled successfully!
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/main.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/pages/products.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/footer/footer.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/graphics/graphics.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/header/header.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/faqs/faqs.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/products/products.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/testimonies/testimony.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/signs/signs.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/about/about.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/contact/contact.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/hero/hero.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/businesscards/cards.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+webpack compiled successfully
+Compiling...
+Compiled successfully!
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/main.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/pages/products.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/header/header.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/products/products.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/hero/hero.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/graphics/graphics.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/businesscards/cards.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/signs/signs.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/faqs/faqs.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/testimonies/testimony.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/about/about.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/contact/contact.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/footer/footer.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+webpack compiled successfully
+Compiling...
+Compiled successfully!
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/hero/hero.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+<w> Deprecation Sass's behavior for declarations that appear after nested
+<w> rules will be changing to match the behavior specified by CSS in an upcoming
+<w> version. To keep the existing behavior, move the declaration above the nested
+<w> rule. To opt into the new behavior, wrap the declaration in `& {}`.
+<w> 
+<w> More info: https://sass-lang.com/d/mixed-decls
+<w> 
+<w> src\styles\components\hero\hero.scss 20:5  root stylesheet
+<w> 
+<w> Deprecation Sass's behavior for declarations that appear after nested
+<w> rules will be changing to match the behavior specified by CSS in an upcoming
+<w> version. To keep the existing behavior, move the declaration above the nested
+<w> rule. To opt into the new behavior, wrap the declaration in `& {}`.
+<w> 
+<w> More info: https://sass-lang.com/d/mixed-decls
+<w> 
+<w> src\styles\components\hero\hero.scss 21:5  root stylesheet
+<w> 
+<w> Deprecation Sass's behavior for declarations that appear after nested
+<w> rules will be changing to match the behavior specified by CSS in an upcoming
+<w> version. To keep the existing behavior, move the declaration above the nested
+<w> rule. To opt into the new behavior, wrap the declaration in `& {}`.
+<w> 
+<w> More info: https://sass-lang.com/d/mixed-decls
+<w> 
+<w> src\styles\components\hero\hero.scss 22:5  root stylesheet
+<w> 
+<w> Deprecation Sass's behavior for declarations that appear after nested
+<w> rules will be changing to match the behavior specified by CSS in an upcoming
+<w> version. To keep the existing behavior, move the declaration above the nested
+<w> rule. To opt into the new behavior, wrap the declaration in `& {}`.
+<w> 
+<w> More info: https://sass-lang.com/d/mixed-decls
+<w> 
+<w> src\styles\components\hero\hero.scss 23:5  root stylesheet
+<w>
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/header/site-nav.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+<w> Deprecation Sass's behavior for declarations that appear after nested
+<w> rules will be changing to match the behavior specified by CSS in an upcoming
+<w> version. To keep the existing behavior, move the declaration above the nested
+<w> rule. To opt into the new behavior, wrap the declaration in `& {}`.
+<w> 
+<w> More info: https://sass-lang.com/d/mixed-decls
+<w> 
+<w> src\styles\components\header\site-nav.scss 18:3  root stylesheet
+<w> 
+<w> Deprecation Sass's behavior for declarations that appear after nested
+<w> rules will be changing to match the behavior specified by CSS in an upcoming
+<w> version. To keep the existing behavior, move the declaration above the nested
+<w> rule. To opt into the new behavior, wrap the declaration in `& {}`.
+<w> 
+<w> More info: https://sass-lang.com/d/mixed-decls
+<w> 
+<w> src\styles\components\header\site-nav.scss 18:3  root stylesheet
+<w> 
+<w> Deprecation Sass's behavior for declarations that appear after nested
+<w> rules will be changing to match the behavior specified by CSS in an upcoming
+<w> version. To keep the existing behavior, move the declaration above the nested
+<w> rule. To opt into the new behavior, wrap the declaration in `& {}`.
+<w> 
+<w> More info: https://sass-lang.com/d/mixed-decls
+<w> 
+<w> src\styles\components\header\site-nav.scss 19:3  root stylesheet
+<w> 
+<w> Deprecation Sass's behavior for declarations that appear after nested
+<w> rules will be changing to match the behavior specified by CSS in an upcoming
+<w> version. To keep the existing behavior, move the declaration above the nested
+<w> rule. To opt into the new behavior, wrap the declaration in `& {}`.
+<w> 
+<w> More info: https://sass-lang.com/d/mixed-decls
+<w> 
+<w> src\styles\components\header\site-nav.scss 19:3  root stylesheet
+<w> 
+<w> Deprecation Sass's behavior for declarations that appear after nested
+<w> rules will be changing to match the behavior specified by CSS in an upcoming
+<w> version. To keep the existing behavior, move the declaration above the nested
+<w> rule. To opt into the new behavior, wrap the declaration in `& {}`.
+<w> 
+<w> More info: https://sass-lang.com/d/mixed-decls
+<w> 
+<w> src\styles\components\header\site-nav.scss 20:3  root stylesheet
+<w> 
+<w> 5 repetitive deprecation warnings omitted.
+<w> 
+<w> null
+
+webpack compiled successfully
+Compiling...
+Compiled successfully!
+webpack compiled successfully
+Compiling...
+Compiled successfully!
+webpack compiled successfully
+Compiling...
+Compiled successfully!
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/header/site-nav.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+<w> Deprecation Sass's behavior for declarations that appear after nested
+<w> rules will be changing to match the behavior specified by CSS in an upcoming
+<w> version. To keep the existing behavior, move the declaration above the nested
+<w> rule. To opt into the new behavior, wrap the declaration in `& {}`.
+<w> 
+<w> More info: https://sass-lang.com/d/mixed-decls
+<w> 
+<w> src\styles\components\header\site-nav.scss 18:3  root stylesheet
+<w> 
+<w> Deprecation Sass's behavior for declarations that appear after nested
+<w> rules will be changing to match the behavior specified by CSS in an upcoming
+<w> version. To keep the existing behavior, move the declaration above the nested
+<w> rule. To opt into the new behavior, wrap the declaration in `& {}`.
+<w> 
+<w> More info: https://sass-lang.com/d/mixed-decls
+<w> 
+<w> src\styles\components\header\site-nav.scss 18:3  root stylesheet
+<w> 
+<w> Deprecation Sass's behavior for declarations that appear after nested
+<w> rules will be changing to match the behavior specified by CSS in an upcoming
+<w> version. To keep the existing behavior, move the declaration above the nested
+<w> rule. To opt into the new behavior, wrap the declaration in `& {}`.
+<w> 
+<w> More info: https://sass-lang.com/d/mixed-decls
+<w> 
+<w> src\styles\components\header\site-nav.scss 19:3  root stylesheet
+<w> 
+<w> Deprecation Sass's behavior for declarations that appear after nested
+<w> rules will be changing to match the behavior specified by CSS in an upcoming
+<w> version. To keep the existing behavior, move the declaration above the nested
+<w> rule. To opt into the new behavior, wrap the declaration in `& {}`.
+<w> 
+<w> More info: https://sass-lang.com/d/mixed-decls
+<w> 
+<w> src\styles\components\header\site-nav.scss 19:3  root stylesheet
+<w> 
+<w> Deprecation Sass's behavior for declarations that appear after nested
+<w> rules will be changing to match the behavior specified by CSS in an upcoming
+<w> version. To keep the existing behavior, move the declaration above the nested
+<w> rule. To opt into the new behavior, wrap the declaration in `& {}`.
+<w> 
+<w> More info: https://sass-lang.com/d/mixed-decls
+<w> 
+<w> src\styles\components\header\site-nav.scss 20:3  root stylesheet
+<w> 
+<w> 5 repetitive deprecation warnings omitted.
+<w> 
+<w> null
+
+webpack compiled successfully
+Compiling...
+Compiled successfully!
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[1].oneOf[7].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[7].use[4]!./src/styles/components/header/site-nav.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+<w> Deprecation Sass's behavior for declarations that appear after nested
+<w> rules will be changing to match the behavior specified by CSS in an upcoming
+<w> version. To keep the existing behavior, move the declaration above the nested
+<w> rule. To opt into the new behavior, wrap the declaration in `& {}`.
+<w> 
+<w> More info: https://sass-lang.com/d/mixed-decls
+<w> 
+<w> src\styles\components\header\site-nav.scss 18:3  root stylesheet
+<w> 
+<w> Deprecation Sass's behavior for declarations that appear after nested
+<w> rules will be changing to match the behavior specified by CSS in an upcoming
+<w> version. To keep the existing behavior, move the declaration above the nested
+<w> rule. To opt into the new behavior, wrap the declaration in `& {}`.
+<w> 
+<w> More info: https://sass-lang.com/d/mixed-decls
+<w> 
+<w> src\styles\components\header\site-nav.scss 18:3  root stylesheet
+<w> 
+<w> Deprecation Sass's behavior for declarations that appear after nested
+<w> rules will be changing to match the behavior specified by CSS in an upcoming
+<w> version. To keep the existing behavior, move the declaration above the nested
+<w> rule. To opt into the new behavior, wrap the declaration in `& {}`.
+<w> 
+<w> More info: https://sass-lang.com/d/mixed-decls
+<w> 
+<w> src\styles\components\header\site-nav.scss 19:3  root stylesheet
+<w> 
+<w> Deprecation Sass's behavior for declarations that appear after nested
+<w> rules will be changing to match the behavior specified by CSS in an upcoming
+<w> version. To keep the existing behavior, move the declaration above the nested
+<w> rule. To opt into the new behavior, wrap the declaration in `& {}`.
+<w> 
+<w> More info: https://sass-lang.com/d/mixed-decls
+<w> 
+<w> src\styles\components\header\site-nav.scss 19:3  root stylesheet
+<w> 
+<w> Deprecation Sass's behavior for declarations that appear after nested
+<w> rules will be changing to match the behavior specified by CSS in an upcoming
+<w> version. To keep the existing behavior, move the declaration above the nested
+<w> rule. To opt into the new behavior, wrap the declaration in `& {}`.
+<w> 
+<w> More info: https://sass-lang.com/d/mixed-decls
+<w> 
+<w> src\styles\components\header\site-nav.scss 20:3  root stylesheet
+<w> 
+<w> 5 repetitive deprecation warnings omitted.
+<w> 
+<w> null
+
+webpack compiled successfully
+
+---
+exit_code: -1
+elapsed_ms: 86400005
+ended_at: 2026-07-02T23:43:17.006Z
+---

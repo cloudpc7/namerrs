@@ -1,0 +1,24 @@
+---
+pid: 33584
+cwd: "C:\Users\cloud\projects\namerrs"
+command: "Set-Location C:\\Users\\cloud\\projects\\namerrs; firebase deploy --only hosting"
+started_at: 2026-07-02T23:46:02.326Z
+running_for_ms: 235003   
+---
+
+=== Deploying to 'namerrs'...
+
+i  deploying hosting
+i  hosting[namerrs]: beginning deploy...
+i  hosting[namerrs]: found 16 files in dist
+i  hosting: upload complete
++  hosting[namerrs]: file upload complete
+i  hosting[namerrs]: finalizing version...
++  hosting[namerrs]: version finalized
+i  hosting[namerrs]: releasing new version...
++  hosting[namerrs]: release complete
+
++  Deploy complete!
+
+Project Console: https://console.firebase.google.com/project/namerrs/overview
+Hosting URL: https://namerrs.web.app

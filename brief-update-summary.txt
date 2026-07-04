@@ -1,0 +1,877 @@
+Namerrs Website Build Brief — Complete Update Summary
+======================================================
+Last updated: MVP build status, form-based designers rationale, new API routes
+Source: website-build-brief-template.md (v1.2)
+Read this file for a full digest; see the .md file for the complete build spec.
+
+
+================================================================================
+1. PROJECT OVERVIEW
+================================================================================
+
+  Project name:     Namerrs
+  Description:      Graphics design and printing company
+  Primary goal:     Custom t-shirts, business cards, signs, banners, magnets,
+                    memorial prints, and hats — customers customize and buy online
+
+  Success:          Customers browse products, customize orders by product type,
+                    add to cart, schedule completion, checkout, receive confirmation
+
+  Target launch:    As soon as possible
+
+  New app URL:      https://namerrs.web.app
+  Original site:    https://namerrs.com  (STAYS LIVE — not replaced)
+
+  Firebase project: namerrs  (from .firebaserc)
+  Codebase:         C:\Users\cloud\projects\namerrs
+  Skeleton:         C:\Users\cloud\projects\skeleton
+
+
+================================================================================
+1a. FIREBASE EMULATORS (LOCAL DEV)
+================================================================================
+
+  EMULATOR PORTS:
+    Emulator UI:   http://127.0.0.1:4000
+    Functions:     http://127.0.0.1:5001  (Express API)
+    RTDB:          http://127.0.0.1:9000
+    Storage:       http://127.0.0.1:9199
+    Auth:          http://127.0.0.1:9099
+    Hosting:       http://127.0.0.1:5000  (requires npm run build first)
+
+  API BASE URL (local):
+    http://127.0.0.1:5001/namerrs/us-central1/api
+
+  NPM SCRIPTS:
+    npm run emulators         Start all emulators (RTDB, Storage, Functions, Auth, UI)
+    npm run emulators:seed    Seed RTDB with default content (run after emulators start)
+    npm run emulators:hosting Start emulators including Hosting (builds dist first)
+    npm run dev:local         Vite dev server + Firebase emulators together
+    npm run dev:full          Vite + emulators + Stripe CLI webhook forwarding
+    npm run stripe:listen     Forward Stripe webhooks to local Express function
+
+  SETUP STEPS:
+    1. npm install
+    2. cd functions && npm install
+    3. copy .env.example → .env.local (root)
+    4. copy functions/.env.example → functions/.env.local
+    5. Add Stripe test keys to functions/.env.local
+    6. npm run emulators
+    7. npm run emulators:seed   (separate terminal, after emulators are ready)
+    8. npm run dev              (separate terminal, or use npm run dev:local)
+
+  STRIPE (no Firebase emulator — use Stripe test mode + CLI):
+    - Add STRIPE_SECRET_KEY + STRIPE_WEBHOOK_SECRET to functions/.env.local
+    - Add VITE_STRIPE_PUBLISHABLE_KEY to .env.local
+    - Run: npm run stripe:listen (requires Stripe CLI installed)
+    - Webhook forwards to: /api/webhooks/stripe
+
+  EXPRESS API ROUTES (functions/src/):
+    GET  /health
+    GET  /content
+    GET  /content/pages/:slug
+    GET  /content/products/:productId
+    GET  /content/seo/:route
+    GET  /reviews
+    POST /reviews
+    POST /contact
+    POST /orders
+    POST /create-payment-intent
+    POST /webhooks/stripe
+
+  FILES:
+    firebase.json              Emulator + hosting + functions config
+    database.rules.json        RTDB security rules
+    emulator-data/             Seed data for RTDB import/export
+    functions/                 Express Cloud Functions
+    src/firebase/config.js     Client SDK + emulator connection
+    src/utils/apiClient.js     HTTP client for Express API
+
+
+================================================================================
+2. DEPLOYMENT & DOMAINS
+================================================================================
+
+  Deploy target:    Firebase Hosting → https://namerrs.web.app
+  Original site:    https://namerrs.com remains unchanged
+  SSL:              Automatic via Firebase Hosting
+  CI/CD:            GitHub Actions (firebase-deploy on merge — from skeleton)
+  Staging:          Firebase preview channels (skeleton workflow)
+  Backups:          Firebase RTDB automated backups in console
+
+  Firebase Console + Google Cloud Console: user logged in — configure RTDB,
+  Storage, Functions, Hosting there. Env var names listed in Section 10 below.
+
+
+================================================================================
+3. DESIGN & BRANDING
+================================================================================
+
+  REFERENCE LAYOUT:  https://namerrs.web.app (structure and spacing)
+
+  LOGO (use this only):
+    Original black-and-white from namerrs.com
+    URL: https://img1.wsimg.com/isteam/ip/47c0480b-7b57-4199-8a74-10229f839ab8/Namers%20White%20-%20Black%20Logo-01.png
+    Save to: public/assets/logo.png
+    Generate favicon from this logo
+
+  DO NOT USE:
+    - Sliding image carousel (hero or anywhere)
+    - Multicolor logo variant
+
+  HERO:
+    Static single image (no carousel)
+    Business name + slogan: "Quality Products. Best Prices Around. Done Fast."
+
+  GUIDELINES: Refactoring UI book
+    - Hierarchy through size, weight, and color — not more elements
+    - Generous whitespace; prefer shadows over borders
+    - Labels above inputs (placeholder is not a label)
+    - Specific, calm error messages next to fields
+    - De-emphasize secondary actions (greyed pricing, muted supporting text)
+    - Limit to 2 font sizes per component where possible
+
+  COLOR SCHEME (high contrast, WCAG AA):
+
+    Token              Hex       Usage
+    -----              ---       -----
+    Primary            #111111   Logo black, headings, primary text
+    Primary light      #374151   Secondary headings
+    Accent / CTA       #1D4ED8   Primary buttons, links (6.7:1 on white)
+    Accent hover       #1E40AF   Button hover
+    Background         #FFFFFF   Page background
+    Surface            #F9FAFB   Cards, expanded product sections
+    Surface elevated   #FFFFFF   Cards with shadow on grey surface
+    Text primary       #111827   Body text
+    Text secondary     #6B7280   Supporting text, specs
+    Text disabled      #9CA3AF   Greyed-out $0.00 pricing
+    Border             #E5E7EB   Dividers (use sparingly)
+    Success            #059669   Confirmations
+    Error              #DC2626   Validation errors
+    Focus ring         #93C5FD   Keyboard focus (2px ring)
+
+  TYPOGRAPHY (Inter or system sans):
+    H1:     36–48px, weight 700
+    H2:     28–32px, weight 600
+    H3:     20–24px, weight 600
+    Body:   16px, weight 400
+    Small:  14px, weight 500
+    Button: 16px, weight 600
+
+  SPACING SCALE: 4, 8, 12, 16, 24, 32, 48, 64 (Tailwind-compatible)
+
+  ANIMATION: react-spring for offcanvas slide, accordion expand, modal fade
+             Respect prefers-reduced-motion (instant transitions when set)
+
+  ICONS: Lucide React or Heroicons (social, cart, send, expand/collapse)
+
+  RESPONSIVE:
+    Tailwind breakpoints: sm 640, md 768, lg 1024, xl 1280
+    Mobile: hamburger nav, sticky cart icon, full-width offcanvas, 44px touch targets
+    Accessibility target: WCAG 2.1 AA
+
+
+================================================================================
+4. PRICING (GLOBAL — ALL PRODUCTS)
+================================================================================
+
+  Display:     $0.00 with greyed-out disabled styling
+               (color #9CA3AF, opacity 0.6, non-clickable price controls)
+
+  Behavior:    Quantity and design flows work normally
+  Storage:     Firebase RTDB path: config/pricing
+  Helper text: "Pricing coming soon — you can still design and save your order."
+  Later:       Enable real prices in Firebase without code changes
+
+  Future reference prices (from namerrs.com — enable when ready):
+    T-shirts:   1–3 $25 | 4–5 $20 | 6–10 $15 | 11–20 $10 | 21–24 $8 |
+                25–50 $7 | 51–100 $6 | 101+ $5
+    Banners:    Vinyl $3/sq ft | Digital $5/sq ft
+    Magnets:    1 = $40 | 2 = $75 | 3 = $100
+    Biz cards:  500 minimum quantity (tiers TBD)
+    Hats:       TBD
+    Memorial:   TBD
+
+
+================================================================================
+5. SITE STRUCTURE & PAGES
+================================================================================
+
+  ROUTES (only these):
+    /           Home — single landing page with ALL sections
+    /about      About (copy from namerrs.com/about-us)
+    /privacy    Privacy Policy (needs content)
+    /terms      Terms & Conditions (needs content)
+
+  NOT BUILT (out of scope):
+    /products, /t-shirts, /banners, /hats, /magnets, /memorial
+    /reviews, /contact (as separate routes)
+    Sliding carousel
+    Multicolor logo
+    Replacing or redirecting namerrs.com
+    Native apps, multi-language, CMS, Signs/Stickers/Flyers (v2)
+
+  HOME PAGE SECTIONS (in order):
+    1. Hero (static image, name, slogan)
+    2. Features
+    3. Products (expandable accordion sections — Feature 13)
+    4. About teaser
+    5. FAQ
+    6. Reviews (display + modal to submit — Feature 14)
+    7. Contact (single input + send — Feature 15)
+    8. Footer (sitemap, legal, about, copyright, Powered by CloudDropDesigns)
+
+  GLOBAL HEADER:
+    Original logo | nav (Home, About, Products anchor, FAQ, Contact)
+    Social icons | search | cart icon
+
+  CART:
+    Offcanvas from right on any page (not a standalone route)
+    Same panel used for designer and cart (designer takes priority when editing)
+
+  MVP (v1):
+    Home, About, Privacy, Terms
+    All product designers via offcanvas
+    Cart, checkout (Stripe), scheduling, notifications (Twilio)
+    SEO files, Google Analytics
+
+  v2:
+    User accounts, admin dashboard, newsletter
+    Signs, Stickers, Flyers
+
+
+================================================================================
+6. SOCIAL & CONTACT LINKS (nav + contact section)
+================================================================================
+
+  Instagram:  https://www.instagram.com/namerrs
+  Facebook:   https://www.facebook.com/Namerrs
+  X:          https://www.x.com/namerrs
+  YouTube:    https://www.youtube.com/channel/UC0hn7EgFs-4ZZT_AIjeA7VQ
+  Yelp:       https://www.yelp.com/biz/namerrs-signs-and-printing-san-jacinto-3
+  Phone:      (951) 350-0270  → tel:9513500270
+  Email:      NameRRs@gmail.com
+
+  Address (for SEO schema):
+    Namerrs Signs & Printing
+    227 Main Street, San Jacinto, California 92583
+
+
+================================================================================
+7. PRODUCT FEATURES (ALL P0)
+================================================================================
+
+  SHARED COMMERCE FLOW (Features 3–6):
+    Design saved → quantity/options → scheduling → cart → checkout → confirmation
+
+  Feature 1–2:  BUSINESS CARDS
+    Offcanvas designer: text, upload/drag-drop images, crop, colors (hex/HSL/RGBA),
+    flip front/back, copy side to side
+    US standard 3.5 x 2 in | 500 minimum quantity
+    Paper: matte, glossy, uncoated
+
+  Feature 3:    ORDER SCHEDULING
+    Pick completion date | min 5 business days lead time
+    Revise schedule up to 12 hours before completion date
+    Request changes up to 24 hours before; new date shown after change
+    Warning: "Please allow at least 5 business days for production."
+
+  Feature 4:    CART (offcanvas)
+    Review, edit quantity, remove, continue shopping, proceed to checkout
+
+  Feature 5:    CHECKOUT & PAYMENT (Stripe)
+    Name, email, phone (required for SMS), optional notes, SMS opt-in
+    Stripe Payment Element in checkout offcanvas
+    Install: @stripe/stripe-js + @stripe/react-stripe-js
+
+  Feature 6:    ORDER CONFIRMATION & NOTIFICATIONS
+    Confirmation screen | email + optional SMS via Twilio
+    Order status: completed, changed, picked up
+
+  Feature 7–8:  T-SHIRTS
+    Similar to business card designer
+    Male/unisex or female fit | sizes S, M, L, XL, 2XL, 3XL
+    Shirt colors, text + image upload/drag-drop/crop
+    Print: front chest (default), 1-color to full color
+
+  Feature 9:    BANNERS
+    Vinyl ($3/sq ft) or Digital ($5/sq ft) — shown as $0.00 greyed for now
+    Presets: 2x4, 3x6, 4x8, 6x10 ft or custom W x H
+    Max: 10' x 145' single piece
+    Description/message box (500 chars, required)
+    Image upload + drag-drop onto banner preview
+
+  Feature 10:   HATS
+    Short company name (max 25 chars) OR logo/image with crop
+    100% cotton twill, 6-panel structured, vinyl print, one size, adjustable closure
+    Colors: black, white, navy, red, khaki, gray
+
+  Feature 11:   MAGNETS
+    Same text/logo flow as hats
+    Fixed size: 12" x 24" full color digital
+    Quantity presets: 1, 2, 3
+
+  Feature 12:   MEMORIAL
+    Same text/photo flow
+    Types: memorial print (8x10, 11x14, 12x18) or sticker (4x6, 6x9)
+    Respectful UX copy
+
+  Feature 13:   PRODUCT EXPANDABLE SECTIONS (landing page)
+    Accordion per product — expand shows specs, description, greyed $0.00, Add/Edit
+    Add/Edit opens offcanvas designer for that product
+    Only one section expanded at a time
+    aria-expanded, aria-controls for accessibility
+
+  Feature 14:   REVIEWS (landing page + modal)
+    Reviews displayed on home page — NO /reviews route
+    Modal: star rating 1–5, review text (max 500), optional name (max 40)
+    Rate limit: 3 reviews per IP per day
+
+  Feature 15:   CONTACT (single input + social icons)
+    One message field (max 500 chars) + Send button with icon
+    Label: "How can we help?"
+    Rate limit: 5 messages per IP per hour
+    Social icons in header nav AND contact section
+
+
+================================================================================
+8. FORMS SUMMARY
+================================================================================
+
+  CONTACT:
+    Field:   Message (required, min 5, max 500)
+    Submit:  POST to Express Function → RTDB + email to NameRRs@gmail.com
+    Success: "Message sent — we'll get back to you soon."
+
+  REVIEW MODAL:
+    Fields:  Rating 1–5 (required), review text (min 10, max 500), name (optional)
+    Submit:  Save to RTDB /reviews/
+
+  CHECKOUT:
+    Fields:  Name, email, phone (required), SMS opt-in, notes (optional)
+    Payment: Stripe Payment Element
+
+
+================================================================================
+9. SHARED SECURITY & ACCESSIBILITY (all designers)
+================================================================================
+
+  OWASP SECURITY:
+    Server-side validation on all text; sanitize output
+    File upload allowlist: .jpg, .jpeg, .png, .webp
+    Validate MIME type AND magic bytes (not Content-Type header alone)
+    Server-generated filenames; max 10 MB; Firebase Storage; signed URLs
+    Re-encode images; strip EXIF/metadata; reject double extensions
+    CSRF / Firebase App Check on save and checkout
+    XSS sanitization; Content Security Policy in production
+    Access control: users only see own cart designs and orders
+    Rate limiting on uploads and form submissions
+
+  VALIDATION MESSAGES (Refactoring UI style):
+    Text too long:        "Keep [field] under [N] characters."
+    Invalid characters:   "This field allows letters, numbers, and basic punctuation only."
+    Save failed:          "We couldn't save your design. Try again."
+    Invalid color:        "Enter a valid hex, HSL, or RGBA color."
+    Upload failed:        "Upload failed. Check your connection and try again."
+    Wrong file type:      "Use a JPG, PNG, or WebP image."
+    File too large:       "Image must be under 10 MB."
+    Low resolution:       "This image may look blurry when printed." (warning)
+
+  WCAG 2.1 AA:
+    Keyboard access for all controls
+    Drag-drop alternatives (keyboard/numeric positioning + Reset button)
+    Offcanvas focus trap; focus in on open, return on close
+    Visible labels or aria-label on every control
+    aria-live="polite" for save, flip, step changes
+    4.5:1 text contrast; warn if below
+    aria-describedby on errors; not color-only
+    44 x 44 px touch targets on mobile
+    prefers-reduced-motion respected
+
+
+================================================================================
+10. TECH STACK (MANDATORY — BUILDER DEFAULTS)
+================================================================================
+
+  FRONTEND:
+    React JSX only — NO TypeScript
+    Vite
+    Redux Toolkit
+    react-spring
+    Tailwind CSS + Sass (variables in src/styles/variables/)
+    React Router (minimal routes only)
+
+  BACKEND:
+    Firebase Cloud Functions with Express server (CRUD)
+    Firebase Realtime Database — NOT Firestore
+      (existing firebase/index.js uses Firestore — migrate during build)
+    Firebase Storage
+    Firebase Hosting
+
+  INTEGRATIONS:
+    Stripe:  @stripe/stripe-js + @stripe/react-stripe-js
+    SMS:     Twilio (account exists; SID/token/phone on backend at deploy)
+    Analytics: Google Analytics 4
+
+  HARD RULES:
+    No TypeScript
+    No prop drilling unless necessary for speed/optimization
+    No hardcoded properties in function arguments
+    DRY global styles and utilities
+    TDD: Jest tests first → implement → Maestro E2E
+    Align with skeleton; update skeleton if it diverges
+
+
+================================================================================
+11. CODE ARCHITECTURE & CONVENTIONS
+================================================================================
+
+  FOLDER STRUCTURE:
+
+    namerrs/
+    ├── public/
+    │   ├── assets/logo.png
+    │   ├── sitemap.xml
+    │   └── robots.txt
+    ├── src/
+    │   ├── pages/           HomePage, AboutPage, PrivacyPage, TermsPage
+    │   ├── ui/
+    │   │   ├── components/  Button, Modal, Offcanvas, ProductSection, etc.
+    │   │   └── layouts/     Header, Footer, MainLayout
+    │   ├── features/        Per-product designers
+    │   ├── redux/
+    │   │   ├── store.js
+    │   │   ├── constants/   Action types
+    │   │   └── slices/      cart, design, auth, ui
+    │   ├── hooks/
+    │   ├── utils/           DRY validation, formatting, errors
+    │   ├── styles/variables/  colors, fonts, buttons, links (Sass)
+    │   ├── Providers/
+    │   └── constants/       App-wide constants
+    ├── firebase/index.js    Express + Cloud Functions
+    ├── __tests__/           Jest setup and tests
+    ├── .maestro/flows/      Maestro E2E
+    └── content/             Product copy config
+
+  COMPONENT FILE RULES:
+    1. Description comment at top of every component
+    2. Imports grouped (blank line between groups):
+       libraries → Redux → local components → utils/constants
+    3. Redux constants separated
+    4. Component-local constants separated
+    5. Redux state selectors grouped
+    6. Local useState grouped
+    7. useEffects grouped and separated by concern
+    8. Handlers, then return JSX
+
+  REDUX:
+    Constants in redux/constants/
+    Slices separated with readable action names
+    Avoid prop drilling — use Redux or context
+
+
+================================================================================
+12. FIREBASE REALTIME DATABASE STRUCTURE
+================================================================================
+
+  /orders/{orderId}       order records (design, qty, schedule, status, stripePaymentId)
+  /cart/{sessionId}       guest cart sessions
+  /designs/{designId}     saved design drafts
+  /reviews/{reviewId}     customer reviews
+  /messages/{messageId}   contact form submissions
+  /config/pricing         product pricing (default 0.00)
+  /config/products        product specs and descriptions (seed from namerrs.com)
+
+  /content/pages          page copy (hero, about, FAQ, footer)
+  /content/sections       landing section visibility, order, headings
+  /content/products       product descriptions, specs, images
+  /content/seo            meta titles, descriptions, keywords per route
+  /content/social         social links and contact info
+
+  EXPRESS CLOUD FUNCTIONS (CRUD):
+    POST/GET/PUT/DELETE for orders, designs, reviews, messages
+    GET /api/content, /api/content/pages/:slug, /api/content/products/:id
+    GET /api/content/seo/:route
+    POST /webhooks/stripe  — payment confirmation
+    Twilio SMS on order status changes
+
+
+================================================================================
+12a. BACKEND-DRIVEN CONTENT PLAN (Section 9a)
+================================================================================
+
+  GOAL: Most copy comes from Firebase RTDB via Express API.
+        React/Redux fetches and renders — no hardcoded page copy in components.
+
+  FLOW:
+    Firebase RTDB (/content/*)
+      → Express GET /api/content/*
+      → React apiClient → Redux content.slice → UI components
+
+  PHASE 1 — Schema & seed:
+    Seed namerrs.com copy into /content/products, /content/pages, /content/seo
+    Build Express content API endpoints
+    Redux content.slice with fetchContent(), selectors
+    Jest tests before UI integration
+
+  PHASE 2 — React integration:
+    fetchContent() on app mount
+    Components read from Redux (hero, FAQ, products, footer, social)
+    Skeleton loading while fetching
+    HttpErrorBanner if content API fails
+
+  PHASE 3 — Updates via Firebase / Google Cloud Console:
+    Edit /content/* in Firebase Console (v1 — no admin UI)
+    Cloud Functions logs in Google Cloud Console
+    v2: optional admin page with Firebase Auth
+
+  PHASE 4 — Hosting:
+    firebase.json: /api/** → Functions; other routes → index.html
+    Static assets in public/ + Firebase Storage
+    Cache: long for static; short/no-cache for /api/content
+
+  REDUX content slice:
+    status: idle | loading | succeeded | failed
+    pages, products, seo, social, pricing
+    Components: NO hardcoded strings for dynamic content
+
+  EDITABLE WITHOUT REDEPLOY:
+    Hero, FAQ, product specs, SEO meta, social links, pricing
+
+
+================================================================================
+12b. HTTP STATUS CODE HANDLING (Section 9)
+================================================================================
+
+  Express returns consistent JSON error shape:
+    { error: true, status, code, message, retryable }
+
+  STATUS CODE MAP:
+
+    200  Success — render data
+    201  Created — toast "Saved successfully"
+    400  Bad request — inline field errors
+    401  Unauthorized — "Please sign in to continue"
+    403  Forbidden — "You don't have permission"
+    404  Not found — NotFoundPage or empty state + home link
+    408  Timeout — "That took too long" + retry
+    409  Conflict — "Already updated. Refresh and try again"
+    422  Invalid data — inline field errors
+    429  Rate limit — "Too many requests" + disable submit
+    500  Server error — ServerErrorPage + retry + contact
+    502  Bad gateway — "Service temporarily unavailable"
+    503  Maintenance — "Doing maintenance. Check back soon"
+    504  Gateway timeout — "Server didn't respond" + retry
+
+  REACT/REDUX:
+    src/utils/apiClient.js — central fetch wrapper
+    src/redux/slices/ui.slice.js — httpStatus, errorMessage, retryable
+    Components: HttpErrorBanner, NotFoundPage, ServerErrorPage
+    React Router * catch-all → 404
+    Global error boundary → 500 fallback
+    Never show raw status numbers to users
+
+  STRIPE ERRORS (checkout):
+    card_declined → "Your card was declined..."
+    insufficient_funds → "Insufficient funds..."
+    expired_card → "This card has expired"
+    processing_error → "Payment couldn't be processed"
+    Network timeout → "Payment service unavailable" + retry
+
+  EXPRESS MIDDLEWARE:
+    errorHandler — consistent JSON + status
+    notFoundHandler — 404 for unknown API routes
+    Log full errors server-side; no stack traces to client in production
+
+
+================================================================================
+12c. STRIPE SKILLS (installed)
+================================================================================
+
+  Installed via: npx skills add -y https://docs.stripe.com
+  Location: .agents/skills/
+
+    stripe-best-practices  — API selection, Payment Element, webhooks, security
+    stripe-directory       — partner/service lookup
+    stripe-projects        — provision third-party services
+    upgrade-stripe         — API version and SDK upgrades
+
+  Use stripe-best-practices when implementing Feature 5 (checkout)
+
+
+================================================================================
+13. ENVIRONMENT VARIABLES
+================================================================================
+
+  FRONTEND (.env):
+    VITE_FIREBASE_API_KEY=
+    VITE_FIREBASE_AUTH_DOMAIN=
+    VITE_FIREBASE_DATABASE_URL=
+    VITE_FIREBASE_PROJECT_ID=namerrs
+    VITE_FIREBASE_STORAGE_BUCKET=
+    VITE_FIREBASE_MESSAGING_SENDER_ID=
+    VITE_FIREBASE_APP_ID=
+    VITE_STRIPE_PUBLISHABLE_KEY=
+    VITE_GA_MEASUREMENT_ID=
+    VITE_SITE_URL=https://namerrs.web.app
+
+  BACKEND (Firebase Functions / Secret Manager):
+    STRIPE_SECRET_KEY=
+    STRIPE_WEBHOOK_SECRET=
+    TWILIO_ACCOUNT_SID=
+    TWILIO_AUTH_TOKEN=
+    TWILIO_PHONE_NUMBER=
+    CONTACT_EMAIL=NameRRs@gmail.com
+
+
+================================================================================
+14. SEO & ANALYTICS
+================================================================================
+
+  FILES TO GENERATE:
+    public/sitemap.xml  — routes: /, /about, /privacy, /terms
+                          anchors: /#products, /#reviews, /#contact
+    public/robots.txt:
+      User-agent: *
+      Allow: /
+      Disallow: /api/
+      Sitemap: https://namerrs.web.app/sitemap.xml
+
+  ON-PAGE SEO:
+    Unique <title> and meta description per route
+    Open Graph tags (og:title, og:description, og:image, og:url)
+    Twitter Card tags
+    Canonical: https://namerrs.web.app/[path]
+    JSON-LD LocalBusiness schema (name, url, phone, address)
+    Semantic HTML (header, main, section, article, footer)
+    alt text on all images
+    One H1 per page; no skipped heading levels
+    Lazy-load images; compressed assets
+
+  TARGET KEYWORDS:
+    custom t-shirts San Jacinto
+    business cards printing
+    vinyl banners
+    signs and printing
+    Namerrs
+
+  GOOGLE ANALYTICS 4:
+    Track: page views, product section expands, designer opens,
+           add-to-cart, checkout start, purchase
+    Env: VITE_GA_MEASUREMENT_ID
+    Register site in Google Search Console after deploy
+
+  EMAIL / SMS TEMPLATES NEEDED:
+    Order confirmation (email + optional SMS)
+    Order status changed
+    Order ready for pickup
+    Contact form notification to NameRRs@gmail.com
+
+
+================================================================================
+15. TESTING (TDD — TEST FIRST)
+================================================================================
+
+  APPROACH:
+    1. Write Jest tests FIRST
+    2. Implement feature until Jest passes
+    3. Add Maestro E2E after Jest passes for that feature
+    4. Do not merge without passing tests
+
+  JEST:
+    Framework: Jest + React Testing Library
+    Location:  __tests__/ and *.test.jsx next to components
+    Migrate from Vitest setup in __tests__/setup.js if needed
+    Coverage:  utils 90%+, components 80%+, Redux slices 90%+
+    Mock:      Firebase, Stripe, Twilio, react-spring
+
+  MAESTRO E2E (.maestro/flows/):
+    home-load.yaml            landing page renders, product sections visible
+    product-expand-design.yaml  expand product → open offcanvas designer
+    add-to-cart.yaml          design → save → cart
+    checkout-stripe.yaml      checkout + Stripe test card
+    contact-send.yaml         single input contact message
+    review-modal.yaml         open modal → submit review
+    http-errors.yaml          404 page, API error banner, retry on 500
+    content-load.yaml         home page content loads from backend API
+
+  JEST — HTTP & content tests:
+    apiClient parses 400, 404, 429, 500, 502, 503
+    ui slice sets httpStatus and retryable
+    NotFoundPage on unknown route
+    HttpErrorBanner shows mapped message (not raw status)
+    Stripe card_declined → friendly message
+    content slice handles API failure with fallback
+
+  ACCEPTANCE CRITERIA:
+    1. Expand Business Cards → see specs and Add/Edit buttons
+    2. Save design → appears in cart offcanvas
+    3. Checkout with Stripe test card → order in RTDB
+    4. Send contact message → success toast
+    5. Submit review via modal → appears in list
+    6. All prices show $0.00 greyed out
+    7. Date < 5 business days → validation warning
+    8. Unknown URL → friendly 404 with home link
+    9. Content API 500 → retry banner (not blank page)
+    10. Stripe decline → friendly message (not raw error code)
+    11. Home page copy renders from Redux (not hardcoded)
+
+
+================================================================================
+16. RESOLVED DECISIONS
+================================================================================
+
+  Payment:         Stripe with React Stripe components
+  SMS:             Twilio — credentials on backend at deploy
+  Pricing:         $0.00 greyed out until Firebase config/pricing updated
+  Lead time:       5 business days minimum
+  Domain:          namerrs.web.app (namerrs.com unchanged)
+  Product routes:  None — expandable sections on landing page
+  Reviews:         Landing page section + modal (no /reviews route)
+  Contact:         Single input + social icons (no /contact route)
+  Database:        Firebase Realtime Database (not Firestore)
+  Language:        React JSX only — no TypeScript
+  Testing:         Jest first (TDD), then Maestro E2E
+  HTTP errors:     Express + React handle 400–504 with friendly UI
+  Content:         Backend-driven via Express → Redux (Section 9a)
+  Stripe skills:   Installed in .agents/skills/
+  Browsers:        Last 2 versions Chrome, Firefox, Safari, Edge
+  Carousel:        Not used
+  Logo:            Original black-and-white only
+
+
+================================================================================
+17. STILL OPEN / TODO
+================================================================================
+
+  HIGH PRIORITY — DESIGNERS (see Section 18 for rationale):
+    - Replace form-based designers with full drag-and-drop canvas (brief spec)
+    - Business Card designer first (sets pattern for T-Shirt / Banner)
+    - Firebase Storage upload pipeline (MIME + magic-byte validation)
+    - Image crop UI and persisted design JSON on cart line items
+
+  OTHER OPEN ITEMS:
+    - Maestro E2E flows (.maestro/flows/) — after Jest coverage complete
+    - Nav search → product filtering (wired in UI, not connected)
+    - Business card pricing tiers when enabled (500 / 1000 / 2500 / 5000)
+    - Hat pricing when enabled
+    - Memorial pricing when enabled
+    - GA4 measurement ID (create property in Google Analytics)
+    - Save logo file to public/assets/logo.png
+    - Stripe test keys in functions/.env.local + VITE_STRIPE_PUBLISHABLE_KEY
+    - Twilio credentials on backend (SMS logs only until configured)
+    - Migrate firebase/index.js from Firestore to Realtime Database (if legacy file remains)
+
+  MVP BUILT (Jul 2026 — verify with npm test && npm run build):
+    - Home sections: hero, features, products accordion, about teaser, FAQ,
+      reviews + modal, contact
+    - Pages: /, /about, /privacy, /terms
+    - Offcanvas: designer wizard, cart, checkout ($0 place-order + Stripe path)
+    - Redux: content, cart, design, ui slices
+    - SEO: sitemap.xml, robots.txt, JSON-LD, useSeo hook
+    - 45 Jest tests passing; production build succeeds
+
+
+================================================================================
+18. PRODUCT DESIGNERS — FORM-BASED vs BRIEF SPEC (IMPORTANT)
+================================================================================
+
+  WHAT THE BRIEF REQUIRES (Features 1, 7, 9–12):
+    Full interactive designers — NOT simple forms.
+    Business Cards (Feature 1) explicitly calls for:
+      - Clickable card canvas inside offcanvas
+      - Text edit, image upload, drag-and-drop onto card
+      - Crop, position, background/text colors (hex/HSL/RGBA)
+      - Flip front/back, copy front to back
+      - Save draft → quantity → scheduling → cart
+    T-Shirts and Banners: similar canvas + upload + crop + preview mockup
+    Hats, Magnets, Memorial: lighter customizer (text OR logo on mockup)
+
+  WHAT WAS ACTUALLY BUILT (MVP scaffolding):
+    Form-based designer steps in src/features/designers/
+    Wired through DesignerWizard: Design → Quantity → Schedule → Add to cart
+    Per-product forms capture fields (text, colors, size, file name) but:
+      - No interactive canvas / artboard
+      - No drag-and-drop positioning
+      - No image crop UI
+      - File inputs record filename only — no Firebase Storage upload yet
+      - Business card "copy front to back" is text-only, not layout duplicate
+
+  WHY FORM-BASED WAS USED (NOT A SPEC CHANGE):
+    Scope trade-off during "build entire MVP in one pass."
+    Drag-and-drop canvas is the largest single feature in the project.
+    Form designers unblocked the full commerce pipeline in one session:
+      product accordion → offcanvas → wizard → cart → checkout → order API
+    while leaving a clear swap-in point at DesignerWizard + registry.js
+
+  WHAT FULL DRAG-AND-DROP REQUIRES (per tier):
+
+    Heavy (Business Cards, T-Shirts, Banners):
+      - Canvas/preview layer (DOM or <canvas>) with positioned elements
+      - Drag-and-drop library (e.g. @dnd-kit)
+      - Upload → Firebase Storage with server-side validation
+      - Crop component (e.g. react-easy-crop or custom)
+      - Front/back flip with separate artboards (business cards)
+      - Design JSON schema persisted on cart items
+      - Jest tests + Maestro product-expand-design / add-to-cart flows
+
+    Light (Hats, Magnets, Memorial):
+      - Text OR logo placement on product mockup
+      - Shared upload + placement primitives from heavy tier
+      - Closer to current forms — less canvas work than business cards
+
+  RECOMMENDED BUILD ORDER (to match brief):
+    1. Business Card designer — full canvas (establishes patterns)
+    2. T-Shirt designer — reuse canvas + upload pipeline
+    3. Banner designer — reuse canvas + dimension-aware preview
+    4. Hat / Magnet / Memorial — lighter customizer on shared primitives
+
+  CODE LOCATIONS:
+    src/features/designers/DesignerWizard.jsx   — wizard shell (keep)
+    src/features/designers/registry.js        — maps productId → designer component
+    src/features/designers/BusinessCardDesigner.jsx  — REPLACE with canvas implementation
+    src/ui/components/DesignerShell.jsx       — offcanvas host (keep)
+
+
+================================================================================
+19. FINAL BUILD INSTRUCTION (from brief Section 20)
+================================================================================
+
+  NOTE: MVP scaffold is largely complete; Section 18 documents the main
+  remaining gap — full canvas designers per original brief Features 1, 7, 9–12.
+
+  Build a fully functional, production-ready website for https://namerrs.web.app.
+  Implement all P0 features (1–15).
+  Design from namerrs.web.app with original black-and-white logo from namerrs.com.
+  No carousel. No multicolor logo. All pricing $0.00 greyed out.
+  Jest tests first → implement until passing → Maestro E2E.
+  Stack: React JSX, Vite, Redux, react-spring, Tailwind, Sass,
+         Firebase RTDB, Storage, Hosting, Express Functions.
+  Install Stripe React components. Wire Twilio on backend.
+  Generate sitemap.xml and robots.txt. Hook up GA4.
+  Serve content from backend (Section 9a) — Redux renders Express API content.
+  Handle HTTP status codes 400–504 with friendly UI (Section 9).
+  Use Stripe skills in .agents/skills/ for checkout integration.
+  Follow skeleton architecture and Section 17 conventions.
+  Document all setup in README.
+
+
+================================================================================
+20. REFERENCE LINKS
+================================================================================
+
+  Full build brief:   website-build-brief-template.md (v1.2)
+  Stripe skills:      .agents/skills/stripe-best-practices (and 3 others)
+  This summary:       brief-update-summary.txt
+  New app:            https://namerrs.web.app
+  Original site:      https://namerrs.com
+  Logo:               https://img1.wsimg.com/isteam/ip/47c0480b-7b57-4199-8a74-10229f839ab8/Namers%20White%20-%20Black%20Logo-01.png
+  Product pages:      https://namerrs.com/t-shirts
+                      https://namerrs.com/banners
+                      https://namerrs.com/hats
+                      https://namerrs.com/magnets
+                      https://namerrs.com/memorial
+                      https://namerrs.com/business-cards
+  Skeleton:           C:\Users\cloud\projects\skeleton
+  Codebase:           C:\Users\cloud\projects\namerrs
+  Firebase project:   namerrs

@@ -1,0 +1,1223 @@
+
+> namerrs@1.0.0 test
+> jest
+
+PASS __tests__/tshirtPricing.test.js
+PASS __tests__/banner.validation.test.js
+PASS __tests__/SocialIcons.test.jsx
+PASS __tests__/hat.validation.test.js
+PASS __tests__/tshirt.designModel.test.js
+PASS __tests__/tshirt.validation.test.js
+PASS __tests__/Offcanvas.test.jsx
+PASS __tests__/Header.test.jsx
+  ● Console
+
+    console.warn
+      ⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+
+      19 |   });
+      20 |
+    > 21 |   return render(
+         |                ^
+      22 |     <Provider store={store}>
+      23 |       <BrowserRouter>
+      24 |         <Header />
+
+      at warn (node_modules/react-router/lib/deprecations.ts:9:13)
+      at warnOnce (node_modules/react-router/lib/deprecations.ts:14:3)
+      at Object.logDeprecation [as UNSAFE_logV6DeprecationWarnings] (node_modules/react-router/lib/deprecations.ts:26:5)
+      at logV6DeprecationWarnings (node_modules/react-router-dom/index.tsx:816:25)
+      at Object.react_stack_bottom_frame (node_modules/react-dom/cjs/react-dom-client.development.js:25989:20)
+      at runWithFiberInDEV (node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+      at commitHookEffectListMount (node_modules/react-dom/cjs/react-dom-client.development.js:13249:29)
+      at commitHookPassiveMountEffects (node_modules/react-dom/cjs/react-dom-client.development.js:13336:11)
+      at commitPassiveMountOnFiber (node_modules/react-dom/cjs/react-dom-client.development.js:15484:13)
+      at recursivelyTraversePassiveMountEffects (node_modules/react-dom/cjs/react-dom-client.development.js:15439:11)
+      at commitPassiveMountOnFiber (node_modules/react-dom/cjs/react-dom-client.development.js:15718:11)
+      at recursivelyTraversePassiveMountEffects (node_modules/react-dom/cjs/react-dom-client.development.js:15439:11)
+      at commitPassiveMountOnFiber (node_modules/react-dom/cjs/react-dom-client.development.js:15476:11)
+      at recursivelyTraversePassiveMountEffects (node_modules/react-dom/cjs/react-dom-client.development.js:15439:11)
+      at commitPassiveMountOnFiber (node_modules/react-dom/cjs/react-dom-client.development.js:15519:11)
+      at flushPassiveEffects (node_modules/react-dom/cjs/react-dom-client.development.js:18432:9)
+      at node_modules/react-dom/cjs/react-dom-client.development.js:17923:15
+      at flushActQueue (node_modules/react/cjs/react.development.js:590:34)
+      at Object.<anonymous>.process.env.NODE_ENV.exports.act (node_modules/react/cjs/react.development.js:884:10)
+      at node_modules/@testing-library/react/dist/act-compat.js:46:25
+      at renderRoot (node_modules/@testing-library/react/dist/pure.js:189:26)
+      at render (node_modules/@testing-library/react/dist/pure.js:291:10)
+      at renderHeader (__tests__/Header.test.jsx:21:16)
+      at Object.renderHeader (__tests__/Header.test.jsx:32:5)
+
+    console.warn
+      ⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+      19 |   });
+      20 |
+    > 21 |   return render(
+         |                ^
+      22 |     <Provider store={store}>
+      23 |       <BrowserRouter>
+      24 |         <Header />
+
+      at warn (node_modules/react-router/lib/deprecations.ts:9:13)
+      at warnOnce (node_modules/react-router/lib/deprecations.ts:14:3)
+      at Object.logDeprecation [as UNSAFE_logV6DeprecationWarnings] (node_modules/react-router/lib/deprecations.ts:37:5)
+      at logV6DeprecationWarnings (node_modules/react-router-dom/index.tsx:816:25)
+      at Object.react_stack_bottom_frame (node_modules/react-dom/cjs/react-dom-client.development.js:25989:20)
+      at runWithFiberInDEV (node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+      at commitHookEffectListMount (node_modules/react-dom/cjs/react-dom-client.development.js:13249:29)
+      at commitHookPassiveMountEffects (node_modules/react-dom/cjs/react-dom-client.development.js:13336:11)
+      at commitPassiveMountOnFiber (node_modules/react-dom/cjs/react-dom-client.development.js:15484:13)
+      at recursivelyTraversePassiveMountEffects (node_modules/react-dom/cjs/react-dom-client.development.js:15439:11)
+      at commitPassiveMountOnFiber (node_modules/react-dom/cjs/react-dom-client.development.js:15718:11)
+      at recursivelyTraversePassiveMountEffects (node_modules/react-dom/cjs/react-dom-client.development.js:15439:11)
+      at commitPassiveMountOnFiber (node_modules/react-dom/cjs/react-dom-client.development.js:15476:11)
+      at recursivelyTraversePassiveMountEffects (node_modules/react-dom/cjs/react-dom-client.development.js:15439:11)
+      at commitPassiveMountOnFiber (node_modules/react-dom/cjs/react-dom-client.development.js:15519:11)
+      at flushPassiveEffects (node_modules/react-dom/cjs/react-dom-client.development.js:18432:9)
+      at node_modules/react-dom/cjs/react-dom-client.development.js:17923:15
+      at flushActQueue (node_modules/react/cjs/react.development.js:590:34)
+      at Object.<anonymous>.process.env.NODE_ENV.exports.act (node_modules/react/cjs/react.development.js:884:10)
+      at node_modules/@testing-library/react/dist/act-compat.js:46:25
+      at renderRoot (node_modules/@testing-library/react/dist/pure.js:189:26)
+      at render (node_modules/@testing-library/react/dist/pure.js:291:10)
+      at renderHeader (__tests__/Header.test.jsx:21:16)
+      at Object.renderHeader (__tests__/Header.test.jsx:32:5)
+
+PASS __tests__/content.slice.test.js
+PASS __tests__/BusinessCardDesigner.test.jsx
+PASS __tests__/HeroSection.test.jsx
+PASS src/ui/components/LinkComponent.test.jsx
+  ● Console
+
+    console.warn
+      ⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+
+       6 |
+       7 | const renderWithRouter = (ui) => {
+    >  8 |   return render(ui, { wrapper: BrowserRouter });
+         |                ^
+       9 | };
+      10 |
+      11 | describe('LinkComponent', () => {
+
+      at warn (node_modules/react-router/lib/deprecations.ts:9:13)
+      at warnOnce (node_modules/react-router/lib/deprecations.ts:14:3)
+      at Object.logDeprecation [as UNSAFE_logV6DeprecationWarnings] (node_modules/react-router/lib/deprecations.ts:26:5)
+      at logV6DeprecationWarnings (node_modules/react-router-dom/index.tsx:816:25)
+      at Object.react_stack_bottom_frame (node_modules/react-dom/cjs/react-dom-client.development.js:25989:20)
+      at runWithFiberInDEV (node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+      at commitHookEffectListMount (node_modules/react-dom/cjs/react-dom-client.development.js:13249:29)
+      at commitHookPassiveMountEffects (node_modules/react-dom/cjs/react-dom-client.development.js:13336:11)
+      at commitPassiveMountOnFiber (node_modules/react-dom/cjs/react-dom-client.development.js:15484:13)
+      at recursivelyTraversePassiveMountEffects (node_modules/react-dom/cjs/react-dom-client.development.js:15439:11)
+      at commitPassiveMountOnFiber (node_modules/react-dom/cjs/react-dom-client.development.js:15519:11)
+      at flushPassiveEffects (node_modules/react-dom/cjs/react-dom-client.development.js:18432:9)
+      at node_modules/react-dom/cjs/react-dom-client.development.js:17923:15
+      at flushActQueue (node_modules/react/cjs/react.development.js:590:34)
+      at Object.<anonymous>.process.env.NODE_ENV.exports.act (node_modules/react/cjs/react.development.js:884:10)
+      at node_modules/@testing-library/react/dist/act-compat.js:46:25
+      at renderRoot (node_modules/@testing-library/react/dist/pure.js:189:26)
+      at render (node_modules/@testing-library/react/dist/pure.js:291:10)
+      at renderWithRouter (src/ui/components/LinkComponent.test.jsx:8:16)
+      at Object.renderWithRouter (src/ui/components/LinkComponent.test.jsx:13:5)
+
+    console.warn
+      ⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+       6 |
+       7 | const renderWithRouter = (ui) => {
+    >  8 |   return render(ui, { wrapper: BrowserRouter });
+         |                ^
+       9 | };
+      10 |
+      11 | describe('LinkComponent', () => {
+
+      at warn (node_modules/react-router/lib/deprecations.ts:9:13)
+      at warnOnce (node_modules/react-router/lib/deprecations.ts:14:3)
+      at Object.logDeprecation [as UNSAFE_logV6DeprecationWarnings] (node_modules/react-router/lib/deprecations.ts:37:5)
+      at logV6DeprecationWarnings (node_modules/react-router-dom/index.tsx:816:25)
+      at Object.react_stack_bottom_frame (node_modules/react-dom/cjs/react-dom-client.development.js:25989:20)
+      at runWithFiberInDEV (node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+      at commitHookEffectListMount (node_modules/react-dom/cjs/react-dom-client.development.js:13249:29)
+      at commitHookPassiveMountEffects (node_modules/react-dom/cjs/react-dom-client.development.js:13336:11)
+      at commitPassiveMountOnFiber (node_modules/react-dom/cjs/react-dom-client.development.js:15484:13)
+      at recursivelyTraversePassiveMountEffects (node_modules/react-dom/cjs/react-dom-client.development.js:15439:11)
+      at commitPassiveMountOnFiber (node_modules/react-dom/cjs/react-dom-client.development.js:15519:11)
+      at flushPassiveEffects (node_modules/react-dom/cjs/react-dom-client.development.js:18432:9)
+      at node_modules/react-dom/cjs/react-dom-client.development.js:17923:15
+      at flushActQueue (node_modules/react/cjs/react.development.js:590:34)
+      at Object.<anonymous>.process.env.NODE_ENV.exports.act (node_modules/react/cjs/react.development.js:884:10)
+      at node_modules/@testing-library/react/dist/act-compat.js:46:25
+      at renderRoot (node_modules/@testing-library/react/dist/pure.js:189:26)
+      at render (node_modules/@testing-library/react/dist/pure.js:291:10)
+      at renderWithRouter (src/ui/components/LinkComponent.test.jsx:8:16)
+      at Object.renderWithRouter (src/ui/components/LinkComponent.test.jsx:13:5)
+
+PASS __tests__/cart.slice.test.js
+PASS __tests__/businessDays.test.js
+PASS __tests__/design.slice.test.js
+PASS __tests__/ui.slice.test.js
+PASS __tests__/businessCard.validation.test.js
+PASS __tests__/apiClient.test.js
+PASS __tests__/formatPrice.test.js
+PASS __tests__/TshirtDesigner.test.jsx
+PASS __tests__/ProductSection.test.jsx
+PASS __tests__/OffcanvasHost.test.jsx (5.378 s)
+FAIL __tests__/DesignerWizard.test.jsx (5.608 s)
+  ● Console
+
+    console.error
+      TypeError: event.currentTarget.setPointerCapture is not a function
+          at setPointerCapture (C:\Users\cloud\projects\namerrs\src\features\designers\tshirt\DraggableTshirtElement.jsx:33:25)
+          at executeDispatch (C:\Users\cloud\projects\namerrs\node_modules\react-dom\cjs\react-dom-client.development.js:19116:9)
+          at runWithFiberInDEV (C:\Users\cloud\projects\namerrs\node_modules\react-dom\cjs\react-dom-client.development.js:874:13)
+          at processDispatchQueue (C:\Users\cloud\projects\namerrs\node_modules\react-dom\cjs\react-dom-client.development.js:19166:19)
+          at C:\Users\cloud\projects\namerrs\node_modules\react-dom\cjs\react-dom-client.development.js:19767:9
+          at batchedUpdates$1 (C:\Users\cloud\projects\namerrs\node_modules\react-dom\cjs\react-dom-client.development.js:3255:40)
+          at dispatchEventForPluginEventSystem (C:\Users\cloud\projects\namerrs\node_modules\react-dom\cjs\react-dom-client.development.js:19320:7)
+          at dispatchEvent (C:\Users\cloud\projects\namerrs\node_modules\react-dom\cjs\react-dom-client.development.js:23585:11)
+          at dispatchDiscreteEvent (C:\Users\cloud\projects\namerrs\node_modules\react-dom\cjs\react-dom-client.development.js:23553:11)
+          at HTMLDivElement.callTheUserObjectsOperation (C:\Users\cloud\projects\namerrs\node_modules\jsdom\lib\jsdom\living\generated\EventListener.js:26:30)
+          at innerInvokeEventListeners (C:\Users\cloud\projects\namerrs\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:350:25)
+          at invokeEventListeners (C:\Users\cloud\projects\namerrs\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:286:3)
+          at HTMLInputElementImpl._dispatch (C:\Users\cloud\projects\namerrs\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:233:9)
+          at HTMLInputElementImpl.dispatchEvent (C:\Users\cloud\projects\namerrs\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:104:17)
+          at HTMLInputElement.dispatchEvent (C:\Users\cloud\projects\namerrs\node_modules\jsdom\lib\jsdom\living\generated\EventTarget.js:241:34)
+          at C:\Users\cloud\projects\namerrs\node_modules\@testing-library\user-event\dist\cjs\event\dispatchEvent.js:45:43
+          at C:\Users\cloud\projects\namerrs\node_modules\@testing-library\react\dist\pure.js:107:16
+          at C:\Users\cloud\projects\namerrs\node_modules\@testing-library\react\dist\act-compat.js:47:24
+          at Object.<anonymous>.process.env.NODE_ENV.exports.act (C:\Users\cloud\projects\namerrs\node_modules\react\cjs\react.development.js:814:22)
+          at C:\Users\cloud\projects\namerrs\node_modules\@testing-library\react\dist\act-compat.js:46:25
+          at Object.eventWrapper (C:\Users\cloud\projects\namerrs\node_modules\@testing-library\react\dist\pure.js:106:28)
+          at Object.wrapEvent (C:\Users\cloud\projects\namerrs\node_modules\@testing-library\user-event\dist\cjs\event\wrapEvent.js:6:28)
+          at Object.dispatchEvent (C:\Users\cloud\projects\namerrs\node_modules\@testing-library\user-event\dist\cjs\event\dispatchEvent.js:45:22)
+          at Object.dispatchUIEvent (C:\Users\cloud\projects\namerrs\node_modules\@testing-library\user-event\dist\cjs\event\dispatchEvent.js:22:26)
+          at Pointer.down (C:\Users\cloud\projects\namerrs\node_modules\@testing-library\user-event\dist\cjs\system\pointer\pointer.js:70:38)
+          at PointerHost.press (C:\Users\cloud\projects\namerrs\node_modules\@testing-library\user-event\dist\cjs\system\pointer\index.js:38:17)
+          at pointerAction (C:\Users\cloud\projects\namerrs\node_modules\@testing-library\user-event\dist\cjs\pointer\index.js:51:43)
+          at Object.pointer (C:\Users\cloud\projects\namerrs\node_modules\@testing-library\user-event\dist\cjs\pointer\index.js:27:15)
+          at Object.type (C:\Users\cloud\projects\namerrs\node_modules\@testing-library\user-event\dist\cjs\utility\type.js:12:9)
+          at Object.asyncWrapper (C:\Users\cloud\projects\namerrs\node_modules\@testing-library\react\dist\pure.js:87:22)
+
+      at Object.<anonymous>.process.env.NODE_ENV.reportGlobalError (node_modules/react-dom/cjs/react-dom-client.development.js:25513:23)
+      at executeDispatch (node_modules/react-dom/cjs/react-dom-client.development.js:19118:9)
+      at runWithFiberInDEV (node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+      at processDispatchQueue (node_modules/react-dom/cjs/react-dom-client.development.js:19166:19)
+      at node_modules/react-dom/cjs/react-dom-client.development.js:19767:9
+      at batchedUpdates$1 (node_modules/react-dom/cjs/react-dom-client.development.js:3255:40)
+      at dispatchEventForPluginEventSystem (node_modules/react-dom/cjs/react-dom-client.development.js:19320:7)
+      at dispatchEvent (node_modules/react-dom/cjs/react-dom-client.development.js:23585:11)
+      at dispatchDiscreteEvent (node_modules/react-dom/cjs/react-dom-client.development.js:23553:11)
+      at HTMLDivElement.callTheUserObjectsOperation (node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+      at innerInvokeEventListeners (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:350:25)
+      at invokeEventListeners (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+      at HTMLInputElementImpl._dispatch (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+      at HTMLInputElementImpl.dispatchEvent (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+      at HTMLInputElement.dispatchEvent (node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+      at node_modules/@testing-library/user-event/dist/cjs/event/dispatchEvent.js:45:43
+      at node_modules/@testing-library/react/dist/pure.js:107:16
+      at node_modules/@testing-library/react/dist/act-compat.js:47:24
+      at Object.<anonymous>.process.env.NODE_ENV.exports.act (node_modules/react/cjs/react.development.js:814:22)
+      at node_modules/@testing-library/react/dist/act-compat.js:46:25
+      at Object.eventWrapper (node_modules/@testing-library/react/dist/pure.js:106:28)
+      at Object.wrapEvent (node_modules/@testing-library/user-event/dist/cjs/event/wrapEvent.js:6:28)
+      at Object.dispatchEvent (node_modules/@testing-library/user-event/dist/cjs/event/dispatchEvent.js:45:22)
+      at Object.dispatchUIEvent (node_modules/@testing-library/user-event/dist/cjs/event/dispatchEvent.js:22:26)
+      at Pointer.down (node_modules/@testing-library/user-event/dist/cjs/system/pointer/pointer.js:70:38)
+      at PointerHost.press (node_modules/@testing-library/user-event/dist/cjs/system/pointer/index.js:38:17)
+      at pointerAction (node_modules/@testing-library/user-event/dist/cjs/pointer/index.js:51:43)
+      at Object.pointer (node_modules/@testing-library/user-event/dist/cjs/pointer/index.js:27:15)
+      at Object.type (node_modules/@testing-library/user-event/dist/cjs/utility/type.js:12:9)
+      at Object.asyncWrapper (node_modules/@testing-library/react/dist/pure.js:87:22)
+
+    console.error
+      TypeError: event.currentTarget.releasePointerCapture is not a function
+          at releasePointerCapture (C:\Users\cloud\projects\namerrs\src\features\designers\tshirt\DraggableTshirtElement.jsx:54:25)
+          at executeDispatch (C:\Users\cloud\projects\namerrs\node_modules\react-dom\cjs\react-dom-client.development.js:19116:9)
+          at runWithFiberInDEV (C:\Users\cloud\projects\namerrs\node_modules\react-dom\cjs\react-dom-client.development.js:874:13)
+          at processDispatchQueue (C:\Users\cloud\projects\namerrs\node_modules\react-dom\cjs\react-dom-client.development.js:19166:19)
+          at C:\Users\cloud\projects\namerrs\node_modules\react-dom\cjs\react-dom-client.development.js:19767:9
+          at batchedUpdates$1 (C:\Users\cloud\projects\namerrs\node_modules\react-dom\cjs\react-dom-client.development.js:3255:40)
+          at dispatchEventForPluginEventSystem (C:\Users\cloud\projects\namerrs\node_modules\react-dom\cjs\react-dom-client.development.js:19320:7)
+          at dispatchEvent (C:\Users\cloud\projects\namerrs\node_modules\react-dom\cjs\react-dom-client.development.js:23585:11)
+          at dispatchDiscreteEvent (C:\Users\cloud\projects\namerrs\node_modules\react-dom\cjs\react-dom-client.development.js:23553:11)
+          at HTMLDivElement.callTheUserObjectsOperation (C:\Users\cloud\projects\namerrs\node_modules\jsdom\lib\jsdom\living\generated\EventListener.js:26:30)
+          at innerInvokeEventListeners (C:\Users\cloud\projects\namerrs\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:350:25)
+          at invokeEventListeners (C:\Users\cloud\projects\namerrs\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:286:3)
+          at HTMLInputElementImpl._dispatch (C:\Users\cloud\projects\namerrs\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:233:9)
+          at HTMLInputElementImpl.dispatchEvent (C:\Users\cloud\projects\namerrs\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:104:17)
+          at HTMLInputElement.dispatchEvent (C:\Users\cloud\projects\namerrs\node_modules\jsdom\lib\jsdom\living\generated\EventTarget.js:241:34)
+          at C:\Users\cloud\projects\namerrs\node_modules\@testing-library\user-event\dist\cjs\event\dispatchEvent.js:45:43
+          at C:\Users\cloud\projects\namerrs\node_modules\@testing-library\react\dist\pure.js:107:16
+          at C:\Users\cloud\projects\namerrs\node_modules\@testing-library\react\dist\act-compat.js:47:24
+          at Object.<anonymous>.process.env.NODE_ENV.exports.act (C:\Users\cloud\projects\namerrs\node_modules\react\cjs\react.development.js:814:22)
+          at C:\Users\cloud\projects\namerrs\node_modules\@testing-library\react\dist\act-compat.js:46:25
+          at Object.eventWrapper (C:\Users\cloud\projects\namerrs\node_modules\@testing-library\react\dist\pure.js:106:28)
+          at Object.wrapEvent (C:\Users\cloud\projects\namerrs\node_modules\@testing-library\user-event\dist\cjs\event\wrapEvent.js:6:28)
+          at Object.dispatchEvent (C:\Users\cloud\projects\namerrs\node_modules\@testing-library\user-event\dist\cjs\event\dispatchEvent.js:45:22)
+          at Object.dispatchUIEvent (C:\Users\cloud\projects\namerrs\node_modules\@testing-library\user-event\dist\cjs\event\dispatchEvent.js:22:26)
+          at Pointer.up (C:\Users\cloud\projects\namerrs\node_modules\@testing-library\user-event\dist\cjs\system\pointer\pointer.js:80:18)
+          at PointerHost.release (C:\Users\cloud\projects\namerrs\node_modules\@testing-library\user-event\dist\cjs\system\pointer\index.js:70:21)
+          at pointerAction (C:\Users\cloud\projects\namerrs\node_modules\@testing-library\user-event\dist\cjs\pointer\index.js:54:47)
+          at Object.pointer (C:\Users\cloud\projects\namerrs\node_modules\@testing-library\user-event\dist\cjs\pointer\index.js:27:9)
+          at Object.type (C:\Users\cloud\projects\namerrs\node_modules\@testing-library\user-event\dist\cjs\utility\type.js:12:9)
+          at Object.asyncWrapper (C:\Users\cloud\projects\namerrs\node_modules\@testing-library\react\dist\pure.js:87:22)
+
+      at Object.<anonymous>.process.env.NODE_ENV.reportGlobalError (node_modules/react-dom/cjs/react-dom-client.development.js:25513:23)
+      at executeDispatch (node_modules/react-dom/cjs/react-dom-client.development.js:19118:9)
+      at runWithFiberInDEV (node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+      at processDispatchQueue (node_modules/react-dom/cjs/react-dom-client.development.js:19166:19)
+      at node_modules/react-dom/cjs/react-dom-client.development.js:19767:9
+      at batchedUpdates$1 (node_modules/react-dom/cjs/react-dom-client.development.js:3255:40)
+      at dispatchEventForPluginEventSystem (node_modules/react-dom/cjs/react-dom-client.development.js:19320:7)
+      at dispatchEvent (node_modules/react-dom/cjs/react-dom-client.development.js:23585:11)
+      at dispatchDiscreteEvent (node_modules/react-dom/cjs/react-dom-client.development.js:23553:11)
+      at HTMLDivElement.callTheUserObjectsOperation (node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+      at innerInvokeEventListeners (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:350:25)
+      at invokeEventListeners (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+      at HTMLInputElementImpl._dispatch (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+      at HTMLInputElementImpl.dispatchEvent (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+      at HTMLInputElement.dispatchEvent (node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+      at node_modules/@testing-library/user-event/dist/cjs/event/dispatchEvent.js:45:43
+      at node_modules/@testing-library/react/dist/pure.js:107:16
+      at node_modules/@testing-library/react/dist/act-compat.js:47:24
+      at Object.<anonymous>.process.env.NODE_ENV.exports.act (node_modules/react/cjs/react.development.js:814:22)
+      at node_modules/@testing-library/react/dist/act-compat.js:46:25
+      at Object.eventWrapper (node_modules/@testing-library/react/dist/pure.js:106:28)
+      at Object.wrapEvent (node_modules/@testing-library/user-event/dist/cjs/event/wrapEvent.js:6:28)
+      at Object.dispatchEvent (node_modules/@testing-library/user-event/dist/cjs/event/dispatchEvent.js:45:22)
+      at Object.dispatchUIEvent (node_modules/@testing-library/user-event/dist/cjs/event/dispatchEvent.js:22:26)
+      at Pointer.up (node_modules/@testing-library/user-event/dist/cjs/system/pointer/pointer.js:80:18)
+      at PointerHost.release (node_modules/@testing-library/user-event/dist/cjs/system/pointer/index.js:70:21)
+      at pointerAction (node_modules/@testing-library/user-event/dist/cjs/pointer/index.js:54:47)
+      at Object.pointer (node_modules/@testing-library/user-event/dist/cjs/pointer/index.js:27:9)
+      at Object.type (node_modules/@testing-library/user-event/dist/cjs/utility/type.js:12:9)
+      at Object.asyncWrapper (node_modules/@testing-library/react/dist/pure.js:87:22)
+
+  ● DesignerWizard › blocks continue when t-shirt design is incomplete
+
+    TestingLibraryElementError: Found multiple elements with the text: /add text or upload an image/i
+
+    Here are the matching elements:
+
+    Ignored nodes: comments, script, style
+    <li>
+      Add text or upload an image for your design.
+    </li>
+
+    Ignored nodes: comments, script, style
+    <li>
+      Add text or upload an image for your design.
+    </li>
+
+    (If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+    Ignored nodes: comments, script, style
+    <body>
+      <div>
+        <div
+          class="space-y-5"
+        >
+          <div
+            class="flex gap-2 text-xs font-medium uppercase tracking-wide text-[#6b7280]"
+          >
+            <span
+              class="text-[#1d4ed8]"
+            >
+              design
+            </span>
+            <span
+              class=""
+            >
+              quantity
+            </span>
+            <span
+              class=""
+            >
+              schedule
+            </span>
+          </div>
+          <div
+            aria-label="T-shirt designer"
+            class="space-y-4"
+          >
+            <p
+              aria-live="polite"
+              class="sr-only"
+            />
+            <div
+              class="mx-auto w-full max-w-sm"
+            >
+              <div
+                aria-label="T-shirt preview"
+                class="relative overflow-hidden rounded-t-[3rem] border border-[#e5e7eb] shadow-md"
+                style="background-color: rgb(255, 255, 255);"
+              >
+                <div
+                  aria-hidden="true"
+                  class="absolute left-1/2 top-0 h-16 w-24 -translate-x-1/2 rounded-b-full border border-[#e5e7eb]/40"
+                  style="background-color: rgb(255, 255, 255); filter: brightness(0.92);"
+                />
+                <div
+                  aria-hidden="true"
+                  class="absolute left-1/2 top-16 h-10 w-28 -translate-x-1/2 rounded-b-3xl"
+                  style="background-color: rgb(255, 255, 255); filter: brightness(0.88);"
+                />
+                <div
+                  class="absolute overflow-hidden rounded border border-dashed border-[#9ca3af]/60 bg-white/10"
+                  data-tshirt-canvas="true"
+                  style="top: 22%; left: 28%; width: 44%; height: 36%;"
+                >
+                  <div
+                    aria-label="Line 1 (name/team)"
+                    class="absolute cursor-move rounded border px-1 py-0.5 focus:outline-none focus:ring-2 focus:ring-[#93c5fd] border-transparent"
+                    role="button"
+                    style="left: 10%; top: 12%; width: 80%; min-height: 8%; color: rgb(17, 17, 17); font-size: 18px;"
+                    tabindex="0"
+                  >
+                    <input
+                      class="w-full border-0 bg-transparent p-0 text-inherit outline-none"
+                      placeholder="Team Namerrs"
+                      type="text"
+                      value=""
+                    />
+                  </div>
+                  <div
+                    aria-label="Line 2 (tagline)"
+                    class="absolute cursor-move rounded border px-1 py-0.5 focus:outline-none focus:ring-2 focus:ring-[#93c5fd] border-transparent"
+                    role="button"
+                    style="left: 10%; top: 26%; width: 80%; min-height: 8%; color: rgb(17, 17, 17); font-size: 14px;"
+                    tabindex="0"
+                  >
+                    <input
+                      class="w-full border-0 bg-transparent p-0 text-inherit outline-none"
+                      placeholder="Signs & Printing"
+                      type="text"
+                      value=""
+                    />
+                  </div>
+                  <div
+                    aria-label="Line 3 (optional)"
+                    class="absolute cursor-move rounded border px-1 py-0.5 focus:outline-none focus:ring-2 focus:ring-[#93c5fd] border-transparent"
+                    role="button"
+                    style="left: 10%; top: 40%; width: 80%; min-height: 8%; color: rgb(17, 17, 17); font-size: 14px;"
+                    tabindex="0"
+                  >
+                    <input
+                      class="w-full border-0 bg-transparent p-0 text-inherit outline-none"
+                      placeholder=""
+                      type="text"
+                      value=""
+                    />
+                  </div>
+                </div>
+              </div>
+              <p
+                class="mt-2 text-center text-xs text-[#9ca3af]"
+              >
+                Drag elements onto the print area or use arrow keys
+              </p>
+            </div>
+            <div
+              class="flex flex-wrap gap-2"
+            >
+              <button
+                class="rounded-lg border border-[#e5e7eb] px-3 py-2 text-sm font-medium text-[#374151] hover:border-[#1d4ed8]"
+                type="button"
+              >
+                Upload graphic
+              </button>
+              <input
+                accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
+                class="hidden"
+                type="file"
+              />
+            </div>
+            <fieldset>
+              <legend
+                class="text-sm font-medium text-[#374151]"
+              >
+                Fit
+              </legend>
+              <div
+                class="mt-2 flex flex-wrap gap-3"
+              >
+                <label
+                  class="flex items-center gap-2 text-sm text-[#374151]"
+                >
+                  <input
+                    checked=""
+                    name="tshirt-fit"
+                    type="radio"
+                    value="male"
+                  />
+                  Male / unisex
+                </label>
+                <label
+                  class="flex items-center gap-2 text-sm text-[#374151]"
+                >
+                  <input
+                    name="tshirt-fit"
+    ...
+
+      51 |     await user.click(screen.getByRole('button', { name: /continue/i }));
+      52 |
+    > 53 |     expect(screen.getByText(/add text or upload an image/i)).toBeInTheDocument();
+         |                   ^
+      54 |     expect(screen.getByText('design')).toBeInTheDocument();
+      55 |   });
+      56 |
+
+      at Object.getElementError (node_modules/@testing-library/dom/dist/config.js:37:19)
+      at getElementError (node_modules/@testing-library/dom/dist/query-helpers.js:20:35)
+      at getMultipleElementsFoundError (node_modules/@testing-library/dom/dist/query-helpers.js:23:10)
+      at node_modules/@testing-library/dom/dist/query-helpers.js:55:13
+      at node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+      at getByText (__tests__/DesignerWizard.test.jsx:53:19)
+      at Generator.call (__tests__/DesignerWizard.test.jsx:2:1)
+      at Generator._invoke [as next] (__tests__/DesignerWizard.test.jsx:2:1)
+      at asyncGeneratorStep (__tests__/DesignerWizard.test.jsx:2:1)
+      at asyncGeneratorStep (__tests__/DesignerWizard.test.jsx:2:1)
+
+  ● DesignerWizard › advances to quantity when t-shirt design is valid
+
+    TypeError: event.currentTarget.setPointerCapture is not a function
+
+      31 |     event.preventDefault();
+      32 |     startDrag(event.clientX, event.clientY);
+    > 33 |     event.currentTarget.setPointerCapture(event.pointerId);
+         |                         ^
+      34 |   };
+      35 |
+      36 |   const handlePointerMove = (event) => {
+
+      at setPointerCapture (src/features/designers/tshirt/DraggableTshirtElement.jsx:33:25)
+      at executeDispatch (node_modules/react-dom/cjs/react-dom-client.development.js:19116:9)
+      at runWithFiberInDEV (node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+      at processDispatchQueue (node_modules/react-dom/cjs/react-dom-client.development.js:19166:19)
+      at node_modules/react-dom/cjs/react-dom-client.development.js:19767:9
+      at batchedUpdates$1 (node_modules/react-dom/cjs/react-dom-client.development.js:3255:40)
+      at dispatchEventForPluginEventSystem (node_modules/react-dom/cjs/react-dom-client.development.js:19320:7)
+      at dispatchEvent (node_modules/react-dom/cjs/react-dom-client.development.js:23585:11)
+      at dispatchDiscreteEvent (node_modules/react-dom/cjs/react-dom-client.development.js:23553:11)
+      at HTMLDivElement.callTheUserObjectsOperation (node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+      at innerInvokeEventListeners (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:350:25)
+      at invokeEventListeners (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+      at HTMLInputElementImpl._dispatch (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+      at HTMLInputElementImpl.dispatchEvent (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+      at HTMLInputElement.dispatchEvent (node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+      at node_modules/@testing-library/user-event/dist/cjs/event/dispatchEvent.js:45:43
+      at node_modules/@testing-library/react/dist/pure.js:107:16
+      at node_modules/@testing-library/react/dist/act-compat.js:47:24
+      at Object.<anonymous>.process.env.NODE_ENV.exports.act (node_modules/react/cjs/react.development.js:814:22)
+      at node_modules/@testing-library/react/dist/act-compat.js:46:25
+      at Object.eventWrapper (node_modules/@testing-library/react/dist/pure.js:106:28)
+      at Object.wrapEvent (node_modules/@testing-library/user-event/dist/cjs/event/wrapEvent.js:6:28)
+      at Object.dispatchEvent (node_modules/@testing-library/user-event/dist/cjs/event/dispatchEvent.js:45:22)
+      at Object.dispatchUIEvent (node_modules/@testing-library/user-event/dist/cjs/event/dispatchEvent.js:22:26)
+      at Pointer.down (node_modules/@testing-library/user-event/dist/cjs/system/pointer/pointer.js:70:38)
+      at PointerHost.press (node_modules/@testing-library/user-event/dist/cjs/system/pointer/index.js:38:17)
+      at pointerAction (node_modules/@testing-library/user-event/dist/cjs/pointer/index.js:51:43)
+      at Object.pointer (node_modules/@testing-library/user-event/dist/cjs/pointer/index.js:27:15)
+      at Object.type (node_modules/@testing-library/user-event/dist/cjs/utility/type.js:12:9)
+      at Object.asyncWrapper (node_modules/@testing-library/react/dist/pure.js:87:22)
+
+  ● DesignerWizard › advances to quantity when t-shirt design is valid
+
+    TypeError: event.currentTarget.releasePointerCapture is not a function
+
+      52 |   const handlePointerUp = (event) => {
+      53 |     dragRef.current.dragging = false;
+    > 54 |     event.currentTarget.releasePointerCapture(event.pointerId);
+         |                         ^
+      55 |   };
+      56 |
+      57 |   const handleKeyDown = (event) => {
+
+      at releasePointerCapture (src/features/designers/tshirt/DraggableTshirtElement.jsx:54:25)
+      at executeDispatch (node_modules/react-dom/cjs/react-dom-client.development.js:19116:9)
+      at runWithFiberInDEV (node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+      at processDispatchQueue (node_modules/react-dom/cjs/react-dom-client.development.js:19166:19)
+      at node_modules/react-dom/cjs/react-dom-client.development.js:19767:9
+      at batchedUpdates$1 (node_modules/react-dom/cjs/react-dom-client.development.js:3255:40)
+      at dispatchEventForPluginEventSystem (node_modules/react-dom/cjs/react-dom-client.development.js:19320:7)
+      at dispatchEvent (node_modules/react-dom/cjs/react-dom-client.development.js:23585:11)
+      at dispatchDiscreteEvent (node_modules/react-dom/cjs/react-dom-client.development.js:23553:11)
+      at HTMLDivElement.callTheUserObjectsOperation (node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+      at innerInvokeEventListeners (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:350:25)
+      at invokeEventListeners (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+      at HTMLInputElementImpl._dispatch (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+      at HTMLInputElementImpl.dispatchEvent (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+      at HTMLInputElement.dispatchEvent (node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+      at node_modules/@testing-library/user-event/dist/cjs/event/dispatchEvent.js:45:43
+      at node_modules/@testing-library/react/dist/pure.js:107:16
+      at node_modules/@testing-library/react/dist/act-compat.js:47:24
+      at Object.<anonymous>.process.env.NODE_ENV.exports.act (node_modules/react/cjs/react.development.js:814:22)
+      at node_modules/@testing-library/react/dist/act-compat.js:46:25
+      at Object.eventWrapper (node_modules/@testing-library/react/dist/pure.js:106:28)
+      at Object.wrapEvent (node_modules/@testing-library/user-event/dist/cjs/event/wrapEvent.js:6:28)
+      at Object.dispatchEvent (node_modules/@testing-library/user-event/dist/cjs/event/dispatchEvent.js:45:22)
+      at Object.dispatchUIEvent (node_modules/@testing-library/user-event/dist/cjs/event/dispatchEvent.js:22:26)
+      at Pointer.up (node_modules/@testing-library/user-event/dist/cjs/system/pointer/pointer.js:80:18)
+      at PointerHost.release (node_modules/@testing-library/user-event/dist/cjs/system/pointer/index.js:70:21)
+      at pointerAction (node_modules/@testing-library/user-event/dist/cjs/pointer/index.js:54:47)
+      at Object.pointer (node_modules/@testing-library/user-event/dist/cjs/pointer/index.js:27:9)
+      at Object.type (node_modules/@testing-library/user-event/dist/cjs/utility/type.js:12:9)
+      at Object.asyncWrapper (node_modules/@testing-library/react/dist/pure.js:87:22)
+
+  ● DesignerWizard › advances to quantity when t-shirt design is valid
+
+    TestingLibraryElementError: Found multiple elements with the role "button" and name `/continue/i`
+
+    Here are the matching elements:
+
+    Ignored nodes: comments, script, style
+    <button
+      class="rounded-lg bg-[#1d4ed8] px-4 py-2 text-sm font-medium text-white hover:bg-[#1e40af] focus:outline-none focus:ring-2 focus:ring-[#93c5fd]"
+      type="button"
+    >
+      Continue
+    </button>
+
+    Ignored nodes: comments, script, style
+    <button
+      class="rounded-lg bg-[#1d4ed8] px-4 py-2 text-sm font-medium text-white hover:bg-[#1e40af] focus:outline-none focus:ring-2 focus:ring-[#93c5fd]"
+      type="button"
+    >
+      Continue
+    </button>
+
+    (If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+    Ignored nodes: comments, script, style
+    <body>
+      <div>
+        <div
+          class="space-y-5"
+        >
+          <div
+            class="flex gap-2 text-xs font-medium uppercase tracking-wide text-[#6b7280]"
+          >
+            <span
+              class="text-[#1d4ed8]"
+            >
+              design
+            </span>
+            <span
+              class=""
+            >
+              quantity
+            </span>
+            <span
+              class=""
+            >
+              schedule
+            </span>
+          </div>
+          <div
+            aria-label="T-shirt designer"
+            class="space-y-4"
+          >
+            <p
+              aria-live="polite"
+              class="sr-only"
+            />
+            <div
+              class="mx-auto w-full max-w-sm"
+            >
+              <div
+                aria-label="T-shirt preview"
+                class="relative overflow-hidden rounded-t-[3rem] border border-[#e5e7eb] shadow-md"
+                style="background-color: rgb(255, 255, 255);"
+              >
+                <div
+                  aria-hidden="true"
+                  class="absolute left-1/2 top-0 h-16 w-24 -translate-x-1/2 rounded-b-full border border-[#e5e7eb]/40"
+                  style="background-color: rgb(255, 255, 255); filter: brightness(0.92);"
+                />
+                <div
+                  aria-hidden="true"
+                  class="absolute left-1/2 top-16 h-10 w-28 -translate-x-1/2 rounded-b-3xl"
+                  style="background-color: rgb(255, 255, 255); filter: brightness(0.88);"
+                />
+                <div
+                  class="absolute overflow-hidden rounded border border-dashed border-[#9ca3af]/60 bg-white/10"
+                  data-tshirt-canvas="true"
+                  style="top: 22%; left: 28%; width: 44%; height: 36%;"
+                >
+                  <div
+                    aria-label="Line 1 (name/team)"
+                    class="absolute cursor-move rounded border px-1 py-0.5 focus:outline-none focus:ring-2 focus:ring-[#93c5fd] border-[#1d4ed8] ring-1 ring-[#93c5fd]"
+                    role="button"
+                    style="left: 10%; top: 12%; width: 80%; min-height: 8%; color: rgb(17, 17, 17); font-size: 18px;"
+                    tabindex="0"
+                  >
+                    <input
+                      class="w-full border-0 bg-transparent p-0 text-inherit outline-none"
+                      placeholder="Team Namerrs"
+                      type="text"
+                      value=""
+                    />
+                    <button
+                      aria-label="Remove element"
+                      class="absolute -right-2 -top-2 rounded-full bg-[#dc2626] px-1.5 text-[10px] text-white"
+                      type="button"
+                    >
+                      ×
+                    </button>
+                  </div>
+                  <div
+                    aria-label="Line 2 (tagline)"
+                    class="absolute cursor-move rounded border px-1 py-0.5 focus:outline-none focus:ring-2 focus:ring-[#93c5fd] border-transparent"
+                    role="button"
+                    style="left: 10%; top: 26%; width: 80%; min-height: 8%; color: rgb(17, 17, 17); font-size: 14px;"
+                    tabindex="0"
+                  >
+                    <input
+                      class="w-full border-0 bg-transparent p-0 text-inherit outline-none"
+                      placeholder="Signs & Printing"
+                      type="text"
+                      value=""
+                    />
+                  </div>
+                  <div
+                    aria-label="Line 3 (optional)"
+                    class="absolute cursor-move rounded border px-1 py-0.5 focus:outline-none focus:ring-2 focus:ring-[#93c5fd] border-transparent"
+                    role="button"
+                    style="left: 10%; top: 40%; width: 80%; min-height: 8%; color: rgb(17, 17, 17); font-size: 14px;"
+                    tabindex="0"
+                  >
+                    <input
+                      class="w-full border-0 bg-transparent p-0 text-inherit outline-none"
+                      placeholder=""
+                      type="text"
+                      value=""
+                    />
+                  </div>
+                </div>
+              </div>
+              <p
+                class="mt-2 text-center text-xs text-[#9ca3af]"
+              >
+                Drag elements onto the print area or use arrow keys
+              </p>
+            </div>
+            <div
+              class="flex flex-wrap gap-2"
+            >
+              <button
+                class="rounded-lg border border-[#e5e7eb] px-3 py-2 text-sm font-medium text-[#374151] hover:border-[#1d4ed8]"
+                type="button"
+              >
+                Upload graphic
+              </button>
+              <input
+                accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
+                class="hidden"
+                type="file"
+              />
+            </div>
+            <fieldset>
+              <legend
+                class="text-sm font-medium text-[#374151]"
+              >
+                Fit
+              </legend>
+              <div
+                class="mt-2 flex flex-wrap gap-3"
+              >
+                <label
+                  class="flex items-center gap-2 text-sm text-[#374151]"
+                >
+                  <input
+                    checked=""
+                    name="tshirt-fit"
+                    type
+
+     if (textInput) {
+      87 |       await user.type(textInput, 'Namerrs');
+    > 88 |       await user.click(screen.getByRole('button', { name: /continue/i }));
+         |                               ^
+      89 |       expect(screen.getByLabelText(/t-shirt quantity/i)).toBeInTheDocument();
+      90 |     }
+      91 |   });
+
+      at Object.getElementError (node_modules/@testing-library/dom/dist/config.js:37:19)
+      at getElementError (node_modules/@testing-library/dom/dist/query-helpers.js:20:35)
+      at getMultipleElementsFoundError (node_modules/@testing-library/dom/dist/query-helpers.js:23:10)
+      at node_modules/@testing-library/dom/dist/query-helpers.js:55:13
+      at node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+      at getByRole (__tests__/DesignerWizard.test.jsx:88:31)
+      at Generator.call (__tests__/DesignerWizard.test.jsx:2:1)
+      at Generator._invoke [as next] (__tests__/DesignerWizard.test.jsx:2:1)
+      at asyncGeneratorStep (__tests__/DesignerWizard.test.jsx:2:1)
+      at asyncGeneratorStep (__tests__/DesignerWizard.test.jsx:2:1)
+
+Summary of all failing tests
+FAIL __tests__/DesignerWizard.test.jsx (5.608 s)
+  ● DesignerWizard › blocks continue when t-shirt design is incomplete
+
+    TestingLibraryElementError: Found multiple elements with the text: /add text or upload an image/i
+
+    Here are the matching elements:
+
+    Ignored nodes: comments, script, style
+    <li>
+      Add text or upload an image for your design.
+    </li>
+
+    Ignored nodes: comments, script, style
+    <li>
+      Add text or upload an image for your design.
+    </li>
+
+    (If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+    Ignored nodes: comments, script, style
+    <body>
+      <div>
+        <div
+          class="space-y-5"
+        >
+          <div
+            class="flex gap-2 text-xs font-medium uppercase tracking-wide text-[#6b7280]"
+          >
+            <span
+              class="text-[#1d4ed8]"
+            >
+              design
+            </span>
+            <span
+              class=""
+            >
+              quantity
+            </span>
+            <span
+              class=""
+            >
+              schedule
+            </span>
+          </div>
+          <div
+            aria-label="T-shirt designer"
+            class="space-y-4"
+          >
+            <p
+              aria-live="polite"
+              class="sr-only"
+            />
+            <div
+              class="mx-auto w-full max-w-sm"
+            >
+              <div
+                aria-label="T-shirt preview"
+                class="relative overflow-hidden rounded-t-[3rem] border border-[#e5e7eb] shadow-md"
+                style="background-color: rgb(255, 255, 255);"
+              >
+                <div
+                  aria-hidden="true"
+                  class="absolute left-1/2 top-0 h-16 w-24 -translate-x-1/2 rounded-b-full border border-[#e5e7eb]/40"
+                  style="background-color: rgb(255, 255, 255); filter: brightness(0.92);"
+                />
+                <div
+                  aria-hidden="true"
+                  class="absolute left-1/2 top-16 h-10 w-28 -translate-x-1/2 rounded-b-3xl"
+                  style="background-color: rgb(255, 255, 255); filter: brightness(0.88);"
+                />
+                <div
+                  class="absolute overflow-hidden rounded border border-dashed border-[#9ca3af]/60 bg-white/10"
+                  data-tshirt-canvas="true"
+                  style="top: 22%; left: 28%; width: 44%; height: 36%;"
+                >
+                  <div
+                    aria-label="Line 1 (name/team)"
+                    class="absolute cursor-move rounded border px-1 py-0.5 focus:outline-none focus:ring-2 focus:ring-[#93c5fd] border-transparent"
+                    role="button"
+                    style="left: 10%; top: 12%; width: 80%; min-height: 8%; color: rgb(17, 17, 17); font-size: 18px;"
+                    tabindex="0"
+                  >
+                    <input
+                      class="w-full border-0 bg-transparent p-0 text-inherit outline-none"
+                      placeholder="Team Namerrs"
+                      type="text"
+                      value=""
+                    />
+                  </div>
+                  <div
+                    aria-label="Line 2 (tagline)"
+                    class="absolute cursor-move rounded border px-1 py-0.5 focus:outline-none focus:ring-2 focus:ring-[#93c5fd] border-transparent"
+                    role="button"
+                    style="left: 10%; top: 26%; width: 80%; min-height: 8%; color: rgb(17, 17, 17); font-size: 14px;"
+                    tabindex="0"
+                  >
+                    <input
+                      class="w-full border-0 bg-transparent p-0 text-inherit outline-none"
+                      placeholder="Signs & Printing"
+                      type="text"
+                      value=""
+                    />
+                  </div>
+                  <div
+                    aria-label="Line 3 (optional)"
+                    class="absolute cursor-move rounded border px-1 py-0.5 focus:outline-none focus:ring-2 focus:ring-[#93c5fd] border-transparent"
+                    role="button"
+                    style="left: 10%; top: 40%; width: 80%; min-height: 8%; color: rgb(17, 17, 17); font-size: 14px;"
+                    tabindex="0"
+                  >
+                    <input
+                      class="w-full border-0 bg-transparent p-0 text-inherit outline-none"
+                      placeholder=""
+                      type="text"
+                      value=""
+                    />
+                  </div>
+                </div>
+              </div>
+              <p
+                class="mt-2 text-center text-xs text-[#9ca3af]"
+              >
+                Drag elements onto the print area or use arrow keys
+              </p>
+            </div>
+            <div
+              class="flex flex-wrap gap-2"
+            >
+              <button
+                class="rounded-lg border border-[#e5e7eb] px-3 py-2 text-sm font-medium text-[#374151] hover:border-[#1d4ed8]"
+                type="button"
+              >
+                Upload graphic
+              </button>
+              <input
+                accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
+                class="hidden"
+                type="file"
+              />
+            </div>
+            <fieldset>
+              <legend
+                class="text-sm font-medium text-[#374151]"
+              >
+                Fit
+              </legend>
+              <div
+                class="mt-2 flex flex-wrap gap-3"
+              >
+                <label
+                  class="flex items-center gap-2 text-sm text-[#374151]"
+                >
+                  <input
+                    checked=""
+                    name="tshirt-fit"
+                    type="radio"
+                    value="male"
+                  />
+                  Male / unisex
+                </label>
+                <label
+                  class="flex items-center gap-2 text-sm text-[#374151]"
+                >
+                  <input
+                    name="tshirt-fit"
+    ...
+
+      51 |     await user.click(screen.getByRole('button', { name: /continue/i }));
+      52 |
+    > 53 |     expect(screen.getByText(/add text or upload an image/i)).toBeInTheDocument();
+         |                   ^
+      54 |     expect(screen.getByText('design')).toBeInTheDocument();
+      55 |   });
+      56 |
+
+      at Object.getElementError (node_modules/@testing-library/dom/dist/config.js:37:19)
+      at getElementError (node_modules/@testing-library/dom/dist/query-helpers.js:20:35)
+      at getMultipleElementsFoundError (node_modules/@testing-library/dom/dist/query-helpers.js:23:10)
+      at node_modules/@testing-library/dom/dist/query-helpers.js:55:13
+      at node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+      at getByText (__tests__/DesignerWizard.test.jsx:53:19)
+      at Generator.call (__tests__/DesignerWizard.test.jsx:2:1)
+      at Generator._invoke [as next] (__tests__/DesignerWizard.test.jsx:2:1)
+      at asyncGeneratorStep (__tests__/DesignerWizard.test.jsx:2:1)
+      at asyncGeneratorStep (__tests__/DesignerWizard.test.jsx:2:1)
+
+  ● DesignerWizard › advances to quantity when t-shirt design is valid
+
+    TypeError: event.currentTarget.setPointerCapture is not a function
+
+      31 |     event.preventDefault();
+      32 |     startDrag(event.clientX, event.clientY);
+    > 33 |     event.currentTarget.setPointerCapture(event.pointerId);
+         |                         ^
+      34 |   };
+      35 |
+      36 |   const handlePointerMove = (event) => {
+
+      at setPointerCapture (src/features/designers/tshirt/DraggableTshirtElement.jsx:33:25)
+      at executeDispatch (node_modules/react-dom/cjs/react-dom-client.development.js:19116:9)
+      at runWithFiberInDEV (node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+      at processDispatchQueue (node_modules/react-dom/cjs/react-dom-client.development.js:19166:19)
+      at node_modules/react-dom/cjs/react-dom-client.development.js:19767:9
+      at batchedUpdates$1 (node_modules/react-dom/cjs/react-dom-client.development.js:3255:40)
+      at dispatchEventForPluginEventSystem (node_modules/react-dom/cjs/react-dom-client.development.js:19320:7)
+      at dispatchEvent (node_modules/react-dom/cjs/react-dom-client.development.js:23585:11)
+      at dispatchDiscreteEvent (node_modules/react-dom/cjs/react-dom-client.development.js:23553:11)
+      at HTMLDivElement.callTheUserObjectsOperation (node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+      at innerInvokeEventListeners (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:350:25)
+      at invokeEventListeners (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+      at HTMLInputElementImpl._dispatch (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+      at HTMLInputElementImpl.dispatchEvent (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+      at HTMLInputElement.dispatchEvent (node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+      at node_modules/@testing-library/user-event/dist/cjs/event/dispatchEvent.js:45:43
+      at node_modules/@testing-library/react/dist/pure.js:107:16
+      at node_modules/@testing-library/react/dist/act-compat.js:47:24
+      at Object.<anonymous>.process.env.NODE_ENV.exports.act (node_modules/react/cjs/react.development.js:814:22)
+      at node_modules/@testing-library/react/dist/act-compat.js:46:25
+      at Object.eventWrapper (node_modules/@testing-library/react/dist/pure.js:106:28)
+      at Object.wrapEvent (node_modules/@testing-library/user-event/dist/cjs/event/wrapEvent.js:6:28)
+      at Object.dispatchEvent (node_modules/@testing-library/user-event/dist/cjs/event/dispatchEvent.js:45:22)
+      at Object.dispatchUIEvent (node_modules/@testing-library/user-event/dist/cjs/event/dispatchEvent.js:22:26)
+      at Pointer.down (node_modules/@testing-library/user-event/dist/cjs/system/pointer/pointer.js:70:38)
+      at PointerHost.press (node_modules/@testing-library/user-event/dist/cjs/system/pointer/index.js:38:17)
+      at pointerAction (node_modules/@testing-library/user-event/dist/cjs/pointer/index.js:51:43)
+      at Object.pointer (node_modules/@testing-library/user-event/dist/cjs/pointer/index.js:27:15)
+      at Object.type (node_modules/@testing-library/user-event/dist/cjs/utility/type.js:12:9)
+      at Object.asyncWrapper (node_modules/@testing-library/react/dist/pure.js:87:22)
+
+  ● DesignerWizard › advances to quantity when t-shirt design is valid
+
+    TypeError: event.currentTarget.releasePointerCapture is not a function
+
+      52 |   const handlePointerUp = (event) => {
+      53 |     dragRef.current.dragging = false;
+    > 54 |     event.currentTarget.releasePointerCapture(event.pointerId);
+         |                         ^
+      55 |   };
+      56 |
+      57 |   const handleKeyDown = (event) => {
+
+      at releasePointerCapture (src/features/designers/tshirt/DraggableTshirtElement.jsx:54:25)
+      at executeDispatch (node_modules/react-dom/cjs/react-dom-client.development.js:19116:9)
+      at runWithFiberInDEV (node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+      at processDispatchQueue (node_modules/react-dom/cjs/react-dom-client.development.js:19166:19)
+      at node_modules/react-dom/cjs/react-dom-client.development.js:19767:9
+      at batchedUpdates$1 (node_modules/react-dom/cjs/react-dom-client.development.js:3255:40)
+      at dispatchEventForPluginEventSystem (node_modules/react-dom/cjs/react-dom-client.development.js:19320:7)
+      at dispatchEvent (node_modules/react-dom/cjs/react-dom-client.development.js:23585:11)
+      at dispatchDiscreteEvent (node_modules/react-dom/cjs/react-dom-client.development.js:23553:11)
+      at HTMLDivElement.callTheUserObjectsOperation (node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+      at innerInvokeEventListeners (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:350:25)
+      at invokeEventListeners (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+      at HTMLInputElementImpl._dispatch (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+      at HTMLInputElementImpl.dispatchEvent (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+      at HTMLInputElement.dispatchEvent (node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+      at node_modules/@testing-library/user-event/dist/cjs/event/dispatchEvent.js:45:43
+      at node_modules/@testing-library/react/dist/pure.js:107:16
+      at node_modules/@testing-library/react/dist/act-compat.js:47:24
+      at Object.<anonymous>.process.env.NODE_ENV.exports.act (node_modules/react/cjs/react.development.js:814:22)
+      at node_modules/@testing-library/react/dist/act-compat.js:46:25
+      at Object.eventWrapper (node_modules/@testing-library/react/dist/pure.js:106:28)
+      at Object.wrapEvent (node_modules/@testing-library/user-event/dist/cjs/event/wrapEvent.js:6:28)
+      at Object.dispatchEvent (node_modules/@testing-library/user-event/dist/cjs/event/dispatchEvent.js:45:22)
+      at Object.dispatchUIEvent (node_modules/@testing-library/user-event/dist/cjs/event/dispatchEvent.js:22:26)
+      at Pointer.up (node_modules/@testing-library/user-event/dist/cjs/system/pointer/pointer.js:80:18)
+      at PointerHost.release (node_modules/@testing-library/user-event/dist/cjs/system/pointer/index.js:70:21)
+      at pointerAction (node_modules/@testing-library/user-event/dist/cjs/pointer/index.js:54:47)
+      at Object.pointer (node_modules/@testing-library/user-event/dist/cjs/pointer/index.js:27:9)
+      at Object.type (node_modules/@testing-library/user-event/dist/cjs/utility/type.js:12:9)
+      at Object.asyncWrapper (node_modules/@testing-library/react/dist/pure.js:87:22)
+
+  ● DesignerWizard › advances to quantity when t-shirt design is valid
+
+    TestingLibraryElementError: Found multiple elements with the role "button" and name `/continue/i`
+
+    Here are the matching elements:
+
+    Ignored nodes: comments, script, style
+    <button
+      class="rounded-lg bg-[#1d4ed8] px-4 py-2 text-sm font-medium text-white hover:bg-[#1e40af] focus:outline-none focus:ring-2 focus:ring-[#93c5fd]"
+      type="button"
+    >
+      Continue
+    </button>
+
+    Ignored nodes: comments, script, style
+    <button
+      class="rounded-lg bg-[#1d4ed8] px-4 py-2 text-sm font-medium text-white hover:bg-[#1e40af] focus:outline-none focus:ring-2 focus:ring-[#93c5fd]"
+      type="button"
+    >
+      Continue
+    </button>
+
+    (If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+    Ignored nodes: comments, script, style
+    <body>
+      <div>
+        <div
+          class="space-y-5"
+        >
+          <div
+            class="flex gap-2 text-xs font-medium uppercase tracking-wide text-[#6b7280]"
+          >
+            <span
+              class="text-[#1d4ed8]"
+            >
+              design
+            </span>
+            <span
+              class=""
+            >
+              quantity
+            </span>
+            <span
+              class=""
+            >
+              schedule
+            </span>
+          </div>
+          <div
+            aria-label="T-shirt designer"
+            class="space-y-4"
+          >
+            <p
+              aria-live="polite"
+              class="sr-only"
+            />
+            <div
+              class="mx-auto w-full max-w-sm"
+            >
+              <div
+                aria-label="T-shirt preview"
+                class="relative overflow-hidden rounded-t-[3rem] border border-[#e5e7eb] shadow-md"
+                style="background-color: rgb(255, 255, 255);"
+              >
+                <div
+                  aria-hidden="true"
+                  class="absolute left-1/2 top-0 h-16 w-24 -translate-x-1/2 rounded-b-full border border-[#e5e7eb]/40"
+                  style="background-color: rgb(255, 255, 255); filter: brightness(0.92);"
+                />
+                <div
+                  aria-hidden="true"
+                  class="absolute left-1/2 top-16 h-10 w-28 -translate-x-1/2 rounded-b-3xl"
+                  style="background-color: rgb(255, 255, 255); filter: brightness(0.88);"
+                />
+                <div
+                  class="absolute overflow-hidden rounded border border-dashed border-[#9ca3af]/60 bg-white/10"
+                  data-tshirt-canvas="true"
+                  style="top: 22%; left: 28%; width: 44%; height: 36%;"
+                >
+                  <div
+                    aria-label="Line 1 (name/team)"
+                    class="absolute cursor-move rounded border px-1 py-0.5 focus:outline-none focus:ring-2 focus:ring-[#93c5fd] border-[#1d4ed8] ring-1 ring-[#93c5fd]"
+                    role="button"
+                    style="left: 10%; top: 12%; width: 80%; min-height: 8%; color: rgb(17, 17, 17); font-size: 18px;"
+                    tabindex="0"
+                  >
+                    <input
+                      class="w-full border-0 bg-transparent p-0 text-inherit outline-none"
+                      placeholder="Team Namerrs"
+                      type="text"
+                      value=""
+                    />
+                    <button
+                      aria-label="Remove element"
+                      class="absolute -right-2 -top-2 rounded-full bg-[#dc2626] px-1.5 text-[10px] text-white"
+                      type="button"
+                    >
+                      ×
+                    </button>
+                  </div>
+                  <div
+                    aria-label="Line 2 (tagline)"
+                    class="absolute cursor-move rounded border px-1 py-0.5 focus:outline-none focus:ring-2 focus:ring-[#93c5fd] border-transparent"
+                    role="button"
+                    style="left: 10%; top: 26%; width: 80%; min-height: 8%; color: rgb(17, 17, 17); font-size: 14px;"
+                    tabindex="0"
+                  >
+                    <input
+                      class="w-full border-0 bg-transparent p-0 text-inherit outline-none"
+                      placeholder="Signs & Printing"
+                      type="text"
+                      value=""
+                    />
+                  </div>
+                  <div
+                    aria-label="Line 3 (optional)"
+                    class="absolute cursor-move rounded border px-1 py-0.5 focus:outline-none focus:ring-2 focus:ring-[#93c5fd] border-transparent"
+                    role="button"
+                    style="left: 10%; top: 40%; width: 80%; min-height: 8%; color: rgb(17, 17, 17); font-size: 14px;"
+                    tabindex="0"
+                  >
+                    <input
+                      class="w-full border-0 bg-transparent p-0 text-inherit outline-none"
+                      placeholder=""
+                      type="text"
+                      value=""
+                    />
+                  </div>
+                </div>
+              </div>
+              <p
+                class="mt-2 text-center text-xs text-[#9ca3af]"
+              >
+                Drag elements onto the print area or use arrow keys
+              </p>
+            </div>
+            <div
+              class="flex flex-wrap gap-2"
+            >
+              <button
+                class="rounded-lg border border-[#e5e7eb] px-3 py-2 text-sm font-medium text-[#374151] hover:border-[#1d4ed8]"
+                type="button"
+              >
+                Upload graphic
+              </button>
+              <input
+                accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
+                class="hidden"
+                type="file"
+              />
+            </div>
+            <fieldset>
+              <legend
+                class="text-sm font-medium text-[#374151]"
+              >
+                Fit
+              </legend>
+              <div
+                class="mt-2 flex flex-wrap gap-3"
+              >
+                <label
+                  class="flex items-center gap-2 text-sm text-[#374151]"
+                >
+                  <input
+                    checked=""
+                    name="tshirt-fit"
+                    type
+
+     if (textInput) {
+      87 |       await user.type(textInput, 'Namerrs');
+    > 88 |       await user.click(screen.getByRole('button', { name: /continue/i }));
+         |                               ^
+      89 |       expect(screen.getByLabelText(/t-shirt quantity/i)).toBeInTheDocument();
+      90 |     }
+      91 |   });
+
+      at Object.getElementError (node_modules/@testing-library/dom/dist/config.js:37:19)
+      at getElementError (node_modules/@testing-library/dom/dist/query-helpers.js:20:35)
+      at getMultipleElementsFoundError (node_modules/@testing-library/dom/dist/query-helpers.js:23:10)
+      at node_modules/@testing-library/dom/dist/query-helpers.js:55:13
+      at node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+      at getByRole (__tests__/DesignerWizard.test.jsx:88:31)
+      at Generator.call (__tests__/DesignerWizard.test.jsx:2:1)
+      at Generator._invoke [as next] (__tests__/DesignerWizard.test.jsx:2:1)
+      at asyncGeneratorStep (__tests__/DesignerWizard.test.jsx:2:1)
+      at asyncGeneratorStep (__tests__/DesignerWizard.test.jsx:2:1)
+
+
+Test Suites: 1 failed, 22 passed, 23 total
+Tests:       2 failed, 76 passed, 78 total
+Snapshots:   0 total
+Time:        7.385 s
+Ran all test suites.

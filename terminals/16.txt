@@ -1,0 +1,161 @@
+---
+pid: 23104
+cwd: "C:\Users\cloud\projects\namerrs"
+command: "Set-Location C:\\Users\\cloud\\projects\\namerrs\\namerrsconcept; npm install 2>&1"
+started_at: 2026-07-01T23:34:37.881Z
+running_for_ms: 86400005 
+---
+npm warn ERESOLVE overriding peer dependency
+npm warn While resolving: @react-three/fiber@9.1.2
+npm warn Found: react@18.3.1
+npm warn node_modules/react
+npm warn   peer react@">=16.3" from @fortawesome/react-fontawesome@0.2.2
+npm warn   node_modules/@fortawesome/react-fontawesome
+npm warn     @fortawesome/react-fontawesome@"^0.2.2" from the root project
+npm warn   44 more (@icons/material, @react-aria/ssr, ...)
+npm warn
+npm warn Could not resolve dependency:
+npm warn peer react@"^19.0.0" from @react-three/fiber@9.1.2
+npm warn node_modules/@react-three/fiber
+npm warn   peer @react-three/fiber@">=6.0" from @react-spring/three@9.7.5
+npm warn   node_modules/@react-spring/three
+npm warn
+npm warn Conflicting peer dependency: react@19.2.7
+npm warn node_modules/react
+npm warn   peer react@"^19.0.0" from @react-three/fiber@9.1.2
+npm warn   node_modules/@react-three/fiber
+npm warn     peer @react-three/fiber@">=6.0" from @react-spring/three@9.7.5
+npm warn     node_modules/@react-spring/three
+npm warn ERESOLVE overriding peer dependency
+npm warn While resolving: @react-three/fiber@9.1.2
+npm warn Found: react-dom@18.3.1
+npm warn node_modules/react-dom
+npm warn   peer react-dom@"^16.8 || ^17 || ^18" from @react-google-maps/api@2.20.3
+npm warn   node_modules/@react-google-maps/api
+npm warn     @react-google-maps/api@"^2.20.3" from the root project
+npm warn   15 more (@react-spring/web, @react-spring/zdog, @restart/ui, ...)
+npm warn
+npm warn Could not resolve dependency:
+npm warn peerOptional react-dom@"^19.0.0" from @react-three/fiber@9.1.2
+npm warn node_modules/@react-three/fiber
+npm warn   peer @react-three/fiber@">=6.0" from @react-spring/three@9.7.5
+npm warn   node_modules/@react-spring/three
+npm warn
+npm warn Conflicting peer dependency: react-dom@19.2.7
+npm warn node_modules/react-dom
+npm warn   peerOptional react-dom@"^19.0.0" from @react-three/fiber@9.1.2
+npm warn   node_modules/@react-three/fiber
+npm warn     peer @react-three/fiber@">=6.0" from @react-spring/three@9.7.5
+npm warn     node_modules/@react-spring/three
+npm warn ERESOLVE overriding peer dependency
+npm warn While resolving: react-native@0.79.2
+npm warn Found: react@18.3.1
+npm warn node_modules/react
+npm warn   peer react@">=16.3" from @fortawesome/react-fontawesome@0.2.2
+npm warn   node_modules/@fortawesome/react-fontawesome
+npm warn     @fortawesome/react-fontawesome@"^0.2.2" from the root project
+npm warn   44 more (@icons/material, @react-aria/ssr, ...)
+npm warn
+npm warn Could not resolve dependency:
+npm warn peer react@"^19.0.0" from react-native@0.79.2
+npm warn node_modules/react-native
+npm warn   peer react-native@">=0.58" from @react-spring/native@9.7.5
+npm warn   node_modules/@react-spring/native
+npm warn   2 more (@react-three/fiber, @react-native/virtualized-lists)
+npm warn
+npm warn Conflicting peer dependency: react@19.2.7
+npm warn node_modules/react
+npm warn   peer react@"^19.0.0" from react-native@0.79.2
+npm warn   node_modules/react-native
+npm warn     peer react-native@">=0.58" from @react-spring/native@9.7.5
+npm warn     node_modules/@react-spring/native
+npm warn     2 more (@react-three/fiber, @react-native/virtualized-lists)
+npm warn ERESOLVE overriding peer dependency
+npm warn While resolving: its-fine@2.0.0
+npm warn Found: react@18.3.1
+npm warn node_modules/react
+npm warn   peer react@">=16.3" from @fortawesome/react-fontawesome@0.2.2
+npm warn   node_modules/@fortawesome/react-fontawesome
+npm warn     @fortawesome/react-fontawesome@"^0.2.2" from the root project
+npm warn   44 more (@icons/material, @react-aria/ssr, ...)
+npm warn
+npm warn Could not resolve dependency:
+npm warn peer react@"^19.0.0" from its-fine@2.0.0
+npm warn node_modules/@react-three/fiber/node_modules/its-fine
+npm warn   its-fine@"^2.0.0" from @react-three/fiber@9.1.2
+npm warn   node_modules/@react-three/fiber
+npm warn
+npm warn Conflicting peer dependency: react@19.2.7
+npm warn node_modules/react
+npm warn   peer react@"^19.0.0" from its-fine@2.0.0
+npm warn   node_modules/@react-three/fiber/node_modules/its-fine
+npm warn     its-fine@"^2.0.0" from @react-three/fiber@9.1.2
+npm warn     node_modules/@react-three/fiber
+npm warn ERESOLVE overriding peer dependency
+npm warn While resolving: react-reconciler@0.31.0
+npm warn Found: react@18.3.1
+npm warn node_modules/react
+npm warn   peer react@">=16.3" from @fortawesome/react-fontawesome@0.2.2
+npm warn   node_modules/@fortawesome/react-fontawesome
+npm warn     @fortawesome/react-fontawesome@"^0.2.2" from the root project
+npm warn   44 more (@icons/material, @react-aria/ssr, ...)
+npm warn
+npm warn Could not resolve dependency:
+npm warn peer react@"^19.0.0" from react-reconciler@0.31.0
+npm warn node_modules/@react-three/fiber/node_modules/react-reconciler
+npm warn   react-reconciler@"^0.31.0" from @react-three/fiber@9.1.2
+npm warn   node_modules/@react-three/fiber
+npm warn
+npm warn Conflicting peer dependency: react@19.2.7
+npm warn node_modules/react
+npm warn   peer react@"^19.0.0" from react-reconciler@0.31.0
+npm warn   node_modules/@react-three/fiber/node_modules/react-reconciler
+npm warn     react-reconciler@"^0.31.0" from @react-three/fiber@9.1.2
+npm warn     node_modules/@react-three/fiber
+npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+npm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+npm warn deprecated stable@0.1.8: Modern JS already guarantees Array#sort() is a stable sort, so this library is deprecated. See the compatibility table on MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#browser_compatibility
+npm warn deprecated abab@2.0.6: Use your platform's native atob() and btoa() methods instead
+npm warn deprecated rollup-plugin-terser@7.0.2: This package has been deprecated and is no longer maintained. Please use @rollup/plugin-terser
+npm warn deprecated sourcemap-codec@1.4.8: Please use @jridgewell/sourcemap-codec instead
+npm warn deprecated q@1.5.1: You or someone you depend on is using Q, the JavaScript Promise library that gave JavaScript developers strong feelings about promises. They can almost certainly migrate to the native JavaScript promise now. Thank you literally everyone for joining me in this bet against the odds. Be excellent to each other.
+npm warn deprecated
+npm warn deprecated (For a CapTP with native promises, see @endo/eventual-send and @endo/captp)
+npm warn deprecated w3c-hr-time@1.0.2: Use your platform's native performance.now() and performance.timeOrigin.
+npm warn deprecated domexception@2.0.1: Use your platform's native DOMException instead
+npm warn deprecated @humanwhocodes/config-array@0.13.0: Use @eslint/config-array instead
+npm warn deprecated @babel/plugin-proposal-private-methods@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-private-methods instead.
+npm warn deprecated @babel/plugin-proposal-nullish-coalescing-operator@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-nullish-coalescing-operator instead.
+npm warn deprecated @babel/plugin-proposal-class-properties@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-class-properties instead.
+npm warn deprecated @babel/plugin-proposal-numeric-separator@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-numeric-separator instead.
+npm warn deprecated rimraf@2.6.3: Rimraf versions prior to v4 are no longer supported
+npm warn deprecated @babel/plugin-proposal-optional-chaining@7.21.0: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-optional-chaining instead.
+npm warn deprecated @humanwhocodes/object-schema@2.0.3: Use @eslint/object-schema instead
+npm warn deprecated @babel/plugin-proposal-private-property-in-object@7.21.11: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-private-property-in-object instead.
+npm warn deprecated workbox-cacheable-response@6.6.0: workbox-background-sync@6.6.0
+npm warn deprecated workbox-google-analytics@6.6.0: It is not compatible with newer versions of GA starting with v4, as long as you are using GAv3 it should be ok, but the package is not longer being maintained
+npm warn deprecated svgo@1.3.2: This SVGO version is no longer supported. Upgrade to v2.x.x.
+npm warn deprecated react-beautiful-dnd@13.1.1: react-beautiful-dnd is now deprecated. Context and options: https://github.com/atlassian/react-beautiful-dnd/issues/2672
+npm warn deprecated eslint@8.57.1: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+
+added 1844 packages, and audited 1845 packages in 50s
+
+306 packages are looking for funding
+  run `npm fund` for details
+
+66 vulnerabilities (13 low, 20 moderate, 31 high, 2 critical)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+
+---
+exit_code: -1
+elapsed_ms: 86400005
+ended_at: 2026-07-02T23:34:50.986Z
+---

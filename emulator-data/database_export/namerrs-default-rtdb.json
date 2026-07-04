@@ -1,0 +1,175 @@
+{
+  "content": {
+    "pages": {
+      "home": {
+        "hero": {
+          "title": "Namerrs Signs & Printing",
+          "slogan": "Quality Products. Best Prices Around. Done Fast.",
+          "imageUrl": "/assets/images/namerrsHero.png"
+        },
+        "features": [
+          {
+            "title": "Local & Trusted",
+            "description": "Serving San Jacinto since 2008 with signs, printing, and custom apparel."
+          },
+          {
+            "title": "Fast Turnaround",
+            "description": "Quality products done fast — with clear scheduling and order updates."
+          },
+          {
+            "title": "Custom Design",
+            "description": "Design online for business cards, shirts, banners, hats, magnets, and memorial prints."
+          }
+        ],
+        "aboutTeaser": {
+          "title": "About Namerrs",
+          "body": "Since 2008 we've been San Jacinto's best local sign, printing, and t-shirt business. We help businesses and families create professional marketing materials and custom products.",
+          "ctaLabel": "Learn more about us",
+          "ctaHref": "/about"
+        },
+        "faq": [
+          {
+            "question": "What is the minimum order for business cards?",
+            "answer": "Business cards have a minimum order of 500 cards."
+          },
+          {
+            "question": "How long does production take?",
+            "answer": "Please allow at least 5 business days from when you place your order for production to complete."
+          },
+          {
+            "question": "Can I revise my order schedule?",
+            "answer": "You may revise your schedule up to 12 hours before the requested completion date."
+          },
+          {
+            "question": "What file types can I upload?",
+            "answer": "Upload JPEG, PNG, or WebP images up to 10 MB for custom designs."
+          }
+        ]
+      },
+      "about": {
+        "title": "Welcome To Namerrs",
+        "body": "Since 2008 we've been San Jacinto's best local sign, printing, and t-shirt business. From custom business cards and banners to t-shirts, hats, vehicle magnets, and memorial prints, we deliver quality products at competitive prices with fast turnaround.\n\nOur team reviews every custom order to make sure your design looks great in print. Visit us in San Jacinto or order online — we're here to help your business stand out."
+      },
+      "privacy": {
+        "title": "Privacy Policy",
+        "body": "Namerrs Signs & Printing respects your privacy. We collect only the information needed to fulfill your order — name, email, phone, and order details. Payment information is processed securely by Stripe and is never stored on our servers.\n\nWe do not sell your personal information. Contact NameRRs@gmail.com with privacy questions."
+      },
+      "terms": {
+        "title": "Terms & Conditions",
+        "body": "By using namerrs.web.app you agree to these terms. All custom orders are subject to our production schedule and approval of uploaded artwork. Pricing displayed as $0.00 indicates pricing is being configured — final totals will be confirmed before payment when live pricing is enabled.\n\nContact NameRRs@gmail.com with questions about these terms."
+      }
+    },
+    "social": {
+      "instagram": "https://www.instagram.com/namerrs",
+      "facebook": "https://www.facebook.com/Namerrs",
+      "x": "https://www.x.com/namerrs",
+      "youtube": "https://www.youtube.com/channel/UC0hn7EgFs-4ZZT_AIjeA7VQ",
+      "yelp": "https://www.yelp.com/biz/namerrs-signs-and-printing-san-jacinto-3",
+      "phone": "(951) 350-0270",
+      "email": "NameRRs@gmail.com"
+    },
+    "products": {
+      "businessCards": {
+        "name": "Business Cards",
+        "description": "Custom business cards with dynamic paper, color, and double-sided design options.",
+        "imageUrl": "/assets/images/businesscards.png",
+        "minQuantity": 500,
+        "specs": [
+          { "label": "Minimum order", "value": "500 cards" },
+          { "label": "Paper options", "value": "14pt gloss, 16pt matte, premium" },
+          { "label": "Sides", "value": "Single or double-sided" }
+        ]
+      },
+      "tshirts": {
+        "name": "T-Shirts",
+        "description": "Custom-printed t-shirts with sizes, colors, and uploaded graphics.",
+        "imageUrl": "/assets/images/tshirts.png",
+        "specs": [
+          { "label": "Sizes", "value": "YS – 5XL" },
+          { "label": "Print", "value": "Full-color digital" }
+        ]
+      },
+      "banners": {
+        "name": "Banners",
+        "description": "Digitally printed vinyl or digital banners in custom sizes.",
+        "imageUrl": "/assets/images/billboard.png",
+        "specs": [
+          { "label": "Types", "value": "Vinyl, mesh, retractable" },
+          { "label": "Sizing", "value": "Preset or custom dimensions" }
+        ]
+      },
+      "hats": {
+        "name": "Hats",
+        "description": "Vinyl-printed hats with short company name or logo.",
+        "specs": [
+          { "label": "Decoration", "value": "Vinyl front panel" },
+          { "label": "Input", "value": "Short company name or logo" }
+        ]
+      },
+      "magnets": {
+        "name": "Magnets",
+        "description": "12 x 24 full color digital vehicle magnets.",
+        "specs": [
+          { "label": "Size", "value": "12\" x 24\"" },
+          { "label": "Print", "value": "Full color digital" }
+        ]
+      },
+      "memorial": {
+        "name": "Memorial",
+        "description": "Custom memorial prints and stickers.",
+        "specs": [
+          { "label": "Products", "value": "Prints and stickers" },
+          { "label": "Customization", "value": "Photo and text layout" }
+        ]
+      }
+    },
+    "seo": {
+      "root": {
+        "route": "/",
+        "title": "Namerrs Signs & Printing | San Jacinto, CA",
+        "description": "Custom t-shirts, business cards, banners, signs, magnets, memorial prints, and hats."
+      },
+      "about": {
+        "route": "/about",
+        "title": "About Namerrs Signs & Printing",
+        "description": "San Jacinto's trusted sign, printing, and t-shirt business since 2008."
+      },
+      "privacy": {
+        "route": "/privacy",
+        "title": "Privacy Policy | Namerrs",
+        "description": "Privacy policy for Namerrs Signs & Printing online services."
+      },
+      "terms": {
+        "route": "/terms",
+        "title": "Terms & Conditions | Namerrs",
+        "description": "Terms and conditions for Namerrs Signs & Printing online orders."
+      }
+    }
+  },
+  "config": {
+    "pricing": {
+      "businessCards": 0,
+      "tshirts": 0,
+      "banners": 0,
+      "hats": 0,
+      "magnets": 0,
+      "memorial": 0
+    }
+  },
+  "reviews": {
+    "seed1": {
+      "rating": 5,
+      "text": "Great local shop! Fast turnaround on our business cards and shirts.",
+      "name": "Maria G.",
+      "createdAt": 1704067200000,
+      "approved": true
+    },
+    "seed2": {
+      "rating": 5,
+      "text": "Professional quality banners at a fair price. Highly recommend Namerrs.",
+      "name": "James T.",
+      "createdAt": 1706745600000,
+      "approved": true
+    }
+  }
+}

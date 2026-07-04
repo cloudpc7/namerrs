@@ -1,0 +1,32 @@
+@use 'sass:map';
+
+$color-theme: (
+  primary: #111111,
+  primary-light: #374151,
+  primary-dark: #000000,
+  accent: #1d4ed8,
+  accent-hover: #1e40af,
+  white: #ffffff,
+  surface: #f9fafb,
+  text-primary: #111827,
+  text-secondary: #6b7280,
+  text-disabled: #9ca3af,
+  border: #e5e7eb,
+  success: #059669,
+  error: #dc2626,
+  focus-ring: #93c5fd,
+  purple-600: #7c3aed,
+  purple-400: #a78bfa,
+  neutral-100: #f3f4f6,
+  neutral-200: #e5e7eb,
+  neutral-300: #d1d5db,
+  neutral-400: #9ca3af,
+  neutral-500: #6b7280,
+  neutral-700: #374151,
+  neutral-800: #1f2937,
+  neutral-900: #111827,
+);
+
+@function colorTheme($key) {
+  @return map.get($color-theme, $key);
+}

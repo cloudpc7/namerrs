@@ -1,0 +1,35 @@
+---
+pid: 26664
+cwd: "C:\Users\cloud\projects\namerrs"
+command: "Set-Location C:\\Users\\cloud\\projects\\namerrs; firebase emulators:start --only functions --project namerrs"
+started_at: 2026-07-04T02:27:01.117Z
+running_for_ms: 129996   
+---
+i  emulators: Starting emulators: functions
+!  functions: The following emulators are not running, calls to these services from the Functions emulator will affect production: apphosting, auth, firestore, database, hosting, pubsub, storage, dataconnect
+!  functions: Application Default Credentials detected. Non-emulated services will access production using these credentials. Be careful!
+i  functions: Watching "C:\Users\cloud\projects\namerrs\functions" for Cloud Functions...
+!  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory.
+!  functions: Please note that there will be breaking changes when you upgrade.
+!  functions: Your requested "node" version "20" doesn't match your global version "22". Using node@22 from host.
+i  functions: Loaded environment variables from .env.local.
+Serving at port 8890
+
++  functions: Loaded functions definitions from source: api.
++  functions[us-central1-api]: http function initialized (http://127.0.0.1:5001/namerrs/us-central1/api).
+
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://127.0.0.1:4000/               │
+└─────────────────────────────────────────────────────────────┘
+
+┌───────────┬────────────────┬─────────────────────────────────┐
+│ Emulator  │ Host:Port      │ View in Emulator UI             │
+├───────────┼────────────────┼─────────────────────────────────┤
+│ Functions │ 127.0.0.1:5001 │ http://127.0.0.1:4000/functions │
+└───────────┴────────────────┴─────────────────────────────────┘
+  Emulator Hub host: 127.0.0.1 port: 4400
+  Other reserved ports: 4500
+
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 

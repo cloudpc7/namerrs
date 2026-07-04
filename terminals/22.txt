@@ -1,0 +1,19 @@
+---
+pid: 26128
+cwd: "C:\Users\cloud\projects\namerrs"
+command: "Set-Location C:\\Users\\cloud\\projects\\namerrs\\namerrsconcept; npm run build 2>&1 | Select-Object -Last 12"
+started_at: 2026-07-02T00:07:27.704Z
+running_for_ms: 85350001 
+---
+You can control this with the homepage field in your package.json.
+
+The build folder is ready to be deployed.
+You may serve it with a static server:
+
+  npm install -g serve
+  serve -s build
+
+Find out more about deployment here:
+
+  https://cra.link/deployment
+
