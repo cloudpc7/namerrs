@@ -2,6 +2,7 @@
  * BusinessCardCanvas.jsx — 3.5 × 2 in interactive card with front/back flip.
  */
 
+import { FlipHorizontal2 } from 'lucide-react';
 import { useSpring, animated } from '@react-spring/web';
 import { usePrefersReducedMotion } from '../../../hooks/usePrefersReducedMotion';
 import { CARD_ASPECT_RATIO } from './constants';
@@ -13,13 +14,14 @@ const CardFace = ({
   isActive,
   onSelectElement,
   onMoveElement,
+  onResizeElement,
   onContentChange,
   onRemoveElement,
   rotateY = 0,
 }) => (
   <div
     data-card-canvas
-    className="absolute inset-0 overflow-hidden rounded-lg border border-[#e5e7eb]"
+    className="card-canvas__face absolute inset-0 overflow-hidden"
     style={{
       backfaceVisibility: 'hidden',
       transform: `rotateY(${rotateY}deg)`,
@@ -36,6 +38,7 @@ const CardFace = ({
           isSelected={selectedElementId === element.id}
           onSelect={onSelectElement}
           onMove={onMoveElement}
+          onResize={onResizeElement}
           onContentChange={onContentChange}
           onRemove={onRemoveElement}
         />
@@ -49,13 +52,16 @@ const BusinessCardCanvas = ({
   backState,
   selectedElementId,
   previewLabel,
+  onFlip,
   onSelectElement,
   onMoveElement,
+  onResizeElement,
   onContentChange,
   onRemoveElement,
 }) => {
   const prefersReducedMotion = usePrefersReducedMotion();
   const isBack = design.activeSide === 'back';
+  const flipLabel = isBack ? 'Show front' : 'Show back';
 
   const flipSpring = useSpring({
     transform: isBack ? 'rotateY(180deg)' : 'rotateY(0deg)',
@@ -64,38 +70,54 @@ const BusinessCardCanvas = ({
   });
 
   return (
-    <div className="perspective-[1000px]">
-      <animated.div
-        aria-label={previewLabel}
-        className="relative mx-auto w-full max-w-md rounded-lg shadow-md"
-        style={{
-          ...flipSpring,
-          aspectRatio: CARD_ASPECT_RATIO,
-          transformStyle: 'preserve-3d',
-        }}
-      >
-        <CardFace
-          sideState={frontState}
-          selectedElementId={selectedElementId}
-          isActive={!isBack}
-          onSelectElement={onSelectElement}
-          onMoveElement={onMoveElement}
-          onContentChange={onContentChange}
-          onRemoveElement={onRemoveElement}
-        />
-        <CardFace
-          sideState={backState}
-          selectedElementId={selectedElementId}
-          isActive={isBack}
-          onSelectElement={onSelectElement}
-          onMoveElement={onMoveElement}
-          onContentChange={onContentChange}
-          onRemoveElement={onRemoveElement}
-          rotateY={180}
-        />
-      </animated.div>
-      <p className="mt-2 text-center text-xs text-[#9ca3af]">
-        US standard 3.5 × 2 in — drag elements or use arrow keys
+    <div className="card-canvas">
+      <div className="card-canvas__card-wrap">
+        <animated.div
+          aria-label={previewLabel}
+          className="card-canvas__card"
+          style={{
+            ...flipSpring,
+            aspectRatio: CARD_ASPECT_RATIO,
+            transformStyle: 'preserve-3d',
+          }}
+        >
+          <CardFace
+            sideState={frontState}
+            selectedElementId={selectedElementId}
+            isActive={!isBack}
+            onSelectElement={onSelectElement}
+            onMoveElement={onMoveElement}
+            onResizeElement={onResizeElement}
+            onContentChange={onContentChange}
+            onRemoveElement={onRemoveElement}
+          />
+          <CardFace
+            sideState={backState}
+            selectedElementId={selectedElementId}
+            isActive={isBack}
+            onSelectElement={onSelectElement}
+            onMoveElement={onMoveElement}
+            onResizeElement={onResizeElement}
+            onContentChange={onContentChange}
+            onRemoveElement={onRemoveElement}
+            rotateY={180}
+          />
+        </animated.div>
+
+        {onFlip && (
+          <button
+            type="button"
+            className="card-canvas__flip"
+            onClick={onFlip}
+            aria-label={`Flip card — ${flipLabel.toLowerCase()}`}
+          >
+            <FlipHorizontal2 size={16} aria-hidden="true" />
+            <span>{flipLabel}</span>
+          </button>
+        )}
+      </div>
+      <p className="card-canvas__hint">
+        US standard 3.5 × 2 in — drag the grip to move, drag the corner to resize
       </p>
     </div>
   );

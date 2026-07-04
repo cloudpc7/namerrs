@@ -28,7 +28,7 @@ describe('apiClient', () => {
 
     const result = await apiGet('/content');
 
-    expect(global.fetch).toHaveBeenCalledWith(`${API_BASE_URL}/content`);
+    expect(global.fetch).toHaveBeenCalledWith(`${API_BASE_URL}/content`, {});
     expect(result).toEqual({ content: { pages: {} }, pricing: {} });
   });
 

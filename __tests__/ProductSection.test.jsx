@@ -1,5 +1,5 @@
 /**
- * ProductSection.test.jsx — Expandable product accordion on landing page.
+ * ProductSection.test.jsx — Product grid and detail modal on landing page.
  */
 
 import React from 'react';
@@ -9,8 +9,11 @@ import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import contentReducer from '../src/redux/slices/content.slice';
 import uiReducer from '../src/redux/slices/ui.slice';
+import designReducer from '../src/redux/slices/design.slice';
+import productDetailReducer from '../src/redux/slices/productDetail.slice';
 import { CONTENT_STATUS } from '../src/redux/constants/content.constants';
 import ProductsSection from '../src/ui/components/ProductsSection';
+import ProductDetailModal from '../src/ui/components/ProductDetailModal';
 
 jest.mock('@react-spring/web', () => ({
   useSpring: (config) => (typeof config === 'function' ? config() : config),
@@ -28,7 +31,29 @@ const mockProducts = {
     name: 'Business Cards',
     description: 'Custom business cards with dynamic paper, color, and double-sided design options.',
     minQuantity: 500,
-    specs: [{ label: 'Minimum order', value: '500 cards' }],
+    options: [
+      {
+        id: 'paperType',
+        label: 'Paper options',
+        type: 'select',
+        choices: [
+          { value: 'standard-matte', label: 'Standard matte' },
+          { value: 'glossy', label: 'Glossy' },
+        ],
+        defaultValue: 'standard-matte',
+      },
+      {
+        id: 'sides',
+        label: 'Sides',
+        type: 'radio',
+        choices: [
+          { value: 'single', label: 'Single-sided' },
+          { value: 'double', label: 'Double-sided' },
+        ],
+        defaultValue: 'double',
+      },
+    ],
+    specs: [{ label: 'Size', value: '3.5" × 2" US standard' }],
   },
   tshirts: {
     name: 'T-Shirts',
@@ -51,7 +76,12 @@ const mockPricing = {
 
 const createStore = (contentState) =>
   configureStore({
-    reducer: { content: contentReducer, ui: uiReducer },
+    reducer: {
+      content: contentReducer,
+      ui: uiReducer,
+      design: designReducer,
+      productDetail: productDetailReducer,
+    },
     preloadedState: {
       content: contentState,
       ui: {
@@ -60,17 +90,46 @@ const createStore = (contentState) =>
         code: null,
         retryable: false,
         productSearch: '',
+        toast: { message: null, type: 'info', id: null },
+        isReviewModalOpen: false,
+      },
+      design: {
+        isOpen: false,
+        panel: null,
+        productId: null,
+        mode: null,
+        wizard: {
+          step: 'design',
+          design: {},
+          quantity: 1,
+          sizeQuantities: {},
+          completionDate: '',
+          designErrors: [],
+          quantityError: '',
+          scheduleError: '',
+        },
+      },
+      productDetail: {
+        isOpen: false,
+        productId: null,
+        status: 'idle',
+        error: null,
+        selectedOptions: {},
       },
     },
   });
 
-const renderProducts = (contentState, props = {}) => {
+const renderProducts = (contentState) => {
   const store = createStore(contentState);
-  return render(
-    <Provider store={store}>
-      <ProductsSection {...props} />
-    </Provider>
-  );
+  return {
+    store,
+    ...render(
+      <Provider store={store}>
+        <ProductsSection />
+        <ProductDetailModal />
+      </Provider>
+    ),
+  };
 };
 
 const baseContentState = {
@@ -98,7 +157,7 @@ describe('ProductsSection', () => {
     expect(screen.getByRole('button', { name: /memorial/i })).toBeInTheDocument();
   });
 
-  it('expands a product panel with description, pricing, and action buttons', async () => {
+  it('opens a modal with interactive options and action buttons', async () => {
     const user = userEvent.setup();
     renderProducts(baseContentState);
 
@@ -107,12 +166,14 @@ describe('ProductsSection', () => {
 
     expect(businessCardsButton).toHaveAttribute('aria-expanded', 'true');
 
-    const panel = document.getElementById(businessCardsButton.getAttribute('aria-controls'));
-    expect(panel).toBeInTheDocument();
-    expect(within(panel).getByText(/custom business cards/i)).toBeInTheDocument();
-    expect(within(panel).getByText('$0.00')).toHaveClass('price', 'price--lg');
-    expect(within(panel).getByRole('button', { name: /add to order/i })).toBeInTheDocument();
-    expect(within(panel).getByRole('button', { name: /edit design/i })).toBeInTheDocument();
+    const modal = screen.getByRole('dialog', { name: /business cards/i });
+    expect(modal).toBeInTheDocument();
+    expect(within(modal).getByText(/custom business cards/i)).toBeInTheDocument();
+    expect(within(modal).getByLabelText(/paper options/i)).toBeInTheDocument();
+    expect(within(modal).getByLabelText(/single-sided/i)).toBeInTheDocument();
+    expect(within(modal).getByText('$0.00')).toHaveClass('price', 'price--lg');
+    expect(within(modal).getByRole('button', { name: /add to order/i })).toBeInTheDocument();
+    expect(within(modal).getByRole('button', { name: /edit design/i })).toBeInTheDocument();
   });
 
   it('keeps only one product expanded at a time', async () => {
@@ -131,20 +192,22 @@ describe('ProductsSection', () => {
     expect(businessCardsButton).toHaveAttribute('aria-expanded', 'false');
   });
 
-  it('calls onDesignerOpen when Add or Edit is clicked', async () => {
+  it('opens the designer with selected product options when Add is clicked', async () => {
     const user = userEvent.setup();
-    const onDesignerOpen = jest.fn();
-    renderProducts(baseContentState, { onDesignerOpen });
+    const { store } = renderProducts(baseContentState);
 
-    const businessCardsButton = screen.getByRole('button', { name: /business cards/i });
-    await user.click(businessCardsButton);
+    await user.click(screen.getByRole('button', { name: /business cards/i }));
 
-    const panel = document.getElementById(businessCardsButton.getAttribute('aria-controls'));
-    await user.click(within(panel).getByRole('button', { name: /add to order/i }));
-    expect(onDesignerOpen).toHaveBeenCalledWith('businessCards', 'add', 500);
+    const modal = screen.getByRole('dialog', { name: /business cards/i });
+    await user.click(within(modal).getByRole('button', { name: /add to order/i }));
 
-    await user.click(within(panel).getByRole('button', { name: /edit design/i }));
-    expect(onDesignerOpen).toHaveBeenCalledWith('businessCards', 'edit', 500);
+    expect(store.getState().design.isOpen).toBe(true);
+    expect(store.getState().design.productId).toBe('businessCards');
+    expect(store.getState().design.wizard.design).toMatchObject({
+      paperType: 'standard-matte',
+      sides: 'double',
+    });
+    expect(store.getState().productDetail.isOpen).toBe(false);
   });
 
   it('shows loading skeleton while content is loading', () => {

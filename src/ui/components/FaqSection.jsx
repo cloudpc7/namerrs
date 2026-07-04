@@ -12,7 +12,7 @@ const FaqSection = () => {
   const faqItems = home?.faq?.length ? home.faq : DEFAULT_FAQ;
 
   return (
-    <Section id="faq" ariaLabel="FAQ">
+    <Section id="faq" ariaLabel="FAQ" variant="dark">
       <Stack gap="xl">
         <SectionHeading
           eyebrow="FAQ"

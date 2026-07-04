@@ -1,7 +1,8 @@
 /**
- * NavLinks.jsx — Desktop navigation link row.
+ * NavLinks.jsx — Desktop link row with inline primary CTA.
  */
 
+import NavCta from './NavCta';
 import NavLink from './NavLink';
 
 const NavLinks = ({ links, className = '' }) => (
@@ -9,6 +10,7 @@ const NavLinks = ({ links, className = '' }) => (
     {links.map((link) => (
       <NavLink key={link.href} link={link} />
     ))}
+    <NavCta className="nav-links__cta" />
   </nav>
 );
 

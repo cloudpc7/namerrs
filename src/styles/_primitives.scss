@@ -78,7 +78,8 @@
   font-size: 0.875rem;
   font-weight: 500;
   color: var(--color-accent);
-  background: #fff;
+  background: rgba(124, 58, 237, 0.08);
+  border: 1px solid rgba(124, 58, 237, 0.16);
   box-shadow: shadow(sm);
 }
 
@@ -291,6 +292,34 @@
   transform: rotate(180deg);
 }
 
+.section--dark .accordion__item {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: none;
+}
+
+.section--dark .accordion__trigger {
+  color: #fff;
+}
+
+.section--dark .accordion__trigger:hover {
+  background: rgba(138, 43, 226, 0.22);
+}
+
+.section--dark .accordion__trigger-icon {
+  color: var(--color-accent-hot);
+}
+
+.section--dark .accordion__panel {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.section--dark .surface {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
 .accordion__panel {
   padding: 0 space(5) space(4);
   font-size: 0.875rem;
@@ -315,6 +344,51 @@
   font-size: 1.125rem;
   font-weight: 600;
   color: var(--color-text-primary);
+}
+
+/* Color picker */
+
+.color-picker-field {
+  display: grid;
+  gap: space(2);
+}
+
+.color-picker-field__label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.color-picker-field__control {
+  display: flex;
+  align-items: center;
+  gap: space(3);
+}
+
+.color-picker-field__swatch {
+  width: 3rem;
+  height: 3rem;
+  flex-shrink: 0;
+  padding: 0.2rem;
+  border: 1px solid var(--color-border);
+  border-radius: radius(md);
+  background: #fff;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.color-picker-field__swatch::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.color-picker-field__swatch::-webkit-color-swatch {
+  border: none;
+  border-radius: radius(sm);
+}
+
+.color-picker-field__hex {
+  flex: 1;
+  min-width: 0;
 }
 
 /* Spec table */
@@ -353,18 +427,120 @@
 
 /* Step indicator */
 
-.step-indicator {
+.step-indicator__list {
   display: flex;
   gap: space(2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.step-indicator__item {
+  flex: 1;
+}
+
+.step-indicator__step {
+  width: 100%;
+  padding: space(3) space(2);
+  border: 1px solid var(--color-border);
+  border-radius: radius(md);
+  background: var(--color-surface);
   font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
   color: var(--color-text-secondary);
+  cursor: default;
+}
+
+.step-indicator__step:disabled {
+  opacity: 1;
+}
+
+.step-indicator__step--complete:not(:disabled) {
+  cursor: pointer;
+  color: var(--color-text-primary);
+}
+
+.step-indicator__step--complete:not(:disabled):hover {
+  border-color: var(--color-accent);
 }
 
 .step-indicator__step--active {
+  border-color: var(--color-accent);
+  background: #fff;
   color: var(--color-accent);
+  box-shadow: 0 0 0 1px var(--color-accent);
+}
+
+/* Designer tab bar */
+
+.designer-tab-bar {
+  flex-shrink: 0;
+  border-top: 1px solid var(--color-border);
+  background: #fff;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.designer-tab-bar--on-card {
+  border-top: 0;
+  border-bottom: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-surface) 55%, #fff);
+  padding-bottom: 0;
+}
+
+.designer-tab-bar__list {
+  display: flex;
+  gap: space(1);
+  margin: 0;
+  padding: space(2);
+  list-style: none;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.designer-tab-bar--on-card .designer-tab-bar__list {
+  padding: space(2) space(2) space(1);
+}
+
+.designer-tab-bar__item {
+  flex: 1;
+  min-width: 3.25rem;
+}
+
+.designer-tab-bar__tab {
+  width: 100%;
+  padding: space(2) space(1);
+  border: 1px solid var(--color-border);
+  border-radius: radius(md);
+  background: var(--color-surface);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  touch-action: manipulation;
+}
+
+.designer-tab-bar__tab--active {
+  border-color: var(--color-accent);
+  background: color-mix(in srgb, var(--color-accent) 8%, #fff);
+  color: var(--color-accent);
+  box-shadow: 0 0 0 1px var(--color-accent);
+}
+
+.designer-tab-bar--on-card .designer-tab-bar__tab {
+  border-radius: radius(sm) radius(sm) 0 0;
+  border-bottom-color: transparent;
+  background: transparent;
+}
+
+.designer-tab-bar--on-card .designer-tab-bar__tab--active {
+  border-bottom-color: #fff;
+  background: #fff;
+  margin-bottom: -1px;
+  position: relative;
+  z-index: 1;
 }
 
 /* Media frame */

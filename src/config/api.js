@@ -2,7 +2,7 @@
  * api.js — API base URL configuration for Vite and Jest environments.
  */
 
-// Relative /api in dev (Vite proxy) and prod (Firebase Hosting rewrite).
+// Dev: full URL from .env.local. Prod build: relative /api (Hosting rewrite).
 const DEFAULT_API_BASE_URL = '/api';
 
 export const API_BASE_URL =

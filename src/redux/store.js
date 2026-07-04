@@ -10,6 +10,7 @@ import uiReducer from './slices/ui.slice';
 import reviewsReducer from './slices/reviews.slice';
 import contactReducer from './slices/contact.slice';
 import checkoutReducer from './slices/checkout.slice';
+import productDetailReducer from './slices/productDetail.slice';
 
 export const store = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ export const store = configureStore({
     reviews: reviewsReducer,
     contact: contactReducer,
     checkout: checkoutReducer,
+    productDetail: productDetailReducer,
   },
 });
 

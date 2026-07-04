@@ -4,11 +4,16 @@
 
 export const NAV_LINKS = [
   { label: 'Home', href: '/' },
-  { label: 'About', href: '/about' },
   { label: 'Products', href: '/#products' },
+  { label: 'About', href: '/about' },
   { label: 'FAQ', href: '/#faq' },
   { label: 'Contact', href: '/#contact' },
 ];
+
+export const NAV_CTA = {
+  label: 'Create a design',
+  href: '/#products',
+};
 
 export const FOOTER_LINKS = [
   { label: 'Home', href: '/' },

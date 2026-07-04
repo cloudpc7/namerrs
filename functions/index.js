@@ -14,7 +14,7 @@ setGlobalOptions({
 exports.api = onRequest(
   {
     cors: true,
-    memory: '256MiB',
+    memory: '512MiB',
     serviceAccount: 'firebase-adminsdk-fbsvc@namerrs.iam.gserviceaccount.com',
     timeoutSeconds: 60,
   },

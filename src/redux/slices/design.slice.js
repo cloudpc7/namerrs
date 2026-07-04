@@ -41,6 +41,7 @@ const designSlice = createSlice({
       state.wizard = {
         ...initialWizardState,
         quantity: action.payload.minQuantity || 1,
+        design: action.payload.initialDesign || {},
       };
     },
     openCart: (state) => {

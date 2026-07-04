@@ -10,6 +10,7 @@
     },
     "reviews": {
       ".read": true,
+      ".indexOn": ["createdAt"],
       "$reviewId": {
         ".write": "newData.hasChildren(['rating', 'text'])"
       }

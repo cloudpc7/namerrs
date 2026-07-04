@@ -5,6 +5,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import contentReducer, {
   fetchContent,
+  fetchProductById,
   selectContentStatus,
   selectPageContent,
   selectProductContent,
@@ -76,6 +77,23 @@ describe('content slice', () => {
     );
     expect(selectSocialLinks(store.getState())).toEqual(mockPayload.content.social);
     expect(selectPricing(store.getState())).toEqual(mockPayload.pricing);
+  });
+
+  it('fetchProductById.fulfilled merges a single product into state', async () => {
+    apiGet.mockResolvedValue({
+      name: 'Business Cards',
+      minQuantity: 500,
+      options: [{ id: 'sides', label: 'Sides', type: 'radio', choices: [] }],
+    });
+
+    const store = createTestStore();
+    await store.dispatch(fetchProductById('businessCards'));
+
+    expect(apiGet).toHaveBeenCalledWith('/content/products/businessCards');
+    expect(selectProductContent(store.getState(), 'businessCards')).toMatchObject({
+      name: 'Business Cards',
+      minQuantity: 500,
+    });
   });
 
   it('fetchContent.rejected stores error details from API client', async () => {

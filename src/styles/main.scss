@@ -11,6 +11,9 @@
   --color-primary: #{colorTheme(primary)};
   --color-accent: #{colorTheme(accent)};
   --color-accent-hover: #{colorTheme(accent-hover)};
+  --color-accent-hot: #{colorTheme(accent-hot)};
+  --color-accent-cyan: #{colorTheme(accent-cyan)};
+  --color-accent-blue: #{colorTheme(accent-blue)};
   --color-surface: #{colorTheme(surface)};
   --color-text-primary: #{colorTheme(text-primary)};
   --color-text-secondary: #{colorTheme(text-secondary)};
@@ -19,6 +22,9 @@
   --color-error: #{colorTheme(error)};
   --color-success: #{colorTheme(success)};
   --color-focus-ring: #{colorTheme(focus-ring)};
+  --gradient-brand: linear-gradient(160deg, #{colorTheme(primary)} 0%, #1a1a2e 45%, #2e1065 100%);
+  --gradient-brand-subtle: linear-gradient(180deg, #fafafa 0%, #f4f4f5 100%);
+  --gradient-accent: linear-gradient(135deg, #{colorTheme(accent)} 0%, #{colorTheme(accent-hot)} 100%);
 }
 
 html {
@@ -53,7 +59,7 @@ img {
 }
 
 ::selection {
-  background-color: #dbeafe;
+  background-color: #e9d5ff;
   color: var(--color-primary);
 }
 

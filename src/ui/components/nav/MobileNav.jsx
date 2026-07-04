@@ -1,14 +1,17 @@
 /**
- * MobileNav.jsx — Slide-over mobile navigation drawer with focus trap.
+ * MobileNav.jsx — Slide-over drawer with CTA, links, search, and social footer.
  */
 
 import { useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { useSpring, animated } from '@react-spring/web';
 import { X } from 'lucide-react';
 import { useFocusTrap } from '../../../hooks/useFocusTrap';
 import { usePrefersReducedMotion } from '../../../hooks/usePrefersReducedMotion';
-import { Button, IconButton } from '../primitives';
-import CartButton from './CartButton';
+import SocialIcons from '../SocialIcons';
+import { IconButton } from '../primitives';
+import NavBrand from './NavBrand';
+import NavCta from './NavCta';
 import NavLink from './NavLink';
 import NavSearch from './NavSearch';
 
@@ -20,13 +23,13 @@ const formatPhoneHref = (phone) => {
 const MobileNav = ({
   isOpen,
   onClose,
+  logoSrc,
+  logoAlt,
   links,
-  socialLinks,
+  socialLinks = {},
   showSearch,
   searchValue,
   onSearch,
-  onCartClick,
-  cartCount,
 }) => {
   const panelRef = useRef(null);
   const prefersReducedMotion = usePrefersReducedMotion();
@@ -54,6 +57,7 @@ const MobileNav = ({
 
   const panelSpring = useSpring({
     transform: isOpen ? 'translateX(0%)' : 'translateX(100%)',
+    opacity: isOpen ? 1 : 0,
     immediate: prefersReducedMotion,
   });
 
@@ -63,7 +67,7 @@ const MobileNav = ({
 
   const phoneHref = formatPhoneHref(socialLinks?.phone);
 
-  return (
+  const drawer = (
     <div className={`nav-drawer-host${isOpen ? '' : ' nav-drawer-host--closed'}`} aria-hidden={!isOpen}>
       <animated.button
         type="button"
@@ -84,16 +88,14 @@ const MobileNav = ({
         className="nav-drawer"
       >
         <header className="nav-drawer__header">
-          <span className="nav-drawer__title">Menu</span>
+          <NavBrand logoSrc={logoSrc} logoAlt={logoAlt} onNavigate={onClose} />
           <IconButton label="Close menu" onClick={onClose}>
             <X size={22} aria-hidden="true" />
           </IconButton>
         </header>
 
         <div className="nav-drawer__cta">
-          <Button href="/#products" className="w-full" onClick={onClose}>
-            Start your order
-          </Button>
+          <NavCta className="w-full" size="md" onClick={onClose} />
         </div>
 
         <nav className="nav-drawer__links" aria-label="Mobile navigation">
@@ -107,41 +109,38 @@ const MobileNav = ({
           ))}
         </nav>
 
-        <div className="nav-drawer__utilities">
-          <CartButton
-            count={cartCount}
-            onClick={() => {
-              onClose();
-              onCartClick();
-            }}
-            showLabel
-          />
-
-          {showSearch && (
+        {showSearch && (
+          <div className="nav-drawer__search">
             <NavSearch
               value={searchValue}
               onSearch={onSearch}
               variant="drawer"
               onCloseMenu={onClose}
             />
-          )}
-        </div>
+          </div>
+        )}
 
         <footer className="nav-drawer__footer">
-          {phoneHref && (
-            <a href={phoneHref} className="nav-drawer__footer-link">
-              {socialLinks.phone}
-            </a>
-          )}
-          {socialLinks?.email && (
-            <a href={`mailto:${socialLinks.email}`} className="nav-drawer__footer-link">
-              {socialLinks.email}
-            </a>
-          )}
+          <p className="nav-drawer__footer-label">Connect with us</p>
+          <SocialIcons links={socialLinks} dark className="nav-drawer__social" />
+          <div className="nav-drawer__contact">
+            {phoneHref && (
+              <a href={phoneHref} className="nav-drawer__contact-link">
+                {socialLinks.phone}
+              </a>
+            )}
+            {socialLinks?.email && (
+              <a href={`mailto:${socialLinks.email}`} className="nav-drawer__contact-link">
+                {socialLinks.email}
+              </a>
+            )}
+          </div>
         </footer>
       </animated.aside>
     </div>
   );
+
+  return createPortal(drawer, document.body);
 };
 
 export default MobileNav;

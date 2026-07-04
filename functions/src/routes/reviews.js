@@ -15,11 +15,14 @@ const sanitizeText = (value) =>
 
 router.get('/', async (req, res, next) => {
   try {
-    const snapshot = await db.ref('reviews').orderByChild('createdAt').limitToLast(20).once('value');
+    // Fetch all reviews and sort in memory — avoids RTDB index requirements on orderByChild.
+    const snapshot = await db.ref('reviews').once('value');
     const reviewsMap = snapshot.val() || {};
     const reviews = Object.entries(reviewsMap)
       .map(([id, review]) => ({ id, ...review }))
-      .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+      .filter((review) => review.approved !== false)
+      .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0))
+      .slice(0, 20);
 
     return res.status(200).json({ reviews });
   } catch (error) {
@@ -58,7 +61,7 @@ router.post('/', async (req, res, next) => {
 
     await reviewRef.set(review);
 
-    return res.status(201).json({ id: reviewRef.key, ...review });
+    return res.status(201).json({ review: { id: reviewRef.key, ...review } });
   } catch (error) {
     return next(error);
   }

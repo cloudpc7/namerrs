@@ -1,28 +1,35 @@
 /**
- * ProductsSection.jsx — Landing-page product grid with expandable detail panel.
+ * ProductsSection.jsx — Landing-page product grid with modal detail panel.
  */
 
-import { useEffect, useMemo, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   selectAllProducts,
   selectContentStatus,
   selectPricing,
 } from '../../redux/slices/content.slice';
 import { selectProductSearch } from '../../redux/slices/ui.slice';
+import {
+  closeProductDetail,
+  openProductDetail,
+  selectIsProductDetailOpen,
+  selectProductDetailId,
+} from '../../redux/slices/productDetail.slice';
 import { CONTENT_STATUS } from '../../redux/constants/content.constants';
 import { PRODUCT_ORDER } from '../../constants/products.constants';
 import { PRICING_HELPER_TEXT } from '../../constants/business.constants';
 import { Section, SectionHeading, Skeleton, Alert, Stack } from './primitives';
 import ProductCard from './ProductCard';
-import ProductDetailPanel from './ProductDetailPanel';
 
-const ProductsSection = ({ onDesignerOpen = () => {} }) => {
+const ProductsSection = () => {
+  const dispatch = useDispatch();
   const status = useSelector(selectContentStatus);
   const products = useSelector(selectAllProducts);
   const pricing = useSelector(selectPricing);
   const searchQuery = useSelector(selectProductSearch);
-  const [openProductId, setOpenProductId] = useState(null);
+  const isDetailOpen = useSelector(selectIsProductDetailOpen);
+  const openProductId = useSelector(selectProductDetailId);
 
   const visibleProducts = useMemo(() => {
     const ordered = PRODUCT_ORDER.filter((productId) => products[productId]);
@@ -49,12 +56,28 @@ const ProductsSection = ({ onDesignerOpen = () => {} }) => {
 
   useEffect(() => {
     if (searchQuery.trim() && visibleProducts.length === 1) {
-      setOpenProductId(visibleProducts[0]);
+      const productId = visibleProducts[0];
+      dispatch(
+        openProductDetail({
+          productId,
+          product: products[productId],
+        })
+      );
     }
-  }, [searchQuery, visibleProducts]);
+  }, [dispatch, products, searchQuery, visibleProducts]);
 
   const handleSelect = (productId) => {
-    setOpenProductId((current) => (current === productId ? null : productId));
+    if (isDetailOpen && openProductId === productId) {
+      dispatch(closeProductDetail());
+      return;
+    }
+
+    dispatch(
+      openProductDetail({
+        productId,
+        product: products[productId],
+      })
+    );
   };
 
   if (status === CONTENT_STATUS.LOADING) {
@@ -104,16 +127,6 @@ const ProductsSection = ({ onDesignerOpen = () => {} }) => {
           />
         ))}
       </div>
-
-      {openProductId && products[openProductId] && (
-        <ProductDetailPanel
-          productId={openProductId}
-          product={products[openProductId]}
-          price={pricing[openProductId] ?? 0}
-          onClose={() => setOpenProductId(null)}
-          onDesignerOpen={onDesignerOpen}
-        />
-      )}
     </Section>
   );
 };

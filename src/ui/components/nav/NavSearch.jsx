@@ -41,8 +41,7 @@ const NavSearch = ({
         value={searchTerm}
         onChange={(event) => setSearchTerm(event.target.value)}
         onSubmit={handleSubmit}
-        hideLabel={false}
-        label="Search products"
+        hideLabel
         className="nav-search nav-search--drawer"
       />
     );

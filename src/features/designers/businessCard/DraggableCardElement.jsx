@@ -1,8 +1,9 @@
 /**
- * DraggableCardElement.jsx — Draggable text or image element on the card canvas.
+ * DraggableCardElement.jsx — Text or image element with a dedicated drag handle.
  */
 
 import { useRef } from 'react';
+import { GripVertical } from 'lucide-react';
 import { TEXT_FIELDS } from './constants';
 
 const DraggableCardElement = ({
@@ -11,10 +12,18 @@ const DraggableCardElement = ({
   isSelected,
   onSelect,
   onMove,
+  onResize,
   onContentChange,
   onRemove,
 }) => {
   const dragRef = useRef({ dragging: false, startX: 0, startY: 0, originX: 0, originY: 0 });
+  const resizeRef = useRef({
+    resizing: false,
+    startX: 0,
+    startY: 0,
+    originWidth: 0,
+    originHeight: 0,
+  });
 
   const startDrag = (clientX, clientY) => {
     dragRef.current = {
@@ -42,6 +51,7 @@ const DraggableCardElement = ({
     if (!canvas) {
       return;
     }
+
     const rect = canvas.getBoundingClientRect();
     const deltaX = ((event.clientX - dragRef.current.startX) / rect.width) * 100;
     const deltaY = ((event.clientY - dragRef.current.startY) / rect.height) * 100;
@@ -51,6 +61,46 @@ const DraggableCardElement = ({
 
   const handlePointerUp = (event) => {
     dragRef.current.dragging = false;
+    event.currentTarget.releasePointerCapture?.(event.pointerId);
+  };
+
+  const handleResizePointerDown = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    resizeRef.current = {
+      resizing: true,
+      startX: event.clientX,
+      startY: event.clientY,
+      originWidth: element.width,
+      originHeight: element.height,
+    };
+    onSelect(element.id);
+    event.currentTarget.setPointerCapture?.(event.pointerId);
+  };
+
+  const handleResizePointerMove = (event) => {
+    if (!resizeRef.current.resizing) {
+      return;
+    }
+
+    const canvas = event.currentTarget.closest('[data-card-canvas]');
+    if (!canvas) {
+      return;
+    }
+
+    const rect = canvas.getBoundingClientRect();
+    const deltaX = ((event.clientX - resizeRef.current.startX) / rect.width) * 100;
+    const deltaY = ((event.clientY - resizeRef.current.startY) / rect.height) * 100;
+
+    onResize(
+      element.id,
+      resizeRef.current.originWidth + deltaX,
+      resizeRef.current.originHeight + deltaY
+    );
+  };
+
+  const handleResizePointerUp = (event) => {
+    resizeRef.current.resizing = false;
     event.currentTarget.releasePointerCapture?.(event.pointerId);
   };
 
@@ -75,57 +125,70 @@ const DraggableCardElement = ({
 
   return (
     <div
-      role="button"
-      tabIndex={0}
-      aria-label={element.type === 'text' ? field?.label || 'Text field' : 'Image'}
-      onPointerDown={handlePointerDown}
-      onPointerMove={handlePointerMove}
-      onPointerUp={handlePointerUp}
-      onKeyDown={handleKeyDown}
-      onFocus={() => onSelect(element.id)}
-      className={`absolute cursor-move rounded border px-1 py-0.5 focus:outline-none focus:ring-2 focus:ring-[#93c5fd] ${
-        isSelected ? 'border-[#1d4ed8] ring-1 ring-[#93c5fd]' : 'border-transparent'
-      }`}
+      className={`card-element${isSelected ? ' card-element--selected' : ''}`}
       style={{
         left: `${element.x}%`,
         top: `${element.y}%`,
         width: `${element.width}%`,
-        minHeight: `${element.height}%`,
+        height: `${element.height}%`,
         color: sideState.textColor,
         fontSize: `${element.fontSize || 12}px`,
       }}
+      onFocus={() => onSelect(element.id)}
     >
+      <button
+        type="button"
+        className="card-element__drag"
+        aria-label={`Drag ${field?.label || 'element'}`}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onKeyDown={handleKeyDown}
+      >
+        <GripVertical size={14} aria-hidden="true" />
+      </button>
+
       {element.type === 'text' ? (
         <input
           type="text"
           value={element.content}
           placeholder={field?.placeholder || ''}
           onChange={(event) => onContentChange(element.id, event.target.value)}
-          onClick={(event) => event.stopPropagation()}
-          className="w-full border-0 bg-transparent p-0 text-inherit outline-none"
+          onFocus={() => onSelect(element.id)}
+          className="card-element__input"
           style={{ fontSize: 'inherit', color: 'inherit' }}
         />
       ) : (
         <img
           src={element.src}
           alt={element.fileName || 'Uploaded graphic'}
-          className="h-full w-full object-cover"
+          className="card-element__image"
           draggable={false}
         />
       )}
 
       {isSelected && (
-        <button
-          type="button"
-          onClick={(event) => {
-            event.stopPropagation();
-            onRemove(element.id);
-          }}
-          className="absolute -right-2 -top-2 rounded-full bg-[#dc2626] px-1.5 text-[10px] text-white"
-          aria-label="Remove element"
-        >
-          ×
-        </button>
+        <>
+          <button
+            type="button"
+            className="card-element__resize"
+            aria-label={`Resize ${field?.label || 'element'}`}
+            onPointerDown={handleResizePointerDown}
+            onPointerMove={handleResizePointerMove}
+            onPointerUp={handleResizePointerUp}
+          />
+          <button
+            type="button"
+            onClick={(event) => {
+              event.stopPropagation();
+              onRemove(element.id);
+            }}
+            className="card-element__remove"
+            aria-label="Remove element"
+          >
+            ×
+          </button>
+        </>
       )}
     </div>
   );

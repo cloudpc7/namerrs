@@ -26,18 +26,32 @@ const parseResponse = async (response) => {
   return payload;
 };
 
-export const apiGet = async (path) => {
-  const response = await fetch(`${API_BASE_URL}${path}`);
+const request = async (path, options = {}) => {
+  let response;
+
+  try {
+    response = await fetch(`${API_BASE_URL}${path}`, options);
+  } catch (error) {
+    const networkError = new Error(
+      'Unable to reach the Namerrs API. If you are developing locally, start the Firebase emulator.'
+    );
+    networkError.status = null;
+    networkError.code = 'NETWORK_ERROR';
+    networkError.retryable = true;
+    networkError.cause = error;
+    throw networkError;
+  }
+
   return parseResponse(response);
 };
 
-export const apiPost = async (path, body) => {
-  const response = await fetch(`${API_BASE_URL}${path}`, {
+export const apiGet = async (path) => request(path);
+
+export const apiPost = async (path, body) =>
+  request(path, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body),
   });
-  return parseResponse(response);
-};
 
 export { API_BASE_URL };

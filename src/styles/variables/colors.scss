@@ -1,30 +1,38 @@
 @use 'sass:map';
 
+/*
+ * Namerrs Ink — professional print-shop palette derived from the logo
+ * (violet, magenta spark, cyan highlight) on an ink-black foundation.
+ */
+
 $color-theme: (
-  primary: #111111,
-  primary-light: #374151,
+  primary: #0a0a0a,
+  primary-light: #1f1f23,
   primary-dark: #000000,
-  accent: #1d4ed8,
-  accent-hover: #1e40af,
+  accent: #7c3aed,
+  accent-hover: #6d28d9,
+  accent-hot: #d946ef,
+  accent-cyan: #06b6d4,
+  accent-blue: #2563eb,
   white: #ffffff,
-  surface: #f9fafb,
-  text-primary: #111827,
-  text-secondary: #6b7280,
-  text-disabled: #9ca3af,
-  border: #e5e7eb,
+  surface: #f4f4f5,
+  text-primary: #18181b,
+  text-secondary: #71717a,
+  text-disabled: #a1a1aa,
+  border: #e4e4e7,
   success: #059669,
   error: #dc2626,
-  focus-ring: #93c5fd,
+  focus-ring: #c4b5fd,
   purple-600: #7c3aed,
   purple-400: #a78bfa,
-  neutral-100: #f3f4f6,
-  neutral-200: #e5e7eb,
-  neutral-300: #d1d5db,
-  neutral-400: #9ca3af,
-  neutral-500: #6b7280,
-  neutral-700: #374151,
-  neutral-800: #1f2937,
-  neutral-900: #111827,
+  neutral-100: #f4f4f5,
+  neutral-200: #e4e4e7,
+  neutral-300: #d4d4d8,
+  neutral-400: #a1a1aa,
+  neutral-500: #71717a,
+  neutral-700: #3f3f46,
+  neutral-800: #27272a,
+  neutral-900: #18181b,
 );
 
 @function colorTheme($key) {

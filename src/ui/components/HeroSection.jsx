@@ -1,8 +1,7 @@
 /**
- * HeroSection.jsx — Hero banner with backend-driven copy, CTAs, and trust strip.
+ * HeroSection.jsx — Hero banner with backend-driven copy and CTAs.
  */
 
-import { MapPin, Clock, ShieldCheck } from 'lucide-react';
 import { useSelector } from 'react-redux';
 import {
   selectContentStatus,
@@ -11,11 +10,8 @@ import {
 import { CONTENT_STATUS } from '../../redux/constants/content.constants';
 import { SITE_NAME, SITE_TAGLINE } from '../../constants/navigation.constants';
 import { HERO_IMAGE_PATH } from '../../constants/assets.constants';
-import {
-  BUSINESS_LOCATION_LABEL,
-  BUSINESS_SINCE,
-} from '../../constants/business.constants';
-import { Section, Button, Badge, MediaFrame, Skeleton, Stack } from './primitives';
+import { HERO_CAPTION_DESC, HERO_CAPTION_TITLE } from '../../constants/business.constants';
+import { Section, Button, MediaFrame, Skeleton, Stack } from './primitives';
 
 const HeroSection = () => {
   const status = useSelector(selectContentStatus);
@@ -42,12 +38,17 @@ const HeroSection = () => {
   return (
     <Section ariaLabel="Hero" variant="surface" className="hero-panel">
       <div className="hero__grid">
-        <div className="hero__content">
-          <Badge>
-            <MapPin size={16} aria-hidden="true" />
-            {BUSINESS_LOCATION_LABEL}
-          </Badge>
+        <div className="hero__media">
+          <MediaFrame
+            src={heroImage}
+            alt={`${title} storefront and signage showcase`}
+            loading="eager"
+            aspectRatio="auto"
+            className="hero__frame"
+          />
+        </div>
 
+        <div className="hero__content">
           <h1 className="hero__title">{title}</h1>
           <p className="hero__slogan">{slogan}</p>
 
@@ -59,42 +60,11 @@ const HeroSection = () => {
               Get in touch
             </Button>
           </div>
-
-          <ul className="hero__trust">
-            <li className="hero__trust-item">
-              <ShieldCheck size={20} className="hero__trust-icon" aria-hidden="true" />
-              <div>
-                <p className="hero__trust-title">Since {BUSINESS_SINCE}</p>
-                <p className="hero__trust-desc">Trusted local print shop</p>
-              </div>
-            </li>
-            <li className="hero__trust-item">
-              <Clock size={20} className="hero__trust-icon" aria-hidden="true" />
-              <div>
-                <p className="hero__trust-title">Fast turnaround</p>
-                <p className="hero__trust-desc">Schedule your completion date</p>
-              </div>
-            </li>
-            <li className="hero__trust-item">
-              <MapPin size={20} className="hero__trust-icon" aria-hidden="true" />
-              <div>
-                <p className="hero__trust-title">Custom design</p>
-                <p className="hero__trust-desc">Cards, shirts, signs & more</p>
-              </div>
-            </li>
-          </ul>
         </div>
 
-        <div className="hero__media">
-          <MediaFrame
-            src={heroImage}
-            alt={`${title} storefront and signage showcase`}
-            loading="eager"
-          />
-          <div className="hero__caption">
-            <p className="hero__caption-title">Quality products. Best prices around.</p>
-            <p className="hero__caption-desc">Design online, pick up in San Jacinto.</p>
-          </div>
+        <div className="hero__caption">
+          <p className="hero__caption-title">{HERO_CAPTION_TITLE}</p>
+          <p className="hero__caption-desc">{HERO_CAPTION_DESC}</p>
         </div>
       </div>
     </Section>

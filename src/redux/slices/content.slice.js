@@ -22,6 +22,24 @@ export const fetchContent = createAsyncThunk(
   }
 );
 
+export const fetchProductById = createAsyncThunk(
+  `${CONTENT_SLICE_NAME}/fetchProductById`,
+  async (productId, { rejectWithValue }) => {
+    try {
+      const product = await apiGet(`/content/products/${productId}`);
+      return { productId, product };
+    } catch (error) {
+      return rejectWithValue({
+        message: error.message,
+        status: error.status,
+        code: error.code,
+        retryable: error.retryable,
+        productId,
+      });
+    }
+  }
+);
+
 const initialState = {
   status: CONTENT_STATUS.IDLE,
   httpStatus: null,
@@ -66,6 +84,12 @@ const contentSlice = createSlice({
         state.error = action.payload?.message || 'Failed to load content.';
         state.httpStatus = action.payload?.status || null;
         state.retryable = Boolean(action.payload?.retryable);
+      })
+      .addCase(fetchProductById.fulfilled, (state, action) => {
+        const { productId, product } = action.payload;
+        if (productId && product) {
+          state.products[productId] = product;
+        }
       });
   },
 });

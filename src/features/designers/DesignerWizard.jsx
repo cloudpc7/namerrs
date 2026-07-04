@@ -2,7 +2,7 @@
  * DesignerWizard.jsx — Multi-step designer flow: design → quantity → schedule → cart.
  */
 
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addCartItem } from '../../redux/slices/cart.slice';
 import {
@@ -21,7 +21,7 @@ import {
 } from '../../redux/slices/design.slice';
 import { selectPricing, selectProductContent } from '../../redux/slices/content.slice';
 import { WIZARD_STEP, WIZARD_STEPS } from '../../redux/constants/design.constants';
-import { Alert, StepIndicator, Stack } from '../../ui/components/primitives';
+import { Alert, Button, StepIndicator, Stack } from '../../ui/components/primitives';
 import {
   formatDateLabel,
   getMinimumCompletionDate,
@@ -40,6 +40,8 @@ const buildInitialSizeQuantities = (design) => {
 const DesignerWizard = () => {
   const dispatch = useDispatch();
   const productId = useSelector(selectDesignerProductId);
+  const isBusinessCardWizard = productId === 'businessCards';
+  const [activeTab, setActiveTab] = useState('text');
   const wizard = useSelector(selectWizardState);
   const product = useSelector((state) => selectProductContent(state, productId));
   const pricing = useSelector(selectPricing);
@@ -59,6 +61,10 @@ const DesignerWizard = () => {
 
   const configuredPrice = Number(pricing[productId]) || 0;
   const minDate = getMinimumCompletionDate().toISOString().slice(0, 10);
+
+  useEffect(() => {
+    setActiveTab('text');
+  }, [productId]);
 
   const { totalQuantity, lineTotal, unitPrice } = useMemo(() => {
     if (productId === 'tshirts') {
@@ -145,6 +151,46 @@ const DesignerWizard = () => {
     }
   };
 
+  const handleStepClick = (targetStep) => {
+    const currentIndex = WIZARD_STEPS.indexOf(step);
+    const targetIndex = WIZARD_STEPS.indexOf(targetStep);
+
+    if (targetIndex < currentIndex) {
+      dispatch(setWizardStep(targetStep));
+    }
+  };
+
+  const handleBusinessCardTabChange = (tabId) => {
+    if (tabId === 'quantity') {
+      const errors = validateDesignStep(productId, design);
+      if (errors.length) {
+        dispatch(setWizardDesignErrors(errors));
+        return;
+      }
+      dispatch(setWizardDesignErrors([]));
+    }
+
+    if (tabId === 'schedule') {
+      const errors = validateDesignStep(productId, design);
+      if (errors.length) {
+        dispatch(setWizardDesignErrors(errors));
+        setActiveTab('text');
+        return;
+      }
+      dispatch(setWizardDesignErrors([]));
+
+      const error = validateQuantityStep();
+      if (error) {
+        dispatch(setWizardQuantityError(error));
+        setActiveTab('quantity');
+        return;
+      }
+      dispatch(setWizardQuantityError(''));
+    }
+
+    setActiveTab(tabId);
+  };
+
   const handleAddToCart = () => {
     if (!isValidCompletionDate(completionDate)) {
       dispatch(setWizardScheduleError('Please allow at least 5 business days for production.'));
@@ -171,63 +217,138 @@ const DesignerWizard = () => {
     return <Alert variant="info">Designer not available for this product.</Alert>;
   }
 
-  return (
-    <Stack gap="md">
-      <StepIndicator steps={WIZARD_STEPS} currentStep={step} />
+  if (isBusinessCardWizard) {
+    return (
+      <div className="designer-wizard designer-wizard--tabbed">
+        <div className="designer-wizard__body">
+          <DesignerComponent
+            design={design}
+            onChange={handleDesignChange}
+            product={product}
+            activeTab={activeTab}
+            onTabChange={handleBusinessCardTabChange}
+            designErrors={designErrors}
+            quantityPanel={
+              <QuantityStepComponent
+                product={product}
+                design={design}
+                quantity={quantity}
+                onQuantityChange={(value) => dispatch(setWizardQuantity(value))}
+                sizeQuantities={sizeQuantities}
+                onSizeQuantitiesChange={(value) => dispatch(setWizardSizeQuantities(value))}
+                configuredUnitPrice={configuredPrice}
+                unitPrice={unitPrice}
+                lineTotal={lineTotal}
+                error={quantityError}
+              />
+            }
+            schedulePanel={
+              <Stack gap="md">
+                <div className="form-field">
+                  <label htmlFor="completion-date" className="form-label">
+                    Requested completion date
+                  </label>
+                  <input
+                    id="completion-date"
+                    type="date"
+                    min={minDate}
+                    value={completionDate}
+                    onChange={(event) => dispatch(setWizardCompletionDate(event.target.value))}
+                    className="form-input"
+                  />
+                  {scheduleError && (
+                    <p className="form-error" role="alert">
+                      {scheduleError}
+                    </p>
+                  )}
+                  {completionDate && isValidCompletionDate(completionDate) && (
+                    <p className="form-hint">Scheduled for {formatDateLabel(completionDate)}</p>
+                  )}
+                  <p className="form-hint">Please allow at least 5 business days for production.</p>
+                </div>
 
-      {step === WIZARD_STEP.DESIGN && (
-        <>
-          <DesignerComponent design={design} onChange={handleDesignChange} product={product} />
-          {designErrors.length > 0 && (
-            <Alert variant="error">
-              <strong>Fix these before continuing:</strong>
-              <ul className="design-errors-list">
-                {designErrors.map((error) => (
-                  <li key={error}>{error}</li>
-                ))}
-              </ul>
-            </Alert>
-          )}
-        </>
-      )}
-
-      {step === WIZARD_STEP.QUANTITY && (
-        <QuantityStepComponent
-          product={product}
-          design={design}
-          quantity={quantity}
-          onQuantityChange={(value) => dispatch(setWizardQuantity(value))}
-          sizeQuantities={sizeQuantities}
-          onSizeQuantitiesChange={(value) => dispatch(setWizardSizeQuantities(value))}
-          configuredUnitPrice={configuredPrice}
-          unitPrice={unitPrice}
-          lineTotal={lineTotal}
-          error={quantityError}
-        />
-      )}
-
-      {step === WIZARD_STEP.SCHEDULE && (
-        <div className="form-field">
-          <label htmlFor="completion-date" className="form-label">
-            Requested completion date
-          </label>
-          <input
-            id="completion-date"
-            type="date"
-            min={minDate}
-            value={completionDate}
-            onChange={(event) => dispatch(setWizardCompletionDate(event.target.value))}
-            className="form-input"
+                <Button className="w-full" onClick={handleAddToCart}>
+                  Add to cart
+                </Button>
+              </Stack>
+            }
           />
-          {scheduleError && <p className="form-error" role="alert">{scheduleError}</p>}
-          {completionDate && isValidCompletionDate(completionDate) && (
-            <p className="form-hint">Scheduled for {formatDateLabel(completionDate)}</p>
-          )}
-          <p className="form-hint">Please allow at least 5 business days for production.</p>
         </div>
-      )}
+      </div>
+    );
+  }
 
-      <div className="wizard-actions">
+  return (
+    <div className="designer-wizard">
+      <StepIndicator
+        steps={WIZARD_STEPS}
+        currentStep={step}
+        onStepClick={handleStepClick}
+      />
+
+      <div className="designer-wizard__body">
+        {step === WIZARD_STEP.DESIGN && (
+          <Stack gap="md">
+            <DesignerComponent
+              design={design}
+              onChange={handleDesignChange}
+              product={product}
+            />
+            {designErrors.length > 0 && (
+              <div className="alert alert--error" role="alert">
+                <strong>Fix these before continuing:</strong>
+                <ul className="design-errors-list">
+                  {designErrors.map((error) => (
+                    <li key={error}>{error}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </Stack>
+        )}
+
+        {step === WIZARD_STEP.QUANTITY && (
+          <QuantityStepComponent
+            product={product}
+            design={design}
+            quantity={quantity}
+            onQuantityChange={(value) => dispatch(setWizardQuantity(value))}
+            sizeQuantities={sizeQuantities}
+            onSizeQuantitiesChange={(value) => dispatch(setWizardSizeQuantities(value))}
+            configuredUnitPrice={configuredPrice}
+            unitPrice={unitPrice}
+            lineTotal={lineTotal}
+            error={quantityError}
+          />
+        )}
+
+        {step === WIZARD_STEP.SCHEDULE && (
+          <div className="form-field">
+            <label htmlFor="completion-date" className="form-label">
+              Requested completion date
+            </label>
+            <input
+              id="completion-date"
+              type="date"
+              min={minDate}
+              value={completionDate}
+              onChange={(event) => dispatch(setWizardCompletionDate(event.target.value))}
+              className="form-input"
+            />
+            {scheduleError && (
+              <p className="form-error" role="alert">
+                {scheduleError}
+              </p>
+            )}
+            {completionDate && isValidCompletionDate(completionDate) && (
+              <p className="form-hint">Scheduled for {formatDateLabel(completionDate)}</p>
+            )}
+            <p className="form-hint">Please allow at least 5 business days for production.</p>
+          </div>
+        )}
+      </div>
+
+      <div className="designer-wizard__footer wizard-actions">
         {step !== WIZARD_STEP.DESIGN && (
           <button type="button" onClick={goBack} className="btn btn--secondary btn--md">
             Back
@@ -243,7 +364,7 @@ const DesignerWizard = () => {
           </button>
         )}
       </div>
-    </Stack>
+    </div>
   );
 };
 

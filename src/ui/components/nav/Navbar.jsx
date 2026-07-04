@@ -2,7 +2,7 @@
  * Navbar.jsx — Sticky header with desktop links, actions, and mobile drawer.
  */
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Menu } from 'lucide-react';
 import { useMediaQuery } from '../../../hooks/useMediaQuery';
 import { IconButton } from '../primitives';
@@ -28,6 +28,12 @@ const Navbar = ({
 
   const closeDrawer = () => setIsDrawerOpen(false);
   const openDrawer = () => setIsDrawerOpen(true);
+
+  useEffect(() => {
+    if (isDesktop && isDrawerOpen) {
+      setIsDrawerOpen(false);
+    }
+  }, [isDesktop, isDrawerOpen]);
 
   return (
     <header className="nav-bar">
@@ -63,13 +69,13 @@ const Navbar = ({
       <MobileNav
         isOpen={isDrawerOpen}
         onClose={closeDrawer}
+        logoSrc={logoSrc}
+        logoAlt={logoAlt}
         links={links}
         socialLinks={socialLinks}
         showSearch={showSearch}
         searchValue={searchValue}
         onSearch={onSearch}
-        onCartClick={onCartClick}
-        cartCount={cartCount}
       />
     </header>
   );

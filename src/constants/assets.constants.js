@@ -16,7 +16,5 @@ export const PRODUCT_IMAGE_PATHS = {
   memorial: '/assets/images/namerrsHero.png',
 };
 
-export const ABOUT_IMAGE_PATH = '/assets/images/namerrsHero.png';
-
 export const getProductImageUrl = (productId, product) =>
   product?.imageUrl || PRODUCT_IMAGE_PATHS[productId] || null;

@@ -1,8 +1,7 @@
 /**
- * NavActions.jsx — Desktop utility actions: search, cart, and primary CTA.
+ * NavActions.jsx — Desktop utilities: search and cart only.
  */
 
-import { Button } from '../primitives';
 import CartButton from './CartButton';
 import NavSearch from './NavSearch';
 
@@ -18,9 +17,6 @@ const NavActions = ({
       <NavSearch value={searchValue} onSearch={onSearch} variant="desktop" />
     )}
     <CartButton count={cartCount} onClick={onCartClick} />
-    <Button href="/#products" size="sm" className="nav-cta">
-      Start order
-    </Button>
   </div>
 );
 

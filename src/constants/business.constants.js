@@ -16,6 +16,10 @@ export const BUSINESS_SINCE = 2008;
 
 export const BUSINESS_LOCATION_LABEL = 'San Jacinto, California';
 
+export const HERO_CAPTION_TITLE = 'One shop for every custom print job';
+export const HERO_CAPTION_DESC =
+  'Design online, set your completion date, and pick up in San Jacinto.';
+
 export const PRICING_HELPER_TEXT =
   'Pricing coming soon — you can still design and save your order.';
 

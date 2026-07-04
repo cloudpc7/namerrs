@@ -75,9 +75,9 @@ describe('Header', () => {
     expect(screen.getByRole('button', { name: /open cart/i })).toBeInTheDocument();
   });
 
-  it('renders primary start order CTA', () => {
+  it('renders primary create a design CTA', () => {
     renderHeader();
 
-    expect(screen.getByRole('link', { name: /start order/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /create a design/i })).toBeInTheDocument();
   });
 });

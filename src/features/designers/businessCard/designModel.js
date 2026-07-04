@@ -2,7 +2,7 @@
  * designModel.js — Business card design state helpers.
  */
 
-import { DEFAULT_ELEMENT_SIZE, TEXT_FIELDS } from './constants';
+import { DEFAULT_ELEMENT_SIZE, ELEMENT_SIZE_LIMITS, TEXT_FIELDS } from './constants';
 
 const createId = () => `el_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`;
 
@@ -154,6 +154,27 @@ export const moveElement = (design, elementId, x, y) =>
     x: Math.max(0, Math.min(100, x)),
     y: Math.max(0, Math.min(100, y)),
   });
+
+const clampElementSize = (element, width, height) => {
+  const limits = ELEMENT_SIZE_LIMITS[element.type] || ELEMENT_SIZE_LIMITS.text;
+  const maxWidth = Math.min(limits.maxWidth, 100 - element.x);
+  const maxHeight = Math.min(limits.maxHeight, 100 - element.y);
+
+  return {
+    width: Math.max(limits.minWidth, Math.min(maxWidth, width)),
+    height: Math.max(limits.minHeight, Math.min(maxHeight, height)),
+  };
+};
+
+export const resizeElement = (design, elementId, width, height) => {
+  const side = getActiveSideKey(design);
+  const element = getSideState(design, side).elements.find((item) => item.id === elementId);
+  if (!element) {
+    return design;
+  }
+
+  return updateElement(design, elementId, clampElementSize(element, width, height));
+};
 
 export const buildCardPreviewLabel = (design) => {
   const side = getActiveSideKey(design);

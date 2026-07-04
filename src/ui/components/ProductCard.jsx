@@ -3,6 +3,7 @@
  */
 
 import { getProductImageUrl } from '../../constants/assets.constants';
+import { PRODUCT_DETAIL_MODAL_ID } from './ProductDetailModal';
 import { Card, PriceDisplay } from './primitives';
 
 const ProductCard = ({
@@ -13,7 +14,7 @@ const ProductCard = ({
   onSelect,
 }) => {
   const imageUrl = getProductImageUrl(productId, product);
-  const panelId = `product-panel-${productId}`;
+  const panelId = PRODUCT_DETAIL_MODAL_ID;
 
   return (
     <Card

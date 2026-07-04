@@ -28,3 +28,24 @@ export const DEFAULT_ELEMENT_SIZE = {
   text: { width: 55, height: 8 },
   image: { width: 28, height: 28 },
 };
+
+export const ELEMENT_SIZE_LIMITS = {
+  text: { minWidth: 12, minHeight: 4, maxWidth: 92, maxHeight: 40 },
+  image: { minWidth: 8, minHeight: 8, maxWidth: 92, maxHeight: 92 },
+};
+
+export const BUSINESS_CARD_PANEL = {
+  TEXT: 'text',
+  COLOR: 'color',
+  PRINT: 'print',
+  IMAGE: 'image',
+};
+
+export const BUSINESS_CARD_WIZARD_TABS = [
+  { id: BUSINESS_CARD_PANEL.TEXT, label: 'Text' },
+  { id: BUSINESS_CARD_PANEL.COLOR, label: 'Color' },
+  { id: BUSINESS_CARD_PANEL.PRINT, label: 'Print' },
+  { id: BUSINESS_CARD_PANEL.IMAGE, label: 'Image' },
+  { id: 'quantity', label: 'Qty' },
+  { id: 'schedule', label: 'Date' },
+];

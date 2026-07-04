@@ -4,10 +4,12 @@
 @source '../../index.html';
 
 @theme {
-  --color-brand: #111111;
-  --color-brand-accent: #1d4ed8;
-  --color-brand-accent-hover: #1e40af;
-  --color-brand-surface: #f9fafb;
-  --color-brand-muted: #6b7280;
+  --color-brand: #0a0a0a;
+  --color-brand-accent: #7c3aed;
+  --color-brand-accent-hover: #6d28d9;
+  --color-brand-accent-hot: #d946ef;
+  --color-brand-accent-cyan: #06b6d4;
+  --color-brand-surface: #f4f4f5;
+  --color-brand-muted: #71717a;
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
 }

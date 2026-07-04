@@ -74,10 +74,32 @@
         "description": "Custom business cards with dynamic paper, color, and double-sided design options.",
         "imageUrl": "/assets/images/businesscards.png",
         "minQuantity": 500,
+        "options": [
+          {
+            "id": "paperType",
+            "label": "Paper options",
+            "type": "select",
+            "choices": [
+              { "value": "standard-matte", "label": "Standard matte" },
+              { "value": "glossy", "label": "Glossy" },
+              { "value": "uncoated", "label": "Uncoated" }
+            ],
+            "defaultValue": "standard-matte"
+          },
+          {
+            "id": "sides",
+            "label": "Sides",
+            "type": "radio",
+            "choices": [
+              { "value": "single", "label": "Single-sided" },
+              { "value": "double", "label": "Double-sided" }
+            ],
+            "defaultValue": "double"
+          }
+        ],
         "specs": [
-          { "label": "Minimum order", "value": "500 cards" },
-          { "label": "Paper options", "value": "14pt gloss, 16pt matte, premium" },
-          { "label": "Sides", "value": "Single or double-sided" }
+          { "label": "Size", "value": "3.5\" × 2\" US standard" },
+          { "label": "Print", "value": "Full-color digital" }
         ]
       },
       "tshirts": {

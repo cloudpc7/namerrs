@@ -7,7 +7,7 @@ import { selectProductContent } from '../../redux/slices/content.slice';
 import { selectDesignerMode, selectDesignerProductId } from '../../redux/slices/design.slice';
 import { DESIGNER_MODE } from '../../redux/constants/design.constants';
 import DesignerWizard from '../../features/designers/DesignerWizard';
-import { Stack } from './primitives';
+
 
 const DesignerShell = () => {
   const productId = useSelector(selectDesignerProductId);
@@ -17,17 +17,10 @@ const DesignerShell = () => {
   const modeLabel = mode === DESIGNER_MODE.EDIT ? 'Edit design' : 'Add to order';
 
   return (
-    <Stack gap="sm">
-      <p className="section-heading__eyebrow" style={{ margin: 0 }}>
-        {modeLabel}
-      </p>
-      {product?.description && (
-        <p className="form-hint" style={{ fontSize: '0.875rem' }}>
-          {product.description}
-        </p>
-      )}
+    <div className="designer-shell">
+      <p className="designer-shell__eyebrow">{modeLabel}</p>
       {productId && <DesignerWizard />}
-    </Stack>
+    </div>
   );
 };
 
