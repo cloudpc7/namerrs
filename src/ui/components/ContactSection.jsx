@@ -14,7 +14,7 @@ import {
 import { showToast } from '../../redux/slices/ui.slice';
 import { ASYNC_STATUS } from '../../redux/constants/async.constants';
 import { TOAST_TYPE } from '../../redux/constants/ui.constants';
-import { CONTACT_VALUE_PROPS } from '../../constants/business.constants';
+import { CONTACT_SECTION_SUBTITLE, CONTACT_VALUE_PROPS } from '../../constants/business.constants';
 import {
   Section,
   SectionHeading,
@@ -66,17 +66,8 @@ const ContactSection = () => {
             className="contact-section__heading"
             eyebrow="Get in touch"
             title="Tell us what you're printing"
+            subtitle={CONTACT_SECTION_SUBTITLE}
           />
-          <div className="section-heading__subtitle-group contact-section__subtitle-group">
-            <p className="section-heading__subtitle">
-              Questions about an order or
-              <br className="contact-section__subtitle-break" aria-hidden="true" />
-              {' '}a custom project?
-            </p>
-            <p className="section-heading__subtitle">
-              Send a message — we typically respond within one business day.
-            </p>
-          </div>
 
           <ul className="contact-value-list">
             {CONTACT_VALUE_PROPS.map((item, index) => {

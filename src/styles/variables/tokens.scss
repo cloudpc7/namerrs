@@ -34,6 +34,11 @@ $shadow-scale: (
   xl: 0 20px 40px rgba(17, 24, 39, 0.12),
 );
 
+// Refactoring UI prose — comfortable line length and minimum body size
+$prose-measure: 38rem;
+$prose-measure-narrow: 28rem;
+$prose-body-min: 0.875rem;
+
 @function space($key) {
   @return map.get($space-scale, $key);
 }

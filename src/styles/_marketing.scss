@@ -147,11 +147,8 @@
   .faq-section__heading .section-heading__subtitle {
     margin-top: space(3);
     padding-inline: space(3);
-    max-width: 38rem;
-    margin-inline: auto;
     font-size: 0.9375rem;
     line-height: 1.6;
-    text-wrap: pretty;
   }
 
   .faq-section__content .accordion__trigger {
@@ -201,12 +198,6 @@
 
 .faq-section__cta-button {
   margin: 0;
-}
-
-@media (min-width: 768px) and (max-width: 1023px) {
-  .faq-section__cta-lead {
-    white-space: nowrap;
-  }
 }
 
 .section__container {
@@ -264,6 +255,26 @@
   font-size: 1rem;
   line-height: 1.6;
   color: var(--color-text-secondary);
+}
+
+/* Prose rhythm — mobile + tablet (<=1023px): balance headings, pretty body copy */
+
+@media (max-width: 1023px) {
+  .section-heading__title {
+    text-wrap: balance;
+  }
+
+  .section-heading__subtitle,
+  .section-heading__subtitle-group .section-heading__subtitle {
+    font-size: max($prose-body-min, 1rem);
+    text-wrap: pretty;
+    max-width: min($prose-measure, 100%);
+  }
+
+  .section-heading--center .section-heading__subtitle,
+  .section-heading--center .section-heading__subtitle-group {
+    margin-inline: auto;
+  }
 }
 
 @media (min-width: 768px) {
@@ -1242,18 +1253,6 @@ p.about-section__support {
   }
 }
 
-@media (max-width: 1023px) {
-  .features-section__heading .section-heading__title {
-    text-wrap: balance;
-  }
-
-  .features-section__heading .section-heading__subtitle {
-    max-width: 38rem;
-    margin-inline: auto;
-    text-wrap: pretty;
-  }
-}
-
 @media (min-width: 768px) and (max-width: 1023px) {
   .features-section__heading .section-heading__subtitle-group {
     align-items: center;
@@ -1343,10 +1342,14 @@ p.about-section__support {
 
 .site-footer__brand-desc {
   margin: space(1) 0 0;
-  max-width: 22rem;
+  max-width: none;
   font-size: 0.9375rem;
   line-height: 1.65;
   color: rgba(255, 255, 255, 0.78);
+}
+
+.site-footer__brand-desc-line {
+  text-wrap: pretty;
 }
 
 .site-footer__heading {
@@ -1458,7 +1461,6 @@ p.about-section__support {
 
   .site-footer__brand-desc-line {
     display: block;
-    white-space: nowrap;
   }
 
   .site-footer__hours {
@@ -1469,7 +1471,7 @@ p.about-section__support {
 
   .site-footer__hours-line {
     display: block;
-    white-space: nowrap;
+    text-wrap: pretty;
   }
 }
 
@@ -1570,7 +1572,6 @@ p.about-section__support {
 
   .site-footer__brand-desc-line {
     display: block;
-    white-space: nowrap;
   }
 
   .site-footer__hours {
@@ -1581,7 +1582,7 @@ p.about-section__support {
 
   .site-footer__hours-line {
     display: block;
-    white-space: nowrap;
+    text-wrap: pretty;
   }
 }
 
@@ -1599,7 +1600,8 @@ p.about-section__support {
   }
 
   .site-footer__connect-desc {
-    white-space: nowrap;
+    text-wrap: pretty;
+    max-width: $prose-measure-narrow;
   }
 
   .site-footer__brand-desc {
@@ -1610,7 +1612,6 @@ p.about-section__support {
 
   .site-footer__brand-desc-line {
     display: block;
-    white-space: nowrap;
   }
 
   .site-footer__brand-desc-line + .site-footer__brand-desc-line {
@@ -1670,16 +1671,6 @@ p.about-section__support {
 
 .products-section__heading .section-heading__subtitle {
   line-height: 1.45;
-}
-
-@media (max-width: 1023px) {
-  .products-section__heading .section-heading__title {
-    text-wrap: balance;
-  }
-
-  .products-section__heading .section-heading__subtitle {
-    text-wrap: pretty;
-  }
 }
 
 /* Products section — desktop only (>=1024px) */
@@ -2182,27 +2173,35 @@ p.about-section__support {
   gap: space(6);
 }
 
+.reviews-section__heading .section-heading__subtitle-group {
+  margin-top: space(3);
+}
+
 .reviews-section__average {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.2em 0.35em;
   margin: space(3) 0 0;
   font-size: 0.875rem;
   font-weight: 500;
   color: var(--color-text-secondary);
 }
 
-.reviews-section__subtitle-break {
-  display: none;
-}
-
-@media (max-width: 767px) {
-  .reviews-section__subtitle {
-    margin-top: 0.75rem;
+@media (max-width: 1023px) {
+  .reviews-section__heading .section-heading__subtitle-group {
     padding-inline: space(3);
-    line-height: 1.6;
+  }
+
+  .reviews-section__average {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: space(1);
     text-wrap: pretty;
   }
 
-  .reviews-section__subtitle-break {
-    display: block;
+  .review-card__text {
+    text-wrap: pretty;
   }
 }
 
@@ -2468,29 +2467,10 @@ p.about-section__support {
   }
 }
 
-.contact-section__subtitle-break {
-  display: none;
-}
-
-@media (max-width: 767px) {
-  .contact-section__subtitle-group .section-heading__subtitle:first-child {
-    line-height: 1.6;
-    text-wrap: pretty;
-  }
-
-  .contact-section__subtitle-break {
-    display: block;
-  }
-}
-
 @media (min-width: 768px) and (max-width: 1023px) {
   .contact-section__heading .section-heading__subtitle-group {
     align-items: flex-start;
     text-align: left;
-  }
-
-  .contact-section__heading .section-heading__subtitle:first-child {
-    white-space: nowrap;
   }
 }
 

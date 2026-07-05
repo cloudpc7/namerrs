@@ -44,6 +44,16 @@ export const FEATURES_SECTION_SUBTITLE = [
   'Design your order and schedule completion',
   'from one place.',
 ];
+
+export const REVIEWS_SECTION_SUBTITLE = [
+  'Real feedback from',
+  'local businesses and families in San Jacinto.',
+];
+
+export const CONTACT_SECTION_SUBTITLE = [
+  'Questions about an order or a custom project?',
+  'Send a message — we typically respond within one business day.',
+];
 export const HERO_CAPTION_DESC_LEAD =
   'Design online, schedule your completion date, and get quality printing done fast — with a local team';
 export const HERO_CAPTION_DESC_TAIL = 'behind every order.';

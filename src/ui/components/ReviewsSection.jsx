@@ -17,6 +17,7 @@ import {
   selectIsReviewModalOpen,
 } from '../../redux/slices/ui.slice';
 import { ASYNC_STATUS } from '../../redux/constants/async.constants';
+import { REVIEWS_SECTION_SUBTITLE } from '../../constants/business.constants';
 import {
   Section,
   SectionHeading,
@@ -51,16 +52,20 @@ const ReviewsSection = () => {
     <Section id="reviews" ariaLabel="Reviews" variant="surface">
       <div className="reviews-section__header">
         <div>
-          <SectionHeading eyebrow="Customer reviews" title="What our customers say" />
-          <p className="section-heading__subtitle reviews-section__subtitle">
-            Real feedback from
-            <br className="reviews-section__subtitle-break" aria-hidden="true" />
-            local businesses and families in San Jacinto.
-          </p>
+          <SectionHeading
+            eyebrow="Customer reviews"
+            title="What our customers say"
+            subtitle={REVIEWS_SECTION_SUBTITLE}
+            className="reviews-section__heading"
+          />
           {averageRating && (
             <p className="reviews-section__average">
-              <span className="review-stars">★</span> {averageRating} average from {reviews.length}{' '}
-              review{reviews.length === 1 ? '' : 's'}
+              <span className="reviews-section__average-rating">
+                <span className="review-stars">★</span> {averageRating} average
+              </span>
+              <span className="reviews-section__average-count">
+                from {reviews.length} review{reviews.length === 1 ? '' : 's'}
+              </span>
             </p>
           )}
         </div>
