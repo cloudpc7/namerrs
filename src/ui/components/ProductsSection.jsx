@@ -93,7 +93,7 @@ const ProductsSection = () => {
         title="Customize your order"
         subtitle={[
           'Choose a product below to view specs.',
-          'Then add or edit your design in the offcanvas designer.',
+          'Then open the designer to add or edit your order.',
         ]}
       />
 

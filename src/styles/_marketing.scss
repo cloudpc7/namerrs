@@ -437,6 +437,10 @@
   color: var(--color-text-secondary);
 }
 
+.hero__trust-desc-lines {
+  display: none;
+}
+
 .hero__media {
   position: relative;
   grid-area: media;
@@ -495,6 +499,52 @@
     0 18px 36px rgba(17, 24, 39, 0.12);
 }
 
+/* Trust strip — mobile + tablet (<=1023px): single column, intentional desc lines */
+
+@media (max-width: 1023px) {
+  .trust-strip-panel .hero__trust {
+    grid-template-columns: 1fr;
+    gap: space(4);
+    max-width: 28rem;
+    margin-inline: auto;
+  }
+
+  .trust-strip-panel .hero__trust-item {
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: left;
+    gap: space(3);
+    padding: space(5) space(4);
+  }
+
+  .trust-strip-panel .hero__trust-icon {
+    margin-top: 0.125rem;
+  }
+
+  .trust-strip-panel .hero__trust-title {
+    font-size: 1.0625rem;
+  }
+
+  .trust-strip-panel .hero__trust-desc--wide {
+    display: none;
+  }
+
+  .trust-strip-panel .hero__trust-desc-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 0.25rem;
+  }
+
+  .trust-strip-panel .hero__trust-desc-line {
+    margin: 0;
+    font-size: 0.875rem;
+    line-height: 1.45;
+    color: var(--color-text-secondary);
+    text-wrap: pretty;
+  }
+}
+
 .hero__caption-title {
   margin: 0;
   font-size: 0.875rem;
@@ -520,8 +570,8 @@
   }
 }
 
-@media (min-width: 640px) {
-  .hero__trust {
+@media (min-width: 1024px) {
+  .trust-strip-panel .hero__trust {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
@@ -707,36 +757,6 @@
     color: rgba(255, 255, 255, 0.9);
   }
 
-  .trust-strip-panel .hero__trust {
-    gap: space(4);
-  }
-
-  .trust-strip-panel .hero__trust-item {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: space(3);
-    padding: space(5) space(4);
-  }
-
-  .trust-strip-panel .hero__trust-icon {
-    margin-top: 0;
-  }
-
-  .trust-strip-panel .hero__trust-title {
-    font-size: 1.125rem;
-  }
-
-  .trust-strip-panel .hero__trust-desc {
-    font-size: 0.9375rem;
-    line-height: 1.5;
-  }
-
-  .trust-strip-panel .hero__trust-item:nth-child(2) .hero__trust-desc {
-    font-size: 0.8125rem;
-    line-height: 1.4;
-    white-space: nowrap;
-  }
 }
 
 /* Hero — desktop only (>=1024px) */
@@ -955,9 +975,34 @@ p.about-section__support {
   display: none;
 }
 
-/* About cards — mobile only (<=767px): balanced description lines */
+.about-section__title-lines {
+  display: none;
+}
 
-@media (max-width: 767px) {
+/* About — mobile + tablet (<=1023px): balanced title and card copy */
+
+@media (max-width: 1023px) {
+  .about-section__heading .section-heading__title {
+    display: none;
+  }
+
+  .about-section__title-lines {
+    display: flex;
+    flex-direction: column;
+    gap: space(1);
+    margin: 0.5rem 0 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--color-text-primary);
+    text-wrap: balance;
+  }
+
+  .about-section__title-line {
+    display: block;
+  }
+
   .about-section__card-desc--desktop {
     display: none;
   }
@@ -974,7 +1019,13 @@ p.about-section__support {
     font-size: 0.875rem;
     line-height: 1.6;
     color: var(--color-text-secondary);
-    text-wrap: balance;
+    text-wrap: pretty;
+  }
+
+  p.about-section__since,
+  p.about-section__intro,
+  p.about-section__support {
+    text-wrap: pretty;
   }
 }
 
@@ -1374,6 +1425,17 @@ p.about-section__support {
     display: block;
     white-space: nowrap;
   }
+
+  .site-footer__hours {
+    display: flex;
+    flex-direction: column;
+    gap: space(1);
+  }
+
+  .site-footer__hours-line {
+    display: block;
+    white-space: nowrap;
+  }
 }
 
 @media (max-width: 360px) {
@@ -1473,6 +1535,18 @@ p.about-section__support {
 
   .site-footer__brand-desc-line {
     display: block;
+    white-space: nowrap;
+  }
+
+  .site-footer__hours {
+    display: flex;
+    flex-direction: column;
+    gap: space(1);
+  }
+
+  .site-footer__hours-line {
+    display: block;
+    white-space: nowrap;
   }
 }
 
@@ -1561,6 +1635,16 @@ p.about-section__support {
 
 .products-section__heading .section-heading__subtitle {
   line-height: 1.45;
+}
+
+@media (max-width: 1023px) {
+  .products-section__heading .section-heading__title {
+    text-wrap: balance;
+  }
+
+  .products-section__heading .section-heading__subtitle {
+    text-wrap: pretty;
+  }
 }
 
 /* Products section — desktop only (>=1024px) */

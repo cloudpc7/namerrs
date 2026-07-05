@@ -29,6 +29,15 @@ const AboutTeaserSection = () => {
             eyebrow={about.eyebrow}
             title={about.title}
           />
+          {about.titleLines?.length > 0 && (
+            <div className="about-section__title-lines" aria-hidden="true">
+              {about.titleLines.map((line) => (
+                <span key={line} className="about-section__title-line">
+                  {line}
+                </span>
+              ))}
+            </div>
+          )}
           <p className="about-section__since">{about.since}</p>
           <p className="about-section__intro">{about.intro}</p>
           <p className="about-section__support">{about.support}</p>

@@ -3,31 +3,32 @@
  */
 
 import { MapPin, Clock, ShieldCheck } from 'lucide-react';
-import { BUSINESS_SINCE } from '../../constants/business.constants';
+import { TRUST_BADGES } from '../../constants/business.constants';
+
+const TRUST_ICONS = [ShieldCheck, Clock, MapPin];
 
 const TrustBadges = ({ className = '' }) => (
   <ul className={`hero__trust ${className}`.trim()}>
-    <li className="hero__trust-item">
-      <ShieldCheck size={20} className="hero__trust-icon" aria-hidden="true" />
-      <div>
-        <p className="hero__trust-title">Since {BUSINESS_SINCE}</p>
-        <p className="hero__trust-desc">Trusted local print shop</p>
-      </div>
-    </li>
-    <li className="hero__trust-item">
-      <Clock size={20} className="hero__trust-icon" aria-hidden="true" />
-      <div>
-        <p className="hero__trust-title">Fast turnaround</p>
-        <p className="hero__trust-desc">Schedule your completion date</p>
-      </div>
-    </li>
-    <li className="hero__trust-item">
-      <MapPin size={20} className="hero__trust-icon" aria-hidden="true" />
-      <div>
-        <p className="hero__trust-title">Custom design</p>
-        <p className="hero__trust-desc">Cards, shirts, signs & more</p>
-      </div>
-    </li>
+    {TRUST_BADGES.map((item, index) => {
+      const Icon = TRUST_ICONS[index % TRUST_ICONS.length];
+
+      return (
+        <li key={item.title} className="hero__trust-item">
+          <Icon size={20} className="hero__trust-icon" aria-hidden="true" />
+          <div>
+            <p className="hero__trust-title">{item.title}</p>
+            <p className="hero__trust-desc hero__trust-desc--wide">{item.description}</p>
+            <div className="hero__trust-desc-lines">
+              {item.descriptionLines.map((line) => (
+                <p key={line} className="hero__trust-desc-line">
+                  {line}
+                </p>
+              ))}
+            </div>
+          </div>
+        </li>
+      );
+    })}
   </ul>
 );
 

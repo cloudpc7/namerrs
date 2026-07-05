@@ -13,7 +13,8 @@ import { FOOTER_LOGO_PATH } from '../../constants/assets.constants';
 import { selectSocialLinks } from '../../redux/slices/content.slice';
 import {
   BUSINESS_ADDRESS,
-  BUSINESS_HOURS,
+  BUSINESS_HOURS_WEEKDAY,
+  BUSINESS_HOURS_SATURDAY,
 } from '../../constants/business.constants';
 import { handleHashHref, parseHashHref } from '../../utils/hashNavigation';
 
@@ -80,7 +81,10 @@ const Footer = () => {
                 <br />
                 {BUSINESS_ADDRESS.city}, {BUSINESS_ADDRESS.state} {BUSINESS_ADDRESS.zip}
               </p>
-              <p className="site-footer__meta-line site-footer__hours">{BUSINESS_HOURS}</p>
+              <p className="site-footer__meta-line site-footer__hours">
+                <span className="site-footer__hours-line">{BUSINESS_HOURS_WEEKDAY}</span>
+                <span className="site-footer__hours-line">{BUSINESS_HOURS_SATURDAY}</span>
+              </p>
             </address>
           </div>
 

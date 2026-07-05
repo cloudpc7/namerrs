@@ -10,9 +10,29 @@ export const BUSINESS_ADDRESS = {
   country: 'US',
 };
 
-export const BUSINESS_HOURS = 'Mon–Fri 9:00 AM – 6:00 PM · Sat 10:00 AM – 4:00 PM';
+export const BUSINESS_HOURS_WEEKDAY = 'Mon–Fri 9:00 AM – 6:00 PM';
+export const BUSINESS_HOURS_SATURDAY = 'Sat 10:00 AM – 4:00 PM';
+export const BUSINESS_HOURS = `${BUSINESS_HOURS_WEEKDAY} · ${BUSINESS_HOURS_SATURDAY}`;
 
 export const BUSINESS_SINCE = 2008;
+
+export const TRUST_BADGES = [
+  {
+    title: `Since ${BUSINESS_SINCE}`,
+    description: 'Trusted local print shop',
+    descriptionLines: ['Trusted local print shop'],
+  },
+  {
+    title: 'Fast turnaround',
+    description: 'Schedule your completion date',
+    descriptionLines: ['Schedule your completion date'],
+  },
+  {
+    title: 'Custom design',
+    description: 'Cards, shirts, signs & more',
+    descriptionLines: ['Cards, shirts, signs & more'],
+  },
+];
 
 export const BUSINESS_LOCATION_LABEL = 'San Jacinto, California';
 
@@ -61,6 +81,10 @@ export const CONTACT_VALUE_PROPS = [
 export const DEFAULT_ABOUT_CONTENT = {
   eyebrow: 'Design & print',
   title: 'Graphics built to print — not just look good on screen',
+  titleLines: [
+    'Graphics built to print —',
+    'not just look good on screen',
+  ],
   intro:
     'We pair graphic design with in-house production so layouts, colors, and files are ready before anything hits the press.',
   since:
@@ -72,11 +96,19 @@ export const DEFAULT_ABOUT_CONTENT = {
       title: 'Prepress & file prep',
       description:
         'Bleeds, resolution, trapping, and export settings checked so your art survives production — not just PDF export.',
+      descriptionMobile: [
+        'Bleeds, resolution, trapping, and export settings checked',
+        'so your art survives production — not just PDF export.',
+      ],
     },
     {
       title: 'Brand & layout design',
       description:
         'Logos, marketing layouts, and campaign graphics tuned for consistency across cards, signage, and apparel.',
+      descriptionMobile: [
+        'Logos, marketing layouts, and campaign graphics',
+        'tuned for consistency across cards, signage, and apparel.',
+      ],
     },
     {
       title: 'Color-managed printing',
@@ -91,6 +123,10 @@ export const DEFAULT_ABOUT_CONTENT = {
       title: 'Proof before we run',
       description:
         'Review a digital proof before production starts — catch sizing, copy, and color issues while they are still easy to fix.',
+      descriptionMobile: [
+        'Review a digital proof before production starts —',
+        'catch sizing, copy, and color issues while they are still easy to fix.',
+      ],
     },
   ],
 };
