@@ -29,7 +29,7 @@ jest.mock('@react-spring/web', () => ({
 const mockProducts = {
   businessCards: {
     name: 'Business Cards',
-    description: 'Custom business cards with dynamic paper, color, and double-sided design options.',
+    description: 'Paper finishes, colors, and layouts.\nSingle- or double-sided printing.',
     minQuantity: 500,
     options: [
       {
@@ -74,7 +74,17 @@ const mockPricing = {
   memorial: 0,
 };
 
-const createStore = (contentState) =>
+const defaultUiState = {
+  httpStatus: null,
+  errorMessage: null,
+  code: null,
+  retryable: false,
+  productSearch: '',
+  toast: { message: null, type: 'info', id: null },
+  isReviewModalOpen: false,
+};
+
+const createStore = (contentState, uiState = {}) =>
   configureStore({
     reducer: {
       content: contentReducer,
@@ -85,13 +95,8 @@ const createStore = (contentState) =>
     preloadedState: {
       content: contentState,
       ui: {
-        httpStatus: null,
-        errorMessage: null,
-        code: null,
-        retryable: false,
-        productSearch: '',
-        toast: { message: null, type: 'info', id: null },
-        isReviewModalOpen: false,
+        ...defaultUiState,
+        ...uiState,
       },
       design: {
         isOpen: false,
@@ -168,12 +173,13 @@ describe('ProductsSection', () => {
 
     const modal = screen.getByRole('dialog', { name: /business cards/i });
     expect(modal).toBeInTheDocument();
-    expect(within(modal).getByText(/custom business cards/i)).toBeInTheDocument();
+    expect(within(modal).queryByText(/paper finishes, colors, and layouts/i)).not.toBeInTheDocument();
+    expect(screen.getByText(/paper finishes, colors, and layouts/i)).toBeInTheDocument();
     expect(within(modal).getByLabelText(/paper options/i)).toBeInTheDocument();
     expect(within(modal).getByLabelText(/single-sided/i)).toBeInTheDocument();
-    expect(within(modal).getByText('$0.00')).toHaveClass('price', 'price--lg');
+    expect(within(modal).queryByText('$0.00')).not.toBeInTheDocument();
     expect(within(modal).getByRole('button', { name: /add to order/i })).toBeInTheDocument();
-    expect(within(modal).getByRole('button', { name: /edit design/i })).toBeInTheDocument();
+    expect(within(modal).queryByRole('button', { name: /edit design/i })).not.toBeInTheDocument();
   });
 
   it('keeps only one product expanded at a time', async () => {
@@ -208,6 +214,40 @@ describe('ProductsSection', () => {
       sides: 'double',
     });
     expect(store.getState().productDetail.isOpen).toBe(false);
+  });
+
+  it('filters products from search without auto-opening the detail modal', () => {
+    const store = createStore(baseContentState, { productSearch: 'hats' });
+
+    render(
+      <Provider store={store}>
+        <ProductsSection />
+        <ProductDetailModal />
+      </Provider>
+    );
+
+    expect(screen.getByRole('button', { name: /hats/i })).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /t-shirts/i })).not.toBeInTheDocument();
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    expect(screen.getByRole('status')).toHaveTextContent(/matching “hats”/i);
+  });
+
+  it('clears search from the products section and restores the full grid', async () => {
+    const user = userEvent.setup();
+    const store = createStore(baseContentState, { productSearch: 'hats' });
+
+    render(
+      <Provider store={store}>
+        <ProductsSection />
+        <ProductDetailModal />
+      </Provider>
+    );
+
+    await user.click(screen.getByRole('button', { name: /clear search/i }));
+
+    expect(store.getState().ui.productSearch).toBe('');
+    expect(screen.getByRole('button', { name: /t-shirts/i })).toBeInTheDocument();
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
   });
 
   it('shows loading skeleton while content is loading', () => {

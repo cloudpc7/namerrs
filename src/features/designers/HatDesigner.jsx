@@ -1,17 +1,19 @@
 /**
- * HatDesigner.jsx — Hat customizer with text or image on front panel.
+ * HatDesigner.jsx — Tabbed hat canvas: text, image, and color panels.
  */
 
 import { useEffect, useRef, useState } from 'react';
+import { ColorPickerField, DesignerTabBar } from '../../ui/components/primitives';
 import ImageCropDialog from './businessCard/ImageCropDialog';
 import HatCanvas from './hat/HatCanvas';
-import { HAT_COLORS } from './hat/constants';
+import { HAT_COLORS, HAT_PANEL, HAT_WIZARD_TABS } from './hat/constants';
 import {
   buildHatPreviewLabel,
   createDefaultHatDesign,
   normalizeHatDesign,
 } from './hat/designModel';
-import { validateColor, validateHatDesign, validateHatText, validateImageFile } from './hat/validation';
+import { validateColor, validateHatText, validateImageFile } from './hat/validation';
+import { formatPrice } from '../../utils/formatPrice';
 
 const readFileAsDataUrl = (file) =>
   new Promise((resolve, reject) => {
@@ -21,7 +23,20 @@ const readFileAsDataUrl = (file) =>
     reader.readAsDataURL(file);
   });
 
-const HatDesigner = ({ design: rawDesign, onChange }) => {
+const CANVAS_PANELS = new Set([HAT_PANEL.TEXT, HAT_PANEL.IMAGE, HAT_PANEL.COLOR]);
+
+const HatDesigner = ({
+  design: rawDesign,
+  onChange,
+  activePanel,
+  activeTab: activeTabProp,
+  onTabChange,
+  tabs = HAT_WIZARD_TABS,
+  designErrors = [],
+  quantityPanel = null,
+  schedulePanel = null,
+}) => {
+  const activeTab = activeTabProp || activePanel || HAT_PANEL.TEXT;
   const design = normalizeHatDesign(rawDesign);
   const [textError, setTextError] = useState('');
   const [colorError, setColorError] = useState('');
@@ -29,6 +44,7 @@ const HatDesigner = ({ design: rawDesign, onChange }) => {
   const [cropSource, setCropSource] = useState(null);
   const fileInputRef = useRef(null);
   const initializedRef = useRef(false);
+  const designRef = useRef(design);
 
   useEffect(() => {
     if (!initializedRef.current && (!rawDesign || !rawDesign.version)) {
@@ -37,8 +53,55 @@ const HatDesigner = ({ design: rawDesign, onChange }) => {
     }
   }, [rawDesign, onChange]);
 
+  useEffect(() => {
+    designRef.current = design;
+  }, [design]);
+
+  useEffect(() => {
+    setUploadError('');
+  }, [activeTab]);
+
   const applyDesign = (next) => onChange(next);
-  const mode = design.inputMode;
+  const showCanvas = CANVAS_PANELS.has(activeTab);
+  const usesHatTabs = Boolean(onTabChange);
+
+  useEffect(() => {
+    if (!usesHatTabs) {
+      return;
+    }
+
+    const current = designRef.current;
+
+    if (activeTab === HAT_PANEL.TEXT && current.inputMode !== 'text') {
+      onChange({ ...current, inputMode: 'text' });
+      return;
+    }
+
+    if (activeTab === HAT_PANEL.IMAGE && current.inputMode !== 'image') {
+      onChange({ ...current, inputMode: 'image' });
+    }
+  }, [activeTab, usesHatTabs, onChange]);
+
+  const handleCompanyNameChange = (value) => {
+    setTextError(validateHatText(value) || '');
+    applyDesign({ ...design, companyName: value, inputMode: 'text' });
+  };
+
+  const handleTextColorChange = (value) => {
+    const error = validateColor(value);
+    setColorError(error || '');
+    if (!error) {
+      applyDesign({ ...design, textColor: value });
+    }
+  };
+
+  const handleHatColorChange = (value) => {
+    const error = validateColor(value);
+    setColorError(error || '');
+    if (!error) {
+      applyDesign({ ...design, hatColor: value });
+    }
+  };
 
   const handleFileSelect = async (event) => {
     const file = event.target.files?.[0];
@@ -68,106 +131,143 @@ const HatDesigner = ({ design: rawDesign, onChange }) => {
   };
 
   return (
-    <div className="space-y-4" aria-label="Hat designer">
-      <HatCanvas design={design} previewLabel={buildHatPreviewLabel(design)} />
+    <div className="card-designer hat-designer" aria-label="Hat designer">
+      <div
+        className={`card-designer__stage${
+          usesHatTabs ? ' card-designer__stage--tabbed' : ''
+        }`}
+      >
+        {usesHatTabs && (
+          <DesignerTabBar
+            tabs={tabs}
+            activeTab={activeTab}
+            onChange={onTabChange}
+            className="designer-tab-bar--on-card"
+          />
+        )}
 
-      <div className="flex gap-2">
-        <button
-          type="button"
-          aria-pressed={mode === 'text'}
-          onClick={() => applyDesign({ ...design, inputMode: 'text' })}
-          className={`rounded-lg px-3 py-2 text-sm ${
-            mode === 'text' ? 'bg-[#1d4ed8] text-white' : 'border border-[#e5e7eb] text-[#374151]'
-          }`}
-        >
-          Company name
-        </button>
-        <button
-          type="button"
-          aria-pressed={mode === 'image'}
-          onClick={() => applyDesign({ ...design, inputMode: 'image' })}
-          className={`rounded-lg px-3 py-2 text-sm ${
-            mode === 'image' ? 'bg-[#1d4ed8] text-white' : 'border border-[#e5e7eb] text-[#374151]'
-          }`}
-        >
-          Logo / image
-        </button>
+        <div className="card-designer__stage-body">
+          {showCanvas && (
+            <div className="card-designer__canvas card-designer__canvas--hat">
+              <HatCanvas design={design} previewLabel={buildHatPreviewLabel(design)} />
+            </div>
+          )}
+
+          {activeTab === HAT_PANEL.TEXT && (
+            <div className="card-designer__panel">
+              <p className="card-designer__callout">
+                Enter a short company or team name to embroider on the front panel.
+              </p>
+
+              <div className="form-field">
+                <label htmlFor="hat-company" className="form-label">
+                  Short company name
+                </label>
+                <input
+                  id="hat-company"
+                  type="text"
+                  maxLength={25}
+                  value={design.companyName}
+                  onChange={(event) => handleCompanyNameChange(event.target.value)}
+                  className="form-input"
+                />
+                {textError && (
+                  <p className="form-error" role="alert">
+                    {textError}
+                  </p>
+                )}
+                <p className="form-hint">Up to 25 characters · letters, numbers, and basic punctuation</p>
+              </div>
+
+              <ColorPickerField
+                label="Text color"
+                value={design.textColor}
+                onChange={handleTextColorChange}
+                error={colorError}
+              />
+            </div>
+          )}
+
+          {activeTab === HAT_PANEL.IMAGE && (
+            <div className="card-designer__panel">
+              <div className="card-designer__toolbar">
+                <button
+                  type="button"
+                  className="card-designer__tool"
+                  onClick={() => fileInputRef.current?.click()}
+                >
+                  Upload logo
+                </button>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
+                  className="sr-only"
+                  onChange={handleFileSelect}
+                />
+              </div>
+
+              <p className="card-designer__callout">
+                Upload a logo or graphic for the front panel. Crop it square before placing on the hat.
+              </p>
+
+              {uploadError && (
+                <p className="card-designer__error" role="alert">
+                  {uploadError}
+                </p>
+              )}
+            </div>
+          )}
+
+          {activeTab === HAT_PANEL.COLOR && (
+            <div className="card-designer__panel">
+              <div>
+                <p className="form-label">Hat color</p>
+                <div className="hat-designer__swatches">
+                  {HAT_COLORS.map((preset) => (
+                    <button
+                      key={preset.id}
+                      type="button"
+                      aria-label={preset.label}
+                      title={preset.label}
+                      onClick={() => handleHatColorChange(preset.hex)}
+                      className={`hat-designer__swatch${
+                        design.hatColor === preset.hex ? ' hat-designer__swatch--active' : ''
+                      }`}
+                      style={{ backgroundColor: preset.hex }}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              <ColorPickerField
+                label="Hat color"
+                value={design.hatColor}
+                onChange={handleHatColorChange}
+                error={colorError}
+              />
+
+              <p className="form-hint hat-designer__price">
+                Pricing: <span className="designer-quantity__muted">{formatPrice(0)}</span> (pending
+                configuration)
+              </p>
+            </div>
+          )}
+
+          {activeTab === 'quantity' && quantityPanel}
+          {activeTab === 'schedule' && schedulePanel}
+        </div>
       </div>
 
-      {mode === 'text' ? (
-        <div>
-          <label htmlFor="hat-company" className="text-sm font-medium text-[#374151]">
-            Short company name
-          </label>
-          <input
-            id="hat-company"
-            type="text"
-            maxLength={25}
-            value={design.companyName}
-            onChange={(e) => {
-              const error = validateHatText(e.target.value);
-              setTextError(error || '');
-              if (!error) applyDesign({ ...design, companyName: e.target.value });
-            }}
-            className="mt-1 w-full rounded-lg border border-[#e5e7eb] px-3 py-2 text-sm"
-          />
-          {textError && <p className="mt-1 text-xs text-red-600">{textError}</p>}
-          <label htmlFor="hat-text-color" className="mt-3 block text-sm font-medium text-[#374151]">
-            Text color
-          </label>
-          <input
-            id="hat-text-color"
-            type="text"
-            value={design.textColor}
-            onChange={(e) => {
-              const error = validateColor(e.target.value);
-              setColorError(error || '');
-              if (!error) applyDesign({ ...design, textColor: e.target.value });
-            }}
-            className="mt-1 w-full rounded-lg border border-[#e5e7eb] px-3 py-2 text-sm"
-          />
-          {colorError && <p className="mt-1 text-xs text-red-600">{colorError}</p>}
-        </div>
-      ) : (
-        <div>
-          <button
-            type="button"
-            onClick={() => fileInputRef.current?.click()}
-            className="rounded-lg border border-[#e5e7eb] px-3 py-2 text-sm font-medium text-[#374151] hover:border-[#1d4ed8]"
-          >
-            Upload logo
-          </button>
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
-            className="hidden"
-            onChange={handleFileSelect}
-          />
-          {uploadError && <p className="mt-2 text-sm text-red-600" role="alert">{uploadError}</p>}
+      {designErrors.length > 0 && (
+        <div className="alert alert--error" role="alert">
+          <ul className="design-errors-list">
+            {designErrors.map((error) => (
+              <li key={error}>{error}</li>
+            ))}
+          </ul>
         </div>
       )}
-
-      <div>
-        <label className="text-sm font-medium text-[#374151]">Hat color</label>
-        <div className="mt-2 flex flex-wrap gap-2">
-          {HAT_COLORS.map((preset) => (
-            <button
-              key={preset.id}
-              type="button"
-              aria-label={preset.label}
-              title={preset.label}
-              onClick={() => applyDesign({ ...design, hatColor: preset.hex })}
-              className={`h-8 w-8 rounded-full border-2 ${
-                design.hatColor === preset.hex ? 'border-[#1d4ed8]' : 'border-[#e5e7eb]'
-              }`}
-              style={{ backgroundColor: preset.hex }}
-            />
-          ))}
-        </div>
-      </div>
-
-      <p className="text-xs text-[#d1d5db]">Pricing: $0.00 (pending configuration)</p>
 
       <ImageCropDialog
         isOpen={Boolean(cropSource)}

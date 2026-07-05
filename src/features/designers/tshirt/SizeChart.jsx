@@ -40,7 +40,6 @@ const SizeChart = ({ fit = 'male' }) => {
           ))}
         </tbody>
       </table>
-      <p className="mt-2 text-xs text-[#9ca3af]">Measurements are approximate industry standards.</p>
     </details>
   );
 };

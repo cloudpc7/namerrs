@@ -8,10 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { X } from 'lucide-react';
 import { useFocusTrap } from '../../hooks/useFocusTrap';
 import { getProductImageUrl } from '../../constants/assets.constants';
-import {
-  selectPricing,
-  selectProductContent,
-} from '../../redux/slices/content.slice';
+import { selectProductContent } from '../../redux/slices/content.slice';
 import { openDesigner } from '../../redux/slices/design.slice';
 import { DESIGNER_MODE } from '../../redux/constants/design.constants';
 import { PRODUCT_DETAIL_STATUS } from '../../redux/constants/productDetail.constants';
@@ -33,7 +30,6 @@ import {
   Button,
   IconButton,
   MediaFrame,
-  PriceDisplay,
   SpecTable,
   Stack,
   Alert,
@@ -51,7 +47,6 @@ const ProductDetailModal = () => {
   const error = useSelector(selectProductDetailError);
   const selectedOptions = useSelector(selectProductDetailOptions);
   const product = useSelector((state) => selectProductContent(state, productId));
-  const pricing = useSelector(selectPricing);
 
   useFocusTrap(isOpen, panelRef, () => dispatch(closeProductDetail()));
 
@@ -80,15 +75,14 @@ const ProductDetailModal = () => {
     return null;
   }
 
-  const price = pricing[productId] ?? 0;
   const imageUrl = getProductImageUrl(productId, product);
   const readOnlySpecs = getReadOnlySpecs(product);
 
-  const handleDesignerOpen = (mode) => {
+  const handleDesignerOpen = () => {
     dispatch(
       openDesigner({
         productId,
-        mode,
+        mode: DESIGNER_MODE.ADD,
         minQuantity: product?.minQuantity || 1,
         initialDesign: buildInitialDesignFromOptions(productId, selectedOptions),
       })
@@ -128,7 +122,7 @@ const ProductDetailModal = () => {
         <div className="product-detail-modal__body">
           {status === PRODUCT_DETAIL_STATUS.LOADING && !product?.options?.length && (
             <Stack gap="md">
-              <Skeleton variant="block" style={{ height: '12rem' }} />
+              <Skeleton variant="block" style={{ height: '7rem', maxWidth: '9.5rem', marginInline: 'auto' }} />
               <Skeleton variant="text" />
               <Skeleton variant="text" style={{ width: '70%' }} />
             </Stack>
@@ -148,10 +142,6 @@ const ProductDetailModal = () => {
                 />
               )}
 
-              {product.description && (
-                <p className="product-detail-modal__description">{product.description}</p>
-              )}
-
               <ProductOptionsForm options={product.options} />
 
               {product.minQuantity > 1 && (
@@ -166,16 +156,9 @@ const ProductDetailModal = () => {
         </div>
 
         <div className="product-detail-modal__footer">
-          <PriceDisplay amount={price} size="lg" showHelper />
-          <div className="cluster product-detail-modal__actions">
-            <Button onClick={() => handleDesignerOpen(DESIGNER_MODE.ADD)}>
+          <div className="product-detail-modal__actions">
+            <Button className="product-detail-modal__cta" onClick={handleDesignerOpen}>
               Add to order
-            </Button>
-            <Button
-              variant="secondary"
-              onClick={() => handleDesignerOpen(DESIGNER_MODE.EDIT)}
-            >
-              Edit design
             </Button>
           </div>
         </div>

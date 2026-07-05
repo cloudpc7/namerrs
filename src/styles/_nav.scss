@@ -37,8 +37,15 @@ $nav-muted: rgba(255, 255, 255, 0.72);
 
 @media (min-width: 1024px) {
   .nav-bar__inner {
-    min-height: 5rem;
+    min-height: 7.25rem;
     gap: space(6);
+  }
+
+  .nav-bar .nav-brand__logo {
+    height: 6.75rem;
+    width: auto;
+    max-width: 16rem;
+    object-fit: contain;
   }
 }
 
@@ -64,12 +71,53 @@ $nav-muted: rgba(255, 255, 255, 0.72);
   color: #fff;
 }
 
+.nav-brand--footer {
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+  background: none;
+  padding: 0;
+  box-shadow: none;
+}
+
 .nav-brand--footer .nav-brand__logo {
-  filter: brightness(0) invert(1);
+  display: block;
+  filter: none;
+  height: 16rem;
+  width: auto;
+  max-width: 16rem;
+  object-fit: contain;
+  background: transparent;
+}
+
+/* Footer logo — mobile only (<=767px): pull copy closer under artwork */
+
+@media (max-width: 767px) {
+  .nav-brand--footer {
+    margin-bottom: -0.5rem;
+  }
+}
+
+/* Footer logo — tablet only (768px–1023px) */
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .nav-brand--footer .nav-brand__logo {
+    height: 18rem;
+    max-width: 18rem;
+  }
+}
+
+/* Footer logo — desktop only (>=1024px) */
+
+@media (min-width: 1024px) {
+  .nav-brand--footer .nav-brand__logo {
+    height: 8.5rem;
+    max-width: 10rem;
+  }
 }
 
 .nav-brand--footer .nav-brand__text {
-  color: #fff;
+  color: var(--color-primary);
 }
 
 /* Desktop links */
@@ -381,24 +429,48 @@ $nav-muted: rgba(255, 255, 255, 0.72);
   color: $nav-orchid;
 }
 
-.nav-drawer__social {
-  margin-bottom: space(4);
+.nav-drawer__social.social-icons {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-rows: repeat(2, auto);
+  gap: space(2) space(3);
+  justify-items: start;
+  align-items: center;
 }
 
-.nav-drawer__contact {
-  display: flex;
-  flex-direction: column;
-  gap: space(2);
+.nav-drawer__social .social-icons__link {
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.9);
 }
 
-.nav-drawer__contact-link {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: $nav-cyan;
-  text-decoration: none;
-}
-
-.nav-drawer__contact-link:hover {
+.nav-drawer__social .social-icons__link:hover {
+  border-color: var(--color-accent-cyan);
+  background: rgba(6, 182, 212, 0.18);
   color: #fff;
-  text-decoration: underline;
+}
+
+.nav-brand--drawer {
+  line-height: 0;
+}
+
+.nav-brand--drawer .nav-brand__logo {
+  display: block;
+  height: 6.25rem;
+  width: auto;
+  max-width: 6.25rem;
+  object-fit: contain;
+  background: transparent;
+}
+
+/* Drawer logo — tablet only (768px–1023px) */
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .nav-brand--drawer .nav-brand__logo {
+    height: 7rem;
+    max-width: 7rem;
+  }
 }

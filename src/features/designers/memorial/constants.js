@@ -23,3 +23,28 @@ export const MAX_NAME_LENGTH = 40;
 export const MAX_MESSAGE_LENGTH = 60;
 export const MAX_UPLOAD_BYTES = 10 * 1024 * 1024;
 export const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
+
+export const MEMORIAL_COLORS = [
+  { id: 'white', label: 'White', hex: '#ffffff' },
+  { id: 'ivory', label: 'Ivory', hex: '#fffff0' },
+  { id: 'cream', label: 'Cream', hex: '#f5f0e6' },
+  { id: 'black', label: 'Black', hex: '#111111' },
+  { id: 'navy', label: 'Navy', hex: '#1e3a5f' },
+  { id: 'gray', label: 'Soft gray', hex: '#e5e7eb' },
+];
+
+export const MEMORIAL_PANEL = {
+  TEXT: 'text',
+  PHOTO: 'photo',
+  SIZE: 'size',
+  COLOR: 'color',
+};
+
+export const MEMORIAL_WIZARD_TABS = [
+  { id: MEMORIAL_PANEL.TEXT, label: 'Text' },
+  { id: MEMORIAL_PANEL.PHOTO, label: 'Photo' },
+  { id: MEMORIAL_PANEL.SIZE, label: 'Size' },
+  { id: MEMORIAL_PANEL.COLOR, label: 'Color' },
+  { id: 'quantity', label: 'Qty' },
+  { id: 'schedule', label: 'Date' },
+];

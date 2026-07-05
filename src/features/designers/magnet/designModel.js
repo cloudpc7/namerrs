@@ -10,6 +10,8 @@ export const createDefaultMagnetDesign = () => ({
   ...createDefaultHatDesign(),
   productType: 'magnet',
   magnetSize: MAGNET_SIZE,
+  hatColor: '#ffffff',
+  textColor: '#000000',
 });
 
 export const normalizeMagnetDesign = (design) => {

@@ -422,7 +422,6 @@ const BusinessCardDesigner = ({
 
       {designErrors.length > 0 && (
         <div className="alert alert--error" role="alert">
-          <strong>Fix these before continuing:</strong>
           <ul className="design-errors-list">
             {designErrors.map((error) => (
               <li key={error}>{error}</li>

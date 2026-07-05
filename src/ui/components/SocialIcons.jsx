@@ -27,8 +27,46 @@ const formatPhoneHref = (phone) => {
   return digits ? `tel:${digits}` : undefined;
 };
 
-const SocialIcons = ({ links = DEFAULT_SOCIAL_LINKS, className = '', dark = false }) => (
+const ContactIconLinks = ({ links, includeContact }) => {
+  if (!includeContact) {
+    return null;
+  }
+
+  return (
+    <>
+      {links?.phone && (
+        <a
+          href={formatPhoneHref(links.phone)}
+          aria-label={`Call us at ${links.phone}`}
+          className="social-icons__link"
+        >
+          <Phone size={ICON_SIZE} aria-hidden="true" />
+        </a>
+      )}
+
+      {links?.email && (
+        <a
+          href={`mailto:${links.email}`}
+          aria-label={`Email us at ${links.email}`}
+          className="social-icons__link"
+        >
+          <Mail size={ICON_SIZE} aria-hidden="true" />
+        </a>
+      )}
+    </>
+  );
+};
+
+const SocialIcons = ({
+  links = DEFAULT_SOCIAL_LINKS,
+  className = '',
+  dark = false,
+  includeContact = true,
+  contactFirst = false,
+}) => (
   <div className={`social-icons${dark ? ' social-icons--dark' : ''} ${className}`.trim()}>
+    {contactFirst && <ContactIconLinks links={links} includeContact={includeContact} />}
+
     {SOCIAL_CONFIG.map(({ key, label, Icon }) => {
       const href = links?.[key];
       if (!href) {
@@ -49,25 +87,7 @@ const SocialIcons = ({ links = DEFAULT_SOCIAL_LINKS, className = '', dark = fals
       );
     })}
 
-    {links?.phone && (
-      <a
-        href={formatPhoneHref(links.phone)}
-        aria-label={`Call us at ${links.phone}`}
-        className="social-icons__link"
-      >
-        <Phone size={ICON_SIZE} aria-hidden="true" />
-      </a>
-    )}
-
-    {links?.email && (
-      <a
-        href={`mailto:${links.email}`}
-        aria-label={`Email us at ${links.email}`}
-        className="social-icons__link"
-      >
-        <Mail size={ICON_SIZE} aria-hidden="true" />
-      </a>
-    )}
+    {!contactFirst && <ContactIconLinks links={links} includeContact={includeContact} />}
   </div>
 );
 

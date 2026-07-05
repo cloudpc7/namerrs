@@ -111,7 +111,7 @@ const CartShell = () => {
       </ul>
 
       <Card padding="md">
-        <PriceDisplay amount={total} size="lg" showHelper />
+        <PriceDisplay amount={total} size="lg" />
         <Button
           className="mt-4 w-full"
           onClick={() => dispatch(setCheckoutStep(CHECKOUT_STEP.CHECKOUT))}

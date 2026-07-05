@@ -28,3 +28,19 @@ export const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
 export const DEFAULT_ELEMENT_SIZE = {
   image: { width: 40, height: 30 },
 };
+
+export const BANNER_PANEL = {
+  IMAGE: 'image',
+  SIZE: 'size',
+  BRIEF: 'brief',
+  COLOR: 'color',
+};
+
+export const BANNER_WIZARD_TABS = [
+  { id: BANNER_PANEL.IMAGE, label: 'Image' },
+  { id: BANNER_PANEL.SIZE, label: 'Size' },
+  { id: BANNER_PANEL.BRIEF, label: 'Brief' },
+  { id: BANNER_PANEL.COLOR, label: 'Color' },
+  { id: 'quantity', label: 'Qty' },
+  { id: 'schedule', label: 'Date' },
+];

@@ -3,12 +3,20 @@
  */
 
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { scrollToTop } from '../../../utils/hashNavigation';
 
 const NavBrand = ({ logoSrc, logoAlt, className = '', onNavigate }) => {
+  const location = useLocation();
   const [logoFailed, setLogoFailed] = useState(false);
 
-  const handleClick = () => {
+  const handleClick = (event) => {
+    if (location.pathname === '/') {
+      event.preventDefault();
+      window.history.replaceState(null, '', '/');
+      scrollToTop('auto');
+    }
+
     onNavigate?.();
   };
 

@@ -51,11 +51,12 @@ const ReviewsSection = () => {
     <Section id="reviews" ariaLabel="Reviews" variant="surface">
       <div className="reviews-section__header">
         <div>
-          <SectionHeading
-            eyebrow="Customer reviews"
-            title="What our customers say"
-            subtitle="Real feedback from local businesses and families in San Jacinto."
-          />
+          <SectionHeading eyebrow="Customer reviews" title="What our customers say" />
+          <p className="section-heading__subtitle reviews-section__subtitle">
+            Real feedback from
+            <br className="reviews-section__subtitle-break" aria-hidden="true" />
+            local businesses and families in San Jacinto.
+          </p>
           {averageRating && (
             <p className="reviews-section__average">
               <span className="review-stars">★</span> {averageRating} average from {reviews.length}{' '}

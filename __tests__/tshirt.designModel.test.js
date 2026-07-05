@@ -4,16 +4,28 @@
 
 import {
   addImageElement,
+  addTextElement,
   createDefaultTshirtDesign,
-  toggleSize,
+  removeElement,
+  selectSize,
   updateFit,
 } from '../src/features/designers/tshirt/designModel';
 
 describe('tshirt designModel', () => {
-  it('createDefaultTshirtDesign includes three text lines', () => {
+  it('createDefaultTshirtDesign includes one centered front text line', () => {
     const design = createDefaultTshirtDesign();
     expect(design.version).toBe(1);
-    expect(design.elements.filter((el) => el.type === 'text')).toHaveLength(3);
+    expect(design.activeView).toBe('front');
+    expect(design.frontPrintPlacement).toBe('front-chest');
+    expect(design.backPrintPlacement).toBe('back-upper');
+
+    const textElements = design.elements.filter((el) => el.type === 'text');
+    expect(textElements).toHaveLength(1);
+    expect(textElements[0].fieldKey).toBe('line1');
+    expect(textElements[0].side).toBe('front');
+    expect(textElements[0].textAlign).toBe('center');
+    expect(textElements[0].y).toBe(34);
+    expect(textElements[0].width).toBe(40);
   });
 
   it('updateFit removes sizes not available for female fit', () => {
@@ -24,14 +36,22 @@ describe('tshirt designModel', () => {
     expect(next.selectedSizes).toEqual(['M']);
   });
 
-  it('toggleSize adds and removes sizes', () => {
+  it('selectSize keeps only one size selected', () => {
     const design = createDefaultTshirtDesign();
-    const withLarge = toggleSize(design, 'L');
-    expect(withLarge.selectedSizes).toContain('L');
+    const withLarge = selectSize(design, 'L');
+    expect(withLarge.selectedSizes).toEqual(['L']);
 
-    const withoutMedium = toggleSize(withLarge, 'M');
-    expect(withoutMedium.selectedSizes).not.toContain('M');
-    expect(withoutMedium.selectedSizes).toContain('L');
+    const withExtraLarge = selectSize(withLarge, 'XL');
+    expect(withExtraLarge.selectedSizes).toEqual(['XL']);
+  });
+
+  it('addTextElement restores a removed text line', () => {
+    const design = createDefaultTshirtDesign();
+    const line1 = design.elements.find((element) => element.fieldKey === 'line1');
+    const withoutLine1 = removeElement(design, line1.id);
+    const restored = addTextElement(withoutLine1, 'line1');
+
+    expect(restored.elements.filter((element) => element.fieldKey === 'line1')).toHaveLength(1);
   });
 
   it('addImageElement enforces max 2 images', () => {

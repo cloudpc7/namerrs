@@ -1,55 +1,118 @@
 /**
- * HatCanvas.jsx — Front-panel hat preview mockup.
+ * HatCanvas.jsx — SVG structured cap preview with front-panel print area.
  */
+
+import {
+  HAT_BUTTON,
+  HAT_CROWN_BRIM_STITCH,
+  HAT_PANEL_SEAMS,
+  HAT_PRINT_SURFACE,
+  HAT_SHAPE_PATH,
+} from './constants';
+import { normalizeHexColor } from '../../../utils/colorUtils';
+
+const isLightHatColor = (value) => {
+  const hex = normalizeHexColor(value);
+  if (!hex) {
+    return false;
+  }
+
+  const red = Number.parseInt(hex.slice(1, 3), 16);
+  const green = Number.parseInt(hex.slice(3, 5), 16);
+  const blue = Number.parseInt(hex.slice(5, 7), 16);
+  const luminance = (0.299 * red + 0.587 * green + 0.114 * blue) / 255;
+
+  return luminance > 0.62;
+};
 
 const HatCanvas = ({ design, previewLabel }) => {
   const isText = design.inputMode === 'text';
+  const isLightHat = isLightHatColor(design.hatColor);
 
   return (
-    <div className="mx-auto w-full max-w-xs">
-      <div
-        aria-label={previewLabel}
-        className="relative mx-auto rounded-lg shadow-md"
-        style={{ aspectRatio: '1 / 1' }}
-      >
-        <div
-          className="absolute inset-x-4 bottom-0 top-8 rounded-t-[40%] border border-[#e5e7eb]"
-          style={{ backgroundColor: design.hatColor }}
-        >
+    <div className="hat-canvas">
+      <div className="hat-canvas__mockup-wrap">
+        <div aria-label={previewLabel} className="hat-canvas__stage">
           <div
-            className="absolute left-1/2 top-0 h-6 w-32 -translate-x-1/2 rounded-b-full"
-            style={{ backgroundColor: design.hatColor, filter: 'brightness(0.9)' }}
-            aria-hidden="true"
-          />
-          <div
-            data-hat-print-area
-            className="absolute left-1/2 top-[28%] flex w-[55%] -translate-x-1/2 items-center justify-center overflow-hidden rounded border border-dashed border-[#9ca3af]/50 bg-white/5"
-            style={{ aspectRatio: '5 / 3', minHeight: '60px' }}
+            className={`hat-canvas__cap${
+              isLightHat ? ' hat-canvas__cap--light' : ' hat-canvas__cap--dark'
+            }`}
           >
-            {isText ? (
-              <span
-                className="px-2 text-center font-semibold leading-tight"
-                style={{ color: design.textColor, fontSize: 'clamp(12px, 4vw, 18px)' }}
-              >
-                {design.companyName || 'Your text'}
-              </span>
-            ) : design.imageSrc ? (
-              <img
-                src={design.imageSrc}
-                alt={design.imageFileName || 'Hat logo'}
-                className="h-full w-full object-contain"
-                style={{
-                  transform: `translate(${design.imageX - 25}%, ${design.imageY - 30}%)`,
-                }}
-                draggable={false}
+            <svg
+              className="hat-canvas__shape"
+              viewBox="0 0 200 140"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path d={HAT_SHAPE_PATH} fill={design.hatColor} stroke="none" />
+              <path
+                className="hat-canvas__crown-brim-stitch"
+                d={HAT_CROWN_BRIM_STITCH}
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="0.9"
+                vectorEffect="non-scaling-stroke"
               />
-            ) : (
-              <span className="text-xs text-[#9ca3af]">Upload logo</span>
-            )}
+              {HAT_PANEL_SEAMS.map((seam) => (
+                <path
+                  key={seam}
+                  className="hat-canvas__seam"
+                  d={seam}
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="0.8"
+                  vectorEffect="non-scaling-stroke"
+                />
+              ))}
+              <circle
+                className="hat-canvas__button"
+                cx={HAT_BUTTON.cx}
+                cy={HAT_BUTTON.cy}
+                r={HAT_BUTTON.r}
+                fill={design.hatColor}
+                stroke="currentColor"
+                strokeWidth="0.8"
+                vectorEffect="non-scaling-stroke"
+              />
+              <path
+                className={`hat-canvas__outline${isLightHat ? ' hat-canvas__outline--light' : ''}`}
+                d={HAT_SHAPE_PATH}
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.2"
+                vectorEffect="non-scaling-stroke"
+              />
+            </svg>
+
+            <div
+              data-hat-print-area
+              className="hat-canvas__print-area"
+              style={{
+                top: `${HAT_PRINT_SURFACE.top}%`,
+                left: `${HAT_PRINT_SURFACE.left}%`,
+                width: `${HAT_PRINT_SURFACE.width}%`,
+                height: `${HAT_PRINT_SURFACE.height}%`,
+              }}
+            >
+              {isText ? (
+                <span className="hat-canvas__text" style={{ color: design.textColor }}>
+                  {design.companyName || 'Your text'}
+                </span>
+              ) : design.imageSrc ? (
+                <img
+                  src={design.imageSrc}
+                  alt={design.imageFileName || 'Hat logo'}
+                  className="hat-canvas__image"
+                  draggable={false}
+                />
+              ) : (
+                <span className="hat-canvas__placeholder">Upload logo</span>
+              )}
+            </div>
           </div>
         </div>
       </div>
-      <p className="mt-2 text-center text-xs text-[#9ca3af]">
+      <p className="hat-canvas__hint">
         Structured 6-panel · vinyl print · one size fits most
       </p>
     </div>

@@ -157,13 +157,18 @@ const CheckoutPanel = ({ onBack }) => {
         <ul className="checkout-summary">
           {items.map((item) => (
             <li key={item.id} className="checkout-summary__row">
-              <span>{item.productName}</span>
+              <span>
+                {item.productName}
+                {item.quantity ? (
+                  <span className="checkout-summary__qty"> · Qty {item.quantity}</span>
+                ) : null}
+              </span>
               <span>{formatPrice(item.lineTotal)}</span>
             </li>
           ))}
         </ul>
         <div className="checkout-summary__total">
-          <PriceDisplay amount={total} size="lg" showHelper />
+          <PriceDisplay amount={total} size="lg" />
         </div>
       </Surface>
 

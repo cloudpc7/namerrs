@@ -49,7 +49,9 @@ describe('HeroSection', () => {
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
       'Namerrs Signs & Printing'
     );
-    expect(screen.getByText('Quality Products. Best Prices Around. Done Fast.')).toBeInTheDocument();
+    expect(screen.getByText('Quality Products.')).toBeInTheDocument();
+    expect(screen.getByText('Best Prices Around.')).toBeInTheDocument();
+    expect(screen.getByText('Done Fast.')).toBeInTheDocument();
   });
 
   it('shows loading skeleton when content is loading', () => {

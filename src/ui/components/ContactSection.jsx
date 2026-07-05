@@ -1,27 +1,20 @@
 /**
- * ContactSection.jsx — Contact form with business details and social links.
+ * ContactSection.jsx — Contact form with marketing value props beside the message form.
  */
 
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { MapPin, Clock, Send } from 'lucide-react';
-import SocialIcons from './SocialIcons';
+import { Clock, MessageSquareQuote, Palette, Send } from 'lucide-react';
 import {
   resetContactForm,
   selectContactError,
   selectContactSubmitStatus,
   submitContactMessage,
 } from '../../redux/slices/contact.slice';
-import { selectSocialLinks } from '../../redux/slices/content.slice';
 import { showToast } from '../../redux/slices/ui.slice';
 import { ASYNC_STATUS } from '../../redux/constants/async.constants';
 import { TOAST_TYPE } from '../../redux/constants/ui.constants';
-import { DEFAULT_SOCIAL_LINKS } from '../../constants/social.constants';
-import {
-  BUSINESS_ADDRESS,
-  BUSINESS_HOURS,
-  BUSINESS_LOCATION_LABEL,
-} from '../../constants/business.constants';
+import { CONTACT_VALUE_PROPS } from '../../constants/business.constants';
 import {
   Section,
   SectionHeading,
@@ -32,19 +25,12 @@ import {
   Alert,
 } from './primitives';
 
-const formatPhoneHref = (phone) => {
-  const digits = String(phone).replace(/\D/g, '');
-  return digits ? `tel:${digits}` : undefined;
-};
+const VALUE_PROP_ICONS = [MessageSquareQuote, Palette, Clock];
 
 const ContactSection = () => {
   const dispatch = useDispatch();
-  const socialFromStore = useSelector(selectSocialLinks);
   const submitStatus = useSelector(selectContactSubmitStatus);
   const error = useSelector(selectContactError);
-  const socialLinks = Object.keys(socialFromStore || {}).length
-    ? socialFromStore
-    : DEFAULT_SOCIAL_LINKS;
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -77,107 +63,124 @@ const ContactSection = () => {
       <div className="contact-grid">
         <Card padding="lg" className="contact-grid__info">
           <SectionHeading
-            eyebrow="Visit or call"
-            title="Namerrs Signs & Printing"
-            subtitle="Questions about an order or a custom project? Reach out — we typically respond within one business day."
+            className="contact-section__heading"
+            eyebrow="Get in touch"
+            title="Tell us what you're printing"
           />
-
-          <Stack gap="md" className="contact-grid__details">
-            <div className="contact-detail">
-              <MapPin size={18} className="contact-detail__icon" aria-hidden="true" />
-              <div>
-                <p className="contact-detail__label">{BUSINESS_LOCATION_LABEL}</p>
-                <p className="contact-detail__value">
-                  {BUSINESS_ADDRESS.street}
-                  <br />
-                  {BUSINESS_ADDRESS.city}, {BUSINESS_ADDRESS.state} {BUSINESS_ADDRESS.zip}
-                </p>
-              </div>
-            </div>
-
-            <div className="contact-detail">
-              <Clock size={18} className="contact-detail__icon" aria-hidden="true" />
-              <p className="contact-detail__value">{BUSINESS_HOURS}</p>
-            </div>
-
-            {socialLinks.phone && (
-              <p className="contact-detail__value">
-                <a href={formatPhoneHref(socialLinks.phone)} className="contact-detail__link">
-                  {socialLinks.phone}
-                </a>
-              </p>
-            )}
-
-            {socialLinks.email && (
-              <p className="contact-detail__value">
-                <a href={`mailto:${socialLinks.email}`} className="contact-detail__link">
-                  {socialLinks.email}
-                </a>
-              </p>
-            )}
-          </Stack>
-
-          <div className="contact-grid__social">
-            <p className="form-label">Connect with us</p>
-            <SocialIcons links={socialLinks} />
+          <div className="section-heading__subtitle-group contact-section__subtitle-group">
+            <p className="section-heading__subtitle">
+              Questions about an order or
+              <br className="contact-section__subtitle-break" aria-hidden="true" />
+              {' '}a custom project?
+            </p>
+            <p className="section-heading__subtitle">
+              Send a message — we typically respond within one business day.
+            </p>
           </div>
+
+          <ul className="contact-value-list">
+            {CONTACT_VALUE_PROPS.map((item, index) => {
+              const Icon = VALUE_PROP_ICONS[index % VALUE_PROP_ICONS.length];
+
+              return (
+                <li key={item.title} className="contact-value-list__item">
+                  <div className="contact-value-list__icon" aria-hidden="true">
+                    <Icon size={18} />
+                  </div>
+                  <div>
+                    <p className="contact-value-list__title">{item.title}</p>
+                    <p className="contact-value-list__desc">{item.description}</p>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
         </Card>
 
-        <Card padding="lg" variant="elevated">
-          <h3 className="panel-header__title">Send a message</h3>
-          <p className="form-hint" style={{ marginTop: '0.5rem', fontSize: '0.875rem' }}>
-            Tell us what you need — quotes, design help, or order questions.
-          </p>
+        <article className="contact-form-panel" aria-labelledby="contact-form-title">
+          <header className="contact-form-panel__header">
+            <div className="contact-form-panel__header-icon" aria-hidden="true">
+              <Send size={22} />
+            </div>
+            <div className="contact-form-panel__header-copy">
+              <p className="contact-form-panel__eyebrow">Get in touch</p>
+              <h3 id="contact-form-title" className="contact-form-panel__title">
+                Send a message
+              </h3>
+              <p className="contact-form-panel__subtitle">
+                Quotes, design help, or order questions — tell us what you need.
+              </p>
+            </div>
+          </header>
 
-          <form onSubmit={handleSubmit} className="stack stack--lg" style={{ marginTop: '1.5rem' }}>
-            <TextField
-              id="contact-name"
-              label="Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-              maxLength={80}
-            />
-            <TextField
-              id="contact-email"
-              label="Email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <TextField
-              id="contact-phone"
-              label="Phone (optional)"
-              type="tel"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-            />
-            <TextField
-              id="contact-message"
-              label="How can we help?"
-              as="textarea"
-              rows={4}
-              required
-              minLength={5}
-              maxLength={500}
-              placeholder="e.g. I need a quote for 500 business cards"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-            />
+          <form onSubmit={handleSubmit} className="contact-form-panel__form" noValidate>
+            <div className="contact-form-panel__fields">
+              <div className="contact-form-panel__row">
+                <TextField
+                  id="contact-name"
+                  label="Name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                  maxLength={80}
+                  autoComplete="name"
+                />
+                <TextField
+                  id="contact-email"
+                  label="Email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  autoComplete="email"
+                />
+              </div>
+              <TextField
+                id="contact-phone"
+                label="Phone"
+                type="tel"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                hint="Optional — we’ll call back if you prefer."
+                autoComplete="tel"
+              />
+              <TextField
+                id="contact-message"
+                label="How can we help?"
+                as="textarea"
+                rows={5}
+                required
+                minLength={5}
+                maxLength={500}
+                placeholder="e.g. I need a quote for 500 business cards"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                hint="Up to 500 characters"
+              />
+            </div>
 
-            {error && <Alert variant="error">{error}</Alert>}
+            {error && (
+              <div className="contact-form-panel__alert">
+                <Alert variant="error">{error}</Alert>
+              </div>
+            )}
 
-            <Button
-              type="submit"
-              disabled={submitStatus === ASYNC_STATUS.SUBMITTING}
-              className="min-h-11"
-            >
-              <Send size={16} aria-hidden="true" />
-              {submitStatus === ASYNC_STATUS.SUBMITTING ? 'Sending…' : 'Send message'}
-            </Button>
+            <div className="contact-form-panel__footer">
+              <Button
+                type="submit"
+                size="lg"
+                disabled={submitStatus === ASYNC_STATUS.SUBMITTING}
+                className="contact-form-panel__submit"
+              >
+                <Send size={18} aria-hidden="true" />
+                {submitStatus === ASYNC_STATUS.SUBMITTING ? 'Sending…' : 'Send message'}
+              </Button>
+              <p className="form-hint contact-form-panel__note">
+                We typically respond within one business day.
+              </p>
+            </div>
           </form>
-        </Card>
+        </article>
       </div>
     </Section>
   );

@@ -14,24 +14,22 @@ jest.mock('react-easy-crop', () => ({
 }));
 
 describe('TshirtDesigner', () => {
-  it('renders shirt canvas and fit controls', () => {
+  it('renders shirt canvas with a single-line hint', () => {
     const onChange = jest.fn();
     render(
       <TshirtDesigner design={createDefaultTshirtDesign()} onChange={onChange} />
     );
 
     expect(screen.getByLabelText(/t-shirt designer/i)).toBeInTheDocument();
-    expect(screen.getByText(/drag elements onto the print area/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/male \/ unisex/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/female/i)).toBeInTheDocument();
+    expect(screen.getByText(/tap a line to type/i)).toBeInTheDocument();
   });
 
-  it('changes fit when female is selected', async () => {
+  it('changes fit when female is selected on sizes tab', async () => {
     const user = userEvent.setup();
     const onChange = jest.fn();
     const design = createDefaultTshirtDesign();
 
-    render(<TshirtDesigner design={design} onChange={onChange} />);
+    render(<TshirtDesigner design={design} onChange={onChange} activePanel="sizes" />);
 
     await user.click(screen.getByLabelText(/female/i));
 
@@ -40,23 +38,49 @@ describe('TshirtDesigner', () => {
     );
   });
 
-  it('shows size chart', () => {
+  it('shows size chart on sizes tab', () => {
     const onChange = jest.fn();
-    render(<TshirtDesigner design={createDefaultTshirtDesign()} onChange={onChange} />);
+    render(
+      <TshirtDesigner design={createDefaultTshirtDesign()} onChange={onChange} activePanel="sizes" />
+    );
     expect(screen.getByText(/size chart/i)).toBeInTheDocument();
   });
 
-  it('applies shirt color preset', async () => {
+  it('applies shirt color preset on color tab', async () => {
     const user = userEvent.setup();
     const onChange = jest.fn();
     const design = createDefaultTshirtDesign();
 
-    render(<TshirtDesigner design={design} onChange={onChange} />);
+    render(<TshirtDesigner design={design} onChange={onChange} activePanel="color" />);
 
     await user.click(screen.getByLabelText('Navy'));
 
     expect(onChange).toHaveBeenCalledWith(
       expect.objectContaining({ shirtColor: '#1e3a5f' })
     );
+  });
+
+  it('flips to back of shirt from canvas control', async () => {
+    const user = userEvent.setup();
+    const onChange = jest.fn();
+    const design = createDefaultTshirtDesign();
+
+    render(<TshirtDesigner design={design} onChange={onChange} />);
+
+    await user.click(screen.getByRole('button', { name: /flip shirt — show back/i }));
+
+    expect(onChange).toHaveBeenCalledWith(
+      expect.objectContaining({ activeView: 'back' })
+    );
+  });
+
+  it('shows back print placement on print tab', () => {
+    const onChange = jest.fn();
+    render(
+      <TshirtDesigner design={createDefaultTshirtDesign()} onChange={onChange} activePanel="print" />
+    );
+
+    expect(screen.getByLabelText(/back print placement/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/front print placement/i)).toBeInTheDocument();
   });
 });

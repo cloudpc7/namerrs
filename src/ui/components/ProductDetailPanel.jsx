@@ -4,6 +4,7 @@
 
 import { X } from 'lucide-react';
 import { getProductImageUrl } from '../../constants/assets.constants';
+
 import {
   Button,
   Card,
@@ -50,10 +51,6 @@ const ProductDetailPanel = ({
         )}
 
         <Stack gap="md" className="product-detail-panel__info">
-          {product?.description && (
-            <p className="product-detail-panel__description">{product.description}</p>
-          )}
-
           <SpecTable specs={product?.specs || []} />
 
           {product?.minQuantity && (
@@ -63,16 +60,10 @@ const ProductDetailPanel = ({
           )}
 
           <Surface padding="md" className="product-detail-panel__actions">
-            <PriceDisplay amount={price} size="lg" showHelper />
-            <div className="cluster product-detail-panel__buttons">
+            <PriceDisplay amount={price} size="lg" />
+            <div className="product-detail-panel__buttons">
               <Button onClick={() => onDesignerOpen(productId, 'add', product?.minQuantity)}>
                 Add to order
-              </Button>
-              <Button
-                variant="secondary"
-                onClick={() => onDesignerOpen(productId, 'edit', product?.minQuantity)}
-              >
-                Edit design
               </Button>
             </div>
           </Surface>

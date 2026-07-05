@@ -20,7 +20,7 @@ const AccordionItem = ({ id, question, answer, isOpen, onToggle }) => {
           onClick={onToggle}
           className="accordion__trigger"
         >
-          {question}
+          <span className="accordion__trigger-text">{question}</span>
           <ChevronDown
             size={18}
             aria-hidden="true"

@@ -3,7 +3,9 @@
  */
 
 import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { handleRouteScroll } from '../../utils/hashNavigation';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import HttpErrorBanner from '../components/HttpErrorBanner';
@@ -17,8 +19,13 @@ import { CONTENT_STATUS } from '../../redux/constants/content.constants';
 
 const MainLayout = ({ children }) => {
   const dispatch = useDispatch();
+  const location = useLocation();
   const status = useSelector(selectContentStatus);
   const contentError = useSelector(selectContentError);
+
+  useEffect(() => {
+    handleRouteScroll(location.pathname, location.hash);
+  }, [location.pathname, location.hash]);
 
   useEffect(() => {
     dispatch(fetchContent());

@@ -5,7 +5,7 @@
 import { useSpring, animated } from '@react-spring/web';
 import { ChevronDown } from 'lucide-react';
 import { getProductImageUrl } from '../../constants/assets.constants';
-import { PRICING_HELPER_TEXT } from '../../constants/business.constants';
+
 import { formatPrice } from '../../utils/formatPrice';
 import Button from './primitives/Button';
 
@@ -131,14 +131,10 @@ const ProductAccordionItem = ({
               <p className="text-lg font-semibold text-[var(--color-text-disabled)]">
                 {formatPrice(price)}
               </p>
-              <p className="mt-1 text-xs text-[var(--color-text-disabled)]">{PRICING_HELPER_TEXT}</p>
             </div>
 
             <div className="flex flex-wrap gap-3">
               <Button onClick={() => onDesignerOpen(productId, 'add')}>Add to order</Button>
-              <Button variant="secondary" onClick={() => onDesignerOpen(productId, 'edit')}>
-                Edit design
-              </Button>
             </div>
           </div>
         </div>

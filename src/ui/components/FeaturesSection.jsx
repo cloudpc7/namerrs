@@ -15,11 +15,15 @@ const FeaturesSection = () => {
   const features = home?.features?.length ? home.features : DEFAULT_FEATURES;
 
   return (
-    <Section ariaLabel="Features">
+    <Section ariaLabel="Features" className="features-section">
       <SectionHeading
+        className="features-section__heading"
         eyebrow="Why Namerrs"
         title="Everything you need for custom print & signs"
-        subtitle="Local expertise, online convenience — design your order and schedule completion from one place."
+        subtitle={[
+          'Local expertise, online convenience —',
+          'Design your order and schedule completion from one place.',
+        ]}
         align="center"
       />
 

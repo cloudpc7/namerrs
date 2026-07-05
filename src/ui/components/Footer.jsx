@@ -2,22 +2,47 @@
  * Footer.jsx — Site footer with logo, NAP, navigation, and social links.
  */
 
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import SocialIcons from './SocialIcons';
+import HashLink from './HashLink';
 import { NavBrand } from './nav';
 import { FOOTER_LINKS, POWERED_BY } from '../../constants/navigation.constants';
-import { DEFAULT_SOCIAL_LINKS, LOGO_PATH } from '../../constants/social.constants';
+import { DEFAULT_SOCIAL_LINKS } from '../../constants/social.constants';
+import { FOOTER_LOGO_PATH } from '../../constants/assets.constants';
 import { selectSocialLinks } from '../../redux/slices/content.slice';
 import {
   BUSINESS_ADDRESS,
   BUSINESS_HOURS,
-  BUSINESS_LOCATION_LABEL,
 } from '../../constants/business.constants';
+import { handleHashHref, parseHashHref } from '../../utils/hashNavigation';
 
-const formatPhoneHref = (phone) => {
-  const digits = String(phone).replace(/\D/g, '');
-  return digits ? `tel:${digits}` : undefined;
+const FooterLink = ({ href, label }) => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { path, sectionId } = parseHashHref(href);
+
+  if (sectionId) {
+    return (
+      <HashLink href={href} className="site-footer__link">
+        {label}
+      </HashLink>
+    );
+  }
+
+  return (
+    <Link
+      to={href}
+      className="site-footer__link"
+      onClick={() => {
+        if (location.pathname === path) {
+          handleHashHref(href, { pathname: location.pathname, navigate });
+        }
+      }}
+    >
+      {label}
+    </Link>
+  );
 };
 
 const Footer = () => {
@@ -31,56 +56,55 @@ const Footer = () => {
     <footer className="site-footer">
       <div className="site-footer__inner">
         <div className="site-footer__grid">
-          <div>
+          <div className="site-footer__brand">
             <NavBrand
-              logoSrc={LOGO_PATH}
+              logoSrc={FOOTER_LOGO_PATH}
               logoAlt="Namerrs Signs and Printing"
               className="nav-brand--footer"
             />
             <p className="site-footer__brand-desc">
-              Custom signs, printing, and apparel in {BUSINESS_LOCATION_LABEL}. Design online and
-              schedule your order completion in one place.
+              <span className="site-footer__brand-desc-line">
+                Custom signs, printing, and apparel in San Jacinto, CA.
+              </span>
+              <span className="site-footer__brand-desc-line">
+                Design online and schedule your order in one place.
+              </span>
             </p>
-            <div className="site-footer__meta">
-              <p>
+          </div>
+
+          <div className="site-footer__visit">
+            <p className="site-footer__heading">Visit us</p>
+            <address className="site-footer__meta">
+              <p className="site-footer__meta-line">
                 {BUSINESS_ADDRESS.street}
                 <br />
                 {BUSINESS_ADDRESS.city}, {BUSINESS_ADDRESS.state} {BUSINESS_ADDRESS.zip}
               </p>
-              {socialLinks.phone && (
-                <p>
-                  <a href={formatPhoneHref(socialLinks.phone)}>{socialLinks.phone}</a>
-                </p>
-              )}
-              {socialLinks.email && (
-                <p>
-                  <a href={`mailto:${socialLinks.email}`}>{socialLinks.email}</a>
-                </p>
-              )}
-              <p>{BUSINESS_HOURS}</p>
-            </div>
+              <p className="site-footer__meta-line site-footer__hours">{BUSINESS_HOURS}</p>
+            </address>
           </div>
 
-          <nav aria-label="Footer navigation">
-            <p className="site-footer__heading">Sitemap</p>
-            <div className="site-footer__links">
-              {FOOTER_LINKS.map((link) =>
-                link.href.startsWith('/#') ? (
-                  <a key={link.href} href={link.href} className="site-footer__link">
-                    {link.label}
-                  </a>
-                ) : (
-                  <Link key={link.href} to={link.href} className="site-footer__link">
-                    {link.label}
-                  </Link>
-                )
-              )}
-            </div>
+          <nav className="site-footer__nav" aria-label="Footer navigation">
+            <p className="site-footer__heading">Quick links</p>
+            <ul className="site-footer__links">
+              {FOOTER_LINKS.map((link) => (
+                <li key={link.href}>
+                  <FooterLink href={link.href} label={link.label} />
+                </li>
+              ))}
+            </ul>
           </nav>
 
-          <div>
+          <div className="site-footer__connect">
             <p className="site-footer__heading">Connect</p>
-            <SocialIcons links={socialLinks} dark className="site-footer__social" />
+            <p className="site-footer__connect-desc">Follow us for updates and inspiration.</p>
+            <SocialIcons
+              links={socialLinks}
+              dark
+              includeContact
+              contactFirst
+              className="site-footer__social"
+            />
           </div>
         </div>
 

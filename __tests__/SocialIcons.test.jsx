@@ -21,4 +21,23 @@ describe('SocialIcons', () => {
       'tel:9513500270'
     );
   });
+
+  it('can hide phone and email when includeContact is false', () => {
+    render(<SocialIcons links={DEFAULT_SOCIAL_LINKS} includeContact={false} />);
+
+    expect(screen.getByRole('link', { name: /instagram/i })).toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: /call us at/i })).not.toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: /email us at/i })).not.toBeInTheDocument();
+  });
+
+  it('renders phone and email before social icons when contactFirst is true', () => {
+    render(<SocialIcons links={DEFAULT_SOCIAL_LINKS} contactFirst />);
+
+    const links = screen.getAllByRole('link');
+    const labels = links.map((link) => link.getAttribute('aria-label'));
+
+    expect(labels[0]).toMatch(/call us at/i);
+    expect(labels[1]).toMatch(/email us at/i);
+    expect(labels[2]).toMatch(/instagram/i);
+  });
 });

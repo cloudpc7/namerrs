@@ -37,11 +37,28 @@ const buildInitialSizeQuantities = (design) => {
   return sizes.reduce((acc, size) => ({ ...acc, [size]: 1 }), {});
 };
 
+const DESIGN_TAB_DEFAULTS = {
+  businessCards: 'text',
+  tshirts: 'text',
+  banners: 'image',
+  hats: 'text',
+  magnets: 'text',
+  memorial: 'text',
+};
+
+const getDefaultDesignTab = (productId) => DESIGN_TAB_DEFAULTS[productId] || 'text';
+
 const DesignerWizard = () => {
   const dispatch = useDispatch();
   const productId = useSelector(selectDesignerProductId);
-  const isBusinessCardWizard = productId === 'businessCards';
-  const [activeTab, setActiveTab] = useState('text');
+  const isTabbedWizard =
+    productId === 'businessCards' ||
+    productId === 'tshirts' ||
+    productId === 'banners' ||
+    productId === 'hats' ||
+    productId === 'magnets' ||
+    productId === 'memorial';
+  const [activeTab, setActiveTab] = useState(() => getDefaultDesignTab(productId));
   const wizard = useSelector(selectWizardState);
   const product = useSelector((state) => selectProductContent(state, productId));
   const pricing = useSelector(selectPricing);
@@ -63,7 +80,7 @@ const DesignerWizard = () => {
   const minDate = getMinimumCompletionDate().toISOString().slice(0, 10);
 
   useEffect(() => {
-    setActiveTab('text');
+    setActiveTab(getDefaultDesignTab(productId));
   }, [productId]);
 
   const { totalQuantity, lineTotal, unitPrice } = useMemo(() => {
@@ -160,7 +177,7 @@ const DesignerWizard = () => {
     }
   };
 
-  const handleBusinessCardTabChange = (tabId) => {
+  const handleTabbedWizardChange = (tabId) => {
     if (tabId === 'quantity') {
       const errors = validateDesignStep(productId, design);
       if (errors.length) {
@@ -174,7 +191,7 @@ const DesignerWizard = () => {
       const errors = validateDesignStep(productId, design);
       if (errors.length) {
         dispatch(setWizardDesignErrors(errors));
-        setActiveTab('text');
+        setActiveTab(getDefaultDesignTab(productId));
         return;
       }
       dispatch(setWizardDesignErrors([]));
@@ -192,6 +209,16 @@ const DesignerWizard = () => {
   };
 
   const handleAddToCart = () => {
+    const quantityError = validateQuantityStep();
+    if (quantityError) {
+      dispatch(setWizardQuantityError(quantityError));
+      if (isTabbedWizard) {
+        setActiveTab('quantity');
+      }
+      return;
+    }
+    dispatch(setWizardQuantityError(''));
+
     if (!isValidCompletionDate(completionDate)) {
       dispatch(setWizardScheduleError('Please allow at least 5 business days for production.'));
       return;
@@ -217,7 +244,7 @@ const DesignerWizard = () => {
     return <Alert variant="info">Designer not available for this product.</Alert>;
   }
 
-  if (isBusinessCardWizard) {
+  if (isTabbedWizard) {
     return (
       <div className="designer-wizard designer-wizard--tabbed">
         <div className="designer-wizard__body">
@@ -226,7 +253,7 @@ const DesignerWizard = () => {
             onChange={handleDesignChange}
             product={product}
             activeTab={activeTab}
-            onTabChange={handleBusinessCardTabChange}
+            onTabChange={handleTabbedWizardChange}
             designErrors={designErrors}
             quantityPanel={
               <QuantityStepComponent
@@ -243,7 +270,7 @@ const DesignerWizard = () => {
               />
             }
             schedulePanel={
-              <Stack gap="md">
+              <div className="card-designer__panel" aria-label="Schedule order">
                 <div className="form-field">
                   <label htmlFor="completion-date" className="form-label">
                     Requested completion date
@@ -270,7 +297,7 @@ const DesignerWizard = () => {
                 <Button className="w-full" onClick={handleAddToCart}>
                   Add to cart
                 </Button>
-              </Stack>
+              </div>
             }
           />
         </div>
@@ -296,7 +323,6 @@ const DesignerWizard = () => {
             />
             {designErrors.length > 0 && (
               <div className="alert alert--error" role="alert">
-                <strong>Fix these before continuing:</strong>
                 <ul className="design-errors-list">
                   {designErrors.map((error) => (
                     <li key={error}>{error}</li>
@@ -323,27 +349,29 @@ const DesignerWizard = () => {
         )}
 
         {step === WIZARD_STEP.SCHEDULE && (
-          <div className="form-field">
-            <label htmlFor="completion-date" className="form-label">
-              Requested completion date
-            </label>
-            <input
-              id="completion-date"
-              type="date"
-              min={minDate}
-              value={completionDate}
-              onChange={(event) => dispatch(setWizardCompletionDate(event.target.value))}
-              className="form-input"
-            />
-            {scheduleError && (
-              <p className="form-error" role="alert">
-                {scheduleError}
-              </p>
-            )}
-            {completionDate && isValidCompletionDate(completionDate) && (
-              <p className="form-hint">Scheduled for {formatDateLabel(completionDate)}</p>
-            )}
-            <p className="form-hint">Please allow at least 5 business days for production.</p>
+          <div className="card-designer__panel" aria-label="Schedule order">
+            <div className="form-field">
+              <label htmlFor="completion-date" className="form-label">
+                Requested completion date
+              </label>
+              <input
+                id="completion-date"
+                type="date"
+                min={minDate}
+                value={completionDate}
+                onChange={(event) => dispatch(setWizardCompletionDate(event.target.value))}
+                className="form-input"
+              />
+              {scheduleError && (
+                <p className="form-error" role="alert">
+                  {scheduleError}
+                </p>
+              )}
+              {completionDate && isValidCompletionDate(completionDate) && (
+                <p className="form-hint">Scheduled for {formatDateLabel(completionDate)}</p>
+              )}
+              <p className="form-hint">Please allow at least 5 business days for production.</p>
+            </div>
           </div>
         )}
       </div>

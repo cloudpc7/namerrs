@@ -3,7 +3,8 @@
  */
 
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { handleHashHref } from '../../../utils/hashNavigation';
 import { Search } from 'lucide-react';
 import { IconButton, SearchField } from '../primitives';
 
@@ -14,6 +15,7 @@ const NavSearch = ({
   onCloseMenu,
 }) => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState(value);
   const [isExpanded, setIsExpanded] = useState(variant === 'drawer');
 
@@ -27,11 +29,7 @@ const NavSearch = ({
     setIsExpanded(false);
     onCloseMenu?.();
 
-    if (location.pathname !== '/') {
-      window.location.href = '/#products';
-    } else {
-      document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' });
-    }
+    handleHashHref('/#products', { pathname: location.pathname, navigate });
   };
 
   if (variant === 'drawer') {

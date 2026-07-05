@@ -7,7 +7,7 @@ import Cropper from 'react-easy-crop';
 import Modal from '../../../ui/components/Modal';
 import { getCroppedImage } from './cropImage';
 
-const ImageCropDialog = ({ isOpen, imageSrc, onClose, onComplete }) => {
+const ImageCropDialog = ({ isOpen, imageSrc, onClose, onComplete, aspect = 1 }) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
@@ -40,7 +40,7 @@ const ImageCropDialog = ({ isOpen, imageSrc, onClose, onComplete }) => {
             image={imageSrc}
             crop={crop}
             zoom={zoom}
-            aspect={1}
+            aspect={aspect}
             onCropChange={setCrop}
             onZoomChange={setZoom}
             onCropComplete={handleCropComplete}

@@ -69,7 +69,6 @@ const Navbar = ({
       <MobileNav
         isOpen={isDrawerOpen}
         onClose={closeDrawer}
-        logoSrc={logoSrc}
         logoAlt={logoAlt}
         links={links}
         socialLinks={socialLinks}

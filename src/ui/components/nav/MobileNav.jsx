@@ -14,16 +14,11 @@ import NavBrand from './NavBrand';
 import NavCta from './NavCta';
 import NavLink from './NavLink';
 import NavSearch from './NavSearch';
-
-const formatPhoneHref = (phone) => {
-  const digits = String(phone || '').replace(/\D/g, '');
-  return digits ? `tel:${digits}` : null;
-};
+import { FOOTER_LOGO_PATH } from '../../../constants/assets.constants';
 
 const MobileNav = ({
   isOpen,
   onClose,
-  logoSrc,
   logoAlt,
   links,
   socialLinks = {},
@@ -65,8 +60,6 @@ const MobileNav = ({
     return null;
   }
 
-  const phoneHref = formatPhoneHref(socialLinks?.phone);
-
   const drawer = (
     <div className={`nav-drawer-host${isOpen ? '' : ' nav-drawer-host--closed'}`} aria-hidden={!isOpen}>
       <animated.button
@@ -88,7 +81,12 @@ const MobileNav = ({
         className="nav-drawer"
       >
         <header className="nav-drawer__header">
-          <NavBrand logoSrc={logoSrc} logoAlt={logoAlt} onNavigate={onClose} />
+          <NavBrand
+            logoSrc={FOOTER_LOGO_PATH}
+            logoAlt={logoAlt}
+            className="nav-brand--drawer"
+            onNavigate={onClose}
+          />
           <IconButton label="Close menu" onClick={onClose}>
             <X size={22} aria-hidden="true" />
           </IconButton>
@@ -122,19 +120,13 @@ const MobileNav = ({
 
         <footer className="nav-drawer__footer">
           <p className="nav-drawer__footer-label">Connect with us</p>
-          <SocialIcons links={socialLinks} dark className="nav-drawer__social" />
-          <div className="nav-drawer__contact">
-            {phoneHref && (
-              <a href={phoneHref} className="nav-drawer__contact-link">
-                {socialLinks.phone}
-              </a>
-            )}
-            {socialLinks?.email && (
-              <a href={`mailto:${socialLinks.email}`} className="nav-drawer__contact-link">
-                {socialLinks.email}
-              </a>
-            )}
-          </div>
+          <SocialIcons
+            links={socialLinks}
+            dark
+            includeContact
+            contactFirst
+            className="nav-drawer__social"
+          />
         </footer>
       </animated.aside>
     </div>

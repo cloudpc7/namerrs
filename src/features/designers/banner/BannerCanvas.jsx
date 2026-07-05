@@ -11,21 +11,21 @@ const BannerCanvas = ({
   previewLabel,
   onSelectElement,
   onMoveElement,
+  onResizeElement,
   onRemoveElement,
 }) => {
   const aspectRatio = getAspectRatio(design);
   const { width, height } = getDimensions(design);
 
   return (
-    <div className="mx-auto w-full max-w-lg">
+    <div className="banner-canvas">
       <div
         aria-label={previewLabel}
         data-banner-canvas
-        className="relative mx-auto w-full overflow-hidden rounded-lg border-2 border-[#374151] shadow-md"
+        className="banner-canvas__preview"
         style={{
           aspectRatio,
           backgroundColor: design.backgroundColor,
-          maxHeight: '280px',
         }}
       >
         {design.elements.map((element) => (
@@ -35,12 +35,13 @@ const BannerCanvas = ({
             isSelected={selectedElementId === element.id}
             onSelect={onSelectElement}
             onMove={onMoveElement}
+            onResize={onResizeElement}
             onRemove={onRemoveElement}
           />
         ))}
       </div>
-      <p className="mt-2 text-center text-xs text-[#9ca3af]">
-        {width && height ? `${width} × ${height} ft` : 'Select dimensions'} — drag images to position
+      <p className="banner-canvas__hint">
+        {width && height ? `${width} × ${height} ft` : 'Select dimensions'} — drag to move, corner handle to resize
       </p>
     </div>
   );

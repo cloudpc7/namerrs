@@ -168,6 +168,12 @@
   }
 }
 
+.form-input--textarea {
+  min-height: 5.5rem;
+  resize: vertical;
+  line-height: 1.5;
+}
+
 .form-input--search {
   padding-left: 2.5rem;
   border-radius: radius(full);
@@ -267,6 +273,7 @@
   background: transparent;
   font-size: 0.875rem;
   font-weight: 600;
+  line-height: 1.4;
   text-align: left;
   color: var(--color-text-primary);
   cursor: pointer;
@@ -280,6 +287,11 @@
     outline: none;
     box-shadow: inset 0 0 0 2px var(--color-focus-ring);
   }
+}
+
+.accordion__trigger-text {
+  flex: 1;
+  min-width: 0;
 }
 
 .accordion__trigger-icon {
@@ -393,34 +405,61 @@
 
 /* Spec table */
 
+.spec-table-panel {
+  display: flex;
+  flex-direction: column;
+  gap: space(2);
+}
+
+.spec-table-panel__label {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.spec-table-panel__surface {
+  overflow: hidden;
+  border: 1px solid rgba(17, 24, 39, 0.09);
+  border-radius: radius(xl);
+  background: #fff;
+  box-shadow:
+    0 2px 6px rgba(17, 24, 39, 0.06),
+    0 10px 24px rgba(17, 24, 39, 0.09);
+}
+
 .spec-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.875rem;
-  border-radius: radius(lg);
-  overflow: hidden;
-  box-shadow: shadow(sm);
 }
 
 .spec-table th,
 .spec-table td {
   padding: space(3) space(4);
   text-align: left;
+  vertical-align: top;
 }
 
 .spec-table tr + tr th,
 .spec-table tr + tr td {
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid rgba(17, 24, 39, 0.07);
 }
 
 .spec-table th {
-  width: 40%;
-  font-weight: 500;
+  width: 42%;
+  font-size: 0.8125rem;
+  font-weight: 600;
   color: var(--color-text-primary);
-  background: var(--color-surface);
+  background: rgba(124, 58, 237, 0.06);
+  border-right: 1px solid rgba(17, 24, 39, 0.06);
 }
 
 .spec-table td {
+  font-weight: 500;
+  line-height: 1.5;
   color: var(--color-text-secondary);
   background: #fff;
 }

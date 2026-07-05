@@ -22,10 +22,7 @@
           }
         ],
         "aboutTeaser": {
-          "title": "About Namerrs",
-          "body": "Since 2008 we've been San Jacinto's best local sign, printing, and t-shirt business. We help businesses and families create professional marketing materials and custom products.",
-          "ctaLabel": "Learn more about us",
-          "ctaHref": "/about"
+          "title": "Graphics built to print — not just look good on screen"
         },
         "faq": [
           {
@@ -71,8 +68,8 @@
     "products": {
       "businessCards": {
         "name": "Business Cards",
-        "description": "Custom business cards with dynamic paper, color, and double-sided design options.",
-        "imageUrl": "/assets/images/businesscards.png",
+        "description": "Paper finishes, colors, and layouts.\nSingle- or double-sided printing.",
+        "imageUrl": "/assets/images/namerrs-black.png",
         "minQuantity": 500,
         "options": [
           {
@@ -105,7 +102,7 @@
       "tshirts": {
         "name": "T-Shirts",
         "description": "Custom-printed t-shirts with sizes, colors, and uploaded graphics.",
-        "imageUrl": "/assets/images/tshirts.png",
+        "imageUrl": "/assets/images/namerrs-black.png",
         "specs": [
           { "label": "Sizes", "value": "YS – 5XL" },
           { "label": "Print", "value": "Full-color digital" }
@@ -114,7 +111,7 @@
       "banners": {
         "name": "Banners",
         "description": "Digitally printed vinyl or digital banners in custom sizes.",
-        "imageUrl": "/assets/images/billboard.png",
+        "imageUrl": "/assets/images/namerrs-black.png",
         "specs": [
           { "label": "Types", "value": "Vinyl, mesh, retractable" },
           { "label": "Sizing", "value": "Preset or custom dimensions" }
@@ -123,6 +120,7 @@
       "hats": {
         "name": "Hats",
         "description": "Vinyl-printed hats with short company name or logo.",
+        "imageUrl": "/assets/images/namerrs-black.png",
         "specs": [
           { "label": "Decoration", "value": "Vinyl front panel" },
           { "label": "Input", "value": "Short company name or logo" }
@@ -131,6 +129,7 @@
       "magnets": {
         "name": "Magnets",
         "description": "12 x 24 full color digital vehicle magnets.",
+        "imageUrl": "/assets/images/namerrs-black.png",
         "specs": [
           { "label": "Size", "value": "12\" x 24\"" },
           { "label": "Print", "value": "Full color digital" }
@@ -139,6 +138,7 @@
       "memorial": {
         "name": "Memorial",
         "description": "Custom memorial prints and stickers.",
+        "imageUrl": "/assets/images/namerrs-black.png",
         "specs": [
           { "label": "Products", "value": "Prints and stickers" },
           { "label": "Customization", "value": "Photo and text layout" }
@@ -150,11 +150,6 @@
         "route": "/",
         "title": "Namerrs Signs & Printing | San Jacinto, CA",
         "description": "Custom t-shirts, business cards, banners, signs, magnets, memorial prints, and hats."
-      },
-      "about": {
-        "route": "/about",
-        "title": "About Namerrs Signs & Printing",
-        "description": "San Jacinto's trusted sign, printing, and t-shirt business since 2008."
       },
       "privacy": {
         "route": "/privacy",

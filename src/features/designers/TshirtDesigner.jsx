@@ -1,32 +1,40 @@
 /**
- * TshirtDesigner.jsx — Interactive shirt canvas with drag-drop, crop, fit, and colors.
+ * TshirtDesigner.jsx — Tabbed shirt canvas: text, colors, print, image, and sizes panels.
  */
 
 import { useEffect, useRef, useState } from 'react';
-import ImageCropDialog from './businessCard/ImageCropDialog';
 import SizeChart from './tshirt/SizeChart';
 import TshirtCanvas from './tshirt/TshirtCanvas';
 import {
+  BACK_PRINT_PLACEMENT_OPTIONS,
+  CENTERED_TEXT_LAYOUT,
   FIT_OPTIONS,
+  FRONT_PRINT_PLACEMENT_OPTIONS,
   PRINT_COLOR_OPTIONS,
-  PRINT_PLACEMENT_OPTIONS,
   SHIRT_COLOR_PRESETS,
   SIZES_BY_FIT,
+  TEXT_FIELDS,
+  TSHIRT_PANEL,
+  TSHIRT_WIZARD_TABS,
 } from './tshirt/constants';
 import {
   addImageElement,
+  addTextElement,
   buildTshirtPreviewLabel,
   createDefaultTshirtDesign,
+  getViewElements,
   moveElement,
   normalizeTshirtDesign,
   removeElement,
-  toggleSize,
+  resizeElement,
+  selectSize,
   updateElement,
   updateFit,
 } from './tshirt/designModel';
+import { ColorPickerField, DesignerTabBar } from '../../ui/components/primitives';
+import { isEyeDropperSupported, pickColorFromScreen } from './tshirt/eyedropper';
 import {
   hasLowContrast,
-  validateColor,
   validateImageFile,
   validateTextValue,
 } from './tshirt/validation';
@@ -39,25 +47,53 @@ const readFileAsDataUrl = (file) =>
     reader.readAsDataURL(file);
   });
 
-const TshirtDesigner = ({ design: rawDesign, onChange }) => {
+const CANVAS_PANELS = new Set([
+  TSHIRT_PANEL.TEXT,
+  TSHIRT_PANEL.COLOR,
+  TSHIRT_PANEL.PRINT,
+  TSHIRT_PANEL.IMAGE,
+]);
+
+const TshirtDesigner = ({
+  design: rawDesign,
+  onChange,
+  activePanel,
+  activeTab: activeTabProp,
+  onTabChange,
+  tabs = TSHIRT_WIZARD_TABS,
+  designErrors = [],
+  quantityPanel = null,
+  schedulePanel = null,
+}) => {
+  const activeTab = activeTabProp || activePanel || TSHIRT_PANEL.TEXT;
   const design = normalizeTshirtDesign(rawDesign);
   const [selectedElementId, setSelectedElementId] = useState(null);
   const [fieldErrors, setFieldErrors] = useState({});
-  const [colorErrors, setColorErrors] = useState({});
   const [uploadError, setUploadError] = useState('');
+  const [colorPickError, setColorPickError] = useState('');
   const [contrastWarning, setContrastWarning] = useState('');
-  const [cropSource, setCropSource] = useState(null);
-  const [pendingFileName, setPendingFileName] = useState('');
   const [liveMessage, setLiveMessage] = useState('');
   const fileInputRef = useRef(null);
   const initializedRef = useRef(false);
 
   useEffect(() => {
-    if (!initializedRef.current && (!rawDesign || !rawDesign.version)) {
+    if (!initializedRef.current && !rawDesign?.version) {
       initializedRef.current = true;
-      onChange(createDefaultTshirtDesign());
+      onChange({
+        ...createDefaultTshirtDesign(),
+        ...rawDesign,
+      });
     }
   }, [rawDesign, onChange]);
+
+  const activeView = design.activeView || 'front';
+  const viewElements = getViewElements(design, activeView);
+
+  useEffect(() => {
+    setSelectedElementId(null);
+    setUploadError('');
+    setColorPickError('');
+  }, [activeTab]);
 
   useEffect(() => {
     if (hasLowContrast(design.shirtColor, design.textColor)) {
@@ -70,28 +106,30 @@ const TshirtDesigner = ({ design: rawDesign, onChange }) => {
   const announce = (message) => setLiveMessage(message);
   const applyDesign = (nextDesign) => onChange(nextDesign);
   const availableSizes = SIZES_BY_FIT[design.fit] || SIZES_BY_FIT.male;
+  const showCanvas = CANVAS_PANELS.has(activeTab);
+  const usesShirtTabs = Boolean(onTabChange);
+  const existingTextFields = new Set(
+    viewElements.filter((element) => element.type === 'text').map((element) => element.fieldKey)
+  );
 
-  const handleFitChange = (fit) => {
-    applyDesign(updateFit(design, fit));
-    announce(`Fit changed to ${FIT_OPTIONS.find((item) => item.id === fit)?.label || fit}`);
+  const handleFlip = () => {
+    const nextView = activeView === 'front' ? 'back' : 'front';
+    applyDesign({ ...design, activeView: nextView });
+    setSelectedElementId(null);
+    announce(nextView === 'back' ? 'Showing back of shirt' : 'Showing front of shirt');
   };
 
   const handleShirtColorChange = (value) => {
-    const error = validateColor(value);
-    setColorErrors((current) => ({ ...current, shirtColor: error }));
-    if (error) {
-      return;
-    }
     applyDesign({ ...design, shirtColor: value });
   };
 
   const handleTextColorChange = (value) => {
-    const error = validateColor(value);
-    setColorErrors((current) => ({ ...current, textColor: error }));
-    if (error) {
-      return;
-    }
     applyDesign({ ...design, textColor: value });
+  };
+
+  const handleFitChange = (fit) => {
+    applyDesign(updateFit(design, fit));
+    announce(`Fit changed to ${FIT_OPTIONS.find((item) => item.id === fit)?.label || fit}`);
   };
 
   const handleContentChange = (elementId, value) => {
@@ -109,9 +147,34 @@ const TshirtDesigner = ({ design: rawDesign, onChange }) => {
     applyDesign(updateElement(design, elementId, { content: value }));
   };
 
-  const handleFileSelect = async (event) => {
-    const file = event.target.files?.[0];
-    event.target.value = '';
+  const handleEyedropper = async (target = 'shirt') => {
+    setColorPickError('');
+    const { color, error } = await pickColorFromScreen();
+
+    if (error) {
+      setColorPickError(error);
+      return;
+    }
+
+    if (!color) {
+      return;
+    }
+
+    if (target === 'text') {
+      handleTextColorChange(color);
+      announce('Text color updated from eyedropper');
+      return;
+    }
+
+    handleShirtColorChange(color);
+    announce('Shirt color updated from eyedropper');
+  };
+
+  const placeImageFile = async (file) => {
+    if (activeTab !== TSHIRT_PANEL.IMAGE) {
+      return;
+    }
+
     setUploadError('');
 
     const validationError = validateImageFile(file);
@@ -122,246 +185,392 @@ const TshirtDesigner = ({ design: rawDesign, onChange }) => {
 
     try {
       const dataUrl = await readFileAsDataUrl(file);
-      setCropSource(dataUrl);
-      setPendingFileName(file.name);
+      const result = addImageElement(design, {
+        src: dataUrl,
+        fileName: file.name,
+      });
+
+      if (result.error) {
+        setUploadError(result.error);
+        return;
+      }
+
+      applyDesign(result.design);
+      if (result.elementId) {
+        setSelectedElementId(result.elementId);
+      }
+      announce(`Image placed on ${activeView} of shirt — drag to move, corner handle to resize`);
     } catch {
       setUploadError('Upload failed. Check your connection and try again.');
     }
   };
 
-  const handleCropComplete = (croppedSrc) => {
-    const result = addImageElement(design, {
-      src: croppedSrc,
-      fileName: pendingFileName,
-    });
-
-    if (result.error) {
-      setUploadError(result.error);
-      return;
+  const handleFileSelect = async (event) => {
+    const file = event.target.files?.[0];
+    event.target.value = '';
+    if (file) {
+      await placeImageFile(file);
     }
-
-    applyDesign(result.design);
-    setPendingFileName('');
-    announce('Image added to shirt');
-  };
-
-  const handleDrop = async (event) => {
-    event.preventDefault();
-    const file = event.dataTransfer.files?.[0];
-    if (!file) {
-      return;
-    }
-
-    const syntheticEvent = { target: { files: [file], value: '' } };
-    await handleFileSelect(syntheticEvent);
   };
 
   return (
-    <div
-      className="space-y-4"
-      aria-label="T-shirt designer"
-      onDragOver={(event) => event.preventDefault()}
-      onDrop={handleDrop}
-    >
+    <div className="card-designer tshirt-designer" aria-label="T-shirt designer">
       <p className="sr-only" aria-live="polite">
         {liveMessage}
       </p>
 
-      <TshirtCanvas
-        design={design}
-        selectedElementId={selectedElementId}
-        previewLabel={buildTshirtPreviewLabel(design)}
-        onSelectElement={setSelectedElementId}
-        onMoveElement={(elementId, x, y) => applyDesign(moveElement(design, elementId, x, y))}
-        onContentChange={handleContentChange}
-        onRemoveElement={(elementId) => {
-          applyDesign(removeElement(design, elementId));
-          setSelectedElementId(null);
-        }}
-      />
+      <div
+        className={`card-designer__stage${
+          usesShirtTabs ? ' card-designer__stage--tabbed' : ''
+        }`}
+      >
+        {usesShirtTabs && (
+          <DesignerTabBar
+            tabs={tabs}
+            activeTab={activeTab}
+            onChange={onTabChange}
+            className="designer-tab-bar--on-card"
+          />
+        )}
 
-      <div className="flex flex-wrap gap-2">
-        <button
-          type="button"
-          onClick={() => fileInputRef.current?.click()}
-          className="rounded-lg border border-[#e5e7eb] px-3 py-2 text-sm font-medium text-[#374151] hover:border-[#1d4ed8]"
-        >
-          Upload graphic
-        </button>
-        <input
-          ref={fileInputRef}
-          type="file"
-          accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
-          className="hidden"
-          onChange={handleFileSelect}
-        />
+        <div className="card-designer__stage-body">
+          {showCanvas && (
+            <div className="card-designer__canvas card-designer__canvas--shirt">
+              <TshirtCanvas
+                design={design}
+                activeTab={activeTab}
+                selectedElementId={selectedElementId}
+                previewLabel={buildTshirtPreviewLabel(design)}
+                onFlip={handleFlip}
+                onDropFile={activeTab === TSHIRT_PANEL.IMAGE ? placeImageFile : undefined}
+                onShirtEyedropper={() => handleEyedropper('shirt')}
+                onSelectElement={setSelectedElementId}
+                onMoveElement={(elementId, x, y) =>
+                  applyDesign(moveElement(design, elementId, x, y))
+                }
+                onResizeElement={(elementId, width, height) =>
+                  applyDesign(resizeElement(design, elementId, width, height))
+                }
+                onContentChange={handleContentChange}
+                onRemoveElement={(elementId) => {
+                  applyDesign(removeElement(design, elementId));
+                  setSelectedElementId(null);
+                }}
+              />
+            </div>
+          )}
+
+          {activeTab === TSHIRT_PANEL.TEXT && (
+            <div className="card-designer__panel">
+              <div className="form-field">
+                <label htmlFor="add-tshirt-text-field" className="form-label">
+                  Add text field
+                </label>
+                <select
+                  id="add-tshirt-text-field"
+                  className="form-input"
+                  defaultValue=""
+                  onChange={(event) => {
+                    if (event.target.value) {
+                      applyDesign(addTextElement(design, event.target.value, activeView));
+                      event.target.value = '';
+                      announce(`Text field added to ${activeView} of shirt`);
+                    }
+                  }}
+                >
+                  <option value="">Select field…</option>
+                  {TEXT_FIELDS.filter((field) => !existingTextFields.has(field.key)).map((field) => (
+                    <option key={field.key} value={field.key}>
+                      {field.label}
+                    </option>
+                  ))}
+                </select>
+                {existingTextFields.size === TEXT_FIELDS.length && (
+                  <p className="form-hint">All text fields are on this side of the shirt.</p>
+                )}
+              </div>
+
+              {viewElements
+                .filter((element) => element.type === 'text')
+                .map((element) =>
+                  fieldErrors[element.id] ? (
+                    <p key={element.id} className="form-error">
+                      {fieldErrors[element.id]}
+                    </p>
+                  ) : null
+                )}
+
+              {selectedElementId &&
+                viewElements.find((item) => item.id === selectedElementId)?.type === 'text' && (
+                <button
+                  type="button"
+                  className="card-designer__link"
+                  onClick={() => {
+                    const element = viewElements.find((item) => item.id === selectedElementId);
+                    if (element) {
+                      applyDesign(
+                        moveElement(
+                          design,
+                          selectedElementId,
+                          CENTERED_TEXT_LAYOUT.x,
+                          CENTERED_TEXT_LAYOUT.y
+                        )
+                      );
+                    }
+                  }}
+                >
+                  Reset selected position
+                </button>
+              )}
+            </div>
+          )}
+
+          {activeTab === TSHIRT_PANEL.COLOR && (
+            <div className="card-designer__panel">
+              <div className="card-designer__toolbar">
+                <button
+                  type="button"
+                  className="card-designer__tool"
+                  onClick={() => handleEyedropper('shirt')}
+                >
+                  Eyedropper — shirt
+                </button>
+                <button
+                  type="button"
+                  className="card-designer__tool"
+                  onClick={() => handleEyedropper('text')}
+                >
+                  Eyedropper — text
+                </button>
+              </div>
+
+              {!isEyeDropperSupported() && (
+                <p className="form-hint">
+                  Eyedropper works best in Chrome or Edge. Use swatches on other browsers.
+                </p>
+              )}
+
+              {colorPickError && (
+                <p className="card-designer__error" role="alert">
+                  {colorPickError}
+                </p>
+              )}
+
+              <div>
+                <p className="form-label">Shirt color</p>
+                <div className="tshirt-designer__swatches">
+                  {SHIRT_COLOR_PRESETS.map((preset) => (
+                    <button
+                      key={preset.id}
+                      type="button"
+                      aria-label={preset.label}
+                      title={preset.label}
+                      onClick={() => handleShirtColorChange(preset.hex)}
+                      className={`tshirt-designer__swatch${
+                        design.shirtColor === preset.hex ? ' tshirt-designer__swatch--active' : ''
+                      }`}
+                      style={{ backgroundColor: preset.hex }}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              <div className="card-designer__color-grid">
+                <ColorPickerField
+                  label="Shirt color"
+                  value={design.shirtColor}
+                  onChange={handleShirtColorChange}
+                />
+                <ColorPickerField
+                  label="Text / graphic color"
+                  value={design.textColor}
+                  onChange={handleTextColorChange}
+                />
+              </div>
+
+              {contrastWarning && (
+                <p className="card-designer__warning" role="status">
+                  {contrastWarning}
+                </p>
+              )}
+            </div>
+          )}
+
+          {activeTab === TSHIRT_PANEL.PRINT && (
+            <div className="card-designer__panel card-designer__print-options" aria-label="Print options">
+              <div className="form-field">
+                <label htmlFor="front-print-placement" className="form-label">
+                  Front print placement
+                </label>
+                <select
+                  id="front-print-placement"
+                  className="form-input"
+                  value={design.frontPrintPlacement}
+                  onChange={(event) => {
+                    const frontPrintPlacement = event.target.value;
+                    applyDesign({ ...design, activeView: 'front', frontPrintPlacement });
+                    announce('Front print placement updated');
+                  }}
+                >
+                  {FRONT_PRINT_PLACEMENT_OPTIONS.map((option) => (
+                    <option key={option.id} value={option.id}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="form-field">
+                <label htmlFor="back-print-placement" className="form-label">
+                  Back print placement
+                </label>
+                <select
+                  id="back-print-placement"
+                  className="form-input"
+                  value={design.backPrintPlacement}
+                  onChange={(event) => {
+                    const backPrintPlacement = event.target.value;
+                    applyDesign({ ...design, activeView: 'back', backPrintPlacement });
+                    announce('Back print placement updated');
+                  }}
+                >
+                  {BACK_PRINT_PLACEMENT_OPTIONS.map((option) => (
+                    <option key={option.id} value={option.id}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="form-field">
+                <label htmlFor="print-colors" className="form-label">
+                  Print colors
+                </label>
+                <select
+                  id="print-colors"
+                  className="form-input"
+                  value={design.printColors}
+                  onChange={(event) =>
+                    applyDesign({ ...design, printColors: event.target.value })
+                  }
+                >
+                  {PRINT_COLOR_OPTIONS.map((option) => (
+                    <option key={option.id} value={option.id}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+          )}
+
+          {activeTab === TSHIRT_PANEL.IMAGE && (
+            <div className="card-designer__panel">
+              <div className="card-designer__toolbar">
+                <button type="button" className="card-designer__tool" onClick={handleFlip}>
+                  Flip shirt
+                </button>
+                <button
+                  type="button"
+                  className="card-designer__tool"
+                  onClick={() => fileInputRef.current?.click()}
+                >
+                  Upload graphic
+                </button>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
+                  className="sr-only"
+                  onChange={handleFileSelect}
+                />
+              </div>
+
+              {selectedElementId &&
+                viewElements.find((item) => item.id === selectedElementId)?.type === 'image' && (
+                  <button
+                    type="button"
+                    className="card-designer__tool"
+                    onClick={() => {
+                      applyDesign(removeElement(design, selectedElementId));
+                      setSelectedElementId(null);
+                    }}
+                  >
+                    Remove selected graphic
+                  </button>
+                )}
+
+              {uploadError && (
+                <p className="card-designer__error" role="alert">
+                  {uploadError}
+                </p>
+              )}
+            </div>
+          )}
+
+          {activeTab === TSHIRT_PANEL.SIZES && (
+            <div className="card-designer__panel">
+              <fieldset className="form-field card-designer__sides">
+                <legend className="form-label">Fit</legend>
+                <div className="card-designer__sides-choices">
+                  {FIT_OPTIONS.map((option) => (
+                    <label key={option.id} className="card-designer__sides-choice">
+                      <input
+                        type="radio"
+                        name="tshirt-fit"
+                        value={option.id}
+                        checked={design.fit === option.id}
+                        onChange={() => handleFitChange(option.id)}
+                      />
+                      <span>{option.label}</span>
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
+
+              <fieldset className="form-field">
+                <legend className="form-label">Sizes</legend>
+                <div className="tshirt-designer__size-chips">
+                  {availableSizes.map((size) => (
+                    <label
+                      key={size}
+                      className={`tshirt-designer__size-chip${
+                        design.selectedSizes[0] === size ? ' tshirt-designer__size-chip--active' : ''
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name="tshirt-size"
+                        className="sr-only"
+                        checked={design.selectedSizes[0] === size}
+                        onChange={() => applyDesign(selectSize(design, size))}
+                      />
+                      {size}
+                    </label>
+                  ))}
+                </div>
+                <p className="form-hint">Per-size quantities are set on the Qty tab.</p>
+              </fieldset>
+
+              <SizeChart fit={design.fit} />
+            </div>
+          )}
+
+          {activeTab === 'quantity' && quantityPanel}
+          {activeTab === 'schedule' && schedulePanel}
+        </div>
       </div>
 
-      {uploadError && (
-        <p className="text-sm text-red-600" role="alert">
-          {uploadError}
-        </p>
+      {designErrors.length > 0 && (
+        <div className="alert alert--error" role="alert">
+          <ul className="design-errors-list">
+            {designErrors.map((error) => (
+              <li key={error}>{error}</li>
+            ))}
+          </ul>
+        </div>
       )}
 
-      <fieldset>
-        <legend className="text-sm font-medium text-[#374151]">Fit</legend>
-        <div className="mt-2 flex flex-wrap gap-3">
-          {FIT_OPTIONS.map((option) => (
-            <label key={option.id} className="flex items-center gap-2 text-sm text-[#374151]">
-              <input
-                type="radio"
-                name="tshirt-fit"
-                value={option.id}
-                checked={design.fit === option.id}
-                onChange={() => handleFitChange(option.id)}
-              />
-              {option.label}
-            </label>
-          ))}
-        </div>
-      </fieldset>
-
-      <fieldset>
-        <legend className="text-sm font-medium text-[#374151]">Sizes</legend>
-        <div className="mt-2 flex flex-wrap gap-2">
-          {availableSizes.map((size) => (
-            <label
-              key={size}
-              className={`cursor-pointer rounded-lg border px-3 py-1.5 text-sm ${
-                design.selectedSizes.includes(size)
-                  ? 'border-[#1d4ed8] bg-[#eff6ff] text-[#1d4ed8]'
-                  : 'border-[#e5e7eb] text-[#374151]'
-              }`}
-            >
-              <input
-                type="checkbox"
-                className="sr-only"
-                checked={design.selectedSizes.includes(size)}
-                onChange={() => applyDesign(toggleSize(design, size))}
-              />
-              {size}
-            </label>
-          ))}
-        </div>
-        <p className="mt-1 text-xs text-[#9ca3af]">
-          Per-size quantities are set on the next step.
-        </p>
-        <div className="mt-3">
-          <SizeChart fit={design.fit} />
-        </div>
-      </fieldset>
-
-      <div>
-        <label className="text-sm font-medium text-[#374151]">Shirt color</label>
-        <div className="mt-2 flex flex-wrap gap-2">
-          {SHIRT_COLOR_PRESETS.map((preset) => (
-            <button
-              key={preset.id}
-              type="button"
-              aria-label={preset.label}
-              title={preset.label}
-              onClick={() => handleShirtColorChange(preset.hex)}
-              className={`h-8 w-8 rounded-full border-2 ${
-                design.shirtColor === preset.hex ? 'border-[#1d4ed8]' : 'border-[#e5e7eb]'
-              }`}
-              style={{ backgroundColor: preset.hex }}
-            />
-          ))}
-        </div>
-        <label htmlFor="shirt-color-custom" className="mt-2 block text-xs text-[#6b7280]">
-          Custom color (hex, HSL, or RGBA)
-        </label>
-        <input
-          id="shirt-color-custom"
-          type="text"
-          value={design.shirtColor}
-          onChange={(event) => handleShirtColorChange(event.target.value)}
-          className="mt-1 w-full rounded-lg border border-[#e5e7eb] px-3 py-2 text-sm"
-        />
-        {colorErrors.shirtColor && (
-          <p className="mt-1 text-xs text-red-600">{colorErrors.shirtColor}</p>
-        )}
-      </div>
-
-      <div className="grid grid-cols-2 gap-3">
-        <div>
-          <label htmlFor="print-placement" className="text-sm font-medium text-[#374151]">
-            Print placement
-          </label>
-          <select
-            id="print-placement"
-            value={design.printPlacement}
-            onChange={(event) => applyDesign({ ...design, printPlacement: event.target.value })}
-            className="mt-1 w-full rounded-lg border border-[#e5e7eb] px-3 py-2 text-sm"
-          >
-            {PRINT_PLACEMENT_OPTIONS.map((option) => (
-              <option key={option.id} value={option.id}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <label htmlFor="print-colors" className="text-sm font-medium text-[#374151]">
-            Print colors
-          </label>
-          <select
-            id="print-colors"
-            value={design.printColors}
-            onChange={(event) => applyDesign({ ...design, printColors: event.target.value })}
-            className="mt-1 w-full rounded-lg border border-[#e5e7eb] px-3 py-2 text-sm"
-          >
-            {PRINT_COLOR_OPTIONS.map((option) => (
-              <option key={option.id} value={option.id}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </div>
-      </div>
-
-      <div>
-        <label htmlFor="text-color" className="text-sm font-medium text-[#374151]">
-          Text / graphic color
-        </label>
-        <input
-          id="text-color"
-          type="text"
-          value={design.textColor}
-          onChange={(event) => handleTextColorChange(event.target.value)}
-          className="mt-1 w-full rounded-lg border border-[#e5e7eb] px-3 py-2 text-sm"
-        />
-        {colorErrors.textColor && (
-          <p className="mt-1 text-xs text-red-600">{colorErrors.textColor}</p>
-        )}
-      </div>
-
-      {contrastWarning && (
-        <p className="text-sm text-amber-700" role="status">
-          {contrastWarning}
-        </p>
-      )}
-
-      {design.elements
-        .filter((element) => element.type === 'text')
-        .map((element) =>
-          fieldErrors[element.id] ? (
-            <p key={element.id} className="text-xs text-red-600">
-              {fieldErrors[element.id]}
-            </p>
-          ) : null
-        )}
-
-      <p className="text-xs text-[#9ca3af]">
-        Pricing: <span className="text-[#d1d5db]">$0.00</span> (tiers configured later)
-      </p>
-
-      <ImageCropDialog
-        isOpen={Boolean(cropSource)}
-        imageSrc={cropSource}
-        onClose={() => setCropSource(null)}
-        onComplete={handleCropComplete}
-      />
     </div>
   );
 };

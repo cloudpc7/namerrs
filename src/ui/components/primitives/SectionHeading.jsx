@@ -11,6 +11,27 @@ const SectionHeading = ({
   className = '',
 }) => {
   const alignClass = align === 'center' ? 'section-heading--center' : '';
+  const subtitleClass = `section-heading__subtitle${dark ? ' section-heading__subtitle--dark' : ''}`;
+
+  const renderSubtitle = () => {
+    if (!subtitle) {
+      return null;
+    }
+
+    if (Array.isArray(subtitle)) {
+      return (
+        <div className="section-heading__subtitle-group">
+          {subtitle.map((line) => (
+            <p key={line} className={subtitleClass}>
+              {line}
+            </p>
+          ))}
+        </div>
+      );
+    }
+
+    return <p className={subtitleClass}>{subtitle}</p>;
+  };
 
   return (
     <div className={`section-heading ${alignClass} ${className}`.trim()}>
@@ -22,11 +43,7 @@ const SectionHeading = ({
       <h2 className={`section-heading__title${dark ? ' section-heading__title--dark' : ''}`}>
         {title}
       </h2>
-      {subtitle && (
-        <p className={`section-heading__subtitle${dark ? ' section-heading__subtitle--dark' : ''}`}>
-          {subtitle}
-        </p>
-      )}
+      {renderSubtitle()}
     </div>
   );
 };

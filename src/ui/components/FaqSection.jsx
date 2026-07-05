@@ -13,21 +13,25 @@ const FaqSection = () => {
 
   return (
     <Section id="faq" ariaLabel="FAQ" variant="dark">
-      <Stack gap="xl">
+      <Stack gap="xl" className="faq-section__stack">
         <SectionHeading
           eyebrow="FAQ"
           title="Questions before you order?"
           subtitle="Tips and answers for design, products, and turnaround."
           align="center"
+          className="faq-section__heading"
         />
 
-        <Accordion items={faqItems} className="mx-auto max-w-3xl" />
+        <Accordion items={faqItems} className="faq-section__content" />
 
-        <Surface padding="md" className="mx-auto max-w-3xl text-center">
-          <p className="form-hint" style={{ fontSize: '0.875rem' }}>
-            Still have questions? We&apos;re happy to help before you place an order.
-          </p>
-          <Button href="/#contact" className="mt-4">
+        <Surface padding="md" className="faq-section__cta faq-section__content">
+          <div className="faq-section__cta-text">
+            <p className="faq-section__cta-lead">Still have questions?</p>
+            <p className="faq-section__cta-sub">
+              We&apos;re happy to help before you place an order.
+            </p>
+          </div>
+          <Button href="/#contact" className="faq-section__cta-button">
             Contact Namerrs
           </Button>
         </Surface>

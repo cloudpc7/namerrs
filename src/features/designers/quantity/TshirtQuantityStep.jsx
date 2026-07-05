@@ -2,12 +2,70 @@
  * TshirtQuantityStep.jsx — Per-size quantities with tier pricing (Feature 8).
  */
 
+import { useEffect, useRef, useState } from 'react';
+import { Surface } from '../../../ui/components/primitives';
 import { formatPrice } from '../../../utils/formatPrice';
 import {
   getTierForQuantity,
   getTshirtLineTotal,
   sumSizeQuantities,
 } from '../../../utils/tshirtPricing';
+
+const SizeQuantityInput = ({ size, quantity, onCommit }) => {
+  const [draft, setDraft] = useState(String(quantity ?? 0));
+  const draftRef = useRef(draft);
+  const onCommitRef = useRef(onCommit);
+
+  useEffect(() => {
+    setDraft(String(quantity ?? 0));
+  }, [quantity]);
+
+  useEffect(() => {
+    draftRef.current = draft;
+  }, [draft]);
+
+  useEffect(() => {
+    onCommitRef.current = onCommit;
+  }, [onCommit]);
+
+  const commitDraft = (value = draftRef.current) => {
+    const qty = Math.max(0, Number(value) || 0);
+    setDraft(String(qty));
+    onCommitRef.current(qty);
+  };
+
+  useEffect(() => () => commitDraft(draftRef.current), []);
+
+  const handleChange = (event) => {
+    const { value } = event.target;
+    if (value !== '' && !/^\d+$/.test(value)) {
+      return;
+    }
+    setDraft(value);
+  };
+
+  const handleBlur = () => {
+    commitDraft();
+  };
+
+  return (
+    <div className="designer-quantity__size-row">
+      <label htmlFor={`qty-${size}`} className="designer-quantity__size-label">
+        {size}
+      </label>
+      <input
+        id={`qty-${size}`}
+        type="text"
+        inputMode="numeric"
+        pattern="[0-9]*"
+        value={draft}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        className="form-input designer-quantity__size-input"
+      />
+    </div>
+  );
+};
 
 const TshirtQuantityStep = ({
   design,
@@ -21,64 +79,64 @@ const TshirtQuantityStep = ({
   const tier = getTierForQuantity(totalQuantity);
   const lineTotal = getTshirtLineTotal(totalQuantity, configuredUnitPrice);
   const pricingEnabled = Boolean(configuredUnitPrice);
+  const fitLabel = design.fit === 'female' ? 'Female' : 'Male / unisex';
 
-  const handleChange = (size, value) => {
-    const qty = Math.max(0, Number(value) || 0);
+  const handleCommit = (size, qty) => {
     onSizeQuantitiesChange({ ...sizeQuantities, [size]: qty });
   };
 
   return (
-    <div className="space-y-4" aria-label="T-shirt quantity">
-      <p className="text-sm text-[#374151]">
-        Fit: <span className="font-medium">{design.fit === 'female' ? 'Female' : 'Male / unisex'}</span>
+    <div className="card-designer__panel" aria-label="T-shirt quantity">
+      <p className="form-hint">
+        Fit: <strong>{fitLabel}</strong>
         {' · '}
-        Color: <span className="font-medium">{design.shirtColor}</span>
+        Color: <strong>{design.shirtColor}</strong>
       </p>
 
-      <div className="space-y-2">
-        <p className="text-sm font-medium text-[#374151]">Quantity per size</p>
-        {sizes.map((size) => (
-          <div key={size} className="flex items-center gap-3">
-            <label htmlFor={`qty-${size}`} className="w-12 text-sm text-[#374151]">
-              {size}
-            </label>
-            <input
-              id={`qty-${size}`}
-              type="number"
-              min={0}
-              value={sizeQuantities[size] ?? 0}
-              onChange={(event) => handleChange(size, event.target.value)}
-              className="w-24 rounded-lg border border-[#e5e7eb] px-3 py-2 text-sm"
+      <div className="form-field">
+        <p className="form-label" id="tshirt-qty-per-size">
+          Quantity per size
+        </p>
+        <div className="designer-quantity__sizes" aria-labelledby="tshirt-qty-per-size">
+          {sizes.map((size) => (
+            <SizeQuantityInput
+              key={size}
+              size={size}
+              quantity={sizeQuantities[size] ?? 0}
+              onCommit={(qty) => handleCommit(size, qty)}
             />
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
       {error && (
-        <p className="text-sm text-red-600" role="alert">
+        <p className="form-error" role="alert">
           {error}
         </p>
       )}
 
-      <div className="rounded-lg border border-[#e5e7eb] bg-[#f9fafb] p-3 text-sm text-[#374151]">
-        <p>
-          Total shirts: <span className="font-medium">{totalQuantity}</span>
-        </p>
-        <p className="mt-1">
-          Tier: {tier.min}–{tier.max === Infinity ? '∞' : tier.max} shirts
-          {pricingEnabled ? (
-            <span>
-              {' '}
-              @ {formatPrice(tier.unitPrice)} each
-            </span>
-          ) : (
-            <span className="text-[#d1d5db]"> @ $0.00 each (pricing pending)</span>
-          )}
-        </p>
-        <p className={`mt-2 font-medium ${pricingEnabled ? 'text-[#374151]' : 'text-[#d1d5db]'}`}>
-          Subtotal: {formatPrice(lineTotal)}
-        </p>
-      </div>
+      <Surface padding="md" className="designer-quantity__summary">
+        <div className="designer-quantity__summary-row">
+          <span>Total shirts</span>
+          <strong>{totalQuantity}</strong>
+        </div>
+        <div className="designer-quantity__summary-row">
+          <span>
+            Tier {tier.min}–{tier.max === Infinity ? '∞' : tier.max}
+          </span>
+          <span className={pricingEnabled ? '' : 'designer-quantity__muted'}>
+            {pricingEnabled
+              ? `${formatPrice(tier.unitPrice)} each`
+              : '$0.00 each (pricing pending)'}
+          </span>
+        </div>
+        <div className="designer-quantity__summary-row designer-quantity__summary-total">
+          <span>Subtotal</span>
+          <strong className={pricingEnabled ? '' : 'designer-quantity__muted'}>
+            {formatPrice(lineTotal)}
+          </strong>
+        </div>
+      </Surface>
     </div>
   );
 };

@@ -2,7 +2,9 @@ node_modules/
 dist/
 .env
 .env.local
+.env.development
 .env.*.local
+namerrsconcept/
 functions/.env
 functions/.env.local
 

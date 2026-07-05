@@ -3,18 +3,19 @@
  */
 
 import { getProductImageUrl } from '../../constants/assets.constants';
+import { getProductDescriptionLines } from '../../utils/productDescription';
 import { PRODUCT_DETAIL_MODAL_ID } from './ProductDetailModal';
-import { Card, PriceDisplay } from './primitives';
+import { Card } from './primitives';
 
 const ProductCard = ({
   productId,
   product,
-  price,
   isSelected,
   onSelect,
 }) => {
   const imageUrl = getProductImageUrl(productId, product);
   const panelId = PRODUCT_DETAIL_MODAL_ID;
+  const descriptionLines = getProductDescriptionLines(product?.description);
 
   return (
     <Card
@@ -28,17 +29,28 @@ const ProductCard = ({
     >
       <div className="product-card__media">
         {imageUrl ? (
-          <img src={imageUrl} alt="" className="product-card__image" />
+          <img src={imageUrl} alt={product?.name || 'Product'} className="product-card__image" />
         ) : (
           <div className="product-card__placeholder" aria-hidden="true" />
         )}
       </div>
       <div className="product-card__body">
         <h3 className="product-card__title">{product?.name}</h3>
-        {product?.description && (
-          <p className="product-card__desc">{product.description}</p>
+        {descriptionLines.length > 1 ? (
+          <p className="product-card__desc">
+            {descriptionLines.map((line) => (
+              <span key={line} className="product-card__desc-line">
+                {line}
+              </span>
+            ))}
+          </p>
+        ) : (
+          descriptionLines[0] && (
+            <p className="product-card__desc product-card__desc--clamped">
+              {descriptionLines[0]}
+            </p>
+          )
         )}
-        <PriceDisplay amount={price} />
       </div>
     </Card>
   );

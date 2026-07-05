@@ -55,13 +55,15 @@ export const addImageElement = (design, image) => {
     return { design, error: 'Max 5 images on banner.' };
   }
 
+  const elementId = createId();
+
   return {
     design: {
       ...design,
       elements: [
         ...design.elements,
         {
-          id: createId(),
+          id: elementId,
           type: 'image',
           src: image.src,
           fileName: image.fileName,
@@ -69,9 +71,11 @@ export const addImageElement = (design, image) => {
           y: 35,
           width: DEFAULT_ELEMENT_SIZE.image.width,
           height: DEFAULT_ELEMENT_SIZE.image.height,
+          objectFit: 'contain',
         },
       ],
     },
+    elementId,
     error: null,
   };
 };
@@ -88,10 +92,44 @@ export const removeElement = (design, elementId) => ({
   elements: design.elements.filter((element) => element.id !== elementId),
 });
 
-export const moveElement = (design, elementId, x, y) =>
+export const moveElement = (design, elementId, x, y) => {
+  const element = design.elements.find((item) => item.id === elementId);
+  if (!element) {
+    return design;
+  }
+
+  const maxX = Math.max(0, 100 - element.width);
+  const maxY = Math.max(0, 100 - element.height);
+
+  return updateElement(design, elementId, {
+    x: Math.max(0, Math.min(maxX, x)),
+    y: Math.max(0, Math.min(maxY, y)),
+  });
+};
+
+export const resizeElement = (design, elementId, width, height) => {
+  const element = design.elements.find((item) => item.id === elementId);
+  if (!element) {
+    return design;
+  }
+
+  const maxWidth = 100 - element.x;
+  const maxHeight = 100 - element.y;
+  const minSize = 8;
+
+  return updateElement(design, elementId, {
+    width: Math.max(minSize, Math.min(maxWidth, width)),
+    height: Math.max(minSize, Math.min(maxHeight, height)),
+  });
+};
+
+export const fillBannerImage = (design, elementId) =>
   updateElement(design, elementId, {
-    x: Math.max(0, Math.min(100, x)),
-    y: Math.max(0, Math.min(100, y)),
+    x: 0,
+    y: 0,
+    width: 100,
+    height: 100,
+    objectFit: 'cover',
   });
 
 export const buildBannerPreviewLabel = (design) => {

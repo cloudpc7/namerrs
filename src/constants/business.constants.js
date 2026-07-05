@@ -17,11 +17,10 @@ export const BUSINESS_SINCE = 2008;
 export const BUSINESS_LOCATION_LABEL = 'San Jacinto, California';
 
 export const HERO_CAPTION_TITLE = 'One shop for every custom print job';
-export const HERO_CAPTION_DESC =
-  'Design online, set your completion date, and pick up in San Jacinto.';
-
-export const PRICING_HELPER_TEXT =
-  'Pricing coming soon — you can still design and save your order.';
+export const HERO_CAPTION_DESC_LEAD =
+  'Design online, schedule your completion date, and get quality printing done fast — with a local team';
+export const HERO_CAPTION_DESC_TAIL = 'behind every order.';
+export const HERO_CAPTION_DESC = `${HERO_CAPTION_DESC_LEAD} ${HERO_CAPTION_DESC_TAIL}`;
 
 export const DEFAULT_FEATURES = [
   {
@@ -41,17 +40,71 @@ export const DEFAULT_FEATURES = [
   },
 ];
 
+export const CONTACT_VALUE_PROPS = [
+  {
+    title: 'Free project quotes',
+    description:
+      'Share what you need — cards, shirts, signs, or banners — and we’ll estimate pricing and turnaround.',
+  },
+  {
+    title: 'Design help before you order',
+    description:
+      'Not sure about file setup, sizing, or finishes? We guide you through options before checkout.',
+  },
+  {
+    title: 'Real people, fast replies',
+    description:
+      'Our San Jacinto team reads every message and typically responds within one business day.',
+  },
+];
+
+export const DEFAULT_ABOUT_CONTENT = {
+  eyebrow: 'Design & print',
+  title: 'Graphics built to print — not just look good on screen',
+  intro:
+    'We pair graphic design with in-house production so layouts, colors, and files are ready before anything hits the press.',
+  since:
+    'Since 2008, Namerrs has served San Jacinto and the Inland Empire with professional signs, printing, and custom apparel.',
+  support:
+    'From business cards and banners to shirts and signage, we handle design, prepress, and production under one roof — keeping your brand consistent across every format.',
+  capabilities: [
+    {
+      title: 'Prepress & file prep',
+      description:
+        'Bleeds, resolution, trapping, and export settings checked so your art survives production — not just PDF export.',
+    },
+    {
+      title: 'Brand & layout design',
+      description:
+        'Logos, marketing layouts, and campaign graphics tuned for consistency across cards, signage, and apparel.',
+    },
+    {
+      title: 'Color-managed printing',
+      description:
+        'Calibrated output for accurate, vivid results on cardstock, wide-format vinyl, textiles, and more.',
+      descriptionMobile: [
+        'Calibrated output for vivid, accurate color',
+        'on cardstock, vinyl, textiles, and more.',
+      ],
+    },
+    {
+      title: 'Proof before we run',
+      description:
+        'Review a digital proof before production starts — catch sizing, copy, and color issues while they are still easy to fix.',
+    },
+  ],
+};
+
 export const DEFAULT_ABOUT_TEASER = {
-  title: 'About Namerrs',
-  body:
-    "Since 2008 we've been San Jacinto's best local sign, printing, and t-shirt business. We help businesses and families create professional marketing materials and custom products.",
-  ctaHref: '/about',
-  ctaLabel: 'Learn more about us',
+  title: DEFAULT_ABOUT_CONTENT.title,
+  body: DEFAULT_ABOUT_CONTENT.intro,
+  ctaHref: '/#products',
+  ctaLabel: 'Start your design',
 };
 
 export const DEFAULT_FAQ = [
   {
-    question: 'What is the minimum order for business cards?',
+    question: 'Minimum order for business cards?',
     answer: 'Business cards have a minimum order of 500 cards.',
   },
   {
