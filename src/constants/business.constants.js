@@ -37,6 +37,13 @@ export const TRUST_BADGES = [
 export const BUSINESS_LOCATION_LABEL = 'San Jacinto, California';
 
 export const HERO_CAPTION_TITLE = 'One shop for every custom print job';
+export const HERO_CAPTION_TITLE_LINES = ['One shop for every', 'custom print job'];
+
+export const FEATURES_SECTION_SUBTITLE = [
+  'Local expertise, online convenience —',
+  'Design your order and schedule completion',
+  'from one place.',
+];
 export const HERO_CAPTION_DESC_LEAD =
   'Design online, schedule your completion date, and get quality printing done fast — with a local team';
 export const HERO_CAPTION_DESC_TAIL = 'behind every order.';
@@ -65,16 +72,28 @@ export const CONTACT_VALUE_PROPS = [
     title: 'Free project quotes',
     description:
       'Share what you need — cards, shirts, signs, or banners — and we’ll estimate pricing and turnaround.',
+    descriptionLines: [
+      'Share what you need — cards, shirts, signs, or banners —',
+      'and we’ll estimate pricing and turnaround.',
+    ],
   },
   {
     title: 'Design help before you order',
     description:
       'Not sure about file setup, sizing, or finishes? We guide you through options before checkout.',
+    descriptionLines: [
+      'Not sure about file setup, sizing, or finishes?',
+      'We guide you through options before checkout.',
+    ],
   },
   {
     title: 'Real people, fast replies',
     description:
       'Our San Jacinto team reads every message and typically responds within one business day.',
+    descriptionLines: [
+      'Our San Jacinto team reads every message',
+      'and typically responds within one business day.',
+    ],
   },
 ];
 

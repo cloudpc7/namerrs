@@ -89,7 +89,22 @@ const ContactSection = () => {
                   </div>
                   <div>
                     <p className="contact-value-list__title">{item.title}</p>
-                    <p className="contact-value-list__desc">{item.description}</p>
+                    {item.descriptionLines ? (
+                      <>
+                        <p className="contact-value-list__desc contact-value-list__desc--wide">
+                          {item.description}
+                        </p>
+                        <div className="contact-value-list__desc-lines">
+                          {item.descriptionLines.map((line) => (
+                            <p key={line} className="contact-value-list__desc-line">
+                              {line}
+                            </p>
+                          ))}
+                        </div>
+                      </>
+                    ) : (
+                      <p className="contact-value-list__desc">{item.description}</p>
+                    )}
                   </div>
                 </li>
               );

@@ -15,6 +15,7 @@ import {
   HERO_CAPTION_DESC_LEAD,
   HERO_CAPTION_DESC_TAIL,
   HERO_CAPTION_TITLE,
+  HERO_CAPTION_TITLE_LINES,
 } from '../../constants/business.constants';
 import { Section, Button, MediaFrame, Skeleton, Stack } from './primitives';
 
@@ -76,7 +77,14 @@ const HeroSection = () => {
           </div>
 
           <div className="hero__caption">
-            <p className="hero__caption-title">{HERO_CAPTION_TITLE}</p>
+            <p className="hero__caption-title hero__caption-title--wide">{HERO_CAPTION_TITLE}</p>
+            <div className="hero__caption-title-lines" aria-hidden="true">
+              {HERO_CAPTION_TITLE_LINES.map((line) => (
+                <span key={line} className="hero__caption-title-line">
+                  {line}
+                </span>
+              ))}
+            </div>
             <p className="hero__caption-desc">
               {HERO_CAPTION_DESC_LEAD}{' '}
               <span className="hero__caption-desc-tail">{HERO_CAPTION_DESC_TAIL}</span>

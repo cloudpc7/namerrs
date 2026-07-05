@@ -5,7 +5,7 @@
 import { Award, Palette, Zap } from 'lucide-react';
 import { useSelector } from 'react-redux';
 import { selectPageContent } from '../../redux/slices/content.slice';
-import { DEFAULT_FEATURES } from '../../constants/business.constants';
+import { DEFAULT_FEATURES, FEATURES_SECTION_SUBTITLE } from '../../constants/business.constants';
 import { Section, SectionHeading, Card } from './primitives';
 
 const FEATURE_ICONS = [Award, Zap, Palette];
@@ -20,10 +20,7 @@ const FeaturesSection = () => {
         className="features-section__heading"
         eyebrow="Why Namerrs"
         title="Everything you need for custom print & signs"
-        subtitle={[
-          'Local expertise, online convenience —',
-          'Design your order and schedule completion from one place.',
-        ]}
+        subtitle={FEATURES_SECTION_SUBTITLE}
         align="center"
       />
 
