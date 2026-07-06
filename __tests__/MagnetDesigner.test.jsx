@@ -32,7 +32,7 @@ describe('MagnetDesigner', () => {
     expect(screen.getByLabelText(/short company name/i)).toHaveClass('form-input');
     expect(screen.queryByRole('button', { name: /upload graphic/i })).not.toBeInTheDocument();
 
-    await user.click(screen.getByRole('button', { name: /^image$/i }));
+    await user.click(screen.getByRole('tab', { name: /^image$/i }));
     expect(onTabChange).toHaveBeenCalledWith(MAGNET_PANEL.IMAGE);
   });
 

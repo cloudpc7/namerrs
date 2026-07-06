@@ -3,7 +3,7 @@
  */
 
 import { useEffect, useRef, useState } from 'react';
-import { ColorPickerField, DesignerTabBar } from '../../ui/components/primitives';
+import { ColorPickerField, DesignerTabBar, DesignerTabPanel } from '../../ui/components/primitives';
 import ImageCropDialog from './businessCard/ImageCropDialog';
 import HatCanvas from './hat/HatCanvas';
 import { HAT_COLORS, HAT_PANEL, HAT_WIZARD_TABS } from './hat/constants';
@@ -154,7 +154,7 @@ const HatDesigner = ({
           )}
 
           {activeTab === HAT_PANEL.TEXT && (
-            <div className="card-designer__panel">
+            <DesignerTabPanel tabId={HAT_PANEL.TEXT} className="card-designer__panel">
               <p className="card-designer__callout">
                 Enter a short company or team name to embroider on the front panel.
               </p>
@@ -185,11 +185,11 @@ const HatDesigner = ({
                 onChange={handleTextColorChange}
                 error={colorError}
               />
-            </div>
+            </DesignerTabPanel>
           )}
 
           {activeTab === HAT_PANEL.IMAGE && (
-            <div className="card-designer__panel">
+            <DesignerTabPanel tabId={HAT_PANEL.IMAGE} className="card-designer__panel">
               <div className="card-designer__toolbar">
                 <button
                   type="button"
@@ -216,11 +216,11 @@ const HatDesigner = ({
                   {uploadError}
                 </p>
               )}
-            </div>
+            </DesignerTabPanel>
           )}
 
           {activeTab === HAT_PANEL.COLOR && (
-            <div className="card-designer__panel">
+            <DesignerTabPanel tabId={HAT_PANEL.COLOR} className="card-designer__panel">
               <div>
                 <p className="form-label">Hat color</p>
                 <div className="hat-designer__swatches">
@@ -251,11 +251,15 @@ const HatDesigner = ({
                 Pricing: <span className="designer-quantity__muted">{formatPrice(0)}</span> (pending
                 configuration)
               </p>
-            </div>
+            </DesignerTabPanel>
           )}
 
-          {activeTab === 'quantity' && quantityPanel}
-          {activeTab === 'schedule' && schedulePanel}
+          {activeTab === 'quantity' && (
+            <DesignerTabPanel tabId="quantity">{quantityPanel}</DesignerTabPanel>
+          )}
+          {activeTab === 'schedule' && (
+            <DesignerTabPanel tabId="schedule">{schedulePanel}</DesignerTabPanel>
+          )}
         </div>
       </div>
 

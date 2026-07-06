@@ -25,7 +25,7 @@ import {
   updateElement,
   updateSide,
 } from './businessCard/designModel';
-import { ColorPickerField, DesignerTabBar } from '../../ui/components/primitives';
+import { ColorPickerField, DesignerTabBar, DesignerTabPanel } from '../../ui/components/primitives';
 import {
   hasLowContrast,
   validateImageFile,
@@ -252,7 +252,7 @@ const BusinessCardDesigner = ({
           )}
 
           {activeTab === BUSINESS_CARD_PANEL.TEXT && (
-        <div className="card-designer__panel">
+            <DesignerTabPanel tabId={BUSINESS_CARD_PANEL.TEXT} className="card-designer__panel">
           <p className="card-designer__callout">
             Tap a field on the card to type. Use the grip to move, corner handle to resize.
           </p>
@@ -305,11 +305,11 @@ const BusinessCardDesigner = ({
               Reset selected position
             </button>
           )}
-          </div>
+            </DesignerTabPanel>
           )}
 
           {activeTab === BUSINESS_CARD_PANEL.COLOR && (
-        <div className="card-designer__panel">
+            <DesignerTabPanel tabId={BUSINESS_CARD_PANEL.COLOR} className="card-designer__panel">
           <div className="card-designer__color-grid">
             <ColorPickerField
               label="Background"
@@ -328,11 +328,14 @@ const BusinessCardDesigner = ({
               {contrastWarning}
             </p>
           )}
-          </div>
+            </DesignerTabPanel>
           )}
 
           {activeTab === BUSINESS_CARD_PANEL.PRINT && (
-        <div className="card-designer__panel card-designer__print-options" aria-label="Print options">
+            <DesignerTabPanel
+              tabId={BUSINESS_CARD_PANEL.PRINT}
+              className="card-designer__panel card-designer__print-options"
+            >
           <div className="form-field">
             <label htmlFor="paper-type" className="form-label">
               Paper
@@ -375,11 +378,11 @@ const BusinessCardDesigner = ({
               ))}
             </div>
           </fieldset>
-          </div>
+            </DesignerTabPanel>
           )}
 
           {activeTab === BUSINESS_CARD_PANEL.IMAGE && (
-        <div className="card-designer__panel">
+            <DesignerTabPanel tabId={BUSINESS_CARD_PANEL.IMAGE} className="card-designer__panel">
           <div className="card-designer__toolbar">
             <button type="button" className="card-designer__tool" onClick={handleFlip}>
               Flip card
@@ -412,11 +415,15 @@ const BusinessCardDesigner = ({
               {uploadError}
             </p>
           )}
-          </div>
+            </DesignerTabPanel>
           )}
 
-          {activeTab === 'quantity' && quantityPanel}
-          {activeTab === 'schedule' && schedulePanel}
+          {activeTab === 'quantity' && (
+            <DesignerTabPanel tabId="quantity">{quantityPanel}</DesignerTabPanel>
+          )}
+          {activeTab === 'schedule' && (
+            <DesignerTabPanel tabId="schedule">{schedulePanel}</DesignerTabPanel>
+          )}
         </div>
       </div>
 

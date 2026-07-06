@@ -2,7 +2,10 @@
  * StarRatingInput.jsx — Interactive star rating picker for review forms.
  */
 
+import { useEffect, useRef } from 'react';
+
 const StarRatingInput = ({ id, value, onChange, max = 5 }) => {
+  const buttonRefs = useRef([]);
   const handleKeyDown = (event, starValue) => {
     if (event.key === 'ArrowLeft' || event.key === 'ArrowDown') {
       event.preventDefault();
@@ -34,6 +37,10 @@ const StarRatingInput = ({ id, value, onChange, max = 5 }) => {
     }
   };
 
+  useEffect(() => {
+    buttonRefs.current[value - 1]?.focus();
+  }, [value]);
+
   return (
     <div>
       <span id={`${id}-label`} className="block text-sm font-medium text-[var(--color-text-primary)]">
@@ -51,6 +58,9 @@ const StarRatingInput = ({ id, value, onChange, max = 5 }) => {
           return (
             <button
               key={starValue}
+              ref={(node) => {
+                buttonRefs.current[index] = node;
+              }}
               type="button"
               role="radio"
               aria-checked={value === starValue}

@@ -3,7 +3,7 @@
  */
 
 import { useEffect, useRef, useState } from 'react';
-import { ColorPickerField, DesignerTabBar } from '../../ui/components/primitives';
+import { ColorPickerField, DesignerTabBar, DesignerTabPanel } from '../../ui/components/primitives';
 import ImageCropDialog from './businessCard/ImageCropDialog';
 import MagnetCanvas from './magnet/MagnetCanvas';
 import { MAGNET_COLORS, MAGNET_PANEL, MAGNET_WIZARD_TABS } from './magnet/constants';
@@ -153,7 +153,7 @@ const MagnetDesigner = ({
           )}
 
           {activeTab === MAGNET_PANEL.TEXT && (
-            <div className="card-designer__panel">
+            <DesignerTabPanel tabId={MAGNET_PANEL.TEXT} className="card-designer__panel">
               <p className="card-designer__callout">
                 Enter a short company or team name to print on your vehicle magnet.
               </p>
@@ -184,11 +184,11 @@ const MagnetDesigner = ({
                 onChange={handleTextColorChange}
                 error={colorError}
               />
-            </div>
+            </DesignerTabPanel>
           )}
 
           {activeTab === MAGNET_PANEL.IMAGE && (
-            <div className="card-designer__panel">
+            <DesignerTabPanel tabId={MAGNET_PANEL.IMAGE} className="card-designer__panel">
               <div className="card-designer__toolbar">
                 <button
                   type="button"
@@ -215,11 +215,11 @@ const MagnetDesigner = ({
                   {uploadError}
                 </p>
               )}
-            </div>
+            </DesignerTabPanel>
           )}
 
           {activeTab === MAGNET_PANEL.COLOR && (
-            <div className="card-designer__panel">
+            <DesignerTabPanel tabId={MAGNET_PANEL.COLOR} className="card-designer__panel">
               <div>
                 <p className="form-label">Background color</p>
                 <div className="magnet-designer__swatches">
@@ -252,11 +252,15 @@ const MagnetDesigner = ({
                 <span className="designer-quantity__muted">{formatPrice(100)}</span> (3) — pending
                 configuration
               </p>
-            </div>
+            </DesignerTabPanel>
           )}
 
-          {activeTab === 'quantity' && quantityPanel}
-          {activeTab === 'schedule' && schedulePanel}
+          {activeTab === 'quantity' && (
+            <DesignerTabPanel tabId="quantity">{quantityPanel}</DesignerTabPanel>
+          )}
+          {activeTab === 'schedule' && (
+            <DesignerTabPanel tabId="schedule">{schedulePanel}</DesignerTabPanel>
+          )}
         </div>
       </div>
 

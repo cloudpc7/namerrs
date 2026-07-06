@@ -32,7 +32,7 @@ describe('MemorialDesigner', () => {
     expect(screen.getByLabelText(/^name$/i)).toHaveClass('form-input');
     expect(screen.queryByRole('button', { name: /upload photo/i })).not.toBeInTheDocument();
 
-    await user.click(screen.getByRole('button', { name: /^photo$/i }));
+    await user.click(screen.getByRole('tab', { name: /^photo$/i }));
     expect(onTabChange).toHaveBeenCalledWith(MEMORIAL_PANEL.PHOTO);
   });
 

@@ -32,7 +32,7 @@ describe('HatDesigner', () => {
     expect(screen.getByLabelText(/short company name/i)).toHaveClass('form-input');
     expect(screen.queryByRole('button', { name: /upload logo/i })).not.toBeInTheDocument();
 
-    await user.click(screen.getByRole('button', { name: /^image$/i }));
+    await user.click(screen.getByRole('tab', { name: /^image$/i }));
     expect(onTabChange).toHaveBeenCalledWith(HAT_PANEL.IMAGE);
   });
 

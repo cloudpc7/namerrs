@@ -74,19 +74,19 @@ describe('DesignerWizard', () => {
     const user = userEvent.setup();
     renderWizard('tshirts');
 
-    await user.click(screen.getByRole('button', { name: /^qty$/i }));
+    await user.click(screen.getByRole('tab', { name: /^qty$/i }));
 
     expect(screen.getByText(/add text or upload an image/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/t-shirt designer/i)).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /^text$/i })).toHaveAttribute('aria-current', 'page');
+    expect(screen.getByRole('tab', { name: /^text$/i })).toHaveAttribute('aria-selected', 'true');
   });
 
   it('renders banner designer tabs instead of step footer', () => {
     renderWizard('banners');
 
     expect(screen.getByLabelText(/banner designer/i)).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /^image$/i })).toHaveAttribute('aria-current', 'page');
-    expect(screen.getByRole('button', { name: /^size$/i })).toBeInTheDocument();
+    expect(screen.getByRole('tab', { name: /^image$/i })).toHaveAttribute('aria-selected', 'true');
+    expect(screen.getByRole('tab', { name: /^size$/i })).toBeInTheDocument();
     expect(screen.queryByRole('button', { name: /continue/i })).not.toBeInTheDocument();
   });
 
@@ -94,7 +94,7 @@ describe('DesignerWizard', () => {
     renderWizard('hats');
 
     expect(screen.getByLabelText(/hat designer/i)).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /^text$/i })).toHaveAttribute('aria-current', 'page');
+    expect(screen.getByRole('tab', { name: /^text$/i })).toHaveAttribute('aria-selected', 'true');
     expect(screen.queryByRole('button', { name: /continue/i })).not.toBeInTheDocument();
   });
 
@@ -102,7 +102,7 @@ describe('DesignerWizard', () => {
     renderWizard('magnets');
 
     expect(screen.getByLabelText(/magnet designer/i)).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /^text$/i })).toHaveAttribute('aria-current', 'page');
+    expect(screen.getByRole('tab', { name: /^text$/i })).toHaveAttribute('aria-selected', 'true');
     expect(screen.queryByRole('button', { name: /continue/i })).not.toBeInTheDocument();
   });
 
@@ -112,7 +112,7 @@ describe('DesignerWizard', () => {
 
     const companyInput = screen.getByLabelText(/short company name/i);
     await user.type(companyInput, 'Namerrs');
-    await user.click(screen.getByRole('button', { name: /^qty$/i }));
+    await user.click(screen.getByRole('tab', { name: /^qty$/i }));
 
     expect(screen.getByLabelText(/magnet quantity/i)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: '2' })).toBeInTheDocument();
@@ -122,8 +122,8 @@ describe('DesignerWizard', () => {
     renderWizard('memorial');
 
     expect(screen.getByLabelText(/memorial designer/i)).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /^text$/i })).toHaveAttribute('aria-current', 'page');
-    expect(screen.getByRole('button', { name: /^size$/i })).toBeInTheDocument();
+    expect(screen.getByRole('tab', { name: /^text$/i })).toHaveAttribute('aria-selected', 'true');
+    expect(screen.getByRole('tab', { name: /^size$/i })).toBeInTheDocument();
     expect(screen.queryByRole('button', { name: /continue/i })).not.toBeInTheDocument();
   });
 
@@ -133,7 +133,7 @@ describe('DesignerWizard', () => {
 
     const nameInput = screen.getByLabelText(/^name$/i);
     await user.type(nameInput, 'Jane Smith');
-    await user.click(screen.getByRole('button', { name: /^qty$/i }));
+    await user.click(screen.getByRole('tab', { name: /^qty$/i }));
 
     expect(screen.getByLabelText(/^quantity$/i)).toBeInTheDocument();
   });

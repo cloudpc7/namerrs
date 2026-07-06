@@ -32,7 +32,7 @@ describe('BannerDesigner', () => {
     expect(screen.getByRole('button', { name: /upload artwork/i })).toHaveClass('card-designer__tool');
     expect(screen.queryByLabelText(/banner type/i)).not.toBeInTheDocument();
 
-    await user.click(screen.getByRole('button', { name: /^size$/i }));
+    await user.click(screen.getByRole('tab', { name: /^size$/i }));
     expect(onTabChange).toHaveBeenCalledWith(BANNER_PANEL.SIZE);
   });
 

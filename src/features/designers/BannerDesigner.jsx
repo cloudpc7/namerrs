@@ -3,7 +3,7 @@
  */
 
 import { useEffect, useRef, useState } from 'react';
-import { ColorPickerField, DesignerTabBar } from '../../ui/components/primitives';
+import { ColorPickerField, DesignerTabBar, DesignerTabPanel } from '../../ui/components/primitives';
 import ImageCropDialog from './businessCard/ImageCropDialog';
 import BannerCanvas from './banner/BannerCanvas';
 import {
@@ -186,7 +186,7 @@ const BannerDesigner = ({
           )}
 
           {activeTab === BANNER_PANEL.IMAGE && (
-            <div className="card-designer__panel">
+            <DesignerTabPanel tabId={BANNER_PANEL.IMAGE} className="card-designer__panel">
               <div className="card-designer__toolbar">
                 <button
                   type="button"
@@ -237,11 +237,11 @@ const BannerDesigner = ({
                   {uploadError}
                 </p>
               )}
-            </div>
+            </DesignerTabPanel>
           )}
 
           {activeTab === BANNER_PANEL.SIZE && (
-            <div className="card-designer__panel">
+            <DesignerTabPanel tabId={BANNER_PANEL.SIZE} className="card-designer__panel">
               <div className="form-field">
                 <label htmlFor="banner-type" className="form-label">
                   Banner type
@@ -326,11 +326,11 @@ const BannerDesigner = ({
                 {' '}
                 ({sqFt ? `${sqFt} sq ft` : '—'} × rate pending)
               </p>
-            </div>
+            </DesignerTabPanel>
           )}
 
           {activeTab === BANNER_PANEL.BRIEF && (
-            <div className="card-designer__panel">
+            <DesignerTabPanel tabId={BANNER_PANEL.BRIEF} className="card-designer__panel">
               <div className="form-field">
                 <label htmlFor="banner-message" className="form-label">
                   Design description / brief
@@ -351,22 +351,26 @@ const BannerDesigner = ({
                   Describe text, colors, and layout so we can produce your banner.
                 </p>
               </div>
-            </div>
+            </DesignerTabPanel>
           )}
 
           {activeTab === BANNER_PANEL.COLOR && (
-            <div className="card-designer__panel">
+            <DesignerTabPanel tabId={BANNER_PANEL.COLOR} className="card-designer__panel">
               <ColorPickerField
                 label="Background color"
                 value={design.backgroundColor}
                 onChange={handleBgColorChange}
                 error={colorError}
               />
-            </div>
+            </DesignerTabPanel>
           )}
 
-          {activeTab === 'quantity' && quantityPanel}
-          {activeTab === 'schedule' && schedulePanel}
+          {activeTab === 'quantity' && (
+            <DesignerTabPanel tabId="quantity">{quantityPanel}</DesignerTabPanel>
+          )}
+          {activeTab === 'schedule' && (
+            <DesignerTabPanel tabId="schedule">{schedulePanel}</DesignerTabPanel>
+          )}
         </div>
       </div>
 

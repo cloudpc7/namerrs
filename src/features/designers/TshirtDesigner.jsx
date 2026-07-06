@@ -31,7 +31,7 @@ import {
   updateElement,
   updateFit,
 } from './tshirt/designModel';
-import { ColorPickerField, DesignerTabBar } from '../../ui/components/primitives';
+import { ColorPickerField, DesignerTabBar, DesignerTabPanel } from '../../ui/components/primitives';
 import { isEyeDropperSupported, pickColorFromScreen } from './tshirt/eyedropper';
 import {
   hasLowContrast,
@@ -261,7 +261,7 @@ const TshirtDesigner = ({
           )}
 
           {activeTab === TSHIRT_PANEL.TEXT && (
-            <div className="card-designer__panel">
+            <DesignerTabPanel tabId={TSHIRT_PANEL.TEXT} className="card-designer__panel">
               <div className="form-field">
                 <label htmlFor="add-tshirt-text-field" className="form-label">
                   Add text field
@@ -322,11 +322,11 @@ const TshirtDesigner = ({
                   Reset selected position
                 </button>
               )}
-            </div>
+            </DesignerTabPanel>
           )}
 
           {activeTab === TSHIRT_PANEL.COLOR && (
-            <div className="card-designer__panel">
+            <DesignerTabPanel tabId={TSHIRT_PANEL.COLOR} className="card-designer__panel">
               <div className="card-designer__toolbar">
                 <button
                   type="button"
@@ -393,11 +393,14 @@ const TshirtDesigner = ({
                   {contrastWarning}
                 </p>
               )}
-            </div>
+            </DesignerTabPanel>
           )}
 
           {activeTab === TSHIRT_PANEL.PRINT && (
-            <div className="card-designer__panel card-designer__print-options" aria-label="Print options">
+            <DesignerTabPanel
+              tabId={TSHIRT_PANEL.PRINT}
+              className="card-designer__panel card-designer__print-options"
+            >
               <div className="form-field">
                 <label htmlFor="front-print-placement" className="form-label">
                   Front print placement
@@ -461,11 +464,11 @@ const TshirtDesigner = ({
                   ))}
                 </select>
               </div>
-            </div>
+            </DesignerTabPanel>
           )}
 
           {activeTab === TSHIRT_PANEL.IMAGE && (
-            <div className="card-designer__panel">
+            <DesignerTabPanel tabId={TSHIRT_PANEL.IMAGE} className="card-designer__panel">
               <div className="card-designer__toolbar">
                 <button type="button" className="card-designer__tool" onClick={handleFlip}>
                   Flip shirt
@@ -505,11 +508,11 @@ const TshirtDesigner = ({
                   {uploadError}
                 </p>
               )}
-            </div>
+            </DesignerTabPanel>
           )}
 
           {activeTab === TSHIRT_PANEL.SIZES && (
-            <div className="card-designer__panel">
+            <DesignerTabPanel tabId={TSHIRT_PANEL.SIZES} className="card-designer__panel">
               <fieldset className="form-field card-designer__sides">
                 <legend className="form-label">Fit</legend>
                 <div className="card-designer__sides-choices">
@@ -553,11 +556,15 @@ const TshirtDesigner = ({
               </fieldset>
 
               <SizeChart fit={design.fit} />
-            </div>
+            </DesignerTabPanel>
           )}
 
-          {activeTab === 'quantity' && quantityPanel}
-          {activeTab === 'schedule' && schedulePanel}
+          {activeTab === 'quantity' && (
+            <DesignerTabPanel tabId="quantity">{quantityPanel}</DesignerTabPanel>
+          )}
+          {activeTab === 'schedule' && (
+            <DesignerTabPanel tabId="schedule">{schedulePanel}</DesignerTabPanel>
+          )}
         </div>
       </div>
 

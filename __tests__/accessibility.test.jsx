@@ -21,6 +21,7 @@ import ProductsSection from '../src/ui/components/ProductsSection';
 import FaqSection from '../src/ui/components/FaqSection';
 import ContactSection from '../src/ui/components/ContactSection';
 import StarRatingInput from '../src/ui/components/StarRatingInput';
+import { DesignerTabBar } from '../src/ui/components/primitives';
 import NotFoundPage from '../src/pages/NotFoundPage';
 
 expect.extend(toHaveNoViolations);
@@ -173,5 +174,20 @@ describe('Accessibility (jest-axe)', () => {
 
     expect(getByRole('radiogroup', { name: /rating/i })).toBeInTheDocument();
     expect(getByRole('radio', { name: /3 stars/i })).toHaveAttribute('aria-checked', 'true');
+  });
+
+  it('DesignerTabBar exposes an accessible tablist with linked tabs', () => {
+    const tabs = [
+      { id: 'text', label: 'Text' },
+      { id: 'color', label: 'Color' },
+    ];
+    const { getByRole } = render(
+      <DesignerTabBar tabs={tabs} activeTab="text" onChange={jest.fn()} />
+    );
+
+    const textTab = getByRole('tab', { name: 'Text' });
+    expect(textTab).toHaveAttribute('aria-selected', 'true');
+    expect(textTab).toHaveAttribute('aria-controls', 'designer-tabpanel-text');
+    expect(getByRole('tab', { name: 'Color' })).toHaveAttribute('aria-selected', 'false');
   });
 });

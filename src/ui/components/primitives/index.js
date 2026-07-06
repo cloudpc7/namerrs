@@ -9,6 +9,7 @@ export { default as Button } from './Button';
 export { default as Card } from './Card';
 export { default as ColorPickerField } from './ColorPickerField';
 export { default as DesignerTabBar } from './DesignerTabBar';
+export { default as DesignerTabPanel } from './DesignerTabPanel';
 export { default as EmptyState } from './EmptyState';
 export { default as IconButton } from './IconButton';
 export { default as MediaFrame } from './MediaFrame';

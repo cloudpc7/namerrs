@@ -3,7 +3,7 @@
  */
 
 import { useEffect, useRef, useState } from 'react';
-import { ColorPickerField, DesignerTabBar } from '../../ui/components/primitives';
+import { ColorPickerField, DesignerTabBar, DesignerTabPanel } from '../../ui/components/primitives';
 import ImageCropDialog from './businessCard/ImageCropDialog';
 import MemorialCanvas from './memorial/MemorialCanvas';
 import {
@@ -183,7 +183,7 @@ const MemorialDesigner = ({
           )}
 
           {activeTab === MEMORIAL_PANEL.TEXT && (
-            <div className="card-designer__panel">
+            <DesignerTabPanel tabId={MEMORIAL_PANEL.TEXT} className="card-designer__panel">
               <p className="card-designer__callout">
                 Add a name and optional dates or short message for a respectful memorial layout.
               </p>
@@ -234,11 +234,11 @@ const MemorialDesigner = ({
                 onChange={handleTextColorChange}
                 error={colorError}
               />
-            </div>
+            </DesignerTabPanel>
           )}
 
           {activeTab === MEMORIAL_PANEL.PHOTO && (
-            <div className="card-designer__panel">
+            <DesignerTabPanel tabId={MEMORIAL_PANEL.PHOTO} className="card-designer__panel">
               <div className="card-designer__toolbar">
                 <button
                   type="button"
@@ -265,11 +265,11 @@ const MemorialDesigner = ({
                   {uploadError}
                 </p>
               )}
-            </div>
+            </DesignerTabPanel>
           )}
 
           {activeTab === MEMORIAL_PANEL.SIZE && (
-            <div className="card-designer__panel">
+            <DesignerTabPanel tabId={MEMORIAL_PANEL.SIZE} className="card-designer__panel">
               <div className="form-field">
                 <label htmlFor="memorial-type" className="form-label">
                   Product type
@@ -306,11 +306,11 @@ const MemorialDesigner = ({
                 </select>
                 <p className="form-hint">Preview updates to match the selected dimensions.</p>
               </div>
-            </div>
+            </DesignerTabPanel>
           )}
 
           {activeTab === MEMORIAL_PANEL.COLOR && (
-            <div className="card-designer__panel">
+            <DesignerTabPanel tabId={MEMORIAL_PANEL.COLOR} className="card-designer__panel">
               <div>
                 <p className="form-label">Background color</p>
                 <div className="memorial-designer__swatches">
@@ -344,11 +344,15 @@ const MemorialDesigner = ({
                 Pricing: <span className="designer-quantity__muted">{formatPrice(0)}</span> (pending
                 configuration)
               </p>
-            </div>
+            </DesignerTabPanel>
           )}
 
-          {activeTab === 'quantity' && quantityPanel}
-          {activeTab === 'schedule' && schedulePanel}
+          {activeTab === 'quantity' && (
+            <DesignerTabPanel tabId="quantity">{quantityPanel}</DesignerTabPanel>
+          )}
+          {activeTab === 'schedule' && (
+            <DesignerTabPanel tabId="schedule">{schedulePanel}</DesignerTabPanel>
+          )}
         </div>
       </div>
 
