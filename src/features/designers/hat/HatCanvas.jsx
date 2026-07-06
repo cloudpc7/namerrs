@@ -9,6 +9,7 @@ import {
   HAT_PRINT_SURFACE,
   HAT_SHAPE_PATH,
 } from './constants';
+import { DesignerPreviewStage } from '../../../ui/components/primitives';
 import { normalizeHexColor } from '../../../utils/colorUtils';
 
 const isLightHatColor = (value) => {
@@ -32,7 +33,7 @@ const HatCanvas = ({ design, previewLabel }) => {
   return (
     <div className="hat-canvas">
       <div className="hat-canvas__mockup-wrap">
-        <div aria-label={previewLabel} className="hat-canvas__stage">
+        <DesignerPreviewStage previewLabel={previewLabel} className="hat-canvas__stage">
           <div
             className={`hat-canvas__cap${
               isLightHat ? ' hat-canvas__cap--light' : ' hat-canvas__cap--dark'
@@ -110,7 +111,7 @@ const HatCanvas = ({ design, previewLabel }) => {
               )}
             </div>
           </div>
-        </div>
+        </DesignerPreviewStage>
       </div>
       <p className="hat-canvas__hint">
         Structured 6-panel · vinyl print · one size fits most

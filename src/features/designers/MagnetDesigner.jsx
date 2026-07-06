@@ -41,6 +41,7 @@ const MagnetDesigner = ({
   const [textError, setTextError] = useState('');
   const [colorError, setColorError] = useState('');
   const [uploadError, setUploadError] = useState('');
+  const [liveMessage, setLiveMessage] = useState('');
   const [cropSource, setCropSource] = useState(null);
   const fileInputRef = useRef(null);
   const initializedRef = useRef(false);
@@ -61,6 +62,7 @@ const MagnetDesigner = ({
     setUploadError('');
   }, [activeTab]);
 
+  const announce = (message) => setLiveMessage(message);
   const applyDesign = (next) => onChange(next);
   const showCanvas = CANVAS_PANELS.has(activeTab);
   const usesMagnetTabs = Boolean(onTabChange);
@@ -74,11 +76,13 @@ const MagnetDesigner = ({
 
     if (activeTab === MAGNET_PANEL.TEXT && current.inputMode !== 'text') {
       onChange({ ...current, inputMode: 'text' });
+      announce('Text mode selected');
       return;
     }
 
     if (activeTab === MAGNET_PANEL.IMAGE && current.inputMode !== 'image') {
       onChange({ ...current, inputMode: 'image' });
+      announce('Image mode selected');
     }
   }, [activeTab, usesMagnetTabs, onChange]);
 
@@ -100,6 +104,8 @@ const MagnetDesigner = ({
     setColorError(error || '');
     if (!error) {
       applyDesign({ ...design, hatColor: value });
+      const preset = MAGNET_COLORS.find((item) => item.hex === value);
+      announce(preset ? `Background set to ${preset.label}` : 'Background color updated');
     }
   };
 
@@ -127,10 +133,14 @@ const MagnetDesigner = ({
       inputMode: 'image',
     });
     setCropSource(null);
+    announce('Graphic placed on magnet preview');
   };
 
   return (
     <div className="card-designer magnet-designer" aria-label="Magnet designer">
+      <p className="sr-only" aria-live="polite">
+        {liveMessage}
+      </p>
       <div
         className={`card-designer__stage${
           usesMagnetTabs ? ' card-designer__stage--tabbed' : ''

@@ -25,11 +25,17 @@ export const normalizeHatDesign = (design) => {
 };
 
 export const buildHatPreviewLabel = (design) => {
-  if (design.inputMode === 'text' && design.companyName) {
-    return `Hat preview: ${design.companyName}`;
+  const colorNote = design.hatColor ? ` on ${design.hatColor} hat` : '';
+
+  if (design.inputMode === 'text') {
+    const text = design.companyName || 'your text';
+    return `Hat preview, text mode: ${text}${colorNote}`;
   }
-  if (design.inputMode === 'image' && design.imageFileName) {
-    return `Hat preview: ${design.imageFileName}`;
+
+  if (design.imageSrc) {
+    const file = design.imageFileName || 'uploaded logo';
+    return `Hat preview, image mode: ${file}${colorNote}`;
   }
-  return 'Hat preview';
+
+  return `Hat preview, image mode, no logo yet${colorNote}`;
 };

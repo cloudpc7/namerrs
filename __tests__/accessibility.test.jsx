@@ -21,6 +21,9 @@ import ProductsSection from '../src/ui/components/ProductsSection';
 import FaqSection from '../src/ui/components/FaqSection';
 import ContactSection from '../src/ui/components/ContactSection';
 import StarRatingInput from '../src/ui/components/StarRatingInput';
+import HatDesigner from '../src/features/designers/HatDesigner';
+import { createDefaultHatDesign } from '../src/features/designers/hat/designModel';
+import { HAT_PANEL } from '../src/features/designers/hat/constants';
 import { DesignerTabBar } from '../src/ui/components/primitives';
 import NotFoundPage from '../src/pages/NotFoundPage';
 
@@ -28,6 +31,11 @@ expect.extend(toHaveNoViolations);
 
 jest.mock('../src/hooks/useSeo', () => ({
   useSeo: jest.fn(),
+}));
+
+jest.mock('react-easy-crop', () => ({
+  __esModule: true,
+  default: () => <div>Cropper</div>,
 }));
 
 jest.mock('@react-spring/web', () => ({
@@ -174,6 +182,18 @@ describe('Accessibility (jest-axe)', () => {
 
     expect(getByRole('radiogroup', { name: /rating/i })).toBeInTheDocument();
     expect(getByRole('radio', { name: /3 stars/i })).toHaveAttribute('aria-checked', 'true');
+  });
+
+  it('HatDesigner has no detectable violations', async () => {
+    const { container } = render(
+      <HatDesigner
+        design={createDefaultHatDesign()}
+        onChange={jest.fn()}
+        activeTab={HAT_PANEL.TEXT}
+        onTabChange={jest.fn()}
+      />
+    );
+    expect(await axe(container)).toHaveNoViolations();
   });
 
   it('DesignerTabBar exposes an accessible tablist with linked tabs', () => {

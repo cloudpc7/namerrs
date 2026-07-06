@@ -22,8 +22,17 @@ export const normalizeMagnetDesign = (design) => {
 };
 
 export const buildMagnetPreviewLabel = (design) => {
-  if (design.inputMode === 'text' && design.companyName) {
-    return `Magnet preview: ${design.companyName}`;
+  const colorNote = design.hatColor ? ` on ${design.hatColor} background` : '';
+
+  if (design.inputMode === 'text') {
+    const text = design.companyName || 'your text';
+    return `Vehicle magnet preview, text mode: ${text}${colorNote}`;
   }
-  return 'Vehicle magnet preview';
+
+  if (design.imageSrc) {
+    const file = design.imageFileName || 'uploaded graphic';
+    return `Vehicle magnet preview, image mode: ${file}${colorNote}`;
+  }
+
+  return `Vehicle magnet preview, image mode, no graphic yet${colorNote}`;
 };

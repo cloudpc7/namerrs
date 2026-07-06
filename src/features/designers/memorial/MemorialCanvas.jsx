@@ -3,6 +3,7 @@
  */
 
 import { getSelectedSize } from './designModel';
+import { DesignerPreviewStage } from '../../../ui/components/primitives';
 
 const MemorialCanvas = ({ design, previewLabel }) => {
   const size = getSelectedSize(design);
@@ -11,8 +12,8 @@ const MemorialCanvas = ({ design, previewLabel }) => {
   return (
     <div className="memorial-canvas">
       <div className="memorial-canvas__mockup-wrap">
-        <div
-          aria-label={previewLabel}
+        <DesignerPreviewStage
+          previewLabel={previewLabel}
           className="memorial-canvas__preview"
           style={{
             aspectRatio: size.aspect,
@@ -42,7 +43,7 @@ const MemorialCanvas = ({ design, previewLabel }) => {
               <span className="memorial-canvas__placeholder">Upload photo</span>
             )}
           </div>
-        </div>
+        </DesignerPreviewStage>
       </div>
       <p className="memorial-canvas__hint">{size.label} · full color digital</p>
     </div>

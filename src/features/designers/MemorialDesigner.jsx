@@ -59,6 +59,7 @@ const MemorialDesigner = ({
   const [messageError, setMessageError] = useState('');
   const [colorError, setColorError] = useState('');
   const [uploadError, setUploadError] = useState('');
+  const [liveMessage, setLiveMessage] = useState('');
   const [cropSource, setCropSource] = useState(null);
   const fileInputRef = useRef(null);
   const initializedRef = useRef(false);
@@ -79,6 +80,7 @@ const MemorialDesigner = ({
     setUploadError('');
   }, [activeTab]);
 
+  const announce = (message) => setLiveMessage(message);
   const applyDesign = (next) => onChange(next);
   const showCanvas = CANVAS_PANELS.has(activeTab);
   const usesMemorialTabs = Boolean(onTabChange);
@@ -94,17 +96,21 @@ const MemorialDesigner = ({
 
     if (activeTab === MEMORIAL_PANEL.TEXT && current.inputMode !== 'text') {
       onChange({ ...current, inputMode: 'text' });
+      announce('Text layout selected');
       return;
     }
 
     if (activeTab === MEMORIAL_PANEL.PHOTO && current.inputMode !== 'image') {
       onChange({ ...current, inputMode: 'image' });
+      announce('Photo layout selected');
     }
   }, [activeTab, usesMemorialTabs, onChange]);
 
   const handleProductTypeChange = (productType) => {
     const firstSize = SIZES_BY_TYPE[productType][0].id;
+    const typeLabel = PRODUCT_TYPES.find((item) => item.id === productType)?.label || productType;
     applyDesign({ ...design, productType, sizeId: firstSize });
+    announce(`Product type set to ${typeLabel}`);
   };
 
   const handleNameChange = (value) => {
@@ -130,6 +136,8 @@ const MemorialDesigner = ({
     setColorError(error || '');
     if (!error) {
       applyDesign({ ...design, backgroundColor: value });
+      const preset = MEMORIAL_COLORS.find((item) => item.hex === value);
+      announce(preset ? `Background set to ${preset.label}` : 'Background color updated');
     }
   };
 
@@ -157,10 +165,14 @@ const MemorialDesigner = ({
       inputMode: 'image',
     });
     setCropSource(null);
+    announce('Photo placed on memorial preview');
   };
 
   return (
     <div className="card-designer memorial-designer" aria-label="Memorial designer">
+      <p className="sr-only" aria-live="polite">
+        {liveMessage}
+      </p>
       <div
         className={`card-designer__stage${
           usesMemorialTabs ? ' card-designer__stage--tabbed' : ''
@@ -295,7 +307,12 @@ const MemorialDesigner = ({
                 <select
                   id="memorial-size"
                   value={design.sizeId}
-                  onChange={(event) => applyDesign({ ...design, sizeId: event.target.value })}
+                  onChange={(event) => {
+                    const sizeId = event.target.value;
+                    const sizeLabel = sizeOptions.find((item) => item.id === sizeId)?.label || sizeId;
+                    applyDesign({ ...design, sizeId });
+                    announce(`Size set to ${sizeLabel}`);
+                  }}
                   className="form-input"
                 >
                   {sizeOptions.map((size) => (

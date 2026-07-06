@@ -29,6 +29,7 @@ describe('MagnetDesigner', () => {
     );
 
     expect(screen.getByRole('navigation', { name: /designer options/i })).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: /magnet preview/i })).toHaveAttribute('tabindex', '0');
     expect(screen.getByLabelText(/short company name/i)).toHaveClass('form-input');
     expect(screen.queryByRole('button', { name: /upload graphic/i })).not.toBeInTheDocument();
 

@@ -30,8 +30,19 @@ export const getSelectedSize = (design) => {
 };
 
 export const buildMemorialPreviewLabel = (design) => {
-  if (design.name) {
-    return `Memorial preview: ${design.name}`;
+  const size = getSelectedSize(design);
+  const sizeNote = size?.label ? `, ${size.label}` : '';
+
+  if (design.inputMode === 'text') {
+    const name = design.name || 'name';
+    const dates = design.datesMessage ? `, ${design.datesMessage}` : '';
+    return `Memorial preview, text layout: ${name}${dates}${sizeNote}`;
   }
-  return 'Memorial preview';
+
+  if (design.imageSrc) {
+    const file = design.imageFileName || 'uploaded photo';
+    return `Memorial preview, photo layout: ${file}${sizeNote}`;
+  }
+
+  return `Memorial preview, photo layout, no photo yet${sizeNote}`;
 };

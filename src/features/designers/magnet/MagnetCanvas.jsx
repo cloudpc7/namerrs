@@ -3,6 +3,7 @@
  */
 
 import { MAGNET_SIZE } from './designModel';
+import { DesignerPreviewStage } from '../../../ui/components/primitives';
 
 const MagnetCanvas = ({ design, previewLabel }) => {
   const isText = design.inputMode === 'text';
@@ -10,8 +11,8 @@ const MagnetCanvas = ({ design, previewLabel }) => {
   return (
     <div className="magnet-canvas">
       <div className="magnet-canvas__mockup-wrap">
-        <div
-          aria-label={previewLabel}
+        <DesignerPreviewStage
+          previewLabel={previewLabel}
           className="magnet-canvas__preview"
           style={{
             aspectRatio: '2 / 1',
@@ -34,7 +35,7 @@ const MagnetCanvas = ({ design, previewLabel }) => {
               <span className="magnet-canvas__placeholder">Upload graphic</span>
             )}
           </div>
-        </div>
+        </DesignerPreviewStage>
       </div>
       <p className="magnet-canvas__hint">
         {MAGNET_SIZE.label} full color digital · landscape

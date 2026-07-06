@@ -3585,6 +3585,16 @@ p.about-section__support {
   width: 100%;
 }
 
+.hat-canvas__stage,
+.magnet-canvas__preview,
+.memorial-canvas__preview {
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--color-focus-ring);
+    border-radius: 0.5rem;
+  }
+}
+
 .hat-canvas__stage {
   display: flex;
   justify-content: center;

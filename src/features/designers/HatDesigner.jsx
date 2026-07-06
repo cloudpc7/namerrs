@@ -41,6 +41,7 @@ const HatDesigner = ({
   const [textError, setTextError] = useState('');
   const [colorError, setColorError] = useState('');
   const [uploadError, setUploadError] = useState('');
+  const [liveMessage, setLiveMessage] = useState('');
   const [cropSource, setCropSource] = useState(null);
   const fileInputRef = useRef(null);
   const initializedRef = useRef(false);
@@ -61,6 +62,7 @@ const HatDesigner = ({
     setUploadError('');
   }, [activeTab]);
 
+  const announce = (message) => setLiveMessage(message);
   const applyDesign = (next) => onChange(next);
   const showCanvas = CANVAS_PANELS.has(activeTab);
   const usesHatTabs = Boolean(onTabChange);
@@ -74,11 +76,13 @@ const HatDesigner = ({
 
     if (activeTab === HAT_PANEL.TEXT && current.inputMode !== 'text') {
       onChange({ ...current, inputMode: 'text' });
+      announce('Text mode selected');
       return;
     }
 
     if (activeTab === HAT_PANEL.IMAGE && current.inputMode !== 'image') {
       onChange({ ...current, inputMode: 'image' });
+      announce('Image mode selected');
     }
   }, [activeTab, usesHatTabs, onChange]);
 
@@ -100,6 +104,8 @@ const HatDesigner = ({
     setColorError(error || '');
     if (!error) {
       applyDesign({ ...design, hatColor: value });
+      const preset = HAT_COLORS.find((item) => item.hex === value);
+      announce(preset ? `Hat color set to ${preset.label}` : 'Hat color updated');
     }
   };
 
@@ -128,10 +134,14 @@ const HatDesigner = ({
       inputMode: 'image',
     });
     setCropSource(null);
+    announce('Logo placed on hat preview');
   };
 
   return (
     <div className="card-designer hat-designer" aria-label="Hat designer">
+      <p className="sr-only" aria-live="polite">
+        {liveMessage}
+      </p>
       <div
         className={`card-designer__stage${
           usesHatTabs ? ' card-designer__stage--tabbed' : ''

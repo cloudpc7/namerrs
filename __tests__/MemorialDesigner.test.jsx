@@ -29,6 +29,7 @@ describe('MemorialDesigner', () => {
     );
 
     expect(screen.getByRole('navigation', { name: /designer options/i })).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: /memorial preview/i })).toHaveAttribute('tabindex', '0');
     expect(screen.getByLabelText(/^name$/i)).toHaveClass('form-input');
     expect(screen.queryByRole('button', { name: /upload photo/i })).not.toBeInTheDocument();
 
