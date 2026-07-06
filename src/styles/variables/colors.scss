@@ -18,6 +18,7 @@ $color-theme: (
   surface: #f4f4f5,
   text-primary: #18181b,
   text-secondary: #71717a,
+  // WCAG AA 4.5:1 minimum on white (#ffffff)
   text-disabled: #757575,
   border: #e4e4e7,
   success: #059669,
