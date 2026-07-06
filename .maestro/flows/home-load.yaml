@@ -1,0 +1,14 @@
+url: ${BASE_URL}
+env:
+  BASE_URL: https://namerrs.web.app
+---
+- launchApp
+- assertVisible: "Namerrs Signs & Printing"
+- scrollUntilVisible:
+    element: "Customize your order"
+    direction: DOWN
+- assertVisible: "Business Cards"
+- scrollUntilVisible:
+    element: "Fast turnaround"
+    direction: UP
+- assertVisible: "Fast turnaround"

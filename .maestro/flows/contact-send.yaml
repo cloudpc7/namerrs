@@ -1,0 +1,18 @@
+url: ${BASE_URL}/#contact
+env:
+  BASE_URL: https://namerrs.web.app
+  E2E_CONTACT_EMAIL: maestro-e2e@example.com
+---
+- launchApp
+- assertVisible: "Send a message"
+- tapOn:
+    id: "contact-name"
+- inputText: "Maestro E2E"
+- tapOn:
+    id: "contact-email"
+- inputText: ${E2E_CONTACT_EMAIL}
+- tapOn:
+    id: "contact-message"
+- inputText: "Maestro E2E automated contact test — please ignore."
+- tapOn: "Send message"
+- assertVisible: "Message sent"

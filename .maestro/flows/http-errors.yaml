@@ -1,0 +1,9 @@
+url: ${BASE_URL}/this-page-does-not-exist
+env:
+  BASE_URL: https://namerrs.web.app
+---
+- launchApp
+- assertVisible: "Page not found"
+- assertVisible: "Back to home"
+- tapOn: "Back to home"
+- assertVisible: "Customize your order"

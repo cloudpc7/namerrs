@@ -1,0 +1,30 @@
+url: ${BASE_URL}
+env:
+  BASE_URL: https://namerrs.web.app
+  COMPLETION_DATE: "2026-07-15"
+---
+- launchApp
+- scrollUntilVisible:
+    element: "Hats"
+    direction: DOWN
+- tapOn:
+    text: "Hats"
+    below: "Customize your order"
+    retryTapIfNoChange: true
+- extendedWaitUntil:
+    visible:
+      css: ".product-detail-modal__cta"
+    timeout: 20000
+- tapOn:
+    css: ".product-detail-modal__cta"
+- tapOn:
+    id: "hat-company"
+- inputText: "Maestro Test Co"
+- tapOn: "Qty"
+- tapOn: "Date"
+- tapOn:
+    id: "completion-date"
+- inputText: ${COMPLETION_DATE}
+- tapOn: "Add to cart"
+- assertVisible: "Shopping cart"
+- assertVisible: "Hats"

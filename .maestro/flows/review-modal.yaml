@@ -1,0 +1,16 @@
+url: ${BASE_URL}/#reviews
+env:
+  BASE_URL: https://namerrs.web.app
+---
+- launchApp
+- assertVisible: "Leave a review"
+- tapOn: "Leave a review"
+- assertVisible: "Review form"
+- tapOn:
+    id: "review-text"
+- inputText: "Maestro E2E automated review test — please ignore."
+- tapOn:
+    id: "review-name"
+- inputText: "Maestro E2E"
+- tapOn: "Submit review"
+- assertVisible: "Thank you"

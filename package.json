@@ -16,7 +16,10 @@
     "dev:full": "concurrently -k -n vite,emulators,stripe -c blue,green,magenta \"npm run dev\" \"npm run emulators\" \"npm run stripe:listen\"",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "maestro": "node scripts/run-maestro.js",
+    "test:e2e": "node scripts/run-maestro.js test .maestro --config .maestro/config.yaml",
+    "test:e2e:flow": "node scripts/run-maestro.js test"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",

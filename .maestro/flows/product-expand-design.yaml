@@ -1,0 +1,20 @@
+url: ${BASE_URL}
+env:
+  BASE_URL: https://namerrs.web.app
+---
+- launchApp
+- scrollUntilVisible:
+    element: "Hats"
+    direction: DOWN
+- tapOn:
+    text: "Hats"
+    below: "Customize your order"
+    retryTapIfNoChange: true
+- extendedWaitUntil:
+    visible:
+      css: ".product-detail-modal__cta"
+    timeout: 20000
+- tapOn:
+    css: ".product-detail-modal__cta"
+- assertVisible: "Hats Designer"
+- assertVisible: "Short company name"

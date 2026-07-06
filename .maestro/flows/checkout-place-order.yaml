@@ -1,0 +1,20 @@
+url: ${BASE_URL}
+env:
+  BASE_URL: https://namerrs.web.app
+  COMPLETION_DATE: "2026-07-15"
+  E2E_CONTACT_EMAIL: maestro-e2e@example.com
+---
+- runFlow: add-to-cart.yaml
+- tapOn: "Proceed to checkout"
+- assertVisible: "Contact information"
+- tapOn:
+    id: "checkout-name"
+- inputText: "Maestro E2E"
+- tapOn:
+    id: "checkout-email"
+- inputText: ${E2E_CONTACT_EMAIL}
+- tapOn:
+    id: "checkout-phone"
+- inputText: "9515550100"
+- tapOn: "Place order"
+- assertVisible: "Order confirmed!"

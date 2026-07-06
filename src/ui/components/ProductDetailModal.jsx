@@ -157,7 +157,11 @@ const ProductDetailModal = () => {
 
         <div className="product-detail-modal__footer">
           <div className="product-detail-modal__actions">
-            <Button className="product-detail-modal__cta" onClick={handleDesignerOpen}>
+            <Button
+              className="product-detail-modal__cta"
+              data-testid="product-detail-add-to-order"
+              onClick={handleDesignerOpen}
+            >
               Add to order
             </Button>
           </div>

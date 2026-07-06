@@ -23,6 +23,7 @@ const ProductCard = ({
       type="button"
       variant={isSelected ? 'selected' : 'interactive'}
       className="product-card"
+      data-testid={`product-card-${productId}`}
       aria-expanded={isSelected}
       aria-controls={panelId}
       onClick={onSelect}

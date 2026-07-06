@@ -1,0 +1,9 @@
+url: ${BASE_URL}
+env:
+  BASE_URL: https://namerrs.web.app
+---
+- launchApp
+- assertVisible: "Quality Products. Best Prices Around. Done Fast."
+- assertVisible: "Trusted local print shop"
+- assertVisible: "What our customers say"
+- assertVisible: "Tell us what you're printing"
