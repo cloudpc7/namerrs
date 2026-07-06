@@ -2,6 +2,7 @@
  * BannerCanvas.jsx — Scaled banner preview with draggable images.
  */
 
+import { DesignerPreviewStage } from '../../../ui/components/primitives';
 import DraggableBannerElement from './DraggableBannerElement';
 import { getAspectRatio, getDimensions } from './designModel';
 
@@ -19,8 +20,8 @@ const BannerCanvas = ({
 
   return (
     <div className="banner-canvas">
-      <div
-        aria-label={previewLabel}
+      <DesignerPreviewStage
+        previewLabel={previewLabel}
         data-banner-canvas
         className="banner-canvas__preview"
         style={{
@@ -39,7 +40,7 @@ const BannerCanvas = ({
             onRemove={onRemoveElement}
           />
         ))}
-      </div>
+      </DesignerPreviewStage>
       <p className="banner-canvas__hint">
         {width && height ? `${width} × ${height} ft` : 'Select dimensions'} — drag to move, corner handle to resize
       </p>

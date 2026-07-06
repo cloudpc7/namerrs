@@ -62,7 +62,7 @@ const Offcanvas = ({
         tabIndex={isOpen ? 0 : -1}
       />
 
-      <animated.aside
+      <animated.div
         ref={panelRef}
         role="dialog"
         aria-modal="true"
@@ -72,7 +72,7 @@ const Offcanvas = ({
       >
         <PanelHeader title={title} titleId={titleId} onClose={onClose} closeLabel="Close panel" />
         <div className="offcanvas-host__body">{children}</div>
-      </animated.aside>
+      </animated.div>
     </div>
   );
 };

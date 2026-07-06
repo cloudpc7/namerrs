@@ -15,10 +15,10 @@ jest.mock('@react-spring/web', () => ({
         {children}
       </button>
     ),
-    aside: ({ children, style, ...props }) => (
-      <aside style={style} {...props}>
+    div: ({ children, style, ...props }) => (
+      <div style={style} {...props}>
         {children}
-      </aside>
+      </div>
     ),
   },
 }));

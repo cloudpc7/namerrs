@@ -158,8 +158,6 @@ const DraggableBannerElement = ({
 
   return (
     <div
-      role="button"
-      tabIndex={0}
       className={`card-element card-element--image${
         isSelected ? ' card-element--selected' : ''
       }`}
@@ -177,9 +175,6 @@ const DraggableBannerElement = ({
         event.preventDefault();
         onSelect(element.id);
       }}
-      onKeyDown={handleKeyDown}
-      onFocus={() => onSelect(element.id)}
-      aria-label={element.fileName || 'Banner image'}
     >
       <button
         type="button"
@@ -188,6 +183,8 @@ const DraggableBannerElement = ({
         onPointerDown={handleDragPointerDown}
         onPointerMove={handleDragPointerMove}
         onPointerUp={handleDragPointerUp}
+        onKeyDown={handleKeyDown}
+        onFocus={() => onSelect(element.id)}
       >
         <GripVertical size={14} aria-hidden="true" />
       </button>

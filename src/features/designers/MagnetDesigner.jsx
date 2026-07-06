@@ -212,6 +212,7 @@ const MagnetDesigner = ({
                   type="file"
                   accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
                   className="sr-only"
+                  aria-label="Upload magnet graphic"
                   onChange={handleFileSelect}
                 />
               </div>

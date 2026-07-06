@@ -199,8 +199,6 @@ export default function DraggableTshirtElement({
 
   return (
     <div
-      role="button"
-      tabIndex={0}
       className={`card-element${isSelected ? ' card-element--selected' : ''}${
         isCentered ? ' card-element--centered' : ''
       }${isImage ? ' card-element--image' : ' card-element--text'}`}
@@ -220,9 +218,6 @@ export default function DraggableTshirtElement({
         event.preventDefault();
         onSelect(element.id);
       }}
-      onKeyDown={handleKeyDown}
-      onFocus={() => onSelect(element.id)}
-      aria-label={isImage ? element.fileName || 'Graphic' : field?.label || 'Text field'}
     >
       <button
         type="button"
@@ -231,6 +226,8 @@ export default function DraggableTshirtElement({
         onPointerDown={handleDragPointerDown}
         onPointerMove={handleDragPointerMove}
         onPointerUp={handleDragPointerUp}
+        onKeyDown={handleKeyDown}
+        onFocus={() => onSelect(element.id)}
       >
         <GripVertical size={14} aria-hidden="true" />
       </button>

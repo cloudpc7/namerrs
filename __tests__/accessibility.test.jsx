@@ -21,9 +21,26 @@ import ProductsSection from '../src/ui/components/ProductsSection';
 import FaqSection from '../src/ui/components/FaqSection';
 import ContactSection from '../src/ui/components/ContactSection';
 import StarRatingInput from '../src/ui/components/StarRatingInput';
+import BusinessCardDesigner from '../src/features/designers/BusinessCardDesigner';
+import TshirtDesigner from '../src/features/designers/TshirtDesigner';
+import BannerDesigner from '../src/features/designers/BannerDesigner';
 import HatDesigner from '../src/features/designers/HatDesigner';
+import MagnetDesigner from '../src/features/designers/MagnetDesigner';
+import MemorialDesigner from '../src/features/designers/MemorialDesigner';
+import { createDefaultBusinessCardDesign } from '../src/features/designers/businessCard/designModel';
+import { BUSINESS_CARD_PANEL } from '../src/features/designers/businessCard/constants';
+import { createDefaultTshirtDesign } from '../src/features/designers/tshirt/designModel';
+import { TSHIRT_PANEL } from '../src/features/designers/tshirt/constants';
+import { createDefaultBannerDesign } from '../src/features/designers/banner/designModel';
+import { BANNER_PANEL } from '../src/features/designers/banner/constants';
 import { createDefaultHatDesign } from '../src/features/designers/hat/designModel';
 import { HAT_PANEL } from '../src/features/designers/hat/constants';
+import { createDefaultMagnetDesign } from '../src/features/designers/magnet/designModel';
+import { MAGNET_PANEL } from '../src/features/designers/magnet/constants';
+import { createDefaultMemorialDesign } from '../src/features/designers/memorial/designModel';
+import { MEMORIAL_PANEL } from '../src/features/designers/memorial/constants';
+import Modal from '../src/ui/components/Modal';
+import Offcanvas from '../src/ui/components/Offcanvas';
 import { DesignerTabBar } from '../src/ui/components/primitives';
 import NotFoundPage from '../src/pages/NotFoundPage';
 
@@ -46,8 +63,23 @@ jest.mock('@react-spring/web', () => ({
         {children}
       </div>
     ),
+    button: ({ children, style, ...props }) => (
+      <button type="button" style={style} {...props}>
+        {children}
+      </button>
+    ),
+    aside: ({ children, style, ...props }) => (
+      <aside style={style} {...props}>
+        {children}
+      </aside>
+    ),
   },
 }));
+
+const designerDefaults = {
+  onChange: jest.fn(),
+  onTabChange: jest.fn(),
+};
 
 const baseContentState = {
   status: CONTENT_STATUS.SUCCEEDED,
@@ -184,14 +216,86 @@ describe('Accessibility (jest-axe)', () => {
     expect(getByRole('radio', { name: /3 stars/i })).toHaveAttribute('aria-checked', 'true');
   });
 
+  it('BusinessCardDesigner has no detectable violations', async () => {
+    const { container } = render(
+      <BusinessCardDesigner
+        {...designerDefaults}
+        design={createDefaultBusinessCardDesign()}
+        activeTab={BUSINESS_CARD_PANEL.TEXT}
+      />
+    );
+    expect(await axe(container)).toHaveNoViolations();
+  });
+
+  it('TshirtDesigner has no detectable violations', async () => {
+    const { container } = render(
+      <TshirtDesigner
+        {...designerDefaults}
+        design={createDefaultTshirtDesign()}
+        activeTab={TSHIRT_PANEL.TEXT}
+      />
+    );
+    expect(await axe(container)).toHaveNoViolations();
+  });
+
+  it('BannerDesigner has no detectable violations', async () => {
+    const { container } = render(
+      <BannerDesigner
+        {...designerDefaults}
+        design={createDefaultBannerDesign()}
+        activeTab={BANNER_PANEL.IMAGE}
+      />
+    );
+    expect(await axe(container)).toHaveNoViolations();
+  });
+
   it('HatDesigner has no detectable violations', async () => {
     const { container } = render(
       <HatDesigner
+        {...designerDefaults}
         design={createDefaultHatDesign()}
-        onChange={jest.fn()}
         activeTab={HAT_PANEL.TEXT}
-        onTabChange={jest.fn()}
       />
+    );
+    expect(await axe(container)).toHaveNoViolations();
+  });
+
+  it('MagnetDesigner has no detectable violations', async () => {
+    const { container } = render(
+      <MagnetDesigner
+        {...designerDefaults}
+        design={createDefaultMagnetDesign()}
+        activeTab={MAGNET_PANEL.TEXT}
+      />
+    );
+    expect(await axe(container)).toHaveNoViolations();
+  });
+
+  it('MemorialDesigner has no detectable violations', async () => {
+    const { container } = render(
+      <MemorialDesigner
+        {...designerDefaults}
+        design={createDefaultMemorialDesign()}
+        activeTab={MEMORIAL_PANEL.TEXT}
+      />
+    );
+    expect(await axe(container)).toHaveNoViolations();
+  });
+
+  it('Modal has no detectable violations when open', async () => {
+    const { container } = render(
+      <Modal isOpen onClose={jest.fn()} title="Leave a review">
+        <p>Review form content</p>
+      </Modal>
+    );
+    expect(await axe(container)).toHaveNoViolations();
+  });
+
+  it('Offcanvas has no detectable violations when open', async () => {
+    const { container } = render(
+      <Offcanvas isOpen onClose={jest.fn()} title="Hat designer">
+        <p>Designer workspace</p>
+      </Offcanvas>
     );
     expect(await axe(container)).toHaveNoViolations();
   });
