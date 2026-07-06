@@ -50,7 +50,9 @@ const ColorPickerField = ({
 
   return (
     <div className={`color-picker-field ${className}`.trim()}>
-      <span className="color-picker-field__label">{label}</span>
+      <label htmlFor={hexId} className="color-picker-field__label">
+        {label}
+      </label>
       <div className="color-picker-field__control">
         <input
           id={pickerId}

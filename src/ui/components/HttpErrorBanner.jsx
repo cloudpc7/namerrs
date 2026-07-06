@@ -3,6 +3,7 @@
  */
 
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchContent } from '../../redux/slices/content.slice';
 import { clearHttpError, selectHttpError } from '../../redux/slices/ui.slice';
 
 const HttpErrorBanner = () => {
@@ -13,6 +14,14 @@ const HttpErrorBanner = () => {
     return null;
   }
 
+  const handleAction = () => {
+    if (retryable) {
+      dispatch(fetchContent());
+    }
+
+    dispatch(clearHttpError());
+  };
+
   return (
     <div
       role="alert"
@@ -22,10 +31,10 @@ const HttpErrorBanner = () => {
         <p>{errorMessage}</p>
         <button
           type="button"
-          onClick={() => dispatch(clearHttpError())}
-          className="rounded px-3 py-1 text-[#111111] hover:bg-[#fee2e2] focus:outline-none focus:ring-2 focus:ring-[#93c5fd]"
+          onClick={handleAction}
+          className="rounded px-3 py-1 text-[#111111] hover:bg-[#fee2e2] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)]"
         >
-          {retryable ? 'Dismiss' : 'Close'}
+          {retryable ? 'Try again' : 'Close'}
         </button>
       </div>
     </div>

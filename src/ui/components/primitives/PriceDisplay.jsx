@@ -10,7 +10,12 @@ const PriceDisplay = ({
   className = '',
 }) => (
   <div className={className}>
-    <p className={`price${size === 'lg' ? ' price--lg' : ''}`}>{formatPrice(amount)}</p>
+    <p
+      className={`price${size === 'lg' ? ' price--lg' : ''}`}
+      aria-label={`Price ${formatPrice(amount)}`}
+    >
+      {formatPrice(amount)}
+    </p>
   </div>
 );
 

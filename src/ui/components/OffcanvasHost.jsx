@@ -42,12 +42,7 @@ const OffcanvasHost = () => {
         : 'Product Designer';
 
   return (
-    <Offcanvas
-      isOpen={isOpen}
-      onClose={handleClose}
-      title={title}
-      ariaLabel={title}
-    >
+    <Offcanvas isOpen={isOpen} onClose={handleClose} title={title}>
       {panelType === PANEL_TYPE.CART ? <CartShell /> : <DesignerShell />}
     </Offcanvas>
   );

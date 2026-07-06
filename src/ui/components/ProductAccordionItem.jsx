@@ -4,6 +4,7 @@
 
 import { useSpring, animated } from '@react-spring/web';
 import { ChevronDown } from 'lucide-react';
+import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
 import { getProductImageUrl } from '../../constants/assets.constants';
 
 import { formatPrice } from '../../utils/formatPrice';
@@ -22,11 +23,13 @@ const ProductAccordionItem = ({
   const panelId = `product-panel-${productId}`;
   const headerId = `product-header-${productId}`;
   const specs = product?.specs || [];
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   const springStyles = useSpring({
     maxHeight: isOpen ? 1200 : 0,
     opacity: isOpen ? 1 : 0,
     config: { tension: 280, friction: 28 },
+    immediate: prefersReducedMotion,
   });
 
   return (

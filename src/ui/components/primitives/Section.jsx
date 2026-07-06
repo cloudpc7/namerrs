@@ -11,6 +11,7 @@ const VARIANTS = {
 const Section = ({
   id,
   ariaLabel,
+  ariaBusy = false,
   variant = 'white',
   className = '',
   containerClassName = '',
@@ -19,6 +20,7 @@ const Section = ({
   <section
     id={id}
     aria-label={ariaLabel}
+    aria-busy={ariaBusy || undefined}
     className={`section ${VARIANTS[variant] || VARIANTS.white} ${className}`.trim()}
   >
     <div className={`section__container ${containerClassName}`.trim()}>{children}</div>

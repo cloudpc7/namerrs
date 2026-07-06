@@ -72,7 +72,16 @@ const ProductsSection = () => {
 
   if (status === CONTENT_STATUS.LOADING) {
     return (
-      <Section id="products" ariaLabel="Loading products" variant="surface" className="products-section">
+      <Section
+        id="products"
+        ariaLabel="Loading products"
+        variant="surface"
+        className="products-section"
+        ariaBusy
+      >
+        <p className="sr-only" aria-live="polite">
+          Loading products
+        </p>
         <Stack gap="lg" className="animate-pulse">
           <Skeleton variant="title" style={{ width: '12rem' }} />
           <div className="product-grid">

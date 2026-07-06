@@ -51,7 +51,10 @@ const HeroSection = () => {
 
   if (status === CONTENT_STATUS.LOADING) {
     return (
-      <Section ariaLabel="Loading hero content" variant="surface">
+      <Section ariaLabel="Loading hero content" variant="surface" ariaBusy>
+        <p className="sr-only" aria-live="polite">
+          Loading hero content
+        </p>
         <Stack gap="lg">
           <Skeleton variant="text" style={{ width: '8rem' }} />
           <Skeleton variant="title" style={{ width: '66%', maxWidth: '32rem' }} />

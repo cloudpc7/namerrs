@@ -2,12 +2,13 @@
  * Modal.jsx — Accessible modal dialog with focus trap and backdrop.
  */
 
-import { useRef } from 'react';
+import { useId, useRef } from 'react';
 import { useFocusTrap } from '../../hooks/useFocusTrap';
 import { PanelHeader } from './primitives';
 
-const Modal = ({ isOpen, onClose, title, children, ariaLabel }) => {
+const Modal = ({ isOpen, onClose, title, children }) => {
   const panelRef = useRef(null);
+  const titleId = useId();
   useFocusTrap(isOpen, panelRef, onClose);
 
   if (!isOpen) {
@@ -26,10 +27,10 @@ const Modal = ({ isOpen, onClose, title, children, ariaLabel }) => {
         ref={panelRef}
         role="dialog"
         aria-modal="true"
-        aria-label={ariaLabel || title}
+        aria-labelledby={titleId}
         className="modal-shell"
       >
-        <PanelHeader title={title} onClose={onClose} />
+        <PanelHeader title={title} titleId={titleId} onClose={onClose} closeLabel="Close modal" />
         <div className="modal-shell__body">{children}</div>
       </div>
     </div>

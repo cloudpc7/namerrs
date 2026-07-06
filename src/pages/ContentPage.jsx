@@ -17,21 +17,27 @@ const ContentPage = ({ slug, seoKey, fallbackTitle }) => {
 
   if (status === CONTENT_STATUS.LOADING) {
     return (
-      <Section ariaLabel="Loading page content">
-        <div className="mx-auto max-w-3xl animate-pulse space-y-4">
-          <div className="h-8 w-1/2 rounded bg-[var(--color-border)]" />
-          <div className="h-4 w-full rounded bg-[var(--color-border)]" />
-          <div className="h-4 w-5/6 rounded bg-[var(--color-border)]" />
-        </div>
-      </Section>
+      <main>
+        <Section ariaLabel="Loading page content" ariaBusy>
+          <p className="sr-only" aria-live="polite">
+            Loading page content
+          </p>
+          <div className="mx-auto max-w-3xl animate-pulse space-y-4">
+            <div className="h-8 w-1/2 rounded bg-[var(--color-border)]" />
+            <div className="h-4 w-full rounded bg-[var(--color-border)]" />
+            <div className="h-4 w-5/6 rounded bg-[var(--color-border)]" />
+          </div>
+        </Section>
+      </main>
     );
   }
 
   const paragraphs = String(page?.body || '').split('\n').filter(Boolean);
 
   return (
-    <Section ariaLabel={page?.title || fallbackTitle}>
-      <article className="mx-auto max-w-3xl">
+    <main>
+      <Section ariaLabel={page?.title || fallbackTitle}>
+        <article className="mx-auto max-w-3xl">
         <p className="text-sm font-semibold uppercase tracking-wider text-[var(--color-accent)]">
           Namerrs Signs & Printing
         </p>
@@ -49,8 +55,9 @@ const ContentPage = ({ slug, seoKey, fallbackTitle }) => {
             Contact us
           </Button>
         </div>
-      </article>
-    </Section>
+        </article>
+      </Section>
+    </main>
   );
 };
 

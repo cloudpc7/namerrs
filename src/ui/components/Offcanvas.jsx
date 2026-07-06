@@ -2,7 +2,7 @@
  * Offcanvas.jsx — Right-sliding panel with backdrop, focus trap, and motion support.
  */
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useId, useRef } from 'react';
 import { useSpring, animated } from '@react-spring/web';
 import { useFocusTrap } from '../../hooks/useFocusTrap';
 import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
@@ -12,10 +12,10 @@ const Offcanvas = ({
   isOpen,
   onClose,
   title,
-  ariaLabel,
   children,
 }) => {
   const panelRef = useRef(null);
+  const titleId = useId();
   const prefersReducedMotion = usePrefersReducedMotion();
 
   useFocusTrap(isOpen, panelRef, onClose);
@@ -66,11 +66,11 @@ const Offcanvas = ({
         ref={panelRef}
         role="dialog"
         aria-modal="true"
-        aria-label={ariaLabel || title}
+        aria-labelledby={titleId}
         style={panelSpring}
         className="offcanvas-host__panel"
       >
-        <PanelHeader title={title} onClose={onClose} />
+        <PanelHeader title={title} titleId={titleId} onClose={onClose} closeLabel="Close panel" />
         <div className="offcanvas-host__body">{children}</div>
       </animated.aside>
     </div>

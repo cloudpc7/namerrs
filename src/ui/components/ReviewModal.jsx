@@ -53,7 +53,7 @@ const ReviewModal = ({ isOpen, onClose }) => {
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={handleClose} title="Leave a review" ariaLabel="Review form">
+    <Modal isOpen={isOpen} onClose={handleClose} title="Leave a review">
       <form onSubmit={handleSubmit} className="stack">
         <StarRatingInput id="review-rating" value={rating} onChange={setRating} />
         <TextField
